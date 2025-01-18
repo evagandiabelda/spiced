@@ -26,6 +26,56 @@
   }
 }
 
+/* ESTILOS BASE DE TAILWIND: */
+@layer base {
+  h1 {
+    @apply font-nohemi font-extrabold text-[2.8rem] text-gray-900;
+    line-height: 60px;
+    letter-spacing: 0.01em;
+  }
+
+  h2 {
+    @apply font-nohemi font-extrabold text-[1.8rem] text-gray-900;
+    line-height: 34px;
+    letter-spacing: 0.02em;
+  }
+
+  h3 {
+    @apply font-inter font-black text-[1.4rem] text-gray-900;
+  }
+
+  h4 { /* Títulos de las Cards */
+    @apply font-inter font-black text-[1.1rem] text-gray-900;
+  }
+
+  p {
+    @apply font-inter font-normal text-base leading-relaxed text-gray-900;
+  }
+
+  span {
+    @apply font-inter font-normal italic text-[0.9rem] text-gray-900;
+  }
+
+  a {
+    @apply font-inter font-bold text-base text-gray-900;
+    /* Si se quiere subrayado, añadir className="hover:underline" en el elemento específico. */
+  }
+
+  .a-boton-gr {
+    @apply font-inter font-black text-[1.1rem] no-underline text-gray-900;
+  }
+
+  .a-boton-pq {
+    @apply font-inter font-black text-[0.8rem] no-underline text-gray-900;
+  }
+
+  .tag {
+    @apply font-inter font-bold text-[0.8rem] text-gray-900;
+  }
+}
+
+/* OTROS ESTILOS: */
+
 body {
   color: var(--foreground);
   background: var(--background);
