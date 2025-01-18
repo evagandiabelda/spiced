@@ -12,6 +12,10 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        nohemi: ['Nohemi', 'sans-serif'],
+        inter: ['InterVariable', 'sans-serif'],
+      },
     },
   },
   plugins: [],
