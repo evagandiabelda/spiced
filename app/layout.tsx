@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/layout/Header";
 
-const interFont = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: "Spiced",
@@ -16,10 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body
-        className={`${interFont} antialiased`}
-      >
+      <body className="antialiased">
+
+        <Header />
+
         {children}
+
       </body>
     </html>
   );

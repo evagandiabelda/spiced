@@ -51,51 +51,49 @@
 }
 
 /* Modo Claro: */
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: var(--gris1);
-    --foreground: var(--negro);
-  }
+:root {
+  --background: var(--gris1);
+  --foreground: var(--negro);
 }
 
 /* Modo Oscuro: */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: var(--gris5);
     --foreground: var(--gris1);
   }
-}
+} */
 
 /* ------------ ESTILOS BASE ------------ */
 
 /* Estilos base de Tailwind: */
 @layer base {
   h1 {
-    @apply font-nohemi font-extrabold text-[2.8rem];
+    @apply font-nohemi font-extrabold text-[2.8rem] my-12;
     color: var(--foreground);
     line-height: 60px;
     letter-spacing: 0.01em;
   }
 
   h2 {
-    @apply font-nohemi font-extrabold text-[1.8rem];
+    @apply font-nohemi font-extrabold text-[1.8rem] my-10;
     color: var(--foreground);
     line-height: 34px;
     letter-spacing: 0.02em;
   }
 
   h3 {
-    @apply font-inter font-black text-[1.4rem];
+    @apply font-inter font-black text-[1.4rem] my-10;
     color: var(--foreground);
   }
 
   h4 { /* Títulos de las Cards */
-    @apply font-inter font-black text-[1.1rem];
+    @apply font-inter font-black text-[1.1rem] my-8;
     color: var(--foreground);
   }
 
   p {
-    @apply font-inter font-normal text-base leading-relaxed;
+    @apply font-inter font-normal text-base leading-relaxed mb-5;
     color: var(--foreground);
   }
 
@@ -108,6 +106,14 @@
     @apply font-inter font-bold text-base;
     color: var(--foreground);
     /* Si se quiere subrayado, añadir className="hover:underline" en el elemento específico. */
+  }
+
+  a:hover {
+    color: var(--brand1);
+  }
+
+  a:active {
+    color: var(--gris3);
   }
 
   .a-boton-gr {
@@ -133,4 +139,13 @@ body {
   background: var(--background);
   font-family: 'InterVariable', sans-serif;
   font-weight: 400;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr); /* Divide el ancho en 12 columnas */
+}
+
+main > * {
+  padding-inline: calc(100% / 12); /* Padding izquierdo y derecho equivalente a 1 columna */
 }
