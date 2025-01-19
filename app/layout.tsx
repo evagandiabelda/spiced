@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="es">
       <body className="antialiased">
 
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}> {/* 'enableSystem' para detectar el tema del sistema del usuario. */}
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={true}> {/* 'enableSystem' para detectar el tema del sistema del usuario. */}
           <Header />
           {children}
         </ThemeProvider>
