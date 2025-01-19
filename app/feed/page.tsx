@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Feed() {
     return (
-        <main className="flex items-center justify-center min-h-screen bg-gray-100">
+        <main className="flex items-center justify-center min-h-screen">
             <div className="text-center space-y-20">
                 <h1 className="text-center">
                     Ejemplo de título H1

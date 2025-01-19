@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ------------ FUENTES ------------ */
+
 /* Fuente Inter: */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
@@ -14,67 +16,117 @@
   font-display: swap;
 }
 
+/* ------------ COLORES ------------ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    /* Colores Corporativos: */
+    --brand1: #FF9486;
+    --brand2: #F4DEC3;
+
+    /* Grises: */
+    --blanco: #FFFFFF;
+    --gris1: #EBE4E4;
+    --gris2: #B0AAAA;
+    --gris3: #605D5D;
+    --gris4: #3D3D3D;
+    --gris5: #282828;
+    --negro: #1B1B1B;
+  
+    /* Colores Espectro: */
+    --tea: #8BC8EA;
+    --tdah: #83D9DB;
+    --toc: #97E8DA;
+    --tlp: #A1E5BD;
+    --tag: #B9E5A1;
+    --tp: #CBD07B;
+    --tpa: #FFCA74;
+    --tb: #FFA879;
+    --tep: #F2979C;
+    --td: #FFB8B3;
+    --te: #FFB6C3;
+    --ta: #F4A6D6;
+    --adi: #DDA9EA;
+    --fob: #CDB0F7;
+    --otr: #A1AEFF;
 }
 
-@media (prefers-color-scheme: dark) {
+/* Modo Claro: */
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--gris1);
+    --foreground: var(--negro);
   }
 }
 
-/* ESTILOS BASE DE TAILWIND: */
+/* Modo Oscuro: */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--gris5);
+    --foreground: var(--gris1);
+  }
+}
+
+/* ------------ ESTILOS BASE ------------ */
+
+/* Estilos base de Tailwind: */
 @layer base {
   h1 {
-    @apply font-nohemi font-extrabold text-[2.8rem] text-gray-900;
+    @apply font-nohemi font-extrabold text-[2.8rem];
+    color: var(--foreground);
     line-height: 60px;
     letter-spacing: 0.01em;
   }
 
   h2 {
-    @apply font-nohemi font-extrabold text-[1.8rem] text-gray-900;
+    @apply font-nohemi font-extrabold text-[1.8rem];
+    color: var(--foreground);
     line-height: 34px;
     letter-spacing: 0.02em;
   }
 
   h3 {
-    @apply font-inter font-black text-[1.4rem] text-gray-900;
+    @apply font-inter font-black text-[1.4rem];
+    color: var(--foreground);
   }
 
   h4 { /* Títulos de las Cards */
-    @apply font-inter font-black text-[1.1rem] text-gray-900;
+    @apply font-inter font-black text-[1.1rem];
+    color: var(--foreground);
   }
 
   p {
-    @apply font-inter font-normal text-base leading-relaxed text-gray-900;
+    @apply font-inter font-normal text-base leading-relaxed;
+    color: var(--foreground);
   }
 
   span {
-    @apply font-inter font-normal italic text-[0.9rem] text-gray-900;
+    @apply font-inter font-normal italic text-[0.9rem];
+    color: var(--foreground);
   }
 
   a {
-    @apply font-inter font-bold text-base text-gray-900;
+    @apply font-inter font-bold text-base;
+    color: var(--foreground);
     /* Si se quiere subrayado, añadir className="hover:underline" en el elemento específico. */
   }
 
   .a-boton-gr {
-    @apply font-inter font-black text-[1.1rem] no-underline text-gray-900;
+    @apply font-inter font-black text-[1.1rem] no-underline;
+    color: var(--foreground);
   }
 
   .a-boton-pq {
-    @apply font-inter font-black text-[0.8rem] no-underline text-gray-900;
+    @apply font-inter font-black text-[0.8rem] no-underline;
+    color: var(--foreground);
   }
 
   .tag {
-    @apply font-inter font-bold text-[0.8rem] text-gray-900;
+    @apply font-inter font-bold text-[0.8rem];
+    color: var(--foreground);
   }
 }
 
-/* OTROS ESTILOS: */
+/* Otros Estilos: */
 
 body {
   color: var(--foreground);
