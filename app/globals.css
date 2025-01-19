@@ -51,18 +51,16 @@
 }
 
 /* Modo Claro: */
-:root {
+.light {
   --background: var(--gris1);
   --foreground: var(--negro);
 }
 
 /* Modo Oscuro: */
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--gris5);
-    --foreground: var(--gris1);
-  }
-} */
+.dark {
+  --background: var(--gris5);
+  --foreground: var(--gris1);
+}
 
 /* ------------ ESTILOS BASE ------------ */
 
@@ -124,6 +122,10 @@
   .a-boton-pq {
     @apply font-inter font-black text-[0.8rem] no-underline;
     color: var(--foreground);
+  }
+
+  input::placeholder {
+    color: var(--gris3);
   }
 
   .tag {

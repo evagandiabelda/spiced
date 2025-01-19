@@ -1,3 +1,4 @@
+import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
@@ -17,9 +18,10 @@ export default function RootLayout({
     <html lang="es">
       <body className="antialiased">
 
-        <Header />
-
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}> {/* 'enableSystem' para detectar el tema del sistema del usuario. */}
+          <Header />
+          {children}
+        </ThemeProvider>
 
       </body>
     </html>
