@@ -51,7 +51,7 @@
 }
 
 /* Modo Claro: */
-.light {
+:root {
   --background: var(--gris1);
   --foreground: var(--negro);
 }

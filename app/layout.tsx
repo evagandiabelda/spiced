@@ -1,6 +1,6 @@
-import { ThemeProvider } from "next-themes";
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from '@/context/ThemeContext';
 import Header from "@/components/layout/Header";
 
 
@@ -15,10 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" className="dark">
       <body className="antialiased">
 
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={true}> {/* 'enableSystem' para detectar el tema del sistema del usuario. */}
+        <ThemeProvider>
           <Header />
           {children}
         </ThemeProvider>

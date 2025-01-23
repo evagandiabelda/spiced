@@ -1,26 +1,18 @@
 'use client';
 
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-
 const Logo = () => {
-    const { theme } = useTheme();
-    const [logoSrc, setLogoSrc] = useState('/logos/logo-spiced-pos.svg'); // Valor por defecto
-
-    useEffect(() => {
-        if (theme === 'dark') {
-            setLogoSrc('/logos/logo-spiced-neg.svg');
-        } else {
-            setLogoSrc('/logos/logo-spiced-pos.svg');
-        }
-    }, [theme]);
-
     return (
         <a href="#">
+            {/* Cambia la imagen según la clase `dark` */}
             <img
-                src={logoSrc}
+                src="/logos/logo-spiced-pos.svg"
                 alt="Logotipo"
-                className="w-full max-h-full object-contain mx-auto"
+                className="w-full max-h-full object-contain mx-auto dark:hidden" // Visible en modo claro
+            />
+            <img
+                src="/logos/logo-spiced-neg.svg"
+                alt="Logotipo en modo oscuro"
+                className="w-full max-h-full object-contain mx-auto hidden dark:block" // Visible en modo oscuro
             />
         </a>
     );
