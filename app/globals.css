@@ -107,11 +107,11 @@
   }
 
   a:hover {
-    color: var(--brand1);
+    color: var(--gris2);
   }
 
   a:active {
-    color: var(--gris3);
+    color: var(--brand1);
   }
 
   .a-boton-gr {
@@ -141,6 +141,7 @@ body {
   background: var(--background);
   font-family: 'InterVariable', sans-serif;
   font-weight: 400;
+  min-height: 100vh;
 }
 
 main {

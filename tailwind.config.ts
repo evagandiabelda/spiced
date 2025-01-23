@@ -18,6 +18,12 @@ export default {
         nohemi: ['Nohemi', 'sans-serif'],
         inter: ['InterVariable', 'sans-serif'],
       },
+      screens: {
+        /* Los valores equivalen al "min-width": */
+        mobile: '0px',
+        tablet: '640px',
+        laptop: '1024px',
+      }
     },
   },
   plugins: [],

@@ -1,13 +1,20 @@
 "use client";
 
 import React from 'react';
+import { useState } from "react";
 import Logo from '@/components/icons/Logo';
+import Menu from '@/components/layout/Menu';
+import Search from '@/components/inputs/Search';
+import Avatar from '@/components/icons/Avatar';
+import Desplegable from "@/components/layout/Desplegable";
 
 interface HeaderProps {
 
 }
 
 const Header = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     return (
         <header className="w-full h-[80px] px-8 py-3 flex items-center justify-between gap-9 bg-[--blanco] dark:bg-[--negro]">
             {/* Caja Principal */}
@@ -15,49 +22,30 @@ const Header = () => {
                 {/* Logo */}
                 <Logo />
                 {/* Menú */}
-                <nav className="hidden md:flex space-x-6">
-                    <a href="/">
-                        Inicio
-                    </a>
-                    <a href="/feed">
-                        Explorar
-                    </a>
-                    <a href="/panel">
-                        Compartir
-                    </a>
-                </nav>
+                <Menu tipo="header" />
             </div>
 
             {/* Caja Buscador */}
-            <div className="flex-1 flex items-center space-x-3 px-4 bg-[--gris1] dark:bg-[--gris5] rounded-full">
-                <input
-                    type="search"
-                    placeholder="Buscar contenido"
-                    className="flex-1 bg-[--gris1] dark:bg-[--gris5] py-2 px-4 focus:outline-none"
-                />
-                <img
-                    src="/iconos/iconos-genericos/search-icon.svg"
-                    alt="Buscar"
-                    className="h-5 px-3 cursor-pointer"
-                />
+            <div className='flex-1 flex mobile:hidden tablet:flex'>
+                <Search />
             </div>
 
             {/* Caja Cuenta */}
-            <div className="flex items-center space-x-4">
-                <img
-                    src="/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"
-                    alt="Cuenta"
-                    className="h-10 w-10 cursor-pointer"
-                />
+            <div className="flex items-center space-x-4 mobile:hidden laptop:flex">
+                <Avatar />
             </div>
 
             {/* Menú Mobile */}
-            <div className="md:hidden flex items-center">
+            <div className="flex items-center mobile:flex laptop:hidden">
                 <img
                     src="/iconos/iconos-genericos/icono-burger.svg"
                     alt="Menú"
                     className="h-8 w-8 cursor-pointer"
+                    onClick={() => setIsMenuOpen(true)}
                 />
+
+                <Desplegable isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+
             </div>
         </header>
     );
