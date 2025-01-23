@@ -16,13 +16,13 @@ const Header = () => {
                 <Logo />
                 {/* Menú */}
                 <nav className="hidden md:flex space-x-6">
-                    <a href="#">
+                    <a href="/">
                         Inicio
                     </a>
-                    <a href="#">
+                    <a href="/feed">
                         Explorar
                     </a>
-                    <a href="#">
+                    <a href="/panel">
                         Compartir
                     </a>
                 </nav>

@@ -1,7 +1,7 @@
 import Image from "next/image"; // Per a optimitzar les imatges.
 import Logo from "@/components/icons/Logo";
 
-export default function Feed() {
+export default function Panel() {
     return (
         <main className="flex items-center justify-center min-h-screen">
             <div className="text-center space-y-20">
@@ -9,7 +9,7 @@ export default function Feed() {
                     <Logo />
                 </div>
                 <h1 className="text-2xl font-inter font-bold">
-                    Feed de publicaciones
+                    Panel de usuario
                 </h1>
             </div>
         </main>

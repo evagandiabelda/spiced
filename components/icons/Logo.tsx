@@ -2,7 +2,7 @@
 
 const Logo = () => {
     return (
-        <a href="#">
+        <a href="/">
             {/* Cambia la imagen según la clase `dark` */}
             <img
                 src="/logos/logo-spiced-pos.svg"
