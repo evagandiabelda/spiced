@@ -30,10 +30,10 @@ const Header = () => {
                 <Search />
             </div>
 
-            {/* Caja Cuenta */}
-            <div className="flex items-center space-x-4 mobile:hidden laptop:flex">
+            {/* Caja Avatar */}
+            <a href="/panel" className="flex items-center space-x-4 mobile:hidden laptop:flex">
                 <Avatar />
-            </div>
+            </a>
 
             {/* Menú Mobile */}
             <div className="flex items-center mobile:flex laptop:hidden">
