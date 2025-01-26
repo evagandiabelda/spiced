@@ -35,21 +35,21 @@ const Menu = ({ tipo }: tipo) => {
             <nav className="mobile:flex laptop:hidden w-full flex-col gap-2">
                 <a href="/" className="w-full">
                     <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
-                        <img src="/iconos/iconos-menu/icono-inicio.svg" alt="Inicio" className="w-6 dark:invert" />
+                        <img src="/iconos/iconos-menu/icono-inicio.svg" alt="inicio" className="w-6 dark:invert" />
                         <p className="font-bold mb-0">Inicio</p>
                     </div>
                 </a>
 
                 <a href="/feed">
                     <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
-                        <img src="/iconos/iconos-menu/icono-explorar.svg" alt="Inicio" className="w-6 dark:invert" />
+                        <img src="/iconos/iconos-menu/icono-explorar.svg" alt="explorar" className="w-6 dark:invert" />
                         <p className="font-bold mb-0">Explorar</p>
                     </div>
                 </a>
 
                 <a href="/panel-estandar">
                     <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
-                        <img src="/iconos/iconos-menu/icono-compartir.svg" alt="Inicio" className="w-6 dark:invert" />
+                        <img src="/iconos/iconos-menu/icono-compartir.svg" alt="compartir" className="w-6 dark:invert" />
                         <p className="font-bold mb-0">Compartir</p>
                     </div>
                 </a>
@@ -62,7 +62,7 @@ const Menu = ({ tipo }: tipo) => {
 
         return (
             <div className="w-full flex mobile:flex-col tablet:flex-row mobile:gap-6 tablet:gap-16">
-                <div>
+                <div className="flex flex-col gap-4">
                     <h3>Spices</h3>
                     <div className="flex flex-row gap-6">
                         <nav className="flex flex-col gap-3">
@@ -86,7 +86,7 @@ const Menu = ({ tipo }: tipo) => {
                         </nav>
                     </div>
                 </div>
-                <div>
+                <div className="flex flex-col gap-4">
                     <h3>Categorías</h3>
                     <nav className="flex flex-col gap-3">
                         <a href="#" className={className}>Mindful cooking</a>
@@ -98,7 +98,7 @@ const Menu = ({ tipo }: tipo) => {
                         <a href="#" className={className}>Gaming inclusivo</a>
                     </nav>
                 </div>
-                <div>
+                <div className="flex flex-col gap-4">
                     <h3>Tu espacio</h3>
                     <nav className="flex flex-col gap-3">
                         <a href="#" className={className}>Espacio personal</a>

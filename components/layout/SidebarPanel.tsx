@@ -8,7 +8,7 @@ type SidebarPanelProps = {
 const SidebarPanel = ({ usuario }: SidebarPanelProps) => {
 
     const usuarioMenu = usuario;
-    const href = "/panel-" + usuario;
+    const href = "/panel-" + usuario + "/configuracion";
 
     return (
         <div className="flex flex-col dark">

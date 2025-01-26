@@ -1,6 +1,6 @@
 import SidebarPanel from "@/components/layout/SidebarPanel";
 
-export default function DashboardLayout({
+export default function PanelExpertoLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
