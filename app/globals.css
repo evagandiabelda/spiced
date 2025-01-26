@@ -187,6 +187,7 @@
 }
 
 body {
+  background-color: var(--background);
   font-family: 'InterVariable', sans-serif;
   font-weight: 400;
   min-height: 100vh;
@@ -209,13 +210,4 @@ body {
 
 .hover-underline:hover, .hover-underline:active {
   border-bottom: 2px solid var(--brand1);
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
 }
