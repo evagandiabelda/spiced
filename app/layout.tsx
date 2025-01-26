@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from '@/context/ThemeContext';
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 
 export const metadata: Metadata = {
@@ -16,11 +17,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="light">
-      <body className="antialiased">
+      <body className="antialiased min-h-screen">
 
         <ThemeProvider>
           <Header />
-          {children}
+          <main className="flex items-center justify-center flex-grow min-h-screen">
+            {children}
+          </main>
+          <Footer />
         </ThemeProvider>
 
       </body>

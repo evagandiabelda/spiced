@@ -6,7 +6,7 @@ import Logo from '@/components/icons/Logo';
 import Menu from '@/components/layout/Menu';
 import Search from '@/components/inputs/Search';
 import Avatar from '@/components/icons/Avatar';
-import Desplegable from "@/components/layout/Desplegable";
+import MenuDesplegable from "@/components/layout/MenuDesplegable";
 
 interface HeaderProps {
 
@@ -44,7 +44,7 @@ const Header = () => {
                     onClick={() => setIsMenuOpen(true)}
                 />
 
-                <Desplegable isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+                <MenuDesplegable isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
 
             </div>
         </header>

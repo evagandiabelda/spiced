@@ -10,7 +10,7 @@ type DesplegableProps = {
 };
 
 const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
-    // Evitar scroll al abrir el menú:
+    // Evitar scroll al obrir el menú:
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
@@ -24,7 +24,7 @@ const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
 
     if (!isOpen) return null;
 
-    return createPortal(
+    return createPortal( // Crea un 'body' paral·lel per a renderitzar el menú desplegable sobre el body principal.
         <div className="fixed inset-0 bg-[--blanco] z-50 h-screen flex flex-col justify-between">
             <div>
                 <div className="px-[30px] py-[24px] border-y-2 border-[--gris1] dark:border-[--gris4] cursor-pointer">
@@ -40,7 +40,7 @@ const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
                 </div>
 
                 <div className="px-[30px] py-[24px]">
-                    <Menu tipo="desplegable" />
+                    <Menu tipo="header-desplegable" />
                 </div>
             </div>
 
