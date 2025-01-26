@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { useEffect } from "react";
 import "./globals.css";
 import { ThemeProvider } from '@/context/ThemeContext';
 import Header from "@/components/layout/Header";
@@ -15,8 +16,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove('dark');
+    root.classList.add('light');
+  }, []);
+
   return (
     <html lang="es" className="light">
+      <head>
+        <meta name="color-scheme" content="light" />
+      </head>
+
       <body className="antialiased min-h-screen">
 
         <ThemeProvider>
@@ -28,6 +40,7 @@ export default function RootLayout({
         </ThemeProvider>
 
       </body>
+
     </html>
   );
 }
