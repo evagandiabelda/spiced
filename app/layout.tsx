@@ -21,7 +21,7 @@ export default function RootLayout({
 
         <ThemeProvider>
           <Header />
-          <main className="flex items-center justify-center flex-grow min-h-screen">
+          <main className="flex flex-grow">
             {children}
           </main>
           <Footer />

@@ -12,14 +12,14 @@ interface FooterProps {
 const Footer = () => {
 
     return (
-        <footer className="w-full -mt-4 -mb-5 flex-col gap-0 dark">
+        <footer className="w-full -mt-4 -mb-5 flex flex-col gap-0 dark">
 
-            <div className='h-[9px] w-full'>
+            <div className='h-[9px] w-full m-0 p-0'>
                 <img src="/iconos/iconos-genericos/wavy-footer.svg" alt="Inicio del footer" className='h-full object-cover' />
             </div>
 
             {/* Caja Principal del Footer: */}
-            <div className='flex-col px-col1 py-8 gap-2 bg-[--negro]'>
+            <div className='flex-col m-0 px-col1 py-8 gap-2 bg-[--negro]'>
 
                 {/* Caja Superior: */}
                 <div className='flex justify-left h-[100px] px-4 py-8 border-b-[1px] border-b-[var(--brand2)]'>

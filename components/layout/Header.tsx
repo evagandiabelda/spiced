@@ -31,8 +31,8 @@ const Header = () => {
             </div>
 
             {/* Caja Avatar */}
-            <a href="/panel" className="flex items-center space-x-4 mobile:hidden laptop:flex">
-                <Avatar />
+            <a href="/panel-estandar" className="w-12 flex items-center space-x-4 mobile:hidden laptop:flex">
+                <Avatar borde='color' />
             </a>
 
             {/* Menú Mobile */}

@@ -23,7 +23,7 @@ const Menu = ({ tipo }: tipo) => {
                 <a href="/feed" className="hover-underline">
                     Explorar
                 </a>
-                <a href="/panel" className="hover-underline">
+                <a href="/panel-estandar" className="hover-underline">
                     Compartir
                 </a>
             </nav>
@@ -47,7 +47,7 @@ const Menu = ({ tipo }: tipo) => {
                     </div>
                 </a>
 
-                <a href="/panel">
+                <a href="/panel-estandar">
                     <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
                         <img src="/iconos/iconos-menu/icono-compartir.svg" alt="Inicio" className="w-6 dark:invert" />
                         <p className="font-bold mb-0">Compartir</p>
