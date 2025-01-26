@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { useEffect } from "react";
 import "./globals.css";
 import { ThemeProvider } from '@/context/ThemeContext';
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ThemeInitializer from "@/components/ThemeInitializer";
 
 
 export const metadata: Metadata = {
@@ -17,12 +17,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  useEffect(() => {
-    const root = document.documentElement;
-    root.classList.remove('dark');
-    root.classList.add('light');
-  }, []);
-
   return (
     <html lang="es" className="light">
       <head>
@@ -32,6 +26,7 @@ export default function RootLayout({
       <body className="antialiased min-h-screen">
 
         <ThemeProvider>
+          <ThemeInitializer />
           <Header />
           <main className="flex flex-grow">
             {children}
