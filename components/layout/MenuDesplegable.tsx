@@ -30,7 +30,7 @@ const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
                 <div className="px-[30px] py-[24px] border-y-2 border-[--gris1] dark:border-[--gris4] cursor-pointer">
                     <a href="/panel" id="enlace">
                         <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
-                            <Avatar />
+                            <Avatar borde="color" />
                             <p className="font-bold mb-0">Espacio personal</p>
                         </div>
                     </a>
