@@ -9,7 +9,7 @@ interface BotonProps {
 
 const Boton = ({ texto, enlace, tamano, jerarquia }: BotonProps) => {
 
-    let className = "inline-block text-center font-semibold rounded-full border-2 transition duration-300 hover-opacity ";
+    let className = "inline-block text-center font-semibold rounded-full border-2 transition duration-300 ";
     let style = "";
 
     if (tamano === "pequeno") {
@@ -20,13 +20,13 @@ const Boton = ({ texto, enlace, tamano, jerarquia }: BotonProps) => {
     }
 
     if (jerarquia === "primario") {
-        className += "text-[var(--blanco)] dark:text-[var(--gris5)] border-[var(--gris5)] dark:border-[var(--brand2)] bg-[var(--gris5)] dark:bg-[var(--brand2)] ";
+        className += "text-[var(--blanco)] dark:text-[var(--gris5)] border-[var(--gris5)] dark:border-[var(--brand2)] bg-[var(--gris5)] dark:bg-[var(--brand2)] hover-opacity ";
     }
     else if (jerarquia === "secundario") {
         className += "text-[var(--gris5)] dark:text-[var(--gris1)] border-[var(--gris5)] dark:border-[var(--brand2)] hover:bg-black/10 dark:hover:bg-white/10 ";
     }
     else { /* Color personalizado: */
-        className += `text-[var(--gris5)] border-[${jerarquia}]`;
+        className += `text-[var(--gris5)] border-[${jerarquia}] hover:scale-105 transition ease `;
         style += jerarquia; /* S'utilitza 'style' perquè no permet definir un 'bg-' dinàmic. */
     }
 

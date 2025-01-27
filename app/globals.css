@@ -50,7 +50,7 @@
     --otr: #A1AEFF;
 
     /* Degradados: */
-    --degradado1: linear-gradient(135deg, #D78E55, #D84C60);
+    --degradado1: linear-gradient(45deg, #D84C60, #D78E55);
     --degradado2: linear-gradient(45deg, #653a70, #d84c60);
 }
 
@@ -80,6 +80,7 @@
     @apply font-nohemi font-extrabold text-[1.8rem] m-0 p-0;
     color: var(--foreground);
     letter-spacing: 0.02em;
+    line-height: 2.2rem;
   }
 
   h3 {
@@ -130,6 +131,17 @@
 }
 
 /* OTROS ESTILOS: */
+
+/* Oculta todas las barras de scroll horizontales */
+*::-webkit-scrollbar:horizontal {
+  display: none; /* Oculta la barra de scroll horizontal en navegadores basados en WebKit */
+}
+
+* {
+  scrollbar-width: none; /* Firefox: oculta la barra de scroll horizontal */
+  -ms-overflow-style: none; /* IE y Edge: oculta todas las barras */
+}
+
 
 :root {
   /* El ancho se divide en 12 columnas (dinámico). */

@@ -12,7 +12,7 @@ export default function Inicio() {
         Página en construcción
       </h1>
       <div className="w-full mx-auto">
-        <Boton texto="Ir al Panel" enlace="/panel-estandar" tamano="grande" jerarquia="secundario" />
+        <Boton texto="Ir al Panel" enlace="/panel-estandar" tamano="grande" jerarquia="primario" />
       </div>
     </div>
   );
