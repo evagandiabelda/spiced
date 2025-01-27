@@ -14,12 +14,12 @@ const Footer = () => {
     return (
         <footer className="w-full -mt-4 -mb-5 flex flex-col gap-0 dark">
 
-            <div className='h-[9px] w-full m-0 p-0'>
-                <img src="/iconos/iconos-genericos/wavy-footer.svg" alt="Inicio del footer" className='h-full object-cover' />
+            <div className='flex flex-col justify-end items-center min-h-[16px] w-full m-0 p-0 overflow-hidden'>
+                <img src="/iconos/iconos-genericos/wavy-footer.svg" alt="Inicio del footer" className='translate-y-[1px] min-w-[1920px] object-cover' />
             </div>
 
             {/* Caja Principal del Footer: */}
-            <div className='flex-col m-0 px-col1 py-8 gap-2 bg-[--negro]'>
+            <div className='flex-col m-0 px-col1 py-8 m-0 gap-2 bg-[--negro]'>
 
                 {/* Caja Superior: */}
                 <div className='flex justify-left h-[100px] px-4 py-8 border-b-[1px] border-b-[var(--brand2)]'>
@@ -47,7 +47,7 @@ const Footer = () => {
                                 <p className='text-[var(--brand2)]'>No dudes en utilizar nuestro chat en vivo 24/7 y gratuito, con profesionales voluntarios y totalmente anónimo.</p>
                             </div>
                             <div>
-                                <Boton texto='Necesito ayuda' enlace='#' modo='oscuro' tamano='grande' jerarquia='primario' customColor='var(--brand1)' />
+                                <Boton texto='Necesito ayuda' enlace='#' tamano='grande' jerarquia='var(--brand1)' />
                             </div>
                         </div>
                     </div>

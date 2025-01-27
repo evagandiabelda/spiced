@@ -14,10 +14,10 @@ const SidebarPanel = ({ usuario }: SidebarPanelProps) => {
         <div className="flex flex-col dark">
             <div>
                 <div className="w-full flex flex-row items-center gap-4 pb-7 border-b border-b-[var(--brand2)]">
-                    <a href={href} className="w-16">
+                    <a href={href} className="mobile:w-16 tablet:w-12 laptop:w-16">
                         <Avatar borde="blanco" />
                     </a>
-                    <a href={href}>
+                    <a href={href} className="mobile:block tablet:hidden laptop:block">
                         <div className="flex flex-col gap-2">
                             <h3 className="m-0">¡Hola, usuario!</h3>
                             <p className="font-normal text-[0.7rem] m-0"><span>Pequeño saltamontes</span></p>

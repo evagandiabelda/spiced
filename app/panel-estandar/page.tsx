@@ -15,7 +15,7 @@ export default function Inicio() {
                             <img src="/iconos/iconos-menu/icono-notificaciones.svg" alt="notificaciones" className="w-8 cursor-pointer hover:scale-110 transition ease" />
                             <img src="/iconos/iconos-otros/icono-insignia-mini-1.svg" alt="insignia actual" className="w-8 cursor-pointer hover:scale-110 transition ease" />
                         </div>
-                        <ThemeToggle tamano="grande" />
+                        <ThemeToggle />
                     </div>
                 </div>
                 <div className="w-full flex flex-col gap-3">
