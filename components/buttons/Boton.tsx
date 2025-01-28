@@ -20,10 +20,10 @@ const Boton = ({ texto, enlace, tamano, jerarquia }: BotonProps) => {
     }
 
     if (jerarquia === "primario") {
-        className += "text-[var(--blanco)] dark:text-[var(--gris5)] border-[var(--gris5)] dark:border-[var(--brand2)] bg-[var(--gris5)] dark:bg-[var(--brand2)] hover-opacity ";
+        className += "text-[var(--blanco)] dark:text-[var(--gris5)] border-[var(--gris5)] dark:border-[var(--brand2)] bg-[var(--gris5)] dark:bg-[var(--brand2)] hover:scale-105 transition ease ";
     }
     else if (jerarquia === "secundario") {
-        className += "text-[var(--gris5)] dark:text-[var(--gris1)] border-[var(--gris5)] dark:border-[var(--brand2)] hover:bg-black/10 dark:hover:bg-white/10 ";
+        className += "text-[var(--gris5)] dark:text-[var(--gris1)] border-[var(--gris5)] dark:border-[var(--brand2)] hover:bg-black/10 dark:hover:bg-white/10 hover:scale-105 transition ease ";
     }
     else { /* Color personalizado: */
         className += `text-[var(--gris5)] border-[${jerarquia}] hover:scale-105 transition ease `;
