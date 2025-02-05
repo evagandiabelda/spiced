@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import Boton from "@/components/buttons/Boton";
 
 const ItemListaShare = () => {
@@ -9,16 +10,21 @@ const ItemListaShare = () => {
             <div className="flex-1 flex flex-row mobile:items-start tablet:items-center gap-4">
 
                 <div id="caja-miniatura">
-                    <img src="/imgs/IMG-Ejemplo-Miniatura.png" alt="miniatura" className="w-[50px] h-[50px]" />
+                    <Image
+                        src="/imgs/IMG-Ejemplo-Miniatura.png"
+                        width={50}
+                        height={50}
+                        alt="miniatura"
+                    />
                 </div>
 
-                <div id="caja-textos" className="flex-1 flex flex-row justify-between gap-3">
-                    <div className="flex-1 flex flex-col justify-between gap-1">
+                <div id="caja-textos" className="flex-1 flex flex-col justify-between gap-1">
+                    <div className="w-full flex flex-row">
                         <p className="font-bold">Características del TDAH en adultos</p>
-                        <span className="text-[var(--gris3)]">@susana_tda</span>
                     </div>
-                    <div className="mobile:hidden tablet:block flex flex-col justify-end">
-                        <span className="text-[var(--gris3)]">Guardado hace 2 horas</span>
+                    <div className="w-full mobile:hidden tablet:flex flex-row justify-between">
+                        <p><span className="text-[var(--gris3)]">@susana_tda</span></p>
+                        <p><span className="text-[var(--gris3)]">Guardado hace 2 horas</span></p>
                     </div>
                 </div>
 

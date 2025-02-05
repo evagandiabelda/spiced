@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import {
     Accordion,
     AccordionContent,
@@ -35,21 +36,39 @@ const Menu = ({ tipo }: tipo) => {
             <nav className="mobile:flex laptop:hidden w-full flex-col gap-2">
                 <a href="/" className="w-full">
                     <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
-                        <img src="/iconos/iconos-menu/icono-inicio.svg" alt="inicio" className="w-6 dark:invert" />
+                        <Image
+                            src="/iconos/iconos-menu/icono-inicio.svg"
+                            width={24}
+                            height={24}
+                            className="dark:invert"
+                            alt="inicio"
+                        />
                         <p className="font-bold mb-0">Inicio</p>
                     </div>
                 </a>
 
                 <a href="/feed">
                     <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
-                        <img src="/iconos/iconos-menu/icono-explorar.svg" alt="explorar" className="w-6 dark:invert" />
+                        <Image
+                            src="/iconos/iconos-menu/icono-explorar.svg"
+                            width={24}
+                            height={24}
+                            className="dark:invert"
+                            alt="explorar"
+                        />
                         <p className="font-bold mb-0">Explorar</p>
                     </div>
                 </a>
 
                 <a href="/panel-estandar">
                     <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
-                        <img src="/iconos/iconos-menu/icono-compartir.svg" alt="compartir" className="w-6 dark:invert" />
+                        <Image
+                            src="/iconos/iconos-menu/icono-compartir.svg"
+                            width={24}
+                            height={24}
+                            className="dark:invert"
+                            alt="compartir"
+                        />
                         <p className="font-bold mb-0">Compartir</p>
                     </div>
                 </a>

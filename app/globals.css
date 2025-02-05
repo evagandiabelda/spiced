@@ -201,3 +201,28 @@ main, .alto-main {
 .sombra-exterior-dark {
   box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 }
+
+select {
+  appearance: none;
+  -webkit-appearance: none; /* Compatibilidad con Safari */
+  -moz-appearance: none; /* Compatibilidad con Firefox */
+  position: relative;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  border: 2px solid var(--blanco);
+  border-radius: 0.8rem;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"%3E%3Cpath fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 1.5rem;
+  cursor: pointer;
+}
+
+select:hover {
+  border: 2px solid var(--gris2);
+
+}
+
+select:active, select:focus {
+  border: 2px solid var(--brand1);
+}

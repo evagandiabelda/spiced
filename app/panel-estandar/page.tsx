@@ -1,3 +1,4 @@
+import Image from "next/image";
 import ThemeToggle from "@/components/buttons/ThemeToggle";
 import Boton from "@/components/buttons/Boton";
 import ItemListaShare from "@/components/cards/ItemListaShare";
@@ -13,8 +14,20 @@ export default function Inicio() {
                     <h2>Tu espacio personal</h2>
                     <div className="flex flex-row justify-end gap-6">
                         <div className="flex flex-row justify-end gap-4">
-                            <img src="/iconos/iconos-menu/icono-notificaciones.svg" alt="notificaciones" className="w-8 cursor-pointer hover:scale-110 transition ease" />
-                            <img src="/iconos/iconos-otros/icono-insignia-mini-1.svg" alt="insignia actual" className="w-8 cursor-pointer hover:scale-110 transition ease" />
+                            <Image
+                                src="/iconos/iconos-menu/icono-notificaciones.svg"
+                                width={32}
+                                height={32}
+                                className="cursor-pointer hover:scale-110 transition ease"
+                                alt="notificaciones"
+                            />
+                            <Image
+                                src="/iconos/iconos-otros/icono-insignia-mini-1.svg"
+                                width={32}
+                                height={32}
+                                className="cursor-pointer hover:scale-110 transition ease"
+                                alt="insignia actual"
+                            />
                         </div>
                         <ThemeToggle />
                     </div>
@@ -33,7 +46,13 @@ export default function Inicio() {
                             <div className="w-full h-100">
                                 <a href="/panel-estandar/nuevo-share">
                                     <div className="flex flex-row gap-2 items-center hover:scale-105 transition ease">
-                                        <img src="/iconos/iconos-otros/icono-agregar.svg" alt="nuevo share" className="invert" />
+                                        <Image
+                                            src="/iconos/iconos-otros/icono-agregar.svg"
+                                            width={28}
+                                            height={28}
+                                            className="invert"
+                                            alt="nuevo share"
+                                        />
                                         <p className="font-bold">Nuevo share</p>
                                     </div>
                                 </a>
@@ -66,7 +85,12 @@ export default function Inicio() {
                             </div>
                         </div>
                         <div id="caja-der" className="min-w-col1 h-100 flex flex-col justify-center items-center">
-                            <img src="/imgs/IMG-Pinguino.svg" alt="imagen de un pingüino" className="w-[300px]" />
+                            <Image
+                                src="/imgs/IMG-Pinguino.svg"
+                                width={300}
+                                height={300}
+                                alt="imagen de un pingüino"
+                            />
                         </div>
                     </div>
                 </div>
@@ -74,7 +98,12 @@ export default function Inicio() {
                 <div className="w-full flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-3">
                     <div className="w-full flex flex-row justify-between items-start">
                         <h4>Últimos shares guardados</h4>
-                        <img src="/iconos/iconos-menu/icono-guardado.svg" alt="últimos shares guardados" className="w-[18px]" />
+                        <Image
+                            src="/iconos/iconos-menu/icono-guardado.svg"
+                            width={18}
+                            height={18}
+                            alt="últimos shares guardados"
+                        />
                     </div>
                     <div className="w-full flex flex-col gap-8 px-[30px] py-[40px] rounded-xl bg-white">
                         <ItemListaShare />

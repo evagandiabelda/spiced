@@ -1,5 +1,7 @@
 'use client';
 
+import Image from "next/image";
+
 type InputProps = {
     tipo: "text" | "number" | "email" | "password" | "textarea";
     placeholder: string;
@@ -13,26 +15,50 @@ const Input = ({ tipo, placeholder }: InputProps) => {
     if (tipo === "text") {
         return (
             <div className={divClassName}>
-                <img src="/iconos/iconos-registro/icono-registro-nombre.svg" alt="campo de texto" className="w-[18px]" />
+                <Image
+                    src="/iconos/iconos-registro/icono-registro-nombre.svg"
+                    width={18}
+                    height={18}
+                    className="dark:invert"
+                    alt="campo de texto"
+                />
                 <input type="text" className={inputClassName} placeholder={placeholder} />
             </div>
         );
     }
     else if (tipo === "number") {
         <div className={divClassName}>
-            <img src="/iconos/iconos-registro/icono-registro-edad.svg" alt="campo numérico" className="w-[18px]" />
+            <Image
+                src="/iconos/iconos-registro/icono-registro-edad.svg"
+                width={18}
+                height={18}
+                className="dark:invert"
+                alt="campo numérico"
+            />
             <input type="number" className={inputClassName} placeholder={placeholder} />
         </div>
     }
     else if (tipo === "email") {
         <div className={divClassName}>
-            <img src="/iconos/iconos-registro/icono-registro-email.svg" alt="campo email" className="w-[18px]" />
+            <Image
+                src="/iconos/iconos-registro/icono-registro-email.svg"
+                width={18}
+                height={18}
+                className="dark:invert"
+                alt="campo email"
+            />
             <input type="email" className={inputClassName} placeholder={placeholder} />
         </div>
     }
     else if (tipo === "password") {
         <div className={divClassName}>
-            <img src="/iconos/iconos-registro/icono-registro-password.svg" alt="campo password" className="w-[18px]" />
+            <Image
+                src="/iconos/iconos-registro/icono-registro-password.svg"
+                width={18}
+                height={18}
+                className="dark:invert"
+                alt="campo password"
+            />
             <input type="password" className={inputClassName} placeholder={placeholder} />
         </div>
     }

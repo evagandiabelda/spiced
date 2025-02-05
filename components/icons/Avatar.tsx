@@ -1,5 +1,7 @@
 'use client';
 
+import Image from "next/image";
+
 type borde = {
     borde: "blanco" | "color";
 }
@@ -10,10 +12,11 @@ const Avatar = ({ borde }: borde) => {
 
     return (
         <div className={`p-1 rounded-full border-[3px] ${colorBorde} cursor-pointer hover:scale-110 transition ease`}>
-            <img
+            <Image
                 src="/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"
-                alt="Avatar"
-                className="w-100"
+                width={100}
+                height={100}
+                alt="avatar"
             />
         </div>
     );

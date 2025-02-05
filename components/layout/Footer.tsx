@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import Logo from '@/components/icons/Logo';
 import Menu from '@/components/layout/Menu';
 import Boton from '@/components/buttons/Boton';
@@ -36,10 +37,38 @@ const Footer = () => {
                     </div>
                     <div id='caja-der' className='flex flex-col gap-9 mobile:w-full laptop:w-col4'>
                         <div className='flex felx-row gap-4 items-end'>
-                            <a href="https://www.instagram.com" className='hover:scale-110 transition ease'><img src="/iconos/iconos-redes-sociales/social-instagram.svg" alt="Instagram" className='w-[24px]' /></a>
-                            <a href="https://www.facebook.com" className='hover:scale-110 transition ease'><img src="/iconos/iconos-redes-sociales/social-facebook.svg" alt="Facebook" className='w-[24px]' /></a>
-                            <a href="https://www.x.com" className='hover:scale-110 transition ease'><img src="/iconos/iconos-redes-sociales/social-x.svg" alt="X" className='w-[24px]' /></a>
-                            <a href="https://www.pinterest.com" className='hover:scale-110 transition ease'><img src="/iconos/iconos-redes-sociales/social-pinterest.svg" alt="Pinterest" className='w-[24px]' /></a>
+                            <a href="https://www.instagram.com" className='hover:scale-110 transition ease'>
+                                <Image
+                                    src="/iconos/iconos-redes-sociales/social-instagram.svg"
+                                    width={24}
+                                    height={24}
+                                    alt="instagram"
+                                />
+                            </a>
+                            <a href="https://www.facebook.com" className='hover:scale-110 transition ease'>
+                                <Image
+                                    src="/iconos/iconos-redes-sociales/social-facebook.svg"
+                                    width={24}
+                                    height={24}
+                                    alt="facebook"
+                                />
+                            </a>
+                            <a href="https://www.x.com" className='hover:scale-110 transition ease'>
+                                <Image
+                                    src="/iconos/iconos-redes-sociales/social-x.svg"
+                                    width={24}
+                                    height={24}
+                                    alt="x"
+                                />
+                            </a>
+                            <a href="https://www.pinterest.com" className='hover:scale-110 transition ease'>
+                                <Image
+                                    src="/iconos/iconos-redes-sociales/social-pinterest.svg"
+                                    width={24}
+                                    height={24}
+                                    alt="pinterest"
+                                />
+                            </a>
                         </div>
                         <div className='flex flex-col gap-5'>
                             <div className="flex flex-col gap-3">

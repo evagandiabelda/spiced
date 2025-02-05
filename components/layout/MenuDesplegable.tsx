@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
+import Image from "next/image";
 import Avatar from "@/components/icons/Avatar";
 import Search from "@/components/inputs/Search";
 import Menu from "@/components/layout/Menu";
@@ -30,7 +31,9 @@ const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
                 <div className="px-[30px] py-[24px] border-y-2 border-[--gris1] dark:border-[--gris4] cursor-pointer">
                     <a href="/panel" id="enlace">
                         <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
-                            <Avatar borde="color" />
+                            <div className="w-12">
+                                <Avatar borde="color" />
+                            </div>
                             <p className="font-bold mb-0">Espacio personal</p>
                         </div>
                     </a>
@@ -44,11 +47,13 @@ const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
                 </div>
             </div>
 
-            <img
+            <Image
                 src="/iconos/iconos-menu/icono-contraer.svg"
-                alt="contraer menú"
-                className="w-[80px] self-end align-bottom cursor-pointer"
+                width={80}
+                height={80}
+                className="self-end align-bottom cursor-pointer dark:invert dark:opacity-50"
                 onClick={onClose}
+                alt="contraer menú"
                 aria-label="Cerrar menú"
             />
         </div>,
