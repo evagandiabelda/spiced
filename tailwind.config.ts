@@ -38,6 +38,7 @@ export default {
         col9: 'calc((100vw / 12) * 9)'
       },
       width: {
+        colhalf: 'calc(100vw / 24)',
         col1: 'calc(100vw / 12)',
         col2: 'calc(100vw / 6)',
         col3: 'calc(100vw / 4)',
