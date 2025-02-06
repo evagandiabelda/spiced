@@ -9,7 +9,7 @@ interface BotonProps {
 
 const Boton = ({ texto, enlace, tamano, jerarquia }: BotonProps) => {
 
-    let className = "inline-block text-center font-semibold rounded-full border-2 transition duration-300 ";
+    let className = "inline-block text-center font-semibold rounded-full border-2 transition ease duration-300 ";
     let style = "";
 
     if (tamano === "pequeno") {
@@ -20,13 +20,13 @@ const Boton = ({ texto, enlace, tamano, jerarquia }: BotonProps) => {
     }
 
     if (jerarquia === "primario") {
-        className += "text-[var(--blanco)] dark:text-[var(--gris5)] border-[var(--gris5)] dark:border-[var(--brand2)] bg-[var(--gris5)] dark:bg-[var(--brand2)] hover:scale-105 transition ease ";
+        className += "text-[var(--blanco)] dark:text-[var(--gris5)] border-[var(--gris5)] dark:border-[var(--brand2)] bg-[var(--gris5)] dark:bg-[var(--brand2)] hover:opacity-80 ";
     }
     else if (jerarquia === "secundario") {
-        className += "text-[var(--gris5)] dark:text-[var(--gris1)] border-[var(--gris5)] dark:border-[var(--brand2)] hover:bg-black/10 dark:hover:bg-white/10 hover:scale-105 transition ease ";
+        className += "text-[var(--gris5)] dark:text-[var(--gris2)] border-[var(--gris5)] dark:border-[var(--gris2)] hover:bg-black/10 dark:hover:bg-white/10 ";
     }
     else { /* Color personalizado: */
-        className += `text-[var(--gris5)] border-[${jerarquia}] hover:scale-105 transition ease `;
+        className += `text-[var(--gris5)] hover:opacity-80 `;
         style += jerarquia; /* S'utilitza 'style' perquè no permet definir un 'bg-' dinàmic. */
     }
 
@@ -34,7 +34,7 @@ const Boton = ({ texto, enlace, tamano, jerarquia }: BotonProps) => {
         <a
             href={enlace}
             className={`${className}`}
-            style={{ backgroundColor: style }}
+            style={{ backgroundColor: style, border: style }}
         >
             {texto}
         </a>

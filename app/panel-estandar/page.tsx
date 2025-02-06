@@ -18,14 +18,14 @@ export default function Inicio() {
                                 src="/iconos/iconos-menu/icono-notificaciones.svg"
                                 width={32}
                                 height={32}
-                                className="cursor-pointer hover:scale-110 transition ease"
+                                className="cursor-pointer hover:scale-110 transition ease dark:invert dark:opacity-70 dark:hover:opacity-100"
                                 alt="notificaciones"
                             />
                             <Image
                                 src="/iconos/iconos-otros/icono-insignia-mini-1.svg"
                                 width={32}
                                 height={32}
-                                className="cursor-pointer hover:scale-110 transition ease"
+                                className="cursor-pointer hover:scale-110 transition ease dark:opacity-70 dark:hover:opacity-100"
                                 alt="insignia actual"
                             />
                         </div>
@@ -41,7 +41,7 @@ export default function Inicio() {
             <div className="w-full flex flex-col gap-4">
                 <div className="w-full flex mobile:flex-col laptop:flex-row justify-between gap-4">
                     {/* Card Estadísticas: */}
-                    <div className="min-w-col3 flex flex-col justify-between rounded-xl bg-[var(--tdah)] p-[30px]">
+                    <div className="min-w-col3 flex flex-col justify-between rounded-xl p-[30px] bg-[var(--tdah)] dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--tdah)]">
                         <div id="caja-sup" className="w-full h-full flex flex-row pb-6 border-b border-[var(--negro)]">
                             <div className="w-full h-100">
                                 <a href="/panel-estandar/nuevo-share">
@@ -50,7 +50,6 @@ export default function Inicio() {
                                             src="/iconos/iconos-otros/icono-agregar.svg"
                                             width={28}
                                             height={28}
-                                            className="invert"
                                             alt="nuevo share"
                                         />
                                         <p className="font-bold">Nuevo share</p>
@@ -76,12 +75,15 @@ export default function Inicio() {
                         </div>
                     </div>
                     {/* Card Pingüinadas: */}
-                    <div className="w-full flex mobile:flex-col-reverse tablet:flex-row gap-2 rounded-xl bg-[var(--fob)] px-[36px] py-[40px] gap-[2.8rem]">
+                    <div className="w-full flex mobile:flex-col-reverse tablet:flex-row gap-2 rounded-xl bg-[var(--fob)] px-[36px] py-[40px] gap-[2.8rem] dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--fob)]">
                         <div id="caja-izq" className="w-full h-100 flex flex-col justify-center gap-8">
                             <p>Los pingüinos suelen regalarse piedrecitas unos a otros en señal de afecto. Envía una pingüinada a alguien que te importe.</p>
                             <Input tipo="text" placeholder="Su nombre de usuario" />
-                            <div>
+                            <div className="dark:hidden">
                                 <Boton texto="Enviar una pingüinada" enlace="#" tamano="pequeno" jerarquia="primario" />
+                            </div>
+                            <div className="hidden dark:block">
+                                <Boton texto="Enviar una pingüinada" enlace="#" tamano="pequeno" jerarquia="var(--fob)" />
                             </div>
                         </div>
                         <div id="caja-der" className="min-w-col1 h-100 flex flex-col justify-center items-center">
@@ -95,17 +97,18 @@ export default function Inicio() {
                     </div>
                 </div>
                 {/* Card Últimos Shares Guardados: */}
-                <div className="w-full flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-3">
+                <div className="w-full flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-3 dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--tpa)]">
                     <div className="w-full flex flex-row justify-between items-start">
                         <h4>Últimos shares guardados</h4>
                         <Image
                             src="/iconos/iconos-menu/icono-guardado.svg"
                             width={18}
                             height={18}
+                            className="dark:invert"
                             alt="últimos shares guardados"
                         />
                     </div>
-                    <div className="w-full flex flex-col gap-8 px-[30px] py-[40px] rounded-xl bg-white">
+                    <div className="w-full flex flex-col gap-8 px-[30px] py-[40px] rounded-xl bg-white dark:bg-[var(--gris4)]">
                         <ItemListaShare />
                         <ItemListaShare />
                         <ItemListaShare />

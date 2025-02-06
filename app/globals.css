@@ -63,7 +63,7 @@
 /* Modo Oscuro: */
 .dark {
   --background: var(--gris5);
-  --foreground: var(--gris1);
+  --foreground: var(--gris2);
 }
 
 /* ------------ ESTILOS BASE ------------ */
@@ -128,6 +128,22 @@
     color: var(--foreground);
   }
 
+  .fondo-degradado1 {
+    background: var(--degradado1);
+  }
+
+  .fondo-degradado2 {
+    background: var(--degradado2);
+  }
+
+  .resaltar-texto {
+    color: var(--gris3);
+  }
+
+  .resaltar-texto:hover {
+    color: var(--blanco);
+  }
+
 }
 
 /* OTROS ESTILOS: */
@@ -176,14 +192,6 @@ main, .alto-main {
 
 .hover-underline:hover, .hover-underline:active {
   border-bottom: 2px solid var(--brand1);
-}
-
-.fondo-degradado1 {
-  background: var(--degradado1);
-}
-
-.fondo-degradado2 {
-  background: var(--degradado2);
 }
 
 .sombra-interior-light {

@@ -10,7 +10,7 @@ type InputProps = {
 const Input = ({ tipo, placeholder }: InputProps) => {
 
     let divClassName = "flex flex-row justify-between items-center gap-3 px-4 py-2 rounded-[12px] bg-white dark:bg-[var(--gris4)] border-2 border-white dark:border-[var(--gris4)] hover:border-[var(--brand1)] dark:hover:border-[var(--brand2)] cursor-text";
-    let inputClassName = "w-full focus:outline-none active:outline-none";
+    let inputClassName = "w-full bg-white dark:bg-[var(--gris4)] focus:outline-none active:outline-none";
 
     if (tipo === "text") {
         return (
