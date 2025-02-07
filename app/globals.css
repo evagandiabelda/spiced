@@ -63,7 +63,7 @@
 /* Modo Oscuro: */
 .dark {
   --background: var(--gris5);
-  --foreground: var(--gris2);
+  --foreground: var(--brand2);
 }
 
 /* ------------ ESTILOS BASE ------------ */
@@ -74,28 +74,32 @@
     @apply font-nohemi font-extrabold text-[2.8rem] m-0 p-0;
     color: var(--foreground);
     letter-spacing: 0.01em;
+    line-height: normal;
   }
 
   h2 {
     @apply font-nohemi font-extrabold text-[1.8rem] m-0 p-0;
     color: var(--foreground);
     letter-spacing: 0.02em;
-    line-height: 2.2rem;
+    line-height: normal;
   }
 
   h3 {
     @apply font-inter font-bold text-[1.4rem] m-0 p-0;
     color: var(--foreground);
+    line-height: normal;
   }
 
   h4 { /* Títulos de las Cards */
     @apply font-inter font-bold text-[1.1rem] m-0 p-0;
     color: var(--foreground);
+    line-height: normal;
   }
 
   p {
     @apply font-inter font-normal text-base;
     color: var(--foreground);
+    line-height: normal;
   }
 
   span {
@@ -134,6 +138,10 @@
 
   .fondo-degradado2 {
     background: var(--degradado2);
+  }
+
+  form,  form * {
+    @apply appearance-none;
   }
 
   .resaltar-texto {
@@ -233,4 +241,11 @@ select:hover {
 
 select:active, select:focus {
   border: 2px solid var(--brand1);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s !important;
 }

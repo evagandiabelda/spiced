@@ -76,7 +76,7 @@ const Footer = () => {
                                 <p className='text-[var(--brand2)]'>No dudes en utilizar nuestro chat en vivo 24/7 y gratuito, con profesionales voluntarios y totalmente anónimo.</p>
                             </div>
                             <div>
-                                <Boton texto='Necesito ayuda' enlace='#' tamano='grande' jerarquia='var(--brand1)' />
+                                <Boton texto='Necesito ayuda' enlace='#' tamano='grande' jerarquia="primario" customColor='var(--brand1)' />
                             </div>
                         </div>
                     </div>

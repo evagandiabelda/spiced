@@ -3,28 +3,35 @@
 import Image from "next/image";
 import Boton from "@/components/buttons/Boton";
 
-const ItemListaShare = () => {
+interface ItemProps {
+    imagen: string;
+    usuario: string;
+    titulo: string;
+    fecha: string;
+}
+
+const ItemListaShare = ({ imagen, usuario, titulo, fecha }: ItemProps) => {
     return (
-        <div className="w-full mobile:max-h-[100px] tablet:max-h-[50px] flex flex-row justify-between items-center gap-12 mobile:pt-4 tablet:pt-0 pb-8 border-b border-b-[var(--gris2)] dark:border-b-[var(--gris5)]">
+        <li className="w-full flex flex-row justify-between items-center gap-12 py-4 border-b border-b-[var(--gris2)] dark:border-b-[var(--gris5)]">
 
             <div className="flex-1 flex flex-row mobile:items-start tablet:items-center gap-4">
 
-                <div id="caja-miniatura">
+                <div id="caja-miniatura" className="relative w-[3rem] h-[3rem]">
                     <Image
-                        src="/imgs/IMG-Ejemplo-Miniatura.png"
-                        width={50}
-                        height={50}
+                        src={imagen}
                         alt="miniatura"
+                        fill
+                        className="object-cover"
                     />
                 </div>
 
                 <div id="caja-textos" className="flex-1 flex flex-col justify-between gap-1">
                     <div className="w-full flex flex-row">
-                        <p className="font-bold">Características del TDAH en adultos</p>
+                        <p className="font-bold">{titulo}</p>
                     </div>
                     <div className="w-full mobile:hidden tablet:flex flex-row justify-between">
-                        <p><span className="text-[var(--gris3)]">@susana_tda</span></p>
-                        <p><span className="text-[var(--gris3)]">Guardado hace 2 horas</span></p>
+                        <p><span className="text-[var(--gris3)]">{usuario}</span></p>
+                        <p><span className="text-[var(--gris3)]">{fecha}</span></p>
                     </div>
                 </div>
 
@@ -34,7 +41,7 @@ const ItemListaShare = () => {
                 <Boton texto="Leer de nuevo" enlace="#" tamano="grande" jerarquia="secundario" />
             </div>
 
-        </div>
+        </li>
     );
 };
 

@@ -4,13 +4,15 @@ import Image from "next/image";
 
 type InputProps = {
     tipo: "text" | "number" | "email" | "password" | "textarea";
-    placeholder: string;
+    id: string;
+    placeholder?: string;
+    required: boolean;
 }
 
-const Input = ({ tipo, placeholder }: InputProps) => {
+const Input = ({ tipo, id, placeholder, required }: InputProps) => {
 
     let divClassName = "flex flex-row justify-between items-center gap-3 px-4 py-2 rounded-[12px] bg-white dark:bg-[var(--gris4)] border-2 border-white dark:border-[var(--gris4)] hover:border-[var(--brand1)] dark:hover:border-[var(--brand2)] cursor-text";
-    let inputClassName = "w-full bg-white dark:bg-[var(--gris4)] focus:outline-none active:outline-none";
+    let inputClassName = "flex-1 text-[1rem] !bg-transparent py-1 px-4 focus:outline-none active:outline-none cursor-text";
 
     if (tipo === "text") {
         return (
@@ -22,50 +24,58 @@ const Input = ({ tipo, placeholder }: InputProps) => {
                     className="dark:invert"
                     alt="campo de texto"
                 />
-                <input type="text" className={inputClassName} placeholder={placeholder} />
+                <input type="text" id={id} name={id} className={inputClassName} placeholder={placeholder} required={required} />
             </div>
         );
     }
     else if (tipo === "number") {
-        <div className={divClassName}>
-            <Image
-                src="/iconos/iconos-registro/icono-registro-edad.svg"
-                width={18}
-                height={18}
-                className="dark:invert"
-                alt="campo numérico"
-            />
-            <input type="number" className={inputClassName} placeholder={placeholder} />
-        </div>
+        return (
+            <div className={divClassName}>
+                <Image
+                    src="/iconos/iconos-registro/icono-registro-edad.svg"
+                    width={18}
+                    height={18}
+                    className="dark:invert"
+                    alt="campo numérico"
+                />
+                <input type="number" id={id} name={id} className={inputClassName} placeholder={placeholder} required={required} />
+            </div>
+        );
     }
     else if (tipo === "email") {
-        <div className={divClassName}>
-            <Image
-                src="/iconos/iconos-registro/icono-registro-email.svg"
-                width={18}
-                height={18}
-                className="dark:invert"
-                alt="campo email"
-            />
-            <input type="email" className={inputClassName} placeholder={placeholder} />
-        </div>
+        return (
+            <div className={divClassName}>
+                <Image
+                    src="/iconos/iconos-registro/icono-registro-email.svg"
+                    width={18}
+                    height={18}
+                    className="dark:invert"
+                    alt="campo email"
+                />
+                <input type="email" id={id} name={id} className={inputClassName} placeholder={placeholder} required={required} />
+            </div>
+        );
     }
     else if (tipo === "password") {
-        <div className={divClassName}>
-            <Image
-                src="/iconos/iconos-registro/icono-registro-password.svg"
-                width={18}
-                height={18}
-                className="dark:invert"
-                alt="campo password"
-            />
-            <input type="password" className={inputClassName} placeholder={placeholder} />
-        </div>
+        return (
+            <div className={divClassName}>
+                <Image
+                    src="/iconos/iconos-registro/icono-registro-password.svg"
+                    width={18}
+                    height={18}
+                    className="dark:invert"
+                    alt="campo password"
+                />
+                <input type="password" id={id} name={id} className={inputClassName} placeholder={placeholder} required={required} />
+            </div>
+        );
     }
     else if (tipo === "textarea") {
-        <div className={divClassName}>
-            <textarea className={inputClassName} placeholder={placeholder} />
-        </div>
+        return (
+            <div className={divClassName}>
+                <textarea id={id} name={id} className={inputClassName} placeholder={placeholder} required={required} />
+            </div>
+        );
     }
 
 
