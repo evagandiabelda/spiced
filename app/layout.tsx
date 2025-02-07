@@ -1,10 +1,11 @@
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from '@/context/ThemeContext';
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ThemeInitializer from "@/components/ThemeInitializer";
-
+import SessionWrapper from "@/components/SessionWrapper";
 
 export const metadata: Metadata = {
   title: "Spiced",
@@ -27,11 +28,13 @@ export default function RootLayout({
 
         <ThemeProvider>
           <ThemeInitializer />
-          <Header />
-          <main className="flex flex-grow">
-            {children}
-          </main>
-          <Footer />
+          <SessionWrapper>
+            <Header />
+            <main className="flex flex-grow">
+              {children}
+            </main>
+            <Footer />
+          </SessionWrapper>
         </ThemeProvider>
 
       </body>

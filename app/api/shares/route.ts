@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
@@ -7,9 +8,9 @@ const prisma = new PrismaClient();
 export async function GET() {
   try {
     const shares = await prisma.share.findMany();
-    return new Response(JSON.stringify(shares), { status: 200 });
+    return NextResponse.json({ message: "Shares recuperados correctamente", shares: shares }, { status: 200 });
   } catch (error) {
-    return new Response("Error fetching shares", { status: 500 });
+    return NextResponse.json({ error: "Error recuperando los shares" }, { status: 500 });
   }
 }
 
@@ -30,9 +31,9 @@ export async function POST(request: Request) {
       },
     });
 
-    return new Response(JSON.stringify(nuevoShare), { status: 201 });
+    return NextResponse.json({ message: "Shares publicado correctamente", share: nuevoShare }, { status: 201 });
   } catch (error) {
-    return new Response("Error creating usuario", { status: 500 });
+    return NextResponse.json({ error: "Error publicando el share" }, { status: 500 });
   }
 }
 
@@ -53,9 +54,9 @@ export async function PUT(request: Request) {
       },
     });
 
-    return new Response(JSON.stringify(shareActualizado), { status: 200 });
+    return NextResponse.json({ message: "Share actualizado correctamente", share: shareActualizado }, { status: 200 });
   } catch (error) {
-    return new Response("Error updating usuario", { status: 500 });
+    return NextResponse.json({ error: "Error actualizando el share" }, { status: 500 });
   }
 }
 
@@ -67,15 +68,15 @@ export async function DELETE(request: Request) {
     const shareId = url.searchParams.get("id");
 
     if (!shareId) {
-      return new Response("Missing shareId parameter", { status: 400 });
+      return NextResponse.json({ error: "Missing 'shareId' parameter" }, { status: 400 });
     }
 
     await prisma.share.delete({
       where: { id: shareId },
     });
 
-    return new Response("Share deleted", { status: 200 });
+    return NextResponse.json({ message: "Share eliminado correctamente" }, { status: 200 });
   } catch (error) {
-    return new Response("Error deleting share", { status: 500 });
+    return NextResponse.json({ error: "No se ha podido eliminar el share" }, { status: 500 });
   }
 }

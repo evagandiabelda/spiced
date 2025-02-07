@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import ItemListaShare from "@/components/layout/panel/ItemListaShare";
 
 interface Share {
@@ -15,21 +16,21 @@ interface Share {
   };
 }
 
-export default function ListaShares({ nombre_usuario }: { nombre_usuario: string }) {
+export default function ListaShares() {
+  const { data: session } = useSession(); // Obtener sesión
   const [shares, setShares] = useState<Share[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchSharesByUser = async () => {
+      if (!session?.user?.name) return; // Evitar la llamada si no hay usuario autenticado
+
       try {
-
-        const response = await fetch(`/api/shares/${nombre_usuario}`);
-
-        if (!response.ok) throw new Error("Error carregant els shares");
+        const response = await fetch(`/api/shares/${session.user.name}`);
+        if (!response.ok) throw new Error("Error cargando los shares");
 
         const data: Share[] = await response.json();
         setShares(data);
-
       } catch (error) {
         console.error(error);
       } finally {
@@ -38,9 +39,9 @@ export default function ListaShares({ nombre_usuario }: { nombre_usuario: string
     };
 
     fetchSharesByUser();
+  }, [session?.user?.name]); // Se ejecuta solo cuando el usuario cambia
 
-  }, [nombre_usuario]);
-
+  if (!session?.user) return <p>Debes iniciar sesión para ver tus shares.</p>;
   if (loading) return <p>Cargando shares...</p>;
 
   return (
@@ -53,9 +54,10 @@ export default function ListaShares({ nombre_usuario }: { nombre_usuario: string
             <ItemListaShare
               key={share.id}
               imagen={share.img_principal}
-              usuario={nombre_usuario}
+              usuario={session.user!.name} // Aquí usamos "!" porque ya verificamos antes que está definido
               titulo={share.titulo}
-              fecha={share.createdAt} />
+              fecha={share.createdAt}
+            />
           ))}
         </ul>
       )}

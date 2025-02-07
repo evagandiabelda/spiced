@@ -77,7 +77,7 @@ export default function Inicio() {
                             alt="últimos shares guardados"
                         />
                     </div>
-                    <ListaShares nombre_usuario="Oral14" />
+                    <ListaShares />
                 </div>
             </div>
 
