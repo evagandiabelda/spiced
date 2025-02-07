@@ -3,10 +3,9 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function GET(request: Request, { params }: { params: { nombre_usuario: string } }) {
+export async function GET(request: Request, context: { params: { nombre_usuario: string } }) {
     try {
-        // Verificamos si "params" tiene el valor esperado
-        const { nombre_usuario } = await params;
+        const { nombre_usuario } = context.params; // Forma correcta de extraer params
 
         // Buscamos el usuario por su nombre de usuario
         const user = await prisma.usuario.findUnique({
@@ -30,6 +29,7 @@ export async function GET(request: Request, { params }: { params: { nombre_usuar
         });
 
         return NextResponse.json(shares, { status: 200 });
+
     } catch (error) {
         console.error("Error en la ruta API:", error);
         return NextResponse.json({ error: "Error obteniendo los shares del usuario" }, { status: 500 });
