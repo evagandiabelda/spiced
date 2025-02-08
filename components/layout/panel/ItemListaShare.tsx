@@ -5,12 +5,12 @@ import Boton from "@/components/buttons/Boton";
 
 interface ItemProps {
     imagen: string;
-    usuario?: string | null; // Permitir que usuario sea opcional y pueda ser null
+    user?: string | null; // Permitir que usuario sea opcional y pueda ser null
     titulo: string;
     fecha: string;
 }
 
-const ItemListaShare = ({ imagen, usuario = "Usuario desconocido", titulo, fecha }: ItemProps) => {
+const ItemListaShare = ({ imagen, user = "Usuario desconocido", titulo, fecha }: ItemProps) => {
     return (
         <li className="w-full flex flex-row justify-between items-center gap-12 py-4 border-b border-b-[var(--gris2)] dark:border-b-[var(--gris5)]">
 
@@ -30,7 +30,7 @@ const ItemListaShare = ({ imagen, usuario = "Usuario desconocido", titulo, fecha
                         <p className="font-bold">{titulo}</p>
                     </div>
                     <div className="w-full mobile:hidden tablet:flex flex-row justify-between">
-                        <p><span className="text-[var(--gris3)]">{usuario || "Usuario desconocido"}</span></p>
+                        <p><span className="text-[var(--gris3)]">{user || "Usuario desconocido"}</span></p>
                         <p><span className="text-[var(--gris3)]">{fecha}</span></p>
                     </div>
                 </div>
