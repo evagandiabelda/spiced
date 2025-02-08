@@ -17,7 +17,7 @@ export default function SigninForm() {
     const [loading, setLoading] = useState(false);
 
     // Manejar cambios en los inputs
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
