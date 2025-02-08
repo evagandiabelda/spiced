@@ -23,10 +23,10 @@ export default function ListaShares() {
 
   useEffect(() => {
     const fetchSharesByUser = async () => {
-      if (!session?.user?.name) return; // Evitar la llamada si no hay usuario autenticado
+      if (!session?.user?.nombre_usuario) return; // Evitar la llamada si no hay usuario autenticado
 
       try {
-        const response = await fetch(`/api/shares/${session.user.name}`);
+        const response = await fetch(`/api/shares/${session.user.nombre_usuario}`);
         if (!response.ok) throw new Error("Error cargando los shares");
 
         const data: Share[] = await response.json();
@@ -39,7 +39,7 @@ export default function ListaShares() {
     };
 
     fetchSharesByUser();
-  }, [session?.user?.name]); // Se ejecuta solo cuando el usuario cambia
+  }, [session?.user?.nombre_usuario]); // Se ejecuta solo cuando el usuario cambia
 
   if (!session?.user) return <p>Debes iniciar sesión para ver tus shares.</p>;
   if (loading) return <p>Cargando shares...</p>;
@@ -54,7 +54,7 @@ export default function ListaShares() {
             <ItemListaShare
               key={share.id}
               imagen={share.img_principal}
-              usuario={session.user!.name} // Aquí usamos "!" porque ya verificamos antes que está definido
+              usuario={session.user!.nombre_usuario} // Aquí usamos "!" porque ya verificamos antes que está definido
               titulo={share.titulo}
               fecha={share.createdAt}
             />

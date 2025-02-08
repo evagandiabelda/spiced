@@ -6,10 +6,6 @@ import Logo from '@/components/icons/Logo';
 import Menu from '@/components/layout/Menu';
 import Boton from '@/components/buttons/Boton';
 
-interface FooterProps {
-
-}
-
 const Footer = () => {
 
     return (

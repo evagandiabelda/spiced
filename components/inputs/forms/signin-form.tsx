@@ -9,7 +9,7 @@ export default function SigninForm() {
     const router = useRouter();
     const [form, setForm] = useState({
         nombre_completo: "",
-        nombre_usuario: "",
+        name: "",
         email: "",
         password: "",
     });
@@ -71,13 +71,13 @@ export default function SigninForm() {
                         </div>
 
                         <div className="w-full">
-                            <label className="mb-3 mt-5 block" htmlFor="nombre_usuario">Elige un nombre de usuario único</label>
+                            <label className="mb-3 mt-5 block" htmlFor="name">Elige un nombre de usuario único</label>
                             <Input
                                 tipo="text"
-                                id="nombre_usuario"
+                                id="name"
                                 placeholder="Nombre de usuario"
                                 required={true}
-                                value={form.nombre_usuario}
+                                value={form.name}
                                 onChange={handleChange}
                             />
                         </div>

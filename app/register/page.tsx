@@ -1,5 +1,4 @@
 import SigninForm from '@/components/inputs/forms/signin-form';
-import Signin from '@/components/inputs/forms/signin-form';
 import { Suspense } from 'react';
 
 export default function LoginPage() {

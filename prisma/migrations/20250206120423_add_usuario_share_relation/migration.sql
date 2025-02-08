@@ -5,7 +5,7 @@
 
 */
 -- AlterTable
-ALTER TABLE "Share" ADD COLUMN     "usuarioId" TEXT NOT NULL;
+ALTER TABLE "Share" ADD COLUMN     "userId" TEXT NOT NULL;
 
 -- AddForeignKey
-ALTER TABLE "Share" ADD CONSTRAINT "Share_usuarioId_fkey" FOREIGN KEY ("usuarioId") REFERENCES "Usuario"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Share" ADD CONSTRAINT "Share_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

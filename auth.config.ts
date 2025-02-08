@@ -1,22 +1,30 @@
-import { NextAuthConfig } from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/app/lib/prisma";
-import { compare } from "bcryptjs";
+import bcrypt from "bcryptjs";
+import { z } from "zod";
 
-export const authConfig: NextAuthConfig = {
+export const authConfig: NextAuthOptions = {
   pages: {
     signIn: "/login",
   },
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user;
-      const isOnDashboard = nextUrl.pathname.startsWith("/panel-estandar");
-
-      if (isOnDashboard) {
-        return isLoggedIn;
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id as string;
+        session.user.email = token.email ?? "";
+        session.user.name = token.name ?? "";
       }
+      return session;
+    },
 
-      return true;
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id as string;
+        token.email = user.email ?? "";
+        token.name = user.name ?? "";
+      }
+      return token;
     }
   },
   providers: [
@@ -27,33 +35,29 @@ export const authConfig: NextAuthConfig = {
         password: { label: "Password", type: "password", required: true },
       },
       async authorize(credentials) {
-        const email = credentials.email as string;
-        const password = credentials.password as string;
+        const parsedCredentials = z
+          .object({ email: z.string().email(), password: z.string().min(6) })
+          .safeParse(credentials);
 
-        if (!email || !password) {
-          throw new Error("Email y contraseña son requeridos");
-        }
+        if (!parsedCredentials.success) return null;
 
-        const usuario = await prisma.usuario.findUnique({
-          where: { email },
-        });
+        const { email, password } = parsedCredentials.data;
 
-        if (!usuario) {
-          throw new Error("No existe un usuario con ese email");
-        }
+        const user = await prisma.user.findUnique({ where: { email } });
 
-        const passwordMatch = await compare(password, usuario.password);
+        if (!user) return null;
 
-        if (!passwordMatch) {
-          throw new Error("Contraseña incorrecta");
-        }
+        const passwordsMatch = await bcrypt.compare(password, user.password);
+        if (!passwordsMatch) return null;
 
         return {
-          id: usuario.id.toString(),
-          name: usuario.nombre_usuario,
-          email: usuario.email,
+          id: user.id,
+          email: user.email,
+          name: user.name,
         };
       }
+
+
     }),
   ],
-} satisfies NextAuthConfig;
+};

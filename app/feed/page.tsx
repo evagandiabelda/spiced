@@ -1,4 +1,3 @@
-import Image from "next/image"; // Per a optimitzar les imatges.
 import Logo from "@/components/icons/Logo";
 
 export default function Feed() {

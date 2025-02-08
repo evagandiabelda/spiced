@@ -9,7 +9,7 @@ type MenuSidebarProps = {
 
 const MenuSidebar = ({ usuario }: MenuSidebarProps) => {
 
-    let className = "w-full flex mobile:flex-row tablet:flex-col mobile:justify-between tablet:justify-start tablet:items-center laptop:items-start mobile:gap-0 tablet:gap-2";
+    const className = "w-full flex mobile:flex-row tablet:flex-col mobile:justify-between tablet:justify-start tablet:items-center laptop:items-start mobile:gap-0 tablet:gap-2";
 
     if (usuario === "estandar") {
 

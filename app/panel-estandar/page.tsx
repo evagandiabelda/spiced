@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import ThemeToggle from "@/components/buttons/ThemeToggle";
 import Estadisticas from "@/components/cards/Estadisticas";

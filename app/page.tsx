@@ -1,4 +1,3 @@
-import Image from "next/image"; // Per a optimitzar les imatges.
 import Logo from "@/components/icons/Logo";
 import Boton from "@/components/buttons/Boton";
 

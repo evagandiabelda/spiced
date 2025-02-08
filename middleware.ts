@@ -1,16 +1,18 @@
+import { NextResponse } from "next/server";
 import { withAuth } from "next-auth/middleware";
 
-export default withAuth({
-    callbacks: {
-        authorized({ token }) {
-            return !!token; // Solo permite el acceso si el usuario está autenticado
-        },
-    },
+export default withAuth(
+  function middleware(req) {
+    return NextResponse.next();
+  },
+  {
     pages: {
-        signIn: "/login",
+      signIn: "/login", // Redirige al login si no está autenticado
     },
-});
+  }
+);
 
+// Especificar qué rutas requieren autenticación
 export const config = {
-    matcher: ["/panel-estandar/:path*"], // Protege solo el panel de usuario
+  matcher: ["/panel/:path*"], // Protege todas las rutas dentro de /panel/
 };

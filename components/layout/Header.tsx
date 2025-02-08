@@ -8,10 +8,6 @@ import Search from '@/components/inputs/Search';
 import Avatar from '@/components/icons/Avatar';
 import MenuDesplegable from "@/components/layout/MenuDesplegable";
 
-interface HeaderProps {
-
-}
-
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 

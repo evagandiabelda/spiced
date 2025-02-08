@@ -13,10 +13,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Usuario {
+model User {
   id                 String   @id @default(uuid())
   nombre_completo    String
-  nombre_usuario     String   @unique
+  name               String   @unique
   email              String   @unique
   password           String
   foto               String?
@@ -38,6 +38,6 @@ model Share {
   created_at       DateTime @default(now())
 
   // Relación: Cada Share pertenece a un único Usuario
-  usuarioId String
-  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+  userId  String
+  usuario User   @relation(fields: [userId], references: [id])
 }

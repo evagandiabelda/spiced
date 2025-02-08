@@ -1,8 +1,8 @@
 -- CreateTable
-CREATE TABLE "Usuario" (
+CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "nombre_completo" TEXT NOT NULL,
-    "nombre_usuario" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "foto" TEXT,
@@ -10,11 +10,11 @@ CREATE TABLE "Usuario" (
     "perfil_privado" BOOLEAN NOT NULL DEFAULT false,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "Usuario_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Usuario_nombre_usuario_key" ON "Usuario"("nombre_usuario");
+CREATE UNIQUE INDEX "User_name_key" ON "User"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Usuario_email_key" ON "Usuario"("email");
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");

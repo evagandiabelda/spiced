@@ -1,45 +1,50 @@
 import NextAuth from 'next-auth';
 import { authConfig } from './auth.config';
-import Credentials from 'next-auth/providers/credentials';
+import CredentialsProvider from 'next-auth/providers/credentials'; // 🔹 Corrección de importación
 import { z } from 'zod';
-import type { Usuario } from '@/app/lib/definitions';
+import type { User } from '@/app/lib/definitions';
 import bcrypt from 'bcryptjs';
-import postgres from 'postgres';
+import { PrismaClient } from '@prisma/client'; // 🔹 Usamos Prisma en lugar de SQL
 
-const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
+const prisma = new PrismaClient();
 
-async function getUser(email: string): Promise<Usuario | undefined> {
+async function getUser(email: string) {
   try {
-    const user = await sql<Usuario[]>`SELECT * FROM "Usuario" WHERE email=${email}`;
-    return user[0];
+    return await prisma.user.findUnique({ where: { email } });
   } catch (error) {
     console.error('Failed to fetch user:', error);
-    throw new Error('Failed to fetch user.');
+    return null;
   }
 }
 
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
-    Credentials({
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
       async authorize(credentials) {
         const parsedCredentials = z
           .object({ email: z.string().email(), password: z.string().min(6) })
           .safeParse(credentials);
 
-        if (parsedCredentials.success) {
-          const { email, password } = parsedCredentials.data;
-          const user = await getUser(email);
-          if (!user) return null;
+        if (!parsedCredentials.success) return null;
 
-          const passwordsMatch = await bcrypt.compare(password, user.password);
-          if (passwordsMatch) {
-            return {
-              id: user.id.toString(),
-              email: user.email,
-              name: user.nombre_usuario, // Opcional, pero recomendable
-            };
-          }
+        const { email, password } = parsedCredentials.data;
+        const user = await getUser(email);
+
+        if (!user) return null;
+
+        const passwordsMatch = await bcrypt.compare(password, user.password);
+        if (passwordsMatch) {
+          return {
+            id: user.id.toString(),
+            email: user.email,
+            name: user.name,
+          };
         }
 
         console.log("Invalid credentials");
@@ -47,4 +52,26 @@ export const { auth, signIn, signOut } = NextAuth({
       }
     }),
   ],
+  callbacks: {
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.id as string;
+        session.user.name = token.name as string;
+      }
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.name = user.name;
+      }
+      return token;
+    },
+  },
+  session: {
+    strategy: "jwt",
+  },
+  pages: {
+    signIn: "/login",
+  },
 });

@@ -2,17 +2,16 @@
 // It describes the shape of the data, and what data type each property should accept.
 // For simplicity of teaching, we're manually defining these types.
 // However, these types are generated automatically if you're using an ORM such as Prisma.
-export type Usuario = {
+export type User = {
   id: string;
   nombre_completo: string;
-  nombre_usuario: string;
+  name: string;
   email: string;
   password: string;
   foto: string;
   descripcion_perfil: string;
   perfil_privado: boolean;
   created_at: Date;
-  shares: Share[];
 };
 
 export type Share = {
@@ -23,8 +22,8 @@ export type Share = {
   img_secundaria: string;
   share_verificado: boolean;
   created_at: Date;
-  usuarioId: string;
-  usuario: Usuario;
+  userId: string;
+  user: User;
 };
 /* 
 export type Invoice = {

@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { faker } from '@faker-js/faker';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
@@ -8,10 +8,10 @@ async function main() {
     for (let i = 0; i < 6; i++) {
         const hashedPassword = await bcrypt.hash(faker.internet.password(), 10); // 🔹 Hasheamos la contraseña
 
-        const usuario = await prisma.usuario.create({
+        const user = await prisma.user.create({
             data: {
                 nombre_completo: faker.person.fullName(),
-                nombre_usuario: faker.internet.username(),
+                name: faker.internet.username(),
                 email: faker.internet.email(),
                 password: hashedPassword, // 🔹 Guardamos la contraseña hasheada
                 foto: faker.image.avatar(),
@@ -29,7 +29,7 @@ async function main() {
                     img_secundaria: faker.image.urlPicsumPhotos(),
                     share_verificado: faker.datatype.boolean(),
                     created_at: faker.date.past(),
-                    usuarioId: usuario.id,
+                    userId: user.id,
                 },
             });
         }
