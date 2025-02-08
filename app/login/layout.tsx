@@ -9,7 +9,7 @@ export default function PanelEstandarLayout({
     return (
         <div className='w-full flex mobile:flex-col tablet:flex-row gap-0 mobile:justify-start tablet:justify-between align-start'>
             {/* CAJA SIDEBAR: */}
-            <section className='dark h-full mobile:w-full tablet:w-fit laptop:w-full laptop:max-w-col3'>
+            <section className='dark h-full mobile:w-full tablet:w-fit laptop:w-full laptop:max-w-col4'>
                 <div className="bg-[url('/imgs/IMG-Fondo-Aside-Login.webp')] bg-cover bg-center flex flex-col items-center justify-center gap-16 w-full h-full p-16">
                     <div className="flex flex-col items-center gap-6">
                         <h1 className="text-white text-center">¡Hola de nuevo!</h1>

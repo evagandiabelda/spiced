@@ -1,5 +1,7 @@
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -15,29 +17,33 @@ export async function GET() {
 }
 
 /* CREAR UN SHARE */
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
-    const body = await request.json();
-    const { titulo, texto, img_principal, img_secundaria, userId } = body;
+    // Obtener los datos enviados en la petición
+    const body = await req.json();
+    const { titulo, texto, imgPrincipal, imgSecundaria } = body;
 
-    if (!titulo || !texto || !userId) {
-      return NextResponse.json({ error: "Título, texto y userId son obligatorios" }, { status: 400 });
+    // Obtener sesión del usuario
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) {
+      return NextResponse.json({ error: "No autorizado" }, { status: 401 });
     }
 
-    const newShare = await prisma.share.create({
+    // Insertar el nuevo Share en la base de datos
+    const nuevoShare = await prisma.share.create({
       data: {
         titulo,
         texto,
-        img_principal,
-        img_secundaria,
-        userId,
+        img_principal: imgPrincipal,
+        img_secundaria: imgSecundaria || null,
+        userId: session.user.id, // Asignamos el Share al usuario autenticado
       },
     });
 
-    return NextResponse.json({ message: "Share publicado correctamente", share: newShare }, { status: 201 });
+    return NextResponse.json(nuevoShare, { status: 201 });
   } catch (error) {
-    console.error("Error publicando el share:", error);
-    return NextResponse.json({ error: "Error publicando el share" }, { status: 500 });
+    console.error("Error al crear el Share:", error);
+    return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 });
   }
 }
 

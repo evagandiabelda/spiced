@@ -43,13 +43,13 @@ export default function LoginForm() {
 
           <div>
             <label className="mb-3 mt-5 block" htmlFor="email">Email</label>
-            <Input tipo="email" id="email" required />
+            <Input tipo="email" icon={true} id="email" required />
           </div>
 
           <div className="mt-4">
             <label className="mb-3 mt-5 block" htmlFor="password">Password</label>
             <div className="relative">
-              <Input tipo="password" id="password" required />
+              <Input tipo="password" icon={true} id="password" required />
             </div>
           </div>
 

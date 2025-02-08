@@ -74,6 +74,7 @@ export default function SigninForm() {
                             <label className="mb-3 mt-5 block" htmlFor="name">Elige un nombre de usuario único</label>
                             <Input
                                 tipo="text"
+                                icon={true}
                                 id="name"
                                 placeholder="Nombre de usuario"
                                 required={true}
@@ -91,6 +92,7 @@ export default function SigninForm() {
                             <label className="mb-3 mt-5 block" htmlFor="email">Tu correo electrónico</label>
                             <Input
                                 tipo="email"
+                                icon={true}
                                 id="email"
                                 placeholder="email@ejemplo.com"
                                 required={true}
@@ -103,6 +105,7 @@ export default function SigninForm() {
                             <label className="mb-3 mt-5 block" htmlFor="password">Escribe una contraseña segura</label>
                             <Input
                                 tipo="password"
+                                icon={true}
                                 id="password"
                                 placeholder="Contraseña"
                                 required={true}
