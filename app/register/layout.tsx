@@ -1,4 +1,9 @@
+import { Metadata } from "next";
 import Boton from "@/components/buttons/Boton";
+
+export const metadata: Metadata = {
+    title: 'Regístrate',
+};
 
 export default function PanelEstandarLayout({
     children,

@@ -13,8 +13,8 @@ interface ShareProps {
 export default function Share({ imagen, user = "Usuario desconocido", foto, titulo, extracto }: ShareProps) {
 
     return (
-        <div className="min-w-col2 max-w-col3 flex flex-col justify-between rounded-[1.2rem] p-[20px] bg-white dark:bg-[var(--gris4)] dark:border-2 dark:border-[var(--tdah)] cursor-pointer">
-            <div id="caja-imagen" className="relative w-full h-[300px] rounded-[0.6rem] overflow-hidden">
+        <div className="min-w-col2 max-w-col3 min-h-[600px] flex flex-col rounded-[1.2rem] p-[20px] bg-white dark:bg-[var(--gris4)] dark:border-2 dark:border-[var(--gris3)] hover:scale-[1.01] transition ease cursor-pointer">
+            <div id="caja-imagen" className="relative w-full h-full rounded-[0.6rem] overflow-hidden">
                 <Image
                     src={imagen}
                     alt="miniatura"
@@ -34,9 +34,9 @@ export default function Share({ imagen, user = "Usuario desconocido", foto, titu
                         />
                     </div>
                 </div>
-                <div className="w-full flex flex-col items-start gap-3 pt-6 pb-3 px-4">
+                <div className="w-full flex flex-col items-start gap-4 pt-6 pb-3 px-4">
                     <h4 className="text-left">{titulo}</h4>
-                    <p className="text-left">{extracto}</p>
+                    <span className="text-left text-[var(--gris2)]">{extracto}</span>
                 </div>
             </div>
         </div>

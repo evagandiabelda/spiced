@@ -1,7 +1,10 @@
-"use client";
-
+import { Metadata } from "next";
 import { Suspense } from "react";
 import ConfigUserForm from "@/components/inputs/forms/config-user-form";
+
+export const metadata: Metadata = {
+    title: 'Configuración',
+};
 
 export default function Configuracion() {
     return (

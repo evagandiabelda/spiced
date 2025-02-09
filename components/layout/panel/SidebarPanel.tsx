@@ -1,6 +1,10 @@
+"use client";
+
 import Avatar from "@/components/icons/Avatar";
 import MenuSidebar from "@/components/layout/panel/MenuSidebar";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 type SidebarPanelProps = {
     usuario: "estandar" | "experto";
@@ -8,7 +12,14 @@ type SidebarPanelProps = {
 
 const SidebarPanel = ({ usuario }: SidebarPanelProps) => {
 
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            router.push("/login"); // Redirigir si no está autenticado
+        }
+    }, [status, router]);
 
     const href = "/panel-" + usuario + "/configuracion";
 

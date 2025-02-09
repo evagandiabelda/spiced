@@ -15,7 +15,7 @@ interface ItemProps {
 const ItemListaShare = ({ id, imagen, user = "Usuario desconocido", titulo, fecha, onDelete }: ItemProps) => {
 
     return (
-        <li className="w-full flex flex-row justify-between items-center gap-12 py-4 border-b border-b-[var(--gris2)] dark:border-b-[var(--gris5)]">
+        <li className="w-full flex flex-row justify-between items-end gap-12 py-4 border-b border-b-[var(--gris2)] dark:border-b-[var(--gris5)]">
 
             <div className="flex-1 flex flex-row mobile:items-start tablet:items-center gap-4">
 
@@ -28,13 +28,13 @@ const ItemListaShare = ({ id, imagen, user = "Usuario desconocido", titulo, fech
                     />
                 </div>
 
-                <div id="caja-textos" className="flex-1 flex flex-col justify-between gap-1">
+                <div id="caja-textos" className="flex-1 flex flex-col justify-between gap-2">
                     <div className="w-full flex flex-row">
                         <p className="font-bold">{titulo}</p>
                     </div>
                     <div className="w-full mobile:hidden tablet:flex flex-row justify-between">
-                        <p><span className="text-[var(--gris3)]">{user || "Usuario desconocido"}</span></p>
-                        <p><span className="text-[var(--gris3)]">{fecha}</span></p>
+                        <p><span className="text-[var(--gris2)] opacity-60">{user || "Usuario desconocido"}</span></p>
+                        <p><span className="text-[var(--gris2)] opacity-60">{fecha}</span></p>
                     </div>
                 </div>
 

@@ -1,8 +1,10 @@
-import Image from "next/image";
+import { Metadata } from "next";
 import Boton from "@/components/buttons/Boton";
 import ListaShares from "@/components/layout/panel/ListaShares";
-import Input from "@/components/inputs/Input";
-import Options from "@/components/inputs/Options";
+
+export const metadata: Metadata = {
+    title: 'Tus Shares',
+};
 
 export default function TusShares() {
     return (

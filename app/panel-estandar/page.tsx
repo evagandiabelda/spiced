@@ -1,5 +1,9 @@
 "use client";
 
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
 import Image from "next/image";
 import ThemeToggle from "@/components/buttons/ThemeToggle";
 import Estadisticas from "@/components/cards/Estadisticas";
@@ -8,6 +12,16 @@ import ListaShares from "@/components/layout/panel/ListaShares";
 import Input from "@/components/inputs/Input";
 
 export default function Inicio() {
+
+    const { status } = useSession();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            router.push("/login"); // Redirigir si no está autenticado
+        }
+    }, [status, router]);
+
     return (
         <div className="w-full flex flex-col gap-12">
 
@@ -46,7 +60,7 @@ export default function Inicio() {
                     {/* Card Estadísticas: */}
                     <Estadisticas />
                     {/* Card Pingüinadas: */}
-                    <div className="w-full flex mobile:flex-col-reverse tablet:flex-row gap-2 rounded-xl bg-[var(--fob)] px-[36px] py-[40px] gap-[2.8rem] dark:bg-[var(--gris4)] dark:border-2 dark:border-[var(--fob)]">
+                    <div className="w-full flex mobile:flex-col-reverse tablet:flex-row gap-2 rounded-xl bg-[var(--fob)] px-[36px] py-[40px] gap-[2.8rem] dark:bg-transparent dark:border-2 dark:border-[var(--fob)]">
                         <div id="caja-izq" className="w-full h-100 flex flex-col justify-center gap-8">
                             <p>Los pingüinos suelen regalarse piedrecitas unos a otros en señal de afecto. Envía una pingüinada a alguien que te importe.</p>
                             <Input tipo="text" id="nombre_usuario" placeholder="Su nombre de usuario" required={true} />
@@ -68,7 +82,7 @@ export default function Inicio() {
                     </div>
                 </div>
                 {/* Card Últimos Shares Guardados: */}
-                <div className="w-full flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-3 dark:bg-[var(--gris4)] dark:border-2 dark:border-[var(--tpa)]">
+                <div className="w-full flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-3 dark:bg-transparent dark:border-2 dark:border-[var(--tpa)]">
                     <div className="w-full flex flex-row justify-between items-start">
                         <h4>Mis últimos shares</h4>
                         <Image

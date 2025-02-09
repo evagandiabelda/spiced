@@ -1,6 +1,9 @@
-"use client";
-
+import { Metadata } from "next";
 import SidebarPanel from "@/components/layout/panel/SidebarPanel";
+
+export const metadata: Metadata = {
+    title: 'Espacio personal',
+};
 
 export default function PanelEstandarLayout({
     children,

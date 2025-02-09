@@ -1,4 +1,9 @@
+import { Metadata } from "next";
 import Options from "@/components/inputs/Options";
+
+export const metadata: Metadata = {
+    title: 'Recursos',
+};
 
 export default function PanelExperto() {
     return (

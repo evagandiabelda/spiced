@@ -8,7 +8,10 @@ import ThemeInitializer from "@/components/ThemeInitializer";
 import SessionWrapper from "@/components/SessionWrapper";
 
 export const metadata: Metadata = {
-  title: "Spiced",
+  title: {
+    template: '%s | Spiced',
+    default: 'Spiced',
+  },
   description: "Brain food for neurospicy folks.",
 };
 

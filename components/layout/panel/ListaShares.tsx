@@ -9,7 +9,7 @@ interface Share {
   titulo: string;
   texto: string;
   img_principal: string;
-  createdAt: string;
+  created_at: string;
   user: {
     id: number;
     name: string;
@@ -88,7 +88,7 @@ export default function ListaShares() {
               imagen={share.img_principal}
               user={session.user!.name} // Aquí usamos "!" porque ya verificamos antes que está definido
               titulo={share.titulo}
-              fecha={share.createdAt}
+              fecha={share.created_at}
               onDelete={handleDelete}
             />
           ))}

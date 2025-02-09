@@ -1,7 +1,10 @@
-"use client";
-
+import { Metadata } from "next";
 import { Suspense } from "react";
 import NuevoShareForm from "@/components/inputs/forms/nuevo-share-form";
+
+export const metadata: Metadata = {
+    title: 'Nuevo Share',
+};
 
 export default function NuevoShare() {
     return (

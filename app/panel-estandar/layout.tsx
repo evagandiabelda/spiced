@@ -1,10 +1,9 @@
-"use client";
-
+import { Metadata } from "next";
 import SidebarPanel from "@/components/layout/panel/SidebarPanel";
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+export const metadata: Metadata = {
+    title: 'Espacio personal',
+};
 
 export default function PanelEstandarLayout({
     children,
@@ -12,19 +11,11 @@ export default function PanelEstandarLayout({
     children: React.ReactNode;
 }>) {
 
-    const { data: session, status } = useSession();
-    const router = useRouter();
-
-    useEffect(() => {
-        if (status === "unauthenticated") {
-            router.push("/login"); // Redirigir si no está autenticado
-        }
-    }, [status, router]);
-
     return (
         <>
 
-            {/* CAJA MODO CLARO (se separan por problemas al aplicar estilos) */}
+            {/* CAJA MODO CLARO - (se separan por problemas al aplicar estilos) */}
+
             <div className='w-full flex mobile:flex-col tablet:flex-row gap-0 mobile:justify-start tablet:justify-between align-start pt-[30px] pb-0 dark:hidden fondo-degradado1'>
                 {/* CAJA SIDEBAR: */}
                 <section className='h-full mobile:w-full tablet:w-fit laptop:w-full laptop:max-w-[360px] px-[2rem] mobile:py-0 tablet:py-5'>
@@ -37,7 +28,8 @@ export default function PanelEstandarLayout({
                 </section>
             </div>
 
-            {/* CAJA MODO OSCURO (se separan por problemas al aplicar estilos) */}
+            {/* CAJA MODO OSCURO - (se separan por problemas al aplicar estilos) */}
+
             <div className='w-full flex mobile:flex-col tablet:flex-row gap-0 mobile:justify-start tablet:justify-between align-start pt-[30px] pb-0 hidden dark:flex bg-[var(--gris4)]'>
                 {/* CAJA SIDEBAR: */}
                 <section className='h-full mobile:w-full tablet:w-fit laptop:w-full laptop:max-w-[360px] px-[2rem] mobile:py-0 tablet:py-5'>
