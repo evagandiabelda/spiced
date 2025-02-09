@@ -1,3 +1,5 @@
+"use client";
+
 import Logo from "@/components/icons/Logo";
 
 export default function PanelExperto() {

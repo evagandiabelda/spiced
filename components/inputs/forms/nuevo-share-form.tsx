@@ -5,7 +5,6 @@ import Input from "@/components/inputs/Input";
 import InputFile from "@/components/inputs/InputFile";
 import BotonSubmit from "@/components/buttons/BotonSubmit";
 import Boton from "@/components/buttons/Boton";
-import Link from "next/link";
 
 export default function nuevoShareForm() {
 

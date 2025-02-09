@@ -1,3 +1,5 @@
+"use client";
+
 import SidebarPanel from "@/components/layout/panel/SidebarPanel";
 
 export default function PanelEstandarLayout({

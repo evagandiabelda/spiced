@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Avatar from "@/components/icons/Avatar";
 import Input from "@/components/inputs/Input";
@@ -14,7 +13,6 @@ import Boton from "@/components/buttons/Boton";
 export default function ConfigUserForm() {
 
     const { data: session } = useSession();
-    const router = useRouter();
 
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
