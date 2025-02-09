@@ -7,7 +7,7 @@ type InputProps = {
     tipo: "text" | "number" | "email" | "password" | "textarea";
     icon?: boolean;
     id: string;
-    placeholder?: string;
+    placeholder?: string | "";
     rows?: number;
     value?: string;
     required: boolean;
@@ -32,7 +32,16 @@ const Input = ({ tipo, icon, id, placeholder, rows, value, required, onChange }:
                         alt="campo de texto"
                     />
                 )}
-                <input type="text" id={id} name={id} value={value} className={inputClassName} placeholder={placeholder} required={required} onChange={onChange} />
+                <input
+                    type="text"
+                    id={id}
+                    name={id}
+                    value={value}
+                    className={inputClassName}
+                    placeholder={placeholder}
+                    required={required}
+                    onChange={onChange}
+                />
             </div>
         );
     }
@@ -49,7 +58,16 @@ const Input = ({ tipo, icon, id, placeholder, rows, value, required, onChange }:
                         alt="campo numérico"
                     />
                 )}
-                <input type="number" id={id} name={id} value={value} className={inputClassName} placeholder={placeholder} required={required} onChange={onChange} />
+                <input
+                    type="number"
+                    id={id}
+                    name={id}
+                    value={value}
+                    className={inputClassName}
+                    placeholder={placeholder}
+                    required={required}
+                    onChange={onChange}
+                />
             </div>
         );
     }
@@ -66,7 +84,16 @@ const Input = ({ tipo, icon, id, placeholder, rows, value, required, onChange }:
                         alt="campo email"
                     />
                 )}
-                <input type="email" id={id} name={id} value={value} className={inputClassName} placeholder={placeholder} required={required} onChange={onChange} />
+                <input
+                    type="email"
+                    id={id}
+                    name={id}
+                    value={value}
+                    className={inputClassName}
+                    placeholder={placeholder}
+                    required={required}
+                    onChange={onChange}
+                />
             </div>
         );
     }
@@ -83,14 +110,31 @@ const Input = ({ tipo, icon, id, placeholder, rows, value, required, onChange }:
                         alt="campo password"
                     />
                 )}
-                <input type="password" id={id} name={id} value={value} className={inputClassName} placeholder={placeholder} required={required} onChange={onChange} />
+                <input
+                    type="password"
+                    id={id}
+                    name={id}
+                    value={value}
+                    className={inputClassName}
+                    placeholder={placeholder}
+                    required={required}
+                    onChange={onChange}
+                />
             </div>
         );
     }
     else if (tipo === "textarea") {
         return (
             <div className={divClassName}>
-                <textarea id={id} name={id} value={value} className={inputClassName} placeholder={placeholder} required={required} onChange={onChange} rows={rows} />
+                <textarea
+                    id={id}
+                    name={id}
+                    value={value}
+                    className={inputClassName}
+                    placeholder={placeholder}
+                    required={required}
+                    onChange={onChange} rows={rows}
+                />
             </div>
         );
     }

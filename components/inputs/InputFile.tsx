@@ -16,7 +16,7 @@ const InputFile = ({ id, placeholder, value, required, onChange }: InputFileProp
     const inputClassName = "py-3 inline-block text-center font-semibold cursor-pointer text-[var(--gris5)] dark:text-[var(--gris2)]";
 
     return (
-        <div className="rounded-xl bg-white dark:bg-[var(--gris4)] px-8 py-4">
+        <div className="px-8 py-4">
             <input type="file" id={id} name={id} className={inputClassName} placeholder={placeholder} required={required} onChange={onChange} />
         </div>
     );

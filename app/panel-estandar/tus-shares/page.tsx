@@ -16,7 +16,7 @@ export default function TusShares() {
                     <h2>Tus shares</h2>
                 </div>
                 <div className="w-full flex flex-col gap-3">
-                    <p>Aquí encontrarás todos los shares que has compartido. Desde aquí podrás consultarlos, editarlos o eliminarlos.</p>
+                    <p>Aquí encontrarás todos los shares que has compartido. Desde aquí podrás consultarlos o eliminarlos.</p>
                 </div>
             </div>
 

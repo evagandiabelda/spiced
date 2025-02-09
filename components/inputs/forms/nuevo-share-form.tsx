@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Input from "@/components/inputs/Input";
 import InputFile from "@/components/inputs/InputFile";
+import Image from "next/image";
 import BotonSubmit from "@/components/buttons/BotonSubmit";
 import Boton from "@/components/buttons/Boton";
 
@@ -12,10 +13,10 @@ export default function nuevoShareForm() {
     const [error, setError] = useState("");
 
     const [formData, setFormData] = useState({
-        titulo: "",
-        texto: "",
-        imgPrincipal: "",
-        imgSecundaria: "",
+        titulo: "Título",
+        texto: "Empieza a escribir para ver aquí el contenido de tu Share.",
+        imgPrincipal: "/imgs/blank-image.jpg",
+        imgSecundaria: "/imgs/blank-image.jpg",
     });
 
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,34 +76,36 @@ export default function nuevoShareForm() {
     return (
         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-12">
 
-            <div className="w-full flex mobile:flex-col laptop:flex-row gap-16">
+            <div className="w-full flex mobile:flex-col laptop:flex-row items-start gap-16">
 
-                {/* COLUMNA IZQUIERDA */}
+                {/* PREVISUALIZACIÓN */}
 
-                <div className="mobile:w-full laptop:w-1/3 flex flex-col justify-end gap-12">
-
-                    <div className="flex flex-col gap-4">
-                        <label className="mb-3 block">Imagen principal</label>
-                        <InputFile
-                            id="imgPrincipal"
-                            required
-                            onChange={handleFileChange}
-                            accept="image/*"
+                <div className="mobile:w-full laptop:max-w-col5 flex flex-col gap-4 rounded-xl bg-white dark:bg-[var(--gris4)] p-6">
+                    <div className="rounded-[0.4rem] overflow-hidden">
+                        <Image
+                            src={formData.imgPrincipal}
+                            width={500}
+                            height={300}
+                            className="dark:opacity-30"
+                            alt="imagen principal"
                         />
                     </div>
-
-                    <div className="flex flex-col gap-4">
-                        <label className="mb-3 block">Imagen secundaria (opcional)</label>
-                        <InputFile
-                            id="imgSecundaria"
-                            required={false}
-                            onChange={handleFileChange}
-                            accept="image/*"
+                    <div className="flex flex-col gap-6 py-4">
+                        <h3>{formData.titulo}</h3>
+                        <p>{formData.texto}</p>
+                    </div>
+                    <div className="rounded-[0.4rem] overflow-hidden w-content">
+                        <Image
+                            src={formData.imgSecundaria}
+                            width={100}
+                            height={100}
+                            className="dark:opacity-30 rounded-[0.4rem] overflow-hidden"
+                            alt="imagen principal"
                         />
                     </div>
                 </div>
 
-                {/* COLUMNA DERECHA */}
+                {/* EDITOR */}
 
                 <div className="mobile:w-full laptop:max-w-full flex flex-col gap-12">
 
@@ -129,6 +132,29 @@ export default function nuevoShareForm() {
                             onChange={(e) => setFormData((prev) => ({ ...prev, texto: e.target.value }))}
                         />
                     </div>
+
+                    <div className="flex flex-row gap-4">
+                        <div>
+                            <label className="mb-3 block">Imagen principal</label>
+                            <InputFile
+                                id="imgPrincipal"
+                                required
+                                onChange={handleFileChange}
+                                accept="image/*"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="mb-3 block">Imagen secundaria (opcional)</label>
+                            <InputFile
+                                id="imgSecundaria"
+                                required={false}
+                                onChange={handleFileChange}
+                                accept="image/*"
+                            />
+                        </div>
+                    </div>
+
 
                 </div>
 
