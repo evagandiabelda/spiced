@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "avatars.githubusercontent.com"
+      },
+      {
+        protocol: "https",
         hostname: "res.cloudinary.com"
       }
     ],

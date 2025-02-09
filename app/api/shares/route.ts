@@ -8,11 +8,19 @@ const prisma = new PrismaClient();
 /* LISTAR TODOS LOS SHARES */
 export async function GET() {
   try {
-    const shares = await prisma.share.findMany();
-    return NextResponse.json({ message: "Shares recuperados correctamente", shares }, { status: 200 });
+    const shares = await prisma.share.findMany({
+      include: {
+        user: {
+          select: { name: true, foto: true }, // Solo traemos el nombre y la foto
+        },
+      },
+      orderBy: { created_at: "desc" },
+    });
+
+    return NextResponse.json({ shares }, { status: 200 });
   } catch (error) {
-    console.error("Error recuperando los shares:", error);
-    return NextResponse.json({ error: "Error recuperando los shares" }, { status: 500 });
+    console.error("Error obteniendo los shares:", error);
+    return NextResponse.json({ error: "No se pudieron obtener los shares" }, { status: 500 });
   }
 }
 

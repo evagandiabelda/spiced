@@ -6,7 +6,7 @@ import Boton from "@/components/buttons/Boton";
 interface ItemProps {
     id: string;
     imagen: string;
-    user?: string | null; // Permitir que usuario sea opcional y pueda ser null
+    user?: string | null;
     titulo: string;
     fecha: string;
     onDelete: (id: string) => void;

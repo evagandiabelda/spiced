@@ -24,7 +24,7 @@ const Menu = ({ tipo }: tipo) => {
                 <a href="/feed" className="hover-underline">
                     Explorar
                 </a>
-                <a href="/panel-estandar" className="hover-underline">
+                <a href="/panel-estandar/nuevo-share" className="hover-underline">
                     Compartir
                 </a>
             </nav>
@@ -60,7 +60,7 @@ const Menu = ({ tipo }: tipo) => {
                     </div>
                 </a>
 
-                <a href="/panel-estandar">
+                <a href="/panel-estandar/nuevo-share">
                     <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
                         <Image
                             src="/iconos/iconos-menu/icono-compartir.svg"
@@ -120,13 +120,13 @@ const Menu = ({ tipo }: tipo) => {
                 <div className="flex flex-col gap-4">
                     <h3>Tu espacio</h3>
                     <nav className="flex flex-col gap-3">
-                        <a href="#" className={className}>Espacio personal</a>
-                        <a href="#" className={className}>Compartir contenido</a>
-                        <a href="#" className={className}>Contenido guardado</a>
+                        <a href="/panel-estandar" className={className}>Espacio personal</a>
+                        <a href="/panel-estandar/nuevo-share" className={className}>Compartir contenido</a>
+                        <a href="/panel-estandar/shares-guardados" className={className}>Contenido guardado</a>
                         <a href="#" className={className}>Convertirse en experto</a>
                         <a href="#" className={className}>Preguntas frecuentes</a>
                         <a href="#" className={className}>Ayúdanos a mejorar</a>
-                        <a href="#" className={className}>Salir</a>
+                        <a href="/panel-estandar/configuracion" className={className}>Salir</a>
                     </nav>
                 </div>
             </div>
@@ -182,13 +182,13 @@ const Menu = ({ tipo }: tipo) => {
                         <AccordionTrigger>Tu espacio</AccordionTrigger>
                         <AccordionContent>
                             <nav className="flex flex-col">
-                                <a href="#" className={className}>Espacio personal</a>
-                                <a href="#" className={className}>Compartir contenido</a>
-                                <a href="#" className={className}>Contenido guardado</a>
+                                <a href="/panel-estandar/" className={className}>Espacio personal</a>
+                                <a href="/panel-estandar/nuevo-share" className={className}>Compartir contenido</a>
+                                <a href="/panel-estandar/shares-guardados" className={className}>Contenido guardado</a>
                                 <a href="#" className={className}>Convertirse en experto</a>
                                 <a href="#" className={className}>Preguntas frecuentes</a>
                                 <a href="#" className={className}>Ayúdanos a mejorar</a>
-                                <a href="#" className={className}>Salir</a>
+                                <a href="/panel-estandar/configuracion" className={className}>Salir</a>
                             </nav>
                         </AccordionContent>
                     </AccordionItem>

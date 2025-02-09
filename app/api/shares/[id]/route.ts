@@ -3,6 +3,33 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+/* OBTENER UN SHARE */
+export async function GET(request: Request) {
+    try {
+        // Extraer el ID desde la URL
+        const url = new URL(request.url);
+        const segments = url.pathname.split("/");
+        const shareId = segments[segments.length - 1];
+
+        if (!shareId) {
+            return NextResponse.json({ error: "Falta el ID del share" }, { status: 400 });
+        }
+
+        const share = await prisma.share.findUnique({
+            where: { id: shareId },
+        });
+
+        if (!share) {
+            return NextResponse.json({ error: "Share no encontrado" }, { status: 404 });
+        }
+
+        return NextResponse.json({ share }, { status: 200 });
+    } catch (error) {
+        console.error("Error obteniendo el share:", error);
+        return NextResponse.json({ error: "Error obteniendo el share" }, { status: 500 });
+    }
+}
+
 /* MODIFICAR UN SHARE */
 export async function PUT(request: Request) {
     try {

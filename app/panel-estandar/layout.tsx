@@ -21,10 +21,6 @@ export default function PanelEstandarLayout({
         }
     }, [status, router]);
 
-    if (status === "loading") {
-        return <p>Cargando...</p>;
-    }
-
     return (
         <>
 
