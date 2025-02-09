@@ -46,6 +46,7 @@ export async function POST(request: Request) {
 /* MODIFICAR UN USUARIO */
 export async function PATCH(req: Request) {
   try {
+
     const session = await getServerSession(authOptions);
 
     if (!session || !session.user?.id) {

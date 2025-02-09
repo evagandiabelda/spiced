@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options"; // Ajusta la ruta si es necesario
+import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
@@ -44,3 +45,4 @@ export async function GET() {
         return NextResponse.json({ error: "Error obteniendo los shares" }, { status: 500 });
     }
 }
+

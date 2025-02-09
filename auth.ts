@@ -44,6 +44,7 @@ export const { auth, signIn, signOut } = NextAuth({
             id: user.id.toString(),
             email: user.email,
             name: user.name,
+            foto: user.foto,
           };
         }
 
@@ -57,7 +58,7 @@ export const { auth, signIn, signOut } = NextAuth({
       if (session.user) {
         session.user.id = token.id as string;
         session.user.name = token.name as string;
-        session.user.foto = token.name as string;
+        session.user.foto = token.foto as string;
       }
       return session;
     },

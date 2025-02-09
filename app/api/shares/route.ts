@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { PrismaClient } from "@prisma/client";
+import { generateSlug } from "@/utils/slug";
 
 const prisma = new PrismaClient();
 
@@ -37,6 +38,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "No autorizado" }, { status: 401 });
     }
 
+    const slug = generateSlug(titulo); // Generamos un slug.
+
     // Insertar el nuevo Share en la base de datos
     const nuevoShare = await prisma.share.create({
       data: {
@@ -44,6 +47,7 @@ export async function POST(req: Request) {
         texto,
         img_principal: imgPrincipal,
         img_secundaria: imgSecundaria || null,
+        slug,
         userId: session.user.id, // Asignamos el Share al usuario autenticado
       },
     });

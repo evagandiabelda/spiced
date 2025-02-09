@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Avatar from "@/components/icons/Avatar";
 import Input from "@/components/inputs/Input";
 import InputFile from "@/components/inputs/InputFile";
@@ -12,7 +11,7 @@ import Boton from "@/components/buttons/Boton";
 
 export default function ConfigUserForm() {
 
-    const { data: session } = useSession();
+    const { data: session, update } = useSession();
 
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -44,45 +43,46 @@ export default function ConfigUserForm() {
     };
 
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { type } = event.target;
+        const file = event.target.files?.[0];
+        if (!file) return;
 
-        if (type === "file") {
+        const uploadData = new FormData();
+        uploadData.append("file", file);
 
-            const file = event.target.files?.[0];
-            if (!file) return;
+        try {
+            const response = await fetch("/api/upload", {
+                method: "POST",
+                body: uploadData,
+            });
 
-            const formData = new FormData();
-            formData.append("file", file);
+            if (!response.ok) throw new Error("Error subiendo la imagen");
 
-            try {
-                const response = await fetch("/api/upload", {
-                    method: "POST",
-                    body: formData,
-                });
+            const data = await response.json();
 
-                if (!response.ok) throw new Error("Error subiendo la imagen");
-
-                const data = await response.json();
-                setFormData((prev) => ({
-                    ...prev,
-                    foto: data.url, // Guardamos la URL devuelta por el backend
-                }));
-            } catch (error) {
-                console.error("Error al subir la imagen:", error);
-            }
-
+            // 🔹 Actualizar correctamente el estado global de formData
+            setFormData((prev) => ({
+                ...prev,
+                foto: data.url, // Guardamos la URL devuelta por el backend
+            }));
+        } catch (error) {
+            console.error("Error al subir la imagen:", error);
         }
-
     };
+
 
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSuccessMessage(""); // Resetea el mensaje anterior
+        setSuccessMessage("");
         setErrorMessage("");
 
         try {
-            const response = await fetch("/api/users", {
+            if (!session?.user.name) {
+                setErrorMessage("Error: no se ha encontrado el usuario");
+                return;
+            }
+
+            const response = await fetch(`/api/users`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -97,12 +97,20 @@ export default function ConfigUserForm() {
             }
 
             setSuccessMessage("Perfil actualizado correctamente");
-            setTimeout(() => setSuccessMessage(""), 5000); // Oculta el mensaje tras 5s
+            setTimeout(() => setSuccessMessage(""), 5000);
+
+            await update({
+                nombre_completo: formData.nombre_completo,
+                foto: formData.foto,
+            });
+
+            window.location.reload();
         } catch (error) {
             setErrorMessage("Hubo un error al actualizar el perfil");
             console.error("Error en la actualización:", error);
         }
     };
+
 
     const handleLogout = async () => {
         try {

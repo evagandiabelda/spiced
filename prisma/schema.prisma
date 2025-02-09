@@ -36,6 +36,7 @@ model Share {
   img_secundaria   String?
   share_verificado Boolean  @default(false)
   created_at       DateTime @default(now())
+  slug             String?  @unique
 
   // Relación: Cada Share pertenece a un único Usuario
   userId String
