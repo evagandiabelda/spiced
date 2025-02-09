@@ -27,7 +27,10 @@ export async function POST(req: Request) {
             folder: "shares",
         });
 
-        return NextResponse.json({ url: uploadResponse.secure_url });
+        const secureUrl = uploadResponse.secure_url;
+        console.log(secureUrl);
+
+        return NextResponse.json({ url: secureUrl });
     } catch (error) {
         console.error("Error subiendo la imagen a Cloudinary:", error);
         return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 });
