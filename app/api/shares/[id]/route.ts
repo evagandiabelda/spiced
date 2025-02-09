@@ -4,15 +4,18 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 /* MODIFICAR UN SHARE */
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+export async function PUT(request: Request) {
     try {
-        const shareId = params.id; // Extraemos el ID desde la URL dinámica
+        // Extraer el ID desde la URL
+        const url = new URL(request.url);
+        const segments = url.pathname.split("/"); // Extraer los segmentos de la ruta
+        const shareId = segments[segments.length - 1]; // Último segmento es el ID
 
         if (!shareId) {
             return NextResponse.json({ error: "ID del share es obligatorio" }, { status: 400 });
         }
 
-        const body = await request.json(); // Extraemos los datos del body
+        const body = await request.json();
         const { titulo, texto, img_principal, img_secundaria } = body;
 
         if (!titulo || !texto) {
@@ -21,12 +24,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 
         const updatedShare = await prisma.share.update({
             where: { id: shareId },
-            data: {
-                titulo,
-                texto,
-                img_principal,
-                img_secundaria,
-            },
+            data: { titulo, texto, img_principal, img_secundaria },
         });
 
         return NextResponse.json({ message: "Share actualizado correctamente", share: updatedShare }, { status: 200 });
@@ -37,17 +35,18 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 }
 
 /* ELIMINAR UN SHARE */
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request) {
     try {
-        const shareId = params.id; // Extraemos el ID desde la URL dinámica
+        // Extraer el ID desde la URL
+        const url = new URL(request.url);
+        const segments = url.pathname.split("/");
+        const shareId = segments[segments.length - 1];
 
         if (!shareId) {
             return NextResponse.json({ error: "Falta el parámetro 'id'" }, { status: 400 });
         }
 
-        await prisma.share.delete({
-            where: { id: shareId },
-        });
+        await prisma.share.delete({ where: { id: shareId } });
 
         return NextResponse.json({ message: "Share eliminado correctamente" }, { status: 200 });
     } catch (error) {
