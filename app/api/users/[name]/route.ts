@@ -5,6 +5,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options"; // Ajusta la
 
 const prisma = new PrismaClient();
 
+/* LISTAR TODOS LOS SHARES DEL USUARIO */
 export async function GET() {
     try {
         // Obtener la sesión del usuario autenticado

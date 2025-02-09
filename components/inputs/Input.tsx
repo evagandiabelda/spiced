@@ -8,15 +8,16 @@ type InputProps = {
     icon?: boolean;
     id: string;
     placeholder?: string;
+    rows?: number;
     value?: string;
     required: boolean;
     onChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
-const Input = ({ tipo, icon, id, placeholder, value, required, onChange }: InputProps) => {
+const Input = ({ tipo, icon, id, placeholder, rows, value, required, onChange }: InputProps) => {
 
-    const divClassName = "flex flex-row justify-between items-center gap-3 px-4 py-2 rounded-[12px] bg-white dark:bg-[var(--gris4)] cursor-text";
-    const inputClassName = "flex-1 text-[1rem] !bg-transparent py-1 px-4 focus:outline-none active:outline-none cursor-text";
+    const divClassName = "flex flex-row justify-between items-center gap-3 px-3 py-1 rounded-[12px] bg-white dark:bg-[var(--gris4)] cursor-text";
+    const inputClassName = "flex-1 text-[1rem] !bg-transparent py-1 px-4 focus:outline-none active:outline-none cursor-text placeholder-light dark:placeholder-dark ";
 
     if (tipo === "text") {
         return (
@@ -89,7 +90,7 @@ const Input = ({ tipo, icon, id, placeholder, value, required, onChange }: Input
     else if (tipo === "textarea") {
         return (
             <div className={divClassName}>
-                <textarea id={id} name={id} value={value} className={inputClassName} placeholder={placeholder} required={required} onChange={onChange} rows={5} />
+                <textarea id={id} name={id} value={value} className={inputClassName} placeholder={placeholder} required={required} onChange={onChange} rows={rows} />
             </div>
         );
     }

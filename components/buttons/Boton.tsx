@@ -2,14 +2,15 @@
 
 interface BotonProps {
     texto: string;
-    enlace: string;
+    enlace?: string;
     tamano: "pequeno" | "grande";
     jerarquia: "primario" | "secundario";
     customColor?: string; /* Color personalizado */
+    onClick?: () => void;
 }
 
-const Boton = ({ texto, enlace, tamano, jerarquia, customColor }: BotonProps) => {
-    let className = "inline-block text-center font-semibold rounded-full border-2 transition ease duration-300 ";
+const Boton = ({ texto, enlace, tamano, jerarquia, customColor, onClick }: BotonProps) => {
+    let className = "inline-block text-center font-semibold rounded-full border-2 transition ease duration-300 cursor-pointer ";
     let style: React.CSSProperties = {};
 
     if (tamano === "pequeno") {
@@ -41,7 +42,7 @@ const Boton = ({ texto, enlace, tamano, jerarquia, customColor }: BotonProps) =>
     }
 
     return (
-        <a href={enlace} className={className} style={style}>
+        <a href={enlace} className={className} style={style} onClick={onClick}>
             {texto}
         </a>
     );

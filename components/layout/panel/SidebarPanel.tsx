@@ -1,11 +1,14 @@
 import Avatar from "@/components/icons/Avatar";
 import MenuSidebar from "@/components/layout/panel/MenuSidebar";
+import { useSession } from "next-auth/react";
 
 type SidebarPanelProps = {
     usuario: "estandar" | "experto";
 };
 
 const SidebarPanel = ({ usuario }: SidebarPanelProps) => {
+
+    const { data: session } = useSession();
 
     const href = "/panel-" + usuario + "/configuracion";
 
@@ -22,7 +25,7 @@ const SidebarPanel = ({ usuario }: SidebarPanelProps) => {
                         <Avatar borde="color" />
                     </a>
                     <div className="mobile:block tablet:hidden laptop:block flex flex-col gap-2">
-                        <h3 className="m-0 text-[var(--blanco)] dark:text-[var(--gris2)]">¡Hola, usuario!</h3>
+                        <h3 className="m-0 text-[var(--blanco)] dark:text-[var(--gris2)]">¡Hola, {session?.user.name}!</h3>
                         <p className="mobile:hidden laptop:block font-normal text-[0.7rem] m-0"><span className="text-[var(--blanco)] dark:text-[var(--gris2)]">Pequeño saltamontes</span></p>
                     </div>
                 </div>

@@ -14,6 +14,7 @@ export const authConfig: NextAuthOptions = {
         session.user.id = token.id as string;
         session.user.email = token.email ?? "";
         session.user.name = token.name ?? "";
+        session.user.foto = token.foto ?? "";
       }
       return session;
     },
@@ -23,6 +24,7 @@ export const authConfig: NextAuthOptions = {
         token.id = user.id as string;
         token.email = user.email ?? "";
         token.name = user.name ?? "";
+        token.foto = user.foto ?? "";
       }
       return token;
     }
@@ -54,6 +56,7 @@ export const authConfig: NextAuthOptions = {
           id: user.id,
           email: user.email,
           name: user.name,
+          foto: user.foto,
         };
       }
 

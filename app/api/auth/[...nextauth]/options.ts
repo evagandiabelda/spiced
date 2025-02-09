@@ -26,24 +26,33 @@ export const authOptions: NextAuthOptions = {
                     throw new Error("Credenciales incorrectas");
                 }
 
-                return { id: user.id, email: user.email, name: user.name };
+                return {
+                    id: user.id,
+                    email: user.email,
+                    name: user.name,
+                    foto: user.foto,
+                };
             },
         }),
     ],
     callbacks: {
-        async session({ session, token }) {
-            if (session.user) {
-                session.user.id = token.id as string;
-                session.user.name = token.name as string;
-            }
-            return session;
-        },
         async jwt({ token, user }) {
             if (user) {
                 token.id = user.id;
                 token.name = user.name;
+                token.foto = user.foto;
             }
             return token;
+        },
+        async session({ session, token }) {
+
+            if (session.user) {
+                session.user.id = token.id as string;
+                session.user.name = token.name as string;
+                session.user.foto = token.foto as string;
+            }
+
+            return session;
         },
     },
     session: {

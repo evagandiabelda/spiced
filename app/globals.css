@@ -85,7 +85,7 @@
   }
 
   h3 {
-    @apply font-inter font-bold text-[1.4rem] m-0 p-0;
+    @apply font-nohemi font-normal text-[1.4rem] m-0 p-0;
     color: var(--foreground);
     line-height: normal;
   }
@@ -123,11 +123,6 @@
     color: var(--foreground);
   }
 
-  input::placeholder {
-    color: var(--gris3);
-    opacity: 0.6;
-  }
-
   .tag {
     @apply font-inter font-bold text-[0.8rem];
     color: var(--foreground);
@@ -151,6 +146,14 @@
 
   .resaltar-texto:hover {
     color: var(--blanco);
+  }
+
+  .placeholder-light::placeholder {
+    @apply text-[var(--gris2)] opacity-60;
+  }
+
+  .placeholder-dark::placeholder {
+    @apply text-[var(--gris2)] opacity-40;
   }
 
 }

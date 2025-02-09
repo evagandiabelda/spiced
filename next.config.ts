@@ -3,12 +3,23 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: ["unsplash.com", "images.unsplash.com"],
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "picsum.photos",
+        protocol: "http",
+        hostname: "localhost",
       },
+      {
+        protocol: "https",
+        hostname: "picsum.photos"
+      },
+      {
+        protocol: "https",
+        hostname: "unsplash.com"
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com"
+      }
     ],
   },
   eslint: {

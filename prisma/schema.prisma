@@ -19,7 +19,7 @@ model User {
   name               String   @unique
   email              String   @unique
   password           String
-  foto               String?
+  foto               String
   descripcion_perfil String?
   perfil_privado     Boolean  @default(false)
   created_at         DateTime @default(now())

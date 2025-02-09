@@ -22,7 +22,7 @@ export default function TusShares() {
             <div className="w-full flex flex-col gap-4">
                 {/* Filtros */}
                 <div className="w-full flex flex-row justify-end items-center">
-                    <Boton texto="Nuevo Share" enlace="/nuevo-share" tamano="pequeno" jerarquia="primario" />
+                    <Boton texto="Nuevo Share" enlace="/panel-estandar/nuevo-share" tamano="pequeno" jerarquia="primario" />
                 </div>
 
                 {/* Tabla */}

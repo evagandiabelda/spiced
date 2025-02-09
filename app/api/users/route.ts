@@ -1,6 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 const prisma = new PrismaClient();
 
@@ -42,41 +44,35 @@ export async function POST(request: Request) {
 }
 
 /* MODIFICAR UN USUARIO */
-export async function PUT(request: Request) {
+export async function PATCH(req: Request) {
   try {
-    const body = await request.json();
-    const { id, nombre_completo, name, email, password, foto, descripcion_perfil, perfil_privado } = body;
+    const session = await getServerSession(authOptions);
 
-    const data: Partial<{
-      nombre_completo: string;
-      name: string;
-      email: string;
-      password?: string;
-      foto?: string;
-      descripcion_perfil?: string;
-      perfil_privado?: boolean;
-    }> = {
-      nombre_completo,
-      name,
-      email,
-      foto,
-      descripcion_perfil,
-      perfil_privado,
-    };
+    if (!session || !session.user?.id) {
+      return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+    }
 
-    // 🔹 Si se envía una nueva contraseña, la ciframos antes de guardarla
-    if (password) {
-      data.password = await bcrypt.hash(password, 10);
+    const requestData = await req.json();
+
+    // Filtrar solo los campos que tienen valores definidos y no son cadenas vacías
+    const updateData: Record<string, any> = Object.fromEntries(
+      Object.entries(requestData).filter(([_, value]) => value !== undefined && value !== "")
+    );
+
+    // Si el usuario está cambiando la contraseña, la encriptamos antes de guardar
+    if (typeof updateData.password === "string") {
+      updateData.password = await bcrypt.hash(updateData.password, 10);
     }
 
     const updatedUser = await prisma.user.update({
-      where: { id },
-      data,
+      where: { id: session.user.id },
+      data: updateData, // Solo se enviarán los campos que tengan un valor definido
     });
 
-    return NextResponse.json({ message: "Usuario actualizado correctamente", user: updatedUser }, { status: 200 });
+    return NextResponse.json(updatedUser);
   } catch (error) {
-    return NextResponse.json({ message: "Error actualizando el usuario", error: error }, { status: 500 });
+    console.error("Error actualizando usuario:", error);
+    return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 });
   }
 }
 

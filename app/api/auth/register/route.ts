@@ -1,6 +1,7 @@
 import { prisma } from "@/app/lib/prisma";
 import { hash } from "bcryptjs";
 import { NextResponse } from "next/server";
+import { obtenerAvatarAleatorio } from "@/lib/avatars";
 
 export async function POST(req: Request) {
     try {
@@ -30,6 +31,7 @@ export async function POST(req: Request) {
                 name,
                 email,
                 password: hashedPassword,
+                foto: obtenerAvatarAleatorio(),
             },
         });
 

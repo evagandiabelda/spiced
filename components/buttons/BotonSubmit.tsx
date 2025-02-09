@@ -2,7 +2,7 @@
 
 interface BotonSubmitProps {
     texto: string;
-    disabled: boolean;
+    disabled?: boolean;
 }
 
 const BotonSubmit = ({ texto, disabled }: BotonSubmitProps) => {

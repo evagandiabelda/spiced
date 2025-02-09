@@ -34,6 +34,7 @@ export default {
         col2: 'calc(100vw / 6)',
         col3: 'calc(100vw / 4)',
         col4: 'calc(100vw / 3)',
+        col5: 'calc((100vw / 12) * 5)',
         col6: 'calc(100vw / 2)',
         col9: 'calc((100vw / 12) * 9)'
       },
@@ -43,6 +44,7 @@ export default {
         col2: 'calc(100vw / 6)',
         col3: 'calc(100vw / 4)',
         col4: 'calc(100vw / 3)',
+        col5: 'calc((100vw / 12) * 5)',
         col6: 'calc(100vw / 2)',
         col9: 'calc((100vw / 12) * 9)'
       },

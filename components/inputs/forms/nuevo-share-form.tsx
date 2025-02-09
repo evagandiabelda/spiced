@@ -2,68 +2,56 @@
 
 import { useState } from "react";
 import Input from "@/components/inputs/Input";
+import InputFile from "@/components/inputs/InputFile";
 import BotonSubmit from "@/components/buttons/BotonSubmit";
 import Boton from "@/components/buttons/Boton";
 import Link from "next/link";
-import { getUnsplashImageUrl } from "@/utils/unsplash";
 
 export default function nuevoShareForm() {
-
-    const [titulo, setTitulo] = useState("");
-    const [texto, setTexto] = useState("");
-    const [imgPrincipal, setImgPrincipal] = useState("");
-    const [imgSecundaria, setImgSecundaria] = useState("");
-
-    const [imageUrl, setImageUrl] = useState(""); // Última imagen obtenida
-    const [userInputUrl, setUserInputUrl] = useState(""); // URL escrita por el usuario
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
-    const handleImageUrlChange = (campo: "imgPrincipal" | "imgSecundaria") =>
-        async (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-            const url = event.target.value;
-            setUserInputUrl(url); // Guardamos la URL ingresada por el usuario
-            setError("");
+    const [formData, setFormData] = useState({
+        titulo: "",
+        texto: "",
+        imgPrincipal: "",
+        imgSecundaria: "",
+    });
 
-            if (campo === "imgPrincipal") {
-                setImgPrincipal(url);
-            } else {
-                setImgSecundaria(url);
-            }
+    const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
 
-            if (url.includes("unsplash.com")) {
-                setLoading(true);
+        const fieldName = event.target.id; // Obtener el ID del input
 
-                try {
-                    const imageUrl = await getUnsplashImageUrl(url);
-                    setLoading(false);
+        const formData = new FormData();
+        formData.append("file", file);
 
-                    if (imageUrl) {
-                        setImageUrl(imageUrl); // Guardamos la imagen obtenida
-                        if (campo === "imgPrincipal") {
-                            setImgPrincipal(imageUrl);
-                        } else {
-                            setImgSecundaria(imageUrl);
-                        }
-                    } else {
-                        setError("No se pudo obtener la imagen. Asegúrate de copiar un enlace válido.");
-                    }
-                } catch (error) {
-                    setLoading(false);
-                    setError("Error al obtener la imagen.");
-                }
-            } else {
-                setImageUrl(url);
-            }
-        };
+        try {
+            const response = await fetch("/api/upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!response.ok) throw new Error("Error subiendo la imagen");
+
+            const data = await response.json();
+            setFormData((prev) => ({
+                ...prev,
+                [fieldName]: data.url, // Ahora se asigna correctamente a 'img_principal' o 'img_secundaria'
+            }));
+        } catch (error) {
+            console.error("Error al subir la imagen:", error);
+        }
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setError("");
 
-        if (!imgPrincipal) {
+        if (!formData.imgPrincipal) {
             setError("Por favor, introduce una imagen válida.");
             return;
         }
@@ -72,7 +60,7 @@ export default function nuevoShareForm() {
             const response = await fetch("/api/shares", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ titulo, texto, imgPrincipal, imgSecundaria }),
+                body: JSON.stringify(formData),
             });
 
             if (!response.ok) throw new Error("Error al crear el Share");
@@ -87,34 +75,64 @@ export default function nuevoShareForm() {
 
     return (
         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-12">
-            <div>
-                <label className="mb-3 mt-5 block">Título</label>
-                <Input tipo="text" id="titulo" placeholder="Añade un título a tu Share..." value={titulo} required onChange={(e) => setTitulo(e.target.value)} />
 
-                <label className="mb-3 mt-5 block">Texto</label>
-                <Input tipo="textarea" id="texto" value={texto} required onChange={(e) => setTexto(e.target.value)} />
+            <div className="w-full flex mobile:flex-col laptop:flex-row gap-16">
 
-                <div>
-                    <label className="mb-3 mt-5 block">Imagen principal</label>
-                    <span className="opacity-50">
-                        Busca aquí tu imagen:{" "}
-                        <Link href="https://unsplash.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                            Unsplash.com
-                        </Link>
-                    </span>
-                    <Input tipo="text" id="imgPrincipal" placeholder="www.unsplash.com/tu-imagen-principal" value={userInputUrl} required onChange={handleImageUrlChange("imgPrincipal")} />
+                {/* COLUMNA IZQUIERDA */}
+
+                <div className="mobile:w-full laptop:w-1/3 flex flex-col justify-end gap-12">
+
+                    <div className="flex flex-col gap-4">
+                        <label className="mb-3 block">Imagen principal</label>
+                        <InputFile
+                            id="imgPrincipal"
+                            required
+                            onChange={handleFileChange}
+                            accept="image/*"
+                        />
+                    </div>
+
+                    <div className="flex flex-col gap-4">
+                        <label className="mb-3 block">Imagen secundaria (opcional)</label>
+                        <InputFile
+                            id="imgSecundaria"
+                            required={false}
+                            onChange={handleFileChange}
+                            accept="image/*"
+                        />
+                    </div>
                 </div>
 
-                <div>
-                    <label className="mb-3 mt-5 block">Imagen secundaria (opcional)</label>
-                    <span className="opacity-50">
-                        Busca aquí tu imagen:{" "}
-                        <Link href="https://unsplash.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
-                            Unsplash.com
-                        </Link>
-                    </span>
-                    <Input tipo="text" id="imgSecundaria" placeholder="www.unsplash.com/tu-imagen-secundaria" value={imgSecundaria} required={false} onChange={handleImageUrlChange("imgSecundaria")} />
+                {/* COLUMNA DERECHA */}
+
+                <div className="mobile:w-full laptop:max-w-full flex flex-col gap-12">
+
+                    <div>
+                        <label className="mb-3 block">Título</label>
+                        <Input
+                            tipo="text"
+                            id="titulo"
+                            placeholder="Añade un título a tu Share..."
+                            value={formData.titulo}
+                            required
+                            onChange={(e) => setFormData((prev) => ({ ...prev, titulo: e.target.value }))}
+                        />
+                    </div>
+
+                    <div>
+                        <label className="mb-3 block">Texto</label>
+                        <Input
+                            tipo="textarea"
+                            id="texto"
+                            value={formData.texto}
+                            rows={12}
+                            required
+                            onChange={(e) => setFormData((prev) => ({ ...prev, texto: e.target.value }))}
+                        />
+                    </div>
+
                 </div>
+
             </div>
 
             {error && <p className="text-red-500">{error}</p>}
