@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import ItemListaShare from "@/components/layout/panel/ItemListaShare";
 
 interface Share {
-  id: number;
+  id: string;
   titulo: string;
   texto: string;
   img_principal: string;
@@ -53,6 +53,24 @@ export default function ListaShares() {
     fetchSharesByUser();
   }, [session?.user?.name]); // Se ejecuta solo cuando el usuario cambia
 
+  const handleDelete = async (id: string) => {
+    try {
+      const res = await fetch(`/api/shares/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        throw new Error("Error al eliminar el share");
+      }
+
+      // Actualizar el estado eliminando el share de la lista
+      setShares((prevShares) => prevShares.filter((share) => share.id !== id));
+    } catch (error) {
+      console.error(error);
+      alert("Hubo un error al eliminar el share.");
+    }
+  };
+
   if (!session?.user) return <p>Debes iniciar sesión para ver tus shares.</p>;
   if (loading) return <p>Cargando shares...</p>;
   if (error) return <p>{error}</p>;
@@ -65,11 +83,13 @@ export default function ListaShares() {
         <ul>
           {shares.map((share) => (
             <ItemListaShare
+              id={share.id}
               key={share.id}
               imagen={share.img_principal}
               user={session.user!.name} // Aquí usamos "!" porque ya verificamos antes que está definido
               titulo={share.titulo}
               fecha={share.createdAt}
+              onDelete={handleDelete}
             />
           ))}
         </ul>

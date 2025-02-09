@@ -4,13 +4,16 @@ import Image from "next/image";
 import Boton from "@/components/buttons/Boton";
 
 interface ItemProps {
+    id: string;
     imagen: string;
     user?: string | null; // Permitir que usuario sea opcional y pueda ser null
     titulo: string;
     fecha: string;
+    onDelete: (id: string) => void;
 }
 
-const ItemListaShare = ({ imagen, user = "Usuario desconocido", titulo, fecha }: ItemProps) => {
+const ItemListaShare = ({ id, imagen, user = "Usuario desconocido", titulo, fecha, onDelete }: ItemProps) => {
+
     return (
         <li className="w-full flex flex-row justify-between items-center gap-12 py-4 border-b border-b-[var(--gris2)] dark:border-b-[var(--gris5)]">
 
@@ -37,8 +40,9 @@ const ItemListaShare = ({ imagen, user = "Usuario desconocido", titulo, fecha }:
 
             </div>
 
-            <div id="caja-boton" className="mobile:hidden laptop:block">
-                <Boton texto="Leer de nuevo" enlace="#" tamano="grande" jerarquia="secundario" />
+            <div id="caja-boton" className="mobile:hidden laptop:flex flex-row gap-4">
+                <Boton texto="Leer de nuevo" enlace="#" tamano="pequeno" jerarquia="secundario" />
+                <Boton texto="Eliminar" enlace="#" tamano="pequeno" jerarquia="secundario" customColor="var(--brand1)" onClick={() => onDelete(id)} />
             </div>
 
         </li>
