@@ -1,7 +1,12 @@
+import cloudinary from "cloudinary";
 import { NextResponse } from "next/server";
-import { writeFile } from "fs/promises";
-import path from "path";
-import { v4 as uuidv4 } from "uuid";
+
+cloudinary.v2.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    secure: true,
+});
 
 export async function POST(req: Request) {
     try {
@@ -12,21 +17,19 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "No se ha proporcionado ningún archivo" }, { status: 400 });
         }
 
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
+        // Convertir el archivo a un buffer base64
+        const arrayBuffer = await file.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+        const base64String = `data:${file.type};base64,${buffer.toString("base64")}`;
 
-        // Generar un nombre único para el archivo
-        const fileName = `${uuidv4()}-${file.name}`;
-        const filePath = path.join(process.cwd(), "public/uploads", fileName);
+        // Subir a Cloudinary
+        const uploadResponse = await cloudinary.v2.uploader.upload(base64String, {
+            folder: "shares",
+        });
 
-        // Guardar el archivo en la carpeta `public/uploads`
-        await writeFile(filePath, buffer);
-
-        // Devolver la URL pública del archivo
-        const fileUrl = `/uploads/${fileName}`;
-        return NextResponse.json({ url: fileUrl });
+        return NextResponse.json({ url: uploadResponse.secure_url });
     } catch (error) {
-        console.error("Error subiendo la imagen:", error);
+        console.error("Error subiendo la imagen a Cloudinary:", error);
         return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 });
     }
 }
