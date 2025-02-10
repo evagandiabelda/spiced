@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Share from "@/components/cards/Share";
-import ShareSkeleton from "@/components/cards/ShareSkeleton"
+import ShareSkeleton from "@/components/cards/ShareSkeleton";
 
 interface ShareData {
     id: string;
@@ -23,16 +23,23 @@ const getExcerpt = (text: string, maxLength = 120) => {
 };
 
 export default function ListaShares() {
-
     const [shares, setShares] = useState<ShareData[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const query = searchParams.get("query") || "";  // Obtener la query desde la URL
 
     useEffect(() => {
         const fetchShares = async () => {
+            setLoading(true);
+            setError(null);
+
             try {
-                const res = await fetch("/api/shares");
+                const url = query ? `/api/shares?query=${encodeURIComponent(query)}` : "/api/shares";
+
+                const res = await fetch(url);
                 if (!res.ok) throw new Error("Error al obtener los shares");
 
                 const data = await res.json();
@@ -45,35 +52,41 @@ export default function ListaShares() {
         };
 
         fetchShares();
-    }, []);
+    }, [query]);  // Se ejecuta cada vez que cambia la query
 
     if (error) return <p className="text-red-500">{error}</p>;
 
-    if (loading) return (
-        <div className="w-full flex flex-wrap justify-center gap-8">
-            <ShareSkeleton />
-            <ShareSkeleton />
-            <ShareSkeleton />
-            <ShareSkeleton />
-            <ShareSkeleton />
-            <ShareSkeleton />
-        </div>
-    );
+    if (loading)
+        return (
+            <div className="w-full flex flex-wrap justify-center gap-8">
+                <ShareSkeleton />
+                <ShareSkeleton />
+                <ShareSkeleton />
+                <ShareSkeleton />
+                <ShareSkeleton />
+                <ShareSkeleton />
+            </div>
+        );
 
     return (
         <div className="w-full flex flex-wrap justify-center gap-8">
-            {shares.map((share) => (
-                <Share
-                    key={share.id}
-                    imagen={share.img_principal || "/imgs/IMG-Ejemplo-Miniatura.png"}
-                    user={share.user?.name || "anónimo"}
-                    foto={share.user?.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
-                    titulo={share.titulo}
-                    extracto={getExcerpt(share.texto)}
-                    onClick={() => router.push(`/share/${share.slug}`)}
-                />
-            ))}
+            {shares.length === 0 ? (
+                <div className="rounded-xl bg-red-200 p-4 my-16">
+                    <p className="text-[var(--gris3)] text-center">🙁 No se han encontrado Shares relacionados con tu búsqueda.</p>
+                </div>
+            ) : (
+                shares.map((share) => (
+                    <Share
+                        key={share.id}
+                        imagen={share.img_principal || "/imgs/IMG-Ejemplo-Miniatura.png"}
+                        user={share.user?.name || "anónimo"}
+                        foto={share.user?.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
+                        titulo={share.titulo}
+                        extracto={getExcerpt(share.texto)}
+                        onClick={() => router.push(`/share/${share.slug}`)}
+                    />
+                ))
+            )}
         </div>
     );
-
 }

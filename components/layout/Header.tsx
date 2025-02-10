@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Logo from '@/components/icons/Logo';
 import Menu from '@/components/layout/Menu';
 import Search from '@/components/inputs/Search';
@@ -23,7 +23,9 @@ const Header = () => {
 
             {/* Caja Buscador */}
             <div className='flex-1 flex mobile:hidden tablet:flex'>
-                <Search />
+                <Suspense fallback={null}>
+                    <Search />
+                </Suspense>
             </div>
 
             {/* Caja Avatar */}

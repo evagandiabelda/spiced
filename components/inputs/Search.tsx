@@ -1,14 +1,34 @@
 'use client';
 
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 
 const Search = () => {
+
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const { replace } = useRouter();
+
+    function handleSearch(term: string) {
+        const params = new URLSearchParams(searchParams);
+
+        if (term) {
+            params.set('query', term);
+        } else {
+            params.delete('query');
+        }
+
+        replace(`/feed?${params.toString()}`);
+    }
+
     return (
         <div className="flex-1 flex items-center space-x-3 px-4 bg-[--gris1] dark:bg-[--gris4] rounded-full">
             <input
                 type="search"
                 placeholder="Buscar contenido"
                 className="flex-1 bg-[--gris1] dark:bg-[--gris4] py-2 px-4 focus:outline-none placeholder-light dark:placeholder-dark"
+                onChange={(e) => { handleSearch(e.target.value) }}
+                defaultValue={searchParams.get('query')?.toString()}
             />
             <Image
                 src="/iconos/iconos-genericos/search-icon.svg"

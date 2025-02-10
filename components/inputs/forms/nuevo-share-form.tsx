@@ -74,13 +74,13 @@ export default function nuevoShareForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-12">
+        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-12 px-8">
 
-            <div className="w-full flex mobile:flex-col laptop:flex-row items-start gap-16">
+            <div className="w-full flex mobile:flex-col-reverse laptop:flex-row items-start gap-[3em]">
 
                 {/* PREVISUALIZACIÓN */}
 
-                <div className="mobile:w-full laptop:max-w-col5 flex flex-col gap-4 rounded-xl bg-white dark:bg-[var(--gris4)] p-6">
+                <div className="mobile:w-full laptop:w-1/3 flex flex-col gap-4 rounded-xl bg-white/40 dark:bg-[var(--gris4)] p-6">
                     <div className="rounded-[0.4rem] overflow-hidden">
                         <Image
                             src={formData.imgPrincipal}
@@ -91,8 +91,8 @@ export default function nuevoShareForm() {
                         />
                     </div>
                     <div className="flex flex-col gap-6 py-4">
-                        <h3>{formData.titulo}</h3>
-                        <p>{formData.texto}</p>
+                        <h3 className="text-[1.2rem] text-[var(--gris2)]">{formData.titulo}</h3>
+                        <p className="text-[0.8rem] text-[var(--gris2)]">{formData.texto}</p>
                     </div>
                     <div className="rounded-[0.4rem] overflow-hidden w-content">
                         <Image
@@ -107,7 +107,7 @@ export default function nuevoShareForm() {
 
                 {/* EDITOR */}
 
-                <div className="mobile:w-full laptop:max-w-full flex flex-col gap-12">
+                <div className="mobile:full laptop:w-2/3 flex flex-col gap-12">
 
                     <div>
                         <label className="mb-3 block">Título</label>

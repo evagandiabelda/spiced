@@ -9,3 +9,5 @@ export default function Configuracion() {
         <h2>Configuración</h2>
     );
 }
+
+export const dynamic = "force-dynamic";

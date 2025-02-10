@@ -7,9 +7,20 @@ import { generateSlug } from "@/utils/slug";
 const prisma = new PrismaClient();
 
 /* LISTAR TODOS LOS SHARES */
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const query = searchParams.get("query");
+
     const shares = await prisma.share.findMany({
+      where: query
+        ? {
+          OR: [
+            { titulo: { contains: query, mode: "insensitive" } }, // Busca en título
+            { texto: { contains: query, mode: "insensitive" } },  // Busca en descripción
+          ],
+        }
+        : undefined, // Si no hay query, no aplica filtro
       include: {
         user: {
           select: { name: true, foto: true }, // Solo traemos el nombre y la foto

@@ -124,8 +124,9 @@ const Input = ({ tipo, icon, id, placeholder, rows, value, required, onChange }:
         );
     }
     else if (tipo === "textarea") {
+
         return (
-            <div className={divClassName}>
+            <div className={divClassName + " py-4"}>
                 <textarea
                     id={id}
                     name={id}
