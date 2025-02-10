@@ -126,7 +126,7 @@ export default function ConfigUserForm() {
 
             {/* SECCIÓN 'EDITA TU PERFIL' */}
 
-            <section className="w-full mx-auto flex flex-col border-y border-y-1 border-y-[var(--gris3)] py-16 px-col1 gap-12">
+            <section className="w-full mx-auto flex flex-col border-b border-b-1 border-b-[var(--gris3)] pb-16 px-col1 gap-12">
 
                 <h3>Edita tu perfil</h3>
 

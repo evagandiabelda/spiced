@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import Image from "next/image";
 import ThemeToggle from "@/components/buttons/ThemeToggle";

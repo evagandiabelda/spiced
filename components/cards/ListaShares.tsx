@@ -1,8 +1,8 @@
 "use client";
 
-
 import { useEffect, useState } from "react";
 import Share from "@/components/cards/Share";
+import ShareSkeleton from "@/components/cards/ShareSkeleton"
 
 interface ShareData {
     id: string;
@@ -44,8 +44,18 @@ export default function ListaShares() {
         fetchShares();
     }, []);
 
-    if (loading) return <p className="opacity-50">Cargando...</p>
     if (error) return <p className="text-red-500">{error}</p>;
+
+    if (loading) return (
+        <div className="w-full flex flex-wrap justify-center gap-8">
+            <ShareSkeleton />
+            <ShareSkeleton />
+            <ShareSkeleton />
+            <ShareSkeleton />
+            <ShareSkeleton />
+            <ShareSkeleton />
+        </div>
+    );
 
     return (
         <div className="w-full flex flex-wrap justify-center gap-8">

@@ -1,16 +1,19 @@
 'use client';
 
+import Image from "next/image";
+
 interface BotonProps {
     texto: string;
     enlace?: string;
     tamano: "pequeno" | "grande";
     jerarquia: "primario" | "secundario";
+    icon?: string;
     customColor?: string; /* Color personalizado */
     onClick?: () => void;
 }
 
-const Boton = ({ texto, enlace, tamano, jerarquia, customColor, onClick }: BotonProps) => {
-    let className = "inline-block text-center font-semibold rounded-full border-2 transition ease duration-300 cursor-pointer ";
+const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick }: BotonProps) => {
+    let className = "flex flex-row gap-4 text-center font-semibold rounded-full border-2 transition ease duration-300 cursor-pointer ";
     let style: React.CSSProperties = {};
 
     if (tamano === "pequeno") {
@@ -43,6 +46,7 @@ const Boton = ({ texto, enlace, tamano, jerarquia, customColor, onClick }: Boton
 
     return (
         <a href={enlace} className={className} style={style} onClick={onClick}>
+            {icon && <Image src={icon} alt="icono" width={15} height={15} className="invert dark:filter-none" />}
             {texto}
         </a>
     );

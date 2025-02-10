@@ -127,13 +127,13 @@ export default function nuevoShareForm() {
                             tipo="textarea"
                             id="texto"
                             value={formData.texto}
-                            rows={12}
+                            rows={14}
                             required
                             onChange={(e) => setFormData((prev) => ({ ...prev, texto: e.target.value }))}
                         />
                     </div>
 
-                    <div className="flex flex-row gap-4">
+                    <div className="flex flex-row gap-8">
                         <div>
                             <label className="mb-3 block">Imagen principal</label>
                             <InputFile
@@ -155,17 +155,17 @@ export default function nuevoShareForm() {
                         </div>
                     </div>
 
+                    {error && <p className="text-red-500">{error}</p>}
+
+                    <div className="flex justify-end gap-6">
+                        <Boton texto="Cancelar" enlace="/panel-estandar" tamano="grande" jerarquia="secundario" />
+                        <BotonSubmit texto="Publicar Share" disabled={loading} />
+                    </div>
 
                 </div>
 
             </div>
 
-            {error && <p className="text-red-500">{error}</p>}
-
-            <div className="flex justify-end gap-6">
-                <Boton texto="Cancelar" enlace="/panel-estandar" tamano="grande" jerarquia="secundario" />
-                <BotonSubmit texto="Publicar Share" disabled={loading} />
-            </div>
         </form>
     );
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import Image from "next/image";
 import {
     Accordion,
@@ -15,6 +16,9 @@ type tipo = {
 };
 
 const Menu = ({ tipo }: tipo) => {
+
+    const pathname = usePathname();
+
     if (tipo === "header") {
         return (
             <nav className="mobile:hidden laptop:flex space-x-6">

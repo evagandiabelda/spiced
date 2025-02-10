@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import ListaSkeleton from "@/components/layout/panel/ListaSkeleton";
 import ItemListaShare from "@/components/layout/panel/ItemListaShare";
 
 interface Share {
@@ -72,8 +73,15 @@ export default function ListaShares() {
   };
 
   if (!session?.user) return <p>Debes iniciar sesión para ver tus shares.</p>;
-  if (loading) return <p>Cargando shares...</p>;
   if (error) return <p>{error}</p>;
+
+  if (loading) return (
+    <div className="w-full flex flex-col gap-8 p-[30px] rounded-xl bg-white dark:bg-[var(--gris4)]">
+      <ListaSkeleton />
+      <ListaSkeleton />
+      <ListaSkeleton />
+    </div>
+  );
 
   return (
     <div className="w-full flex flex-col gap-8 px-[30px] py-[10px] rounded-xl bg-white dark:bg-[var(--gris4)]">

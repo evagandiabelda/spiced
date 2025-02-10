@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import Options from "@/components/inputs/Options";
+import ShareSkeleton from "@/components/cards/ShareSkeleton"
+import ListaSkeleton from "@/components/layout/panel/ListaSkeleton"
 
 export const metadata: Metadata = {
     title: 'Recursos',
@@ -50,6 +52,12 @@ export default function PanelExperto() {
                     ]}
                 />
             </div>
+
+            <div>
+                <ShareSkeleton />
+            </div>
+
+            <ListaSkeleton />
 
         </div>
     );
