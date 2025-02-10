@@ -60,10 +60,12 @@ export default function Inicio() {
                     {/* Card Estadísticas: */}
                     <Estadisticas />
                     {/* Card Pingüinadas: */}
-                    <div className="w-full flex mobile:flex-col-reverse tablet:flex-row gap-2 rounded-xl bg-[var(--fob)] px-[36px] py-[40px] gap-[2.8rem] dark:bg-transparent dark:border-2 dark:border-[var(--fob)]">
+                    <div className="w-full flex mobile:flex-col-reverse tablet:flex-row gap-2 rounded-xl bg-[var(--fob)] px-[36px] py-[40px] gap-[2.8rem] dark:bg-[var(--fondo-pinguinadas)] dark:border-2 dark:border-[var(--borde-pinguinadas)]">
                         <div id="caja-izq" className="w-full h-100 flex flex-col justify-center gap-8">
                             <p>Los pingüinos suelen regalarse piedrecitas unos a otros en señal de afecto. Envía una pingüinada a alguien que te importe.</p>
-                            <Input tipo="text" id="nombre_usuario" placeholder="Su nombre de usuario" required={true} />
+                            <div className="rounded-xl border border-2 border-[var(--borde-pinguinadas)]">
+                                <Input tipo="text" id="nombre_usuario" placeholder="Su nombre de usuario" required={true} />
+                            </div>
                             <div className="dark:hidden">
                                 <Boton texto="Enviar una pingüinada" enlace="#" tamano="pequeno" jerarquia="primario" />
                             </div>
@@ -82,8 +84,8 @@ export default function Inicio() {
                     </div>
                 </div>
                 {/* Card Últimos Shares Guardados: */}
-                <div className="w-full flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-3 dark:bg-transparent dark:border-2 dark:border-[var(--tpa)]">
-                    <div className="w-full flex flex-row justify-between items-start">
+                <div className="w-full flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-shares)] dark:border-2 dark:border-[var(--borde-shares)]">
+                    <div className="w-full flex flex-row justify-between items-center">
                         <h4>Mis últimos shares</h4>
                         <Image
                             src="/iconos/iconos-menu/icono-guardado.svg"

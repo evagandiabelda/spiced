@@ -28,7 +28,7 @@ export default function Estadisticas() {
     }, [session?.user?.name]);
 
     return (
-        <div className="min-w-col3 flex flex-col justify-between rounded-xl p-[30px] bg-[var(--tdah)] dark:bg-transparent dark:border-2 dark:border-[var(--tdah)]">
+        <div className="min-w-col3 flex flex-col justify-between rounded-xl p-[30px] bg-[var(--tdah)] dark:bg-[var(--fondo-estadisticas)] dark:border-2 dark:border-[var(--borde-estadisticas)]">
             <div id="caja-sup" className="w-full h-full flex flex-row pb-6 border-b border-[var(--negro)]">
                 <div className="w-full h-100">
                     <a href="/panel-estandar/nuevo-share">

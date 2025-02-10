@@ -24,7 +24,7 @@ export default function Share({ imagen, user = "Usuario desconocido", foto, titu
                 />
             </div>
             <div id="caja-textos" className="w-full flex flex-col">
-                <div className="w-full flex flex-row justify-end items-center gap-2 border-b border-b-1 border-b-[var(--gris2)] py-6 px-4">
+                <div className="w-full flex flex-row justify-end items-center gap-2 border-b border-b-1 border-b-[var(--gris2)] dark:border-b-[var(--gris5)] py-6 px-4">
                     <p className="text-right font-bold opacity-50">@{user}</p>
                     <div id="caja-imagen" className="relative w-8 h-8 rounded-full overflow-hidden">
                         <Image
@@ -37,7 +37,7 @@ export default function Share({ imagen, user = "Usuario desconocido", foto, titu
                 </div>
                 <div className="w-full flex flex-col items-start gap-4 pt-6 pb-3 px-4">
                     <h4 className="text-left">{titulo}</h4>
-                    <span className="text-left text-[var(--gris2)]">{extracto}</span>
+                    <span className="text-left text-[var(--gris2)] opacity-50">{extracto}</span>
                 </div>
             </div>
         </div>

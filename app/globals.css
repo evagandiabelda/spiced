@@ -19,6 +19,7 @@
 /* ------------ COLORES ------------ */
 
 :root {
+
     /* Colores Corporativos: */
     --brand1: #FF9486;
     --brand2: #F4DEC3;
@@ -52,23 +53,31 @@
     /* Degradados: */
     --degradado1: linear-gradient(45deg, #D84C60, #D78E55);
     --degradado2: linear-gradient(45deg, #653a70, #d84c60);
+
+    /* Básicos (modo claro): */
+    --background: var(--gris1);
+    --foreground: var(--negro);
 }
 
-/* Modo Claro: */
-:root {
-  --background: var(--gris1);
-  --foreground: var(--negro);
-}
+/* MODO OSCURO: */
 
-/* Modo Oscuro: */
 .dark {
+
+  /* Básicos (modo oscuro): */
   --background: var(--gris5);
-  --foreground: var(--brand2);
+  --foreground: var(--gris2);
+
+  /* Cards (modo oscuro): */
+  --fondo-estadisticas: rgba(131, 217, 219, 0.1);
+  --borde-estadisticas: rgba(131, 217, 219, 0.2);
+  --fondo-pinguinadas: rgba(205, 176, 247, 0.1);
+  --borde-pinguinadas: rgba(205, 176, 247, 0.2);
+  --fondo-shares: rgba(255, 202, 116, 0.1);
+  --borde-shares: rgba(255, 202, 116, 0.2);
 }
 
-/* ------------ ESTILOS BASE ------------ */
+/* ------------ ESTILOS BASE DE TAILWIND ------------ */
 
-/* Estilos base de Tailwind: */
 @layer base {
   h1 {
     @apply font-nohemi font-extrabold text-[2.8rem] m-0 p-0;
@@ -162,9 +171,21 @@
 
 }
 
-/* OTROS ESTILOS: */
+/* ------------ OTROS ESTILOS CSS: ------------ */
 
-/* Oculta todas las barras de scroll horizontales */
+body {
+  background-color: var(--background);
+  font-family: 'InterVariable', sans-serif;
+  font-weight: 400;
+  min-height: 100vh;
+}
+
+main {
+  min-height: calc(100vh - 80px);
+}
+
+/* Oculta todas las barras de scroll horizontales: */
+
 *::-webkit-scrollbar:horizontal {
   display: none; /* Oculta la barra de scroll horizontal en navegadores basados en WebKit */
 }
@@ -174,22 +195,7 @@
   -ms-overflow-style: none; /* IE y Edge: oculta todas las barras */
 }
 
-
-:root {
-  /* El ancho se divide en 12 columnas (dinámico). */
-  --columna: calc(100vw / 12); /* Valor equivalene a 1 columna */
-}
-
-body {
-  background-color: var(--background);
-  font-family: 'InterVariable', sans-serif;
-  font-weight: 400;
-  min-height: 100vh;
-}
-
-main, .alto-main {
-  min-height: calc(100vh - 80px);
-}
+/* Opacidad selectiva: */
 
 .hover-opacity {
   opacity: 1;
@@ -200,6 +206,8 @@ main, .alto-main {
   opacity: 0.7;
 }
 
+/* Hover Underline del Menú Principal: */
+
 .hover-underline {
   border-top: 2px solid transparent;
   border-bottom: 2px solid transparent;
@@ -209,6 +217,8 @@ main, .alto-main {
 .hover-underline:hover, .hover-underline:active {
   border-bottom: 2px solid var(--brand1);
 }
+
+/* Efectos para Toggles: */
 
 .sombra-interior-light {
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
@@ -225,6 +235,8 @@ main, .alto-main {
 .sombra-exterior-dark {
   box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 }
+
+/* Estilo personalizado para Selects: */
 
 select {
   appearance: none;
@@ -250,6 +262,8 @@ select:hover {
 select:active, select:focus {
   border: 2px solid var(--brand1);
 }
+
+/* Estilo personalizado para Inputs: */
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,

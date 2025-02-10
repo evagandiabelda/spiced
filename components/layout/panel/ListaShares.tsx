@@ -85,7 +85,7 @@ export default function ListaShares() {
   );
 
   return (
-    <div className="w-full flex flex-col gap-8 px-[30px] py-[10px] rounded-xl bg-white dark:bg-[var(--gris4)]">
+    <div className="w-full flex flex-col gap-8 px-[30px] py-[10px] rounded-xl bg-white dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--borde-shares)]">
       {shares.length === 0 ? (
         <p>Todavía no hay shares por aquí...</p>
       ) : (
