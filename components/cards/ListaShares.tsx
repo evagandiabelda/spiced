@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Share from "@/components/cards/Share";
 import ShareSkeleton from "@/components/cards/ShareSkeleton"
 
@@ -13,6 +14,7 @@ interface ShareData {
     } | null;
     titulo: string;
     texto: string;
+    slug: string;
 }
 
 // Función para generar un extracto del texto (máx. 120 caracteres)
@@ -25,6 +27,7 @@ export default function ListaShares() {
     const [shares, setShares] = useState<ShareData[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchShares = async () => {
@@ -67,6 +70,7 @@ export default function ListaShares() {
                     foto={share.user?.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
                     titulo={share.titulo}
                     extracto={getExcerpt(share.texto)}
+                    onClick={() => router.push(`/share/${share.slug}`)}
                 />
             ))}
         </div>

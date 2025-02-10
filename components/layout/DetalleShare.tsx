@@ -1,11 +1,24 @@
 "use client";
 
+import React from "react";
 import Image from "next/image";
 import Avatar from "@/components/icons/Avatar";
 import Boton from "@/components/buttons/Boton";
+import { redirect } from "next/dist/server/api-utils";
 
+interface DetalleShareProps {
+    titulo: string;
+    texto: string;
+    img_principal: string;
+    img_secundaria: string | null;
+    fecha: Date;
+    user: {
+        name: string;
+        foto: string;
+    }
+}
 
-export default function DetalleShare() {
+export default function DetalleShare({ titulo, texto, img_principal, img_secundaria, fecha, user }: DetalleShareProps) {
 
     return (
         <div className="w-full flex flex-col items-center gap-16 pb-[160px]">
@@ -14,7 +27,7 @@ export default function DetalleShare() {
             <div className="w-full min-h-[500px] max-h-[600px] flex flex-row">
                 <div className="relative w-1/2">
                     <Image
-                        src="/uploads/c73de387-1454-4cd0-8c2d-205709e50291-WALLPAPER-(NO-BORRAR).jpg"
+                        src={img_principal}
                         alt="miniatura"
                         fill
                         className="object-cover"
@@ -32,7 +45,7 @@ export default function DetalleShare() {
                         />
                         <h4>Compartiendo experiencias</h4>
                     </div>
-                    <h1>Entendiendo la Sobrecarga Sensorial: Mi Experiencia con el TDAH y el Autismo</h1>
+                    <h1>{titulo}</h1>
                 </div>
             </div>
 
@@ -45,9 +58,9 @@ export default function DetalleShare() {
                     <div className="w-full flex flex-col gap-5 border-b border-b-1 border-b-[var(--gris2)] px-2 pb-8">
                         <div className="w-full flex flex-col gap-3">
                             <div className="max-w-[120px]">
-                                <Avatar borde="color" />
+                                <Avatar borde="color" foto={user.foto} />
                             </div>
-                            <h4 className="pl-2">@neurolucia</h4>
+                            <h4 className="pl-2">@{user.name}</h4>
                         </div>
                         <Boton
                             texto="Seguir"
@@ -63,7 +76,9 @@ export default function DetalleShare() {
                         </div>
                         <div className="w-full px-2">
                             <p className="font-bold text-[0.8rem] text-[var(--gris2)]">Publicado el:</p>
-                            <p className="font-bold text-[0.8rem] text-[var(--gris2)]">13 de agosto de 2024</p>
+                            <p className="font-bold text-[0.8rem] text-[var(--gris2)]">
+                                {fecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}
+                            </p>
                         </div>
                     </div>
 
@@ -80,19 +95,33 @@ export default function DetalleShare() {
                 </div>
 
                 {/* Artículo */}
-                <div className="w-full flex flex-col items-start gap-2 gap-8">
-                    <p className="text-[1.2rem]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <p className="text-[1.2rem]">Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam.</p>
-                    <div className="relative w-full h-[300px]">
-                        <Image
-                            src="/uploads/c73de387-1454-4cd0-8c2d-205709e50291-WALLPAPER-(NO-BORRAR).jpg"
-                            alt="imagen secundaria"
-                            fill
-                            className="object-cover"
+                <div className="w-full flex flex-col items-start gap-2 gap-4">
+                    {texto.split("\n").map((parrafo, index) => (
+                        <React.Fragment key={index}>
+                            {/* Renderizamos el primer párrafo + la imagen secundaria (si hay) */}
+                            {index === 1 && img_secundaria && (
+                                <div className="relative w-full h-[300px] my-8">
+                                    <Image
+                                        src={img_secundaria}
+                                        alt="imagen secundaria"
+                                        fill
+                                        className="object-cover"
+                                    />
+                                </div>
+                            )}
+                            {/* Renderizamos el resto de párrafos */}
+                            <p className="text-[1.2rem]">{parrafo}</p>
+                        </React.Fragment>
+                    ))}
+                    <div className="inline-block px-2 py-8">
+                        <Boton
+                            texto="Volver al Feed"
+                            enlace="/feed"
+                            tamano="pequeno"
+                            jerarquia="secundario"
+                            icon="/iconos/iconos-otros/icono-arrow-left.svg"
                         />
                     </div>
-                    <p className="text-[1.2rem]">Phasellus consequat. Aenean vitae quam. Vivamus et nunc. Nunc consequat sem a augue. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut lectus ac quam malesuada scelerisque. Morbi luctus, wisi viverra faucibus pretium, nibh est placerat odio, nec commodo wisi enim eget quam.</p>
-                    <p className="text-[1.2rem]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 </div>
             </div>
 

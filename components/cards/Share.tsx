@@ -8,12 +8,13 @@ interface ShareProps {
     foto: string;
     titulo: string;
     extracto: string;
+    onClick: () => void;
 }
 
-export default function Share({ imagen, user = "Usuario desconocido", foto, titulo, extracto }: ShareProps) {
+export default function Share({ imagen, user = "Usuario desconocido", foto, titulo, extracto, onClick }: ShareProps) {
 
     return (
-        <div className="min-w-col2 max-w-col3 min-h-[600px] flex flex-col rounded-[1.2rem] p-[20px] bg-white dark:bg-[var(--gris4)] dark:border-2 dark:border-[var(--gris3)] hover:scale-[1.01] transition ease cursor-pointer">
+        <div onClick={onClick} className="min-w-col2 max-w-col3 min-h-[600px] flex flex-col rounded-[1.2rem] p-[20px] bg-white dark:bg-[var(--gris4)] dark:border-2 dark:border-[var(--gris3)] hover:scale-[1.01] transition ease cursor-pointer">
             <div id="caja-imagen" className="relative w-full h-full rounded-[0.6rem] overflow-hidden">
                 <Image
                     src={imagen}
@@ -24,7 +25,7 @@ export default function Share({ imagen, user = "Usuario desconocido", foto, titu
             </div>
             <div id="caja-textos" className="w-full flex flex-col">
                 <div className="w-full flex flex-row justify-end items-center gap-2 border-b border-b-1 border-b-[var(--gris2)] py-6 px-4">
-                    <p className="text-right">@{user}</p>
+                    <p className="text-right font-bold opacity-50">@{user}</p>
                     <div id="caja-imagen" className="relative w-8 h-8 rounded-full overflow-hidden">
                         <Image
                             src={foto}

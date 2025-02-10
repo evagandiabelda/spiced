@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Boton from "@/components/buttons/Boton";
 
@@ -9,10 +10,13 @@ interface ItemProps {
     user?: string | null;
     titulo: string;
     fecha: string;
+    slug: string;
     onDelete: (id: string) => void;
 }
 
-const ItemListaShare = ({ id, imagen, user = "Usuario desconocido", titulo, fecha, onDelete }: ItemProps) => {
+const ItemListaShare = ({ id, imagen, user = "Usuario desconocido", titulo, fecha, slug, onDelete }: ItemProps) => {
+
+    const router = useRouter();
 
     return (
         <li className="w-full flex flex-row justify-between items-end gap-12 py-4 border-b border-b-[var(--gris2)] dark:border-b-[var(--gris5)]">
@@ -41,7 +45,7 @@ const ItemListaShare = ({ id, imagen, user = "Usuario desconocido", titulo, fech
             </div>
 
             <div id="caja-boton" className="mobile:hidden laptop:flex flex-row gap-4">
-                <Boton texto="Leer de nuevo" enlace="#" tamano="pequeno" jerarquia="secundario" />
+                <Boton texto="Leer de nuevo" enlace="#" tamano="pequeno" jerarquia="secundario" onClick={() => router.push(`/share/${slug}`)} />
                 <Boton texto="Eliminar" enlace="#" tamano="pequeno" jerarquia="secundario" customColor="var(--brand1)" onClick={() => onDelete(id)} />
             </div>
 
