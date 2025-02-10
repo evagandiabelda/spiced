@@ -10,7 +10,7 @@ export default function Inicio() {
       <h1 className="text-2xl font-inter font-bold">
         Página en construcción
       </h1>
-      <div className="w-full mx-auto">
+      <div className="mx-auto">
         <Boton texto="Ir al Panel" enlace="/panel-estandar" tamano="grande" jerarquia="primario" />
       </div>
     </div>

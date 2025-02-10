@@ -74,7 +74,7 @@
     @apply font-nohemi font-extrabold text-[2.8rem] m-0 p-0;
     color: var(--foreground);
     letter-spacing: 0.01em;
-    line-height: normal;
+    line-height: 3.6rem;
   }
 
   h2 {

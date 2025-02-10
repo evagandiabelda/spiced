@@ -13,8 +13,9 @@ interface BotonProps {
 }
 
 const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick }: BotonProps) => {
-    let className = "flex flex-row gap-4 text-center font-semibold rounded-full border-2 transition ease duration-300 cursor-pointer ";
+    let className = "inline-block gap-4 text-center font-semibold rounded-full border-2 transition ease duration-300 cursor-pointer ";
     let style: React.CSSProperties = {};
+    let iconClassName = ""
 
     if (tamano === "pequeno") {
         className += "a-boton-pq px-[1rem] py-[0.2rem] ";
@@ -25,6 +26,7 @@ const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick }:
     if (jerarquia === "primario") {
 
         className += "text-[var(--blanco)] dark:text-[var(--gris5)] hover:opacity-80 ";
+        iconClassName += "invert dark:filter-none ";
 
         if (customColor) {
             style = { backgroundColor: customColor, borderColor: customColor };
@@ -35,6 +37,7 @@ const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick }:
     } else if (jerarquia === "secundario") {
 
         className += "hover:bg-black/10 dark:hover:bg-white/10 ";
+        iconClassName += "dark:invert ";
 
         if (customColor) {
             style = { color: customColor, borderColor: customColor };
@@ -46,8 +49,10 @@ const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick }:
 
     return (
         <a href={enlace} className={className} style={style} onClick={onClick}>
-            {icon && <Image src={icon} alt="icono" width={15} height={15} className="invert dark:filter-none" />}
-            {texto}
+            <div className="flex flex-row justify-center gap-4">
+                {icon && <Image src={icon} alt="icono" width={15} height={15} className={iconClassName} />}
+                {texto}
+            </div>
         </a>
     );
 };
