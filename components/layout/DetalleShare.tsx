@@ -34,7 +34,7 @@ export default function DetalleShare({ titulo, texto, img_principal, img_secunda
                     />
                 </div>
 
-                <div className="w-1/2 h-full flex flex-col justify-center gap-8 p-20">
+                <div className="w-1/2 h-full flex flex-col justify-center gap-8 p-20 bg-black/5 dark:bg-white/5">
                     <div className="flex flex-row gap-4 items-center">
                         <Image
                             src="/iconos/iconos-genericos/icono-spiced.svg"
@@ -63,7 +63,7 @@ export default function DetalleShare({ titulo, texto, img_principal, img_secunda
                             <h4 className="pl-2">@{user.name}</h4>
                         </div>
                         <Boton
-                            texto="Seguir"
+                            texto="Seguir contenido"
                             enlace="#"
                             tamano="pequeno"
                             jerarquia="primario"

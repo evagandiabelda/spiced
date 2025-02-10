@@ -19,7 +19,7 @@ const ItemListaShare = ({ id, imagen, user = "Usuario desconocido", titulo, fech
     const router = useRouter();
 
     return (
-        <li className="w-full flex flex-row justify-between items-end gap-12 py-4 border-b border-b-[var(--gris2)] dark:border-b-[var(--gris5)]">
+        <li className="w-full flex flex-row justify-between items-end gap-12 py-4 border-b border-b-[var(--gris2)] dark:border-b-[var(--negro)]">
 
             <div className="flex-1 flex flex-row mobile:items-start tablet:items-center gap-4">
 
@@ -45,7 +45,7 @@ const ItemListaShare = ({ id, imagen, user = "Usuario desconocido", titulo, fech
             </div>
 
             <div id="caja-boton" className="mobile:hidden laptop:flex flex-row gap-4">
-                <Boton texto="Leer de nuevo" enlace="#" tamano="pequeno" jerarquia="secundario" onClick={() => router.push(`/share/${slug}`)} />
+                <Boton texto="Leer" enlace="#" tamano="pequeno" jerarquia="secundario" onClick={() => router.push(`/share/${slug}`)} />
                 <Boton texto="Eliminar" enlace="#" tamano="pequeno" jerarquia="secundario" customColor="var(--brand1)" onClick={() => onDelete(id)} />
             </div>
 

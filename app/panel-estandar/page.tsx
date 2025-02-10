@@ -63,7 +63,7 @@ export default function Inicio() {
                     <div className="w-full flex mobile:flex-col-reverse tablet:flex-row gap-2 rounded-xl bg-[var(--fob)] px-[36px] py-[40px] gap-[2.8rem] dark:bg-[var(--fondo-pinguinadas)] dark:border-2 dark:border-[var(--borde-pinguinadas)]">
                         <div id="caja-izq" className="w-full h-100 flex flex-col justify-center gap-8">
                             <p>Los pingüinos suelen regalarse piedrecitas unos a otros en señal de afecto. Envía una pingüinada a alguien que te importe.</p>
-                            <div className="rounded-xl border border-2 border-[var(--borde-pinguinadas)]">
+                            <div className="rounded-[1rem] border border-2 dark:border-[var(--borde-pinguinadas)] overflow-hidden">
                                 <Input tipo="text" id="nombre_usuario" placeholder="Su nombre de usuario" required={true} />
                             </div>
                             <div className="dark:hidden">
@@ -91,7 +91,7 @@ export default function Inicio() {
                             src="/iconos/iconos-menu/icono-guardado.svg"
                             width={18}
                             height={18}
-                            className="dark:invert"
+                            className="dark:invert opacity-50"
                             alt="últimos shares guardados"
                         />
                     </div>

@@ -31,7 +31,7 @@ const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick }:
         if (customColor) {
             style = { backgroundColor: customColor, borderColor: customColor };
         } else {
-            className += "border-[var(--gris5)] dark:border-[var(--brand2)] bg-[var(--gris5)] dark:bg-[var(--brand2)] ";
+            className += "border-[var(--gris5)] dark:border-[var(--brand1)] bg-[var(--gris5)] dark:bg-[var(--brand1)] ";
         }
 
     } else if (jerarquia === "secundario") {
@@ -48,12 +48,14 @@ const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick }:
     }
 
     return (
-        <a href={enlace} className={className} style={style} onClick={onClick}>
-            <div className="flex flex-row justify-center gap-4">
-                {icon && <Image src={icon} alt="icono" width={15} height={15} className={iconClassName} />}
-                {texto}
-            </div>
-        </a>
+        <div className="inline-block">
+            <a href={enlace} className={className} style={style} onClick={onClick}>
+                <div className="flex flex-row justify-center gap-4">
+                    {icon && <Image src={icon} alt="icono" width={15} height={15} className={iconClassName} />}
+                    {texto}
+                </div>
+            </a>
+        </div>
     );
 };
 

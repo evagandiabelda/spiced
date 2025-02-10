@@ -107,7 +107,7 @@ export default function nuevoShareForm() {
 
                 {/* EDITOR */}
 
-                <div className="mobile:full laptop:w-2/3 flex flex-col gap-12">
+                <div className="mobile:full laptop:w-2/3 flex flex-col gap-8">
 
                     <div>
                         <label className="mb-3 block">Título</label>
@@ -133,37 +133,42 @@ export default function nuevoShareForm() {
                         />
                     </div>
 
-                    <div className="flex flex-row gap-8">
-                        <div>
-                            <label className="mb-3 block">Imagen principal</label>
-                            <InputFile
-                                id="imgPrincipal"
-                                required
-                                onChange={handleFileChange}
-                                accept="image/*"
-                            />
-                        </div>
+                    {/* CARGA DE IMÁGENES */}
 
-                        <div>
-                            <label className="mb-3 block">Imagen secundaria (opcional)</label>
-                            <InputFile
-                                id="imgSecundaria"
-                                required={false}
-                                onChange={handleFileChange}
-                                accept="image/*"
-                            />
-                        </div>
+                    <div className="w-full">
+                        <label className="mb-3 block">Imagen principal</label>
+                        <InputFile
+                            id="imgPrincipal"
+                            required
+                            onChange={handleFileChange}
+                            accept="image/*"
+                        />
                     </div>
 
-                    {error && <p className="text-red-500">{error}</p>}
-
-                    <div className="flex justify-end gap-6">
-                        <Boton texto="Cancelar" enlace="/panel-estandar" tamano="grande" jerarquia="secundario" />
-                        <BotonSubmit texto="Publicar Share" disabled={loading} />
+                    <div className="w-full">
+                        <label className="mb-3 block">Imagen secundaria (opcional)</label>
+                        <InputFile
+                            id="imgSecundaria"
+                            required={false}
+                            onChange={handleFileChange}
+                            accept="image/*"
+                        />
                     </div>
 
                 </div>
 
+            </div>
+
+            <div className="w-full flex flex-col gap-16">
+
+                {/* BOTONES: */}
+
+                {error && <p className="text-red-500">{error}</p>}
+
+                <div className="flex justify-end gap-6">
+                    <Boton texto="Cancelar" enlace="/panel-estandar" tamano="grande" jerarquia="secundario" />
+                    <BotonSubmit texto="Publicar Share" disabled={loading} />
+                </div>
             </div>
 
         </form>
