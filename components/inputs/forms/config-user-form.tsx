@@ -50,7 +50,6 @@ export default function ConfigUserForm() {
 
         const uploadData = new FormData();
         uploadData.append("file", file);
-        userPhoto = uploadData;
 
         try {
             const response = await fetch("/api/upload", {
@@ -103,8 +102,8 @@ export default function ConfigUserForm() {
             setTimeout(() => setSuccessMessage(""), 5000);
 
             await update({
-                nombre_completo: data.nombre_completo,
-                foto: data.foto,
+                nombre_completo: formData.nombre_completo,
+                foto: formData.foto,
             });
 
             window.location.reload();
@@ -192,7 +191,7 @@ export default function ConfigUserForm() {
                         <div className="w-30 h-30 p-1 rounded-full border-[3px] border-[var(--brand1)] overflow-hidden cursor-pointer hover:scale-105 transition ease">
                             <div className="rounded-full overflow-hidden">
                                 <Image
-                                    src={userPhoto || session?.user.foto}
+                                    src={formData.foto || session?.user.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
                                     width={200}
                                     height={200}
                                     alt="avatar"

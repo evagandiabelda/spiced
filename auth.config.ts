@@ -19,12 +19,18 @@ export const authConfig: NextAuthOptions = {
       return session;
     },
 
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
       if (user) {
         token.id = user.id as string;
         token.email = user.email ?? "";
         token.name = user.name ?? "";
         token.foto = user.foto ?? "";
+      }
+      if (trigger === "update") {
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+        token.foto = user.foto;
       }
       return token;
     }

@@ -36,8 +36,13 @@ export const authOptions: NextAuthOptions = {
         }),
     ],
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({ token, user, trigger }) {
             if (user) {
+                token.id = user.id;
+                token.name = user.name;
+                token.foto = user.foto;
+            }
+            if (trigger === "update") {
                 token.id = user.id;
                 token.name = user.name;
                 token.foto = user.foto;

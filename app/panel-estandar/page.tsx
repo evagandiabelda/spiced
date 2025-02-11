@@ -86,7 +86,7 @@ export default function Inicio() {
                 {/* Card Últimos Shares Guardados: */}
                 <div className="w-full flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-shares)] dark:border-2 dark:border-[var(--borde-shares)]">
                     <div className="w-full flex flex-row justify-between items-center">
-                        <h4>Mis últimos shares</h4>
+                        <h4>Tus últimos shares</h4>
                         <Image
                             src="/iconos/iconos-menu/icono-guardado.svg"
                             width={18}
