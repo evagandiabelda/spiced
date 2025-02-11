@@ -22,7 +22,7 @@ const getExcerpt = (text: string, maxLength = 120) => {
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 };
 
-export default function ListaShares() {
+export default function ListaFeed() {
     const [shares, setShares] = useState<ShareData[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);

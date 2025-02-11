@@ -81,12 +81,12 @@ const Menu = ({ tipo }: tipo) => {
     }
 
     if (tipo === "footer") {
-        const className = "font-normal text-[var(--brand2)] hover:text-[var(--blanco)]";
+        const className = "font-normal text-[var(--brand2)] hover:text-white";
 
         return (
             <div className="w-full flex mobile:flex-col tablet:flex-row mobile:gap-6 tablet:gap-16">
-                <div className="flex flex-col gap-4">
-                    <h3>Spices</h3>
+                <div className="flex flex-col gap-5">
+                    <h3 className='text-white'>Spices</h3>
                     <div className="flex flex-row gap-6">
                         <nav className="flex flex-col gap-3">
                             <a href="#" className={className}>TEA</a>
@@ -109,8 +109,8 @@ const Menu = ({ tipo }: tipo) => {
                         </nav>
                     </div>
                 </div>
-                <div className="flex flex-col gap-4">
-                    <h3>Categorías</h3>
+                <div className="flex flex-col gap-5">
+                    <h3 className='text-white'>Categorías</h3>
                     <nav className="flex flex-col gap-3">
                         <a href="#" className={className}>Mindful cooking</a>
                         <a href="#" className={className}>Tips para el hogar</a>
@@ -121,8 +121,8 @@ const Menu = ({ tipo }: tipo) => {
                         <a href="#" className={className}>Gaming inclusivo</a>
                     </nav>
                 </div>
-                <div className="flex flex-col gap-4">
-                    <h3>Tu espacio</h3>
+                <div className="flex flex-col gap-5">
+                    <h3 className='text-white'>Tu espacio</h3>
                     <nav className="flex flex-col gap-3">
                         <a href="/panel-estandar" className={className}>Espacio personal</a>
                         <a href="/panel-estandar/nuevo-share" className={className}>Compartir contenido</a>

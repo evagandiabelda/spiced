@@ -1,7 +1,7 @@
 
 import { Metadata } from 'next';
 import { Suspense } from 'react';
-import ListaShares from '@/components/cards/ListaShares';
+import ListaFeed from '@/components/cards/ListaFeed';
 import Boton from '@/components/buttons/Boton';
 import ListaSkeleton from '@/components/layout/panel/ListaSkeleton';
 
@@ -21,7 +21,7 @@ export default async function Feed() {
 
             {/* CONTENIDO */}
             <Suspense fallback={<ListaSkeleton />}>
-                <ListaShares />
+                <ListaFeed />
             </Suspense>
 
 

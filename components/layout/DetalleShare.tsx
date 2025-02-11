@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 import Avatar from "@/components/icons/Avatar";
 import Boton from "@/components/buttons/Boton";
-import { redirect } from "next/dist/server/api-utils";
 
 interface DetalleShareProps {
     titulo: string;

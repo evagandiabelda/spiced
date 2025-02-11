@@ -10,7 +10,7 @@ interface Share {
   titulo: string;
   texto: string;
   img_principal: string;
-  created_at: string;
+  created_at: Date;
   slug: string;
   user: {
     id: number;
@@ -37,13 +37,13 @@ export default function ListaShares() {
           throw new Error("Error al recuperar los datos");
         }
 
-        const data: Share[] = await response.json();
+        const shares: Share[] = await response.json();
 
-        if (data.length === 0) {
+        if (shares.length === 0) {
           setError("Todavía no has publicado ningún share.");
           setShares([]);
         } else {
-          setShares(data);
+          setShares(shares);
         }
       } catch (error) {
         setError("Error cargando los shares.");
@@ -97,7 +97,7 @@ export default function ListaShares() {
               imagen={share.img_principal}
               user={session.user!.name} // Aquí usamos "!" porque ya verificamos antes que está definido
               titulo={share.titulo}
-              fecha={share.created_at}
+              fecha={share.created_at as Date}
               slug={share.slug}
               onDelete={handleDelete}
             />

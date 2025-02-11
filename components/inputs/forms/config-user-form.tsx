@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
-import Avatar from "@/components/icons/Avatar";
+import Image from "next/image";
 import Input from "@/components/inputs/Input";
 import InputFile from "@/components/inputs/InputFile";
 import Toggle from "@/components/buttons/Toggle";
@@ -13,6 +13,8 @@ export default function ConfigUserForm() {
 
     const { data: session, update } = useSession();
 
+    let userPhoto = session?.user?.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"; // Imagen por defecto
+
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -20,7 +22,7 @@ export default function ConfigUserForm() {
         nombre_completo: "",
         email: "",
         password: "",
-        foto: "",
+        foto: session?.user.foto,
         descripcion_perfil: "",
         perfil_privado: false,
     });
@@ -48,6 +50,7 @@ export default function ConfigUserForm() {
 
         const uploadData = new FormData();
         uploadData.append("file", file);
+        userPhoto = uploadData;
 
         try {
             const response = await fetch("/api/upload", {
@@ -100,8 +103,8 @@ export default function ConfigUserForm() {
             setTimeout(() => setSuccessMessage(""), 5000);
 
             await update({
-                nombre_completo: formData.nombre_completo,
-                foto: formData.foto,
+                nombre_completo: data.nombre_completo,
+                foto: data.foto,
             });
 
             window.location.reload();
@@ -186,8 +189,15 @@ export default function ConfigUserForm() {
                     </div>
 
                     <div className="flex flex-col items-center gap-6">
-                        <div className="w-30 h-30 ">
-                            <Avatar borde="color" />
+                        <div className="w-30 h-30 p-1 rounded-full border-[3px] border-[var(--brand1)] overflow-hidden cursor-pointer hover:scale-105 transition ease">
+                            <div className="rounded-full overflow-hidden">
+                                <Image
+                                    src={userPhoto || session?.user.foto}
+                                    width={200}
+                                    height={200}
+                                    alt="avatar"
+                                />
+                            </div>
                         </div>
                         <p className="text-black text-[1.3rem] opacity-50">@{session?.user.name}</p>
                     </div>

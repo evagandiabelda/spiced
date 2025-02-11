@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Boton from "@/components/buttons/Boton";
@@ -9,7 +10,7 @@ interface ItemProps {
     imagen: string;
     user?: string | null;
     titulo: string;
-    fecha: string;
+    fecha: Date;
     slug: string;
     onDelete: (id: string) => void;
 }
@@ -17,6 +18,7 @@ interface ItemProps {
 const ItemListaShare = ({ id, imagen, user = "Usuario desconocido", titulo, fecha, slug, onDelete }: ItemProps) => {
 
     const router = useRouter();
+    const objetoFecha = new Date(fecha);
 
     return (
         <li className="w-full flex flex-row justify-between items-end gap-12 py-4 border-b border-b-[var(--gris2)] dark:border-b-[var(--negro)]">
@@ -38,7 +40,7 @@ const ItemListaShare = ({ id, imagen, user = "Usuario desconocido", titulo, fech
                     </div>
                     <div className="w-full mobile:hidden tablet:flex flex-row justify-between">
                         <p><span className="text-[var(--gris2)] opacity-60">{user || "Usuario desconocido"}</span></p>
-                        <p><span className="text-[var(--gris2)] opacity-60">{fecha}</span></p>
+                        <p><span className="text-[var(--gris2)] opacity-60">{objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</span></p>
                     </div>
                 </div>
 
