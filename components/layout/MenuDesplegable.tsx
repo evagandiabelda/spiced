@@ -43,7 +43,7 @@ const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
                 </div>
 
                 <div className="px-[30px] py-[24px]">
-                    <Menu tipo="header-desplegable" />
+                    <Menu tipo='header-desplegable' />
                 </div>
             </div>
 

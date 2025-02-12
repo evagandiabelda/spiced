@@ -1,7 +1,7 @@
-
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from '@/context/ThemeContext';
+import { LanguageProvider } from "@/context/LanguageContext";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ThemeInitializer from "@/components/ThemeInitializer";
@@ -30,14 +30,16 @@ export default function RootLayout({
       <body className="antialiased min-h-screen">
 
         <ThemeProvider>
-          <ThemeInitializer />
-          <SessionWrapper>
-            <Header />
-            <main className="flex flex-grow">
-              {children}
-            </main>
-            <Footer />
-          </SessionWrapper>
+          <LanguageProvider>
+            <ThemeInitializer />
+            <SessionWrapper>
+              <Header />
+              <main className="flex flex-grow">
+                {children}
+              </main>
+              <Footer />
+            </SessionWrapper>
+          </LanguageProvider>
         </ThemeProvider>
 
       </body>
