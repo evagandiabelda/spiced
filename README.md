@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Spiced
 
-## Getting Started
+<img src="public/logos/logo-spiced-pos.png" alt="Logo de Spiced" width="300">
 
-First, run the development server:
+Esta aplicación es una plataforma de apoyo para personas neurodivergentes, diseñada para conectar, compartir experiencias y acceder a recursos útiles. Entre sus características clave, podemos encontrar:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 👥 **Comunidad neurodivergente:** Espacios interactivos para compartir experiencias y recursos.
+- 📌 **Publicación y guardado de contenido:** Sistema de ‘shares’ para compartir y organizar información útil.
+- 🔎 **Búsqueda optimizada:** Filtrado y categorización para encontrar recursos fácilmente.
+- 🎨 **Diseño accesible:** Adaptación a distintas necesidades visuales, modo oscuro y navegación intuitiva.
+
+## Primer vistazo a la plataforma
+
+<img src="public/imgs/screenshots/Spiced-screenshot-index.png" alt="Página principal de Spiced" width="800">
+*Página principal de Spiced.*
+
+<img src="public/imgs/screenshots/Spiced-screenshot-feed.png" alt="Feed de publicaciones" width="800">
+*Feed de publicaciones.*
+
+<img src="public/imgs/screenshots/Spiced-screenshot-singin.png" alt="Página de registro" width="800">
+*Página de registro.*
+
+<img src="public/imgs/screenshots/Spiced-screenshot-dashboard.png" alt="Panel de usuario" width="800">
+*Panel de usuario.*
+
+# Tecnologías utilizadas
+
+- **Frontend:** Next.js + TypeScript + Tailwind
+- **Backend:** Prisma + PostgreSQL (Neon)
+- **Autenticación:** NextAuth
+- **Almacenamiento de imágenes:** Cloudinary
+- **Despliegue:** Vercel
+
+# Instalación y Configuración
+
+## **Paso 1:** Configuración de variables de entorno
+
+Este proyecto utiliza variables de entorno para gestionar configuraciones sensibles. Para ejecutarlo en local, se debe crear un archivo ".env.local" en la raíz del proyecto con el siguiente formato:
+
+```
+# Base de datos
+DATABASE_URL=postgres://USER:PASSWORD@HOST/DATABASE?sslmode=require
+
+# Autenticación
+AUTH_SECRET=your_secret_key
+NEXTAUTH_SECRET=your_secret_key
+NEXTAUTH_URL=http://localhost:3000
+
+# Cloudinary (gestión de imágenes)
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A continuación, se debe copiar el contenido del archivo ".env.example" a ".env.local" y completar los valores según la configuración deseada.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## **Paso 2:** Clonar el repositorio y ejecutar el proyecto en local
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Estos son los pasos básicos:
 
-## Learn More
+```bash
+# Clonar el repositorio:
+git clone https://github.com/evagandiabelda/spiced
+# Situarse en la carpeta del proyecto:
+cd spiced
+# Instalar las dependencias necesarias:
+npm install
+# Ejecutar el servidor de desarrollo:
+npm run dev # (o 'pnpm dev')
+# Generar los clientes de Prisma:
+pnpm prisma generate
+# Ejecutar todas las migraciones desde cero (opcional):
+npx prisma migrate reset
+# Poblar la base de datos:
+npx prisma db seed
+```
 
-To learn more about Next.js, take a look at the following resources:
+Podremos ver la aplicación en ejecución desde el navegador, en la siguiente dirección:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[http://localhost:3000](http://localhost:3000)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Estructura del proyecto
 
-## Deploy on Vercel
+Éste es un breve esquema con las carpetas principales y su función:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+📦 spiced
+ ┣ 📂 app
+ ┃ ┣ 📂 api               # Gestión y operaciones sobre la BD, autenticación.
+ ┃ ┣ 📂 lib               # Funciones auxiliares y lógica compartida.
+ ┃ ┣ 📂 nombre-pagina     # Páginas principales (feed, login, panel, register, share...).
+ ┃ ┃ ┣ 🖽 layout.tsx       # Estructura de cada página.
+ ┃ ┃ ┗ 📄 page.tsx         # Archivo de cada página.
+ ┃ ┣ 🎨 globals.css       # Estilos globales CSS.
+ ┃ ┣ 🖽 layout.tsx         # Estructura global para las páginas hijas.
+ ┃ ┗ 📄 page.tsx          # Archivo de la página principal.
+ ┣ 📂 components          # Componentes reutilizables.
+ ┣ 📂 lib                 # Funciones auxiliares y lógica compartida.
+ ┣ 📂 prisma              # Configuración de Prisma.
+ ┣ 📂 public              # Archivos estáticos (imágenes, fuentes, etc.).
+ ┣ 📂 utils               # Utilidades y funciones auxiliares.
+ ┣ ⚙️ .env.example        # Ejemplo de archivo de variables de entorno.
+ ┣ 📜 README.md           # Documentación sobre la aplicación.
+ ┗ 🎨 tailwind.config.ts  # Estilos globales de Tailwind.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Contacto
+
+Para cualquier duda o ampliación de la información, puedes ponerte en contacto con el equipo de desarrollo:
+
+[Enviar email](mailto:evaganbel@alu.edu.gva.es)
