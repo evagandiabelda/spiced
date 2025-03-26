@@ -83,6 +83,7 @@ Podremos ver la aplicación en ejecución desde el navegador, en la siguiente di
 
 Éste es un breve esquema con las carpetas principales y su función:
 
+```
 📦 spiced
     ┣ 📂 app
     ┃   ┣ 📂 api              # Gestión y operaciones sobre la BD, autenticación.
@@ -101,6 +102,7 @@ Podremos ver la aplicación en ejecución desde el navegador, en la siguiente di
     ┣ ⚙️ .env.example         # Ejemplo de archivo de variables de entorno.
     ┣ 📜 README.md            # Documentación sobre la aplicación.
     ┗ 🎨 tailwind.config.ts   # Estilos globales de Tailwind.
+```
 
 # Contacto
 
