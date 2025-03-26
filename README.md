@@ -11,17 +11,17 @@ Esta aplicación es una plataforma de apoyo para personas neurodivergentes, dise
 
 ## Primer vistazo a la plataforma
 
+*Página principal de Spiced:*
 <img src="public/imgs/screenshots/Spiced-screenshot-index.png" alt="Página principal de Spiced" width="800">
-*Página principal de Spiced.*
 
+*Feed de publicaciones:*
 <img src="public/imgs/screenshots/Spiced-screenshot-feed.png" alt="Feed de publicaciones" width="800">
-*Feed de publicaciones.*
 
+*Página de registro:*
 <img src="public/imgs/screenshots/Spiced-screenshot-singin.png" alt="Página de registro" width="800">
-*Página de registro.*
 
+*Panel de usuario:*
 <img src="public/imgs/screenshots/Spiced-screenshot-dashboard.png" alt="Panel de usuario" width="800">
-*Panel de usuario.*
 
 # Tecnologías utilizadas
 
@@ -84,23 +84,23 @@ Podremos ver la aplicación en ejecución desde el navegador, en la siguiente di
 Éste es un breve esquema con las carpetas principales y su función:
 
 📦 spiced
- ┣ 📂 app
- ┃ ┣ 📂 api               # Gestión y operaciones sobre la BD, autenticación.
- ┃ ┣ 📂 lib               # Funciones auxiliares y lógica compartida.
- ┃ ┣ 📂 nombre-pagina     # Páginas principales (feed, login, panel, register, share...).
- ┃ ┃ ┣ 🖽 layout.tsx       # Estructura de cada página.
- ┃ ┃ ┗ 📄 page.tsx         # Archivo de cada página.
- ┃ ┣ 🎨 globals.css       # Estilos globales CSS.
- ┃ ┣ 🖽 layout.tsx         # Estructura global para las páginas hijas.
- ┃ ┗ 📄 page.tsx          # Archivo de la página principal.
- ┣ 📂 components          # Componentes reutilizables.
- ┣ 📂 lib                 # Funciones auxiliares y lógica compartida.
- ┣ 📂 prisma              # Configuración de Prisma.
- ┣ 📂 public              # Archivos estáticos (imágenes, fuentes, etc.).
- ┣ 📂 utils               # Utilidades y funciones auxiliares.
- ┣ ⚙️ .env.example        # Ejemplo de archivo de variables de entorno.
- ┣ 📜 README.md           # Documentación sobre la aplicación.
- ┗ 🎨 tailwind.config.ts  # Estilos globales de Tailwind.
+    ┣ 📂 app
+    ┃   ┣ 📂 api              # Gestión y operaciones sobre la BD, autenticación.
+    ┃   ┣ 📂 lib              # Funciones auxiliares y lógica compartida.
+    ┃   ┣ 📂 nombre-pagina    # Páginas principales (feed, login, panel, register, share...).
+    ┃   ┃   ┣ 🖽 layout.tsx    # Estructura de cada página.
+    ┃   ┃   ┗ 📄 page.tsx      # Archivo de cada página.
+    ┃   ┣ 🎨 globals.css      # Estilos globales CSS.
+    ┃   ┣ 🖽 layout.tsx        # Estructura global para las páginas hijas.
+    ┃   ┗ 📄 page.tsx          # Archivo de la página principal.
+    ┣ 📂 components           # Componentes reutilizables.
+    ┣ 📂 lib                  # Funciones auxiliares y lógica compartida.
+    ┣ 📂 prisma               # Configuración de Prisma.
+    ┣ 📂 public               # Archivos estáticos (imágenes, fuentes, etc.).
+    ┣ 📂 utils                # Utilidades y funciones auxiliares.
+    ┣ ⚙️ .env.example         # Ejemplo de archivo de variables de entorno.
+    ┣ 📜 README.md            # Documentación sobre la aplicación.
+    ┗ 🎨 tailwind.config.ts   # Estilos globales de Tailwind.
 
 # Contacto
 
