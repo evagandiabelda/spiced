@@ -132,8 +132,13 @@
     color: var(--foreground);
   }
 
-  .tag {
+  .tag-gr {
     @apply font-inter font-bold text-[0.8rem];
+    color: var(--foreground);
+  }
+
+  .tag-pq {
+    @apply font-inter font-bold text-[0.7rem];
     color: var(--foreground);
   }
 

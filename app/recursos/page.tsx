@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Options from "@/components/inputs/Options";
+import Tag from "@/components/buttons/Tag";
 
 export const metadata: Metadata = {
     title: 'Recursos',
@@ -48,6 +49,15 @@ export default function PanelExperto() {
                         { id: "Opcion2", texto: "Opción 2" },
                         { id: "Opcion3", texto: "Opción 3" },
                     ]}
+                />
+            </div>
+
+            <div className="p-5">
+                <Tag
+                    nombre="TEA"
+                    tamano="pequeno"
+                    isActive={true}
+                    icon={false}
                 />
             </div>
 
