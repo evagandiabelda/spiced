@@ -1,16 +1,17 @@
 import HeroBanner from "@/components/home/HeroBanner";
 import Image from "next/image";
 import CardHome from "@/components/cards/CardHome";
+import NubeTags from "@/components/buttons/NubeTags";
 
 export default function Inicio() {
   return (
-    <div className="w-full flex flex-col items-center text-center mx-auto">
+    <div className="w-full flex flex-col items-center gap-[80px] pb-[80px] text-center mx-auto">
 
       {/* BLOQUE BANNER: */}
       <HeroBanner />
 
       {/* BLOQUE 'QUÉ ES SPICED': */}
-      <div className="w-full flex flex-col items-center mobile:px-col1 tablet:px-col2 laptop:px-col1 py-[80px] gap-12">
+      <div className="w-full flex flex-col items-center mobile:px-col1 tablet:px-col2 laptop:px-col1 gap-12">
         <div className="w-full flex flex-col items-center gap-8 px-col1">
           <Image
             src="/iconos/iconos-genericos/icono-spiced.svg"
@@ -37,6 +38,17 @@ export default function Inicio() {
             titulo="Comunidad"
             parrafo="Comparte tus reflexiones y participa en debates con otros miembros."
           />
+        </div>
+      </div>
+
+      {/* BLOQUE TAGS: */}
+      <div className="w-full flex flex-col items-center mobile:px-col1 tablet:px-col2 gap-12">
+        <div className="w-full flex flex-col items-center gap-8">
+          <h1>Veamos qué te interesa</h1>
+          <p>Descubre contenido basado en tu condición. Puedes seleccionar una o varias etiquetas para empezar a componer tu tablero de intereses.</p>
+        </div>
+        <div className="w-full">
+          <NubeTags />
         </div>
       </div>
 

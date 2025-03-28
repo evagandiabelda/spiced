@@ -13,8 +13,8 @@ interface TagProps {
 
 const Tag = ({ nombre, tamano, isActive = false, icon = false, mode = "static", onClick }: TagProps) => {
     let texto = "";
-    let className = `inline-block gap-4 text-center font-semibold rounded-full border-2 hover:scale-[1.03] transition ease duration-300 cursor-pointer `;
-    let backgroundColor = "bg-[var(--gris2)] "; // Color por defecto inactivo.
+    let className = `inline-block gap-4 text-center font-semibold rounded-full border-2 hover:scale-[1.02] transition ease duration-300 cursor-pointer `;
+    let backgroundColor = "bg-[#d2c9c9] "; // Color por defecto inactivo.
 
     const etiquetas = {
         TEA: "T. del Espectro Autista",
