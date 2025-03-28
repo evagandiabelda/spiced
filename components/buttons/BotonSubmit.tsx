@@ -5,7 +5,7 @@ interface BotonSubmitProps {
     disabled?: boolean;
 }
 
-const BotonSubmit = ({ texto, disabled }: BotonSubmitProps) => {
+const BotonSubmit = ({ texto, disabled = false }: BotonSubmitProps) => {
 
     return (
         <button

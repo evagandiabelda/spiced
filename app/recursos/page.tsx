@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Options from "@/components/inputs/Options";
-import Tag from "@/components/buttons/Tag";
+import NubeTags from "@/components/buttons/NubeTags";
 
 export const metadata: Metadata = {
     title: 'Recursos',
@@ -53,12 +53,7 @@ export default function PanelExperto() {
             </div>
 
             <div className="p-5">
-                <Tag
-                    nombre="TEA"
-                    tamano="pequeno"
-                    isActive={true}
-                    icon={false}
-                />
+                <NubeTags />
             </div>
 
         </div>
