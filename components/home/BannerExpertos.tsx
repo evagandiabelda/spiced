@@ -13,7 +13,8 @@ export default function BannerExpertos() {
             </div>
 
             {/* CONTENEDOR TEXTOS */}
-            <div className="flex flex-col gap-8 w-full tablet:h-full bg-[var(--brand2)] px-col1 py-[4rem] text-left">
+            <div className="flex flex-col gap-8 w-full tablet:h-full bg-[var(--brand2)] px-col1 py-[5rem] text-left">
+                <h1 className="mobile:hidden tablet:block">¿Eres un profesional de la salud mental?</h1>
                 <p>Si trabajas en el campo de la psicología, la psiquiatría y la salud mental y cuentas con una titulación, ¡te queremos en el equipo!</p>
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row gap-4">
