@@ -2,12 +2,13 @@ import HeroBanner from "@/components/home/HeroBanner";
 import Image from "next/image";
 import CardHome from "@/components/cards/CardHome";
 import NubeTags from "@/components/buttons/NubeTags";
+import BannerExpertos from "@/components/home/BannerExpertos";
 
 export default function Inicio() {
   return (
     <div className="w-full flex flex-col items-center gap-[80px] pb-[80px] text-center mx-auto">
 
-      {/* BLOQUE BANNER: */}
+      {/* BANNER PRINCIPAL: */}
       <HeroBanner />
 
       {/* BLOQUE 'QUÉ ES SPICED': */}
@@ -52,6 +53,10 @@ export default function Inicio() {
         </div>
       </div>
 
+      {/* BANNER EXPERTOS */}
+      <BannerExpertos />
+
     </div>
+
   );
 }

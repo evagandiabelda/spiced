@@ -13,7 +13,7 @@ interface BotonProps {
 }
 
 const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick }: BotonProps) => {
-    let className = "inline-block gap-4 text-center font-semibold rounded-full border-2 transition ease duration-300 cursor-pointer ";
+    let className = "inline-block gap-4 text-center font-semibold rounded-full border-2 hover:scale-[1.02] transition ease duration-300 cursor-pointer ";
     let style: React.CSSProperties = {};
     let iconClassName = ""
 
@@ -25,7 +25,7 @@ const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick }:
 
     if (jerarquia === "primario") {
 
-        className += "text-[var(--blanco)] dark:text-[var(--gris5)] hover:opacity-80 ";
+        className += "text-[var(--blanco)] dark:text-[var(--gris5)] ";
         iconClassName += "invert dark:filter-none ";
 
         if (customColor) {

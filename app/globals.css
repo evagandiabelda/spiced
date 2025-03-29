@@ -80,66 +80,6 @@
 
 @layer base {
 
-  /* ------------ COLORES ------------ */
-
-  :root {
-
-    /* Colores Corporativos: */
-    --brand1: #FF9486;
-    --brand2: #F4DEC3;
-
-    /* Grises: */
-    --blanco: #FFFFFF;
-    --gris1: #EBE4E4;
-    --gris2: #B0AAAA;
-    --gris3: #605D5D;
-    --gris4: #3D3D3D;
-    --gris5: #282828;
-    --negro: #1B1B1B;
-
-    /* Colores Espectro: */
-    --tea: #8BC8EA;
-    --tdah: #83D9DB;
-    --toc: #97E8DA;
-    --tlp: #A1E5BD;
-    --tag: #B9E5A1;
-    --tp: #CBD07B;
-    --tpa: #FFCA74;
-    --tb: #FFA879;
-    --tep: #F2979C;
-    --td: #FFB8B3;
-    --te: #FFB6C3;
-    --ta: #F4A6D6;
-    --adi: #DDA9EA;
-    --fob: #CDB0F7;
-    --otr: #A1AEFF;
-
-    /* Degradados: */
-    --degradado1: linear-gradient(45deg, #D84C60, #D78E55);
-    --degradado2: linear-gradient(45deg, #653a70, #d84c60);
-
-    /* Básicos (modo claro): */
-    --background: var(--gris1);
-    --foreground: var(--negro);
-  }
-
-  /* MODO OSCURO: */
-
-  .dark {
-
-  /* Básicos (modo oscuro): */
-  --background: var(--gris5);
-  --foreground: var(--gris2);
-
-  /* Cards (modo oscuro): */
-  --fondo-estadisticas: rgba(131, 217, 219, 0.1);
-  --borde-estadisticas: rgba(131, 217, 219, 0.2);
-  --fondo-pinguinadas: rgba(205, 176, 247, 0.1);
-  --borde-pinguinadas: rgba(205, 176, 247, 0.2);
-  --fondo-shares: rgba(255, 202, 116, 0.1);
-  --borde-shares: rgba(255, 202, 116, 0.2);
-  }
-
   h1 {
     @apply font-nohemi font-extrabold text-[2.8rem] m-0 p-0;
     color: var(--foreground);
@@ -177,7 +117,7 @@
     color: var(--foreground);
   }
 
-  a {
+  a, strong {
     @apply font-inter font-bold text-base;
     color: var(--foreground);
     /* Si se quiere subrayado, añadir className="hover:underline" en el elemento específico. */
