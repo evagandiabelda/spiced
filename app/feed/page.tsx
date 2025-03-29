@@ -22,7 +22,7 @@ export default async function Feed() {
                 <p>Descubre, aprende y apasiónate por aquello que te hace especial.</p>
             </div>
 
-            <div className='w-full flex flex-col items-center text-center gap-8 py-[2rem] bg-[#dfd8d8] rounded-[1.4rem]'>
+            <div className='w-full flex flex-col items-center text-center gap-8 py-[2rem] bg-[#dfd8d8] dark:bg-[#2d2d2d] rounded-[1.4rem]'>
 
                 {/* DROPDOWNS */}
                 <div className='w-full flex flex-row items-center gap-4 px-col1'>

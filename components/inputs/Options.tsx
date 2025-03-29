@@ -36,7 +36,7 @@ const Options = ({ tipo, label, name, opciones }: OptionsProps) => {
         return (
             <div className='w-full flex flex-col gap-4'>
                 {label && <label htmlFor={name}>{label}</label>}
-                <select id={name} onChange={handleSelectChange} value={opcionSel} className="select dark:border-[var(--gris-4)] dark:hover:border-[var(--gris3)] dark:active:border-[var(--brand2)] dark:focus:border-[var(--brand2)]">
+                <select id={name} onChange={handleSelectChange} value={opcionSel} className="select dark:bg-[var(--gris4)] dark:border-[var(--gris3)] dark:hover:border-[var(--gris2)] dark:active:border-[var(--brand2)] dark:focus:border-[var(--brand2)]">
                     {opciones.map(opcion => (
                         <OptionItem key={opcion.id} tipo={tipo} id={opcion.id} texto={opcion.texto} />
                     ))}
