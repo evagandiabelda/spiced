@@ -13,8 +13,8 @@ interface TagProps {
 
 const Tag = ({ nombre, tamano, isActive = false, icon = false, mode = "static", onClick }: TagProps) => {
     let texto = "";
-    let className = `inline-block gap-4 text-center font-semibold rounded-full border-2 hover:scale-[1.02] transition ease duration-300 cursor-pointer `;
-    let backgroundColor = "bg-[#d2c9c9] "; // Color por defecto inactivo.
+    let className = `inline-block gap-4 text-center font-semibold rounded-full hover:scale-[1.02] dark:hover:text-[var(--gris5)] transition ease duration-300 cursor-pointer `;
+    let backgroundColor = "bg-[#d2c9c9] dark:bg-[var(--gris4)] "; // Color por defecto inactivo.
 
     const etiquetas = {
         TEA: "T. del Espectro Autista",
@@ -47,64 +47,64 @@ const Tag = ({ nombre, tamano, isActive = false, icon = false, mode = "static", 
     switch (nombre.toUpperCase()) {
 
         case "TEA":
-            if (isActive) { backgroundColor = "bg-[var(--tea)] "; }
-            backgroundColor += "hover:bg-[var(--tea)]";
+            if (isActive) { backgroundColor = "bg-[var(--tea)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--tea)] dark:hover:bg-[var(--tea)]";
             break;
         case "TDAH":
-            if (isActive) { backgroundColor = "bg-[var(--tdah)] "; }
-            backgroundColor += "hover:bg-[var(--tdah)]";
+            if (isActive) { backgroundColor = "bg-[var(--tdah)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--tdah)] dark:hover:bg-[var(--tdah)]";
             break;
         case "TOC":
-            if (isActive) { backgroundColor = "bg-[var(--toc)] "; }
-            backgroundColor += "hover:bg-[var(--toc)]";
+            if (isActive) { backgroundColor = "bg-[var(--toc)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--toc)] dark:hover:bg-[var(--toc)]";
             break;
         case "TLP":
-            if (isActive) { backgroundColor = "bg-[var(--tlp)] "; }
-            backgroundColor += "hover:bg-[var(--tlp)]";
+            if (isActive) { backgroundColor = "bg-[var(--tlp)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--tlp)] dark:hover:bg-[var(--tlp)]";
             break;
         case "TAG":
-            if (isActive) { backgroundColor = "bg-[var(--tag)] "; }
-            backgroundColor += "hover:bg-[var(--tag)]";
+            if (isActive) { backgroundColor = "bg-[var(--tag)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--tag)] dark:hover:bg-[var(--tag)]";
             break;
         case "TP":
-            if (isActive) { backgroundColor = "bg-[var(--tp)] "; }
-            backgroundColor += "hover:bg-[var(--tp)]";
+            if (isActive) { backgroundColor = "bg-[var(--tp)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--tp)] dark:hover:bg-[var(--tp)]";
             break;
         case "TPA":
-            if (isActive) { backgroundColor = "bg-[var(--tpa)] "; }
-            backgroundColor += "hover:bg-[var(--tpa)]";
+            if (isActive) { backgroundColor = "bg-[var(--tpa)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--tpa)] dark:hover:bg-[var(--tpa)]";
             break;
         case "TB":
-            if (isActive) { backgroundColor = "bg-[var(--tb)] "; }
-            backgroundColor += "hover:bg-[var(--tb)]";
+            if (isActive) { backgroundColor = "bg-[var(--tb)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--tb)] dark:hover:bg-[var(--tb)]";
             break;
         case "TEP":
-            if (isActive) { backgroundColor = "bg-[var(--tep)] "; }
-            backgroundColor += "hover:bg-[var(--tep)]";
+            if (isActive) { backgroundColor = "bg-[var(--tep)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--tep)] dark:hover:bg-[var(--tep)]";
             break;
         case "TD":
-            if (isActive) { backgroundColor = "bg-[var(--td)] "; }
-            backgroundColor += "hover:bg-[var(--td)]";
+            if (isActive) { backgroundColor = "bg-[var(--td)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--td)] dark:hover:bg-[var(--td)]";
             break;
         case "TE":
-            if (isActive) { backgroundColor = "bg-[var(--te)] "; }
-            backgroundColor += "hover:bg-[var(--te)]";
+            if (isActive) { backgroundColor = "bg-[var(--te)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--te)] dark:hover:bg-[var(--te)]";
             break;
         case "TA":
-            if (isActive) { backgroundColor = "bg-[var(--ta)] "; }
-            backgroundColor += "hover:bg-[var(--ta)]";
+            if (isActive) { backgroundColor = "bg-[var(--ta)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--ta)] dark:hover:bg-[var(--ta)]";
             break;
         case "ADI":
-            if (isActive) { backgroundColor = "bg-[var(--adi)] "; }
-            backgroundColor += "hover:bg-[var(--adi)]";
+            if (isActive) { backgroundColor = "bg-[var(--adi)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--adi)] dark:hover:bg-[var(--adi)]";
             break;
         case "FOB":
-            if (isActive) { backgroundColor = "bg-[var(--fob)] "; }
-            backgroundColor += "hover:bg-[var(--fob)]";
+            if (isActive) { backgroundColor = "bg-[var(--fob)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--fob)] dark:hover:bg-[var(--fob)]";
             break;
         case "OTR":
-            if (isActive) { backgroundColor = "bg-[var(--otr)] "; }
-            backgroundColor += "hover:bg-[var(--otr)]";
+            if (isActive) { backgroundColor = "bg-[var(--otr)] text-[var(--gris5)] "; }
+            backgroundColor += "hover:bg-[var(--otr)] dark:hover:bg-[var(--otr)]";
             break;
 
     }

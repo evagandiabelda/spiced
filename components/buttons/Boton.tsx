@@ -31,7 +31,7 @@ const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick }:
         if (customColor) {
             style = { backgroundColor: customColor, borderColor: customColor };
         } else {
-            className += "border-[var(--gris5)] dark:border-[var(--brand1)] bg-[var(--gris5)] dark:bg-[var(--brand1)] ";
+            className += "border-[var(--gris5)] dark:border-[var(--brand2)] bg-[var(--gris5)] dark:bg-[var(--brand2)] ";
         }
 
     } else if (jerarquia === "secundario") {

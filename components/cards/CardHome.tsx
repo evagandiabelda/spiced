@@ -1,7 +1,6 @@
 'use client';
 
 import Image from "next/image";
-import Boton from "@/components/buttons/Boton";
 
 interface CardHomeProps {
     icono: string;
@@ -30,14 +29,16 @@ export default function CardHome({ icono, titulo, parrafo }: CardHomeProps) {
                 width="40"
                 height="40"
             />
-            <h2>{titulo}</h2>
-            <p>{parrafo}</p>
-            <Boton
-                texto="Explorar"
-                enlace="/feed"
-                tamano="grande"
-                jerarquia="primario"
-            />
+            <h2 className="text-[var(--gris5)]">{titulo}</h2>
+            <p className="text-[var(--gris5)]">{parrafo}</p>
+            {/* NO se usa el componente "Boton" para el siguiente botón, ya que se requiere personalización avanzada: */}
+            <div className="inline-block">
+                <a href="/feed" className="inline-block gap-4 text-center font-semibold rounded-full border-2 hover:scale-[1.02] transition ease duration-300 cursor-pointer a-boton-gr px-[1.8rem] py-[0.4rem] text-[var(--blanco)] border-[var(--gris5)] bg-[var(--gris5)]">
+                    <div className="flex flex-row justify-center gap-4">
+                        Explorar
+                    </div>
+                </a>
+            </div>
         </div>
     );
 }

@@ -13,28 +13,30 @@ export default function BannerExpertos() {
             </div>
 
             {/* CONTENEDOR TEXTOS */}
-            <div className="flex flex-col gap-8 w-full tablet:h-full bg-[var(--brand2)] px-col1 py-[5rem] text-left">
-                <h1 className="mobile:hidden tablet:block">¿Eres un profesional de la salud mental?</h1>
+            <div className="flex flex-col gap-8 w-full tablet:h-full bg-[var(--brand2)] dark:bg-[var(--gris4)] px-col1 py-[5rem] text-left">
+                <h1 className="mobile:hidden tablet:block dark:text-[var(--brand2)]">¿Eres un profesional de la salud mental?</h1>
                 <p>Si trabajas en el campo de la psicología, la psiquiatría y la salud mental y cuentas con una titulación, ¡te queremos en el equipo!</p>
                 <div className="flex flex-col gap-4">
-                    <div className="flex flex-row gap-4">
+                    <div className="flex flex-row items-start gap-4">
                         <Image
                             src="/iconos/iconos-otros/icono-tick-lista.svg"
                             alt="icono tick"
-                            width="20"
-                            height="20"
+                            width="18"
+                            height="18"
+                            className="py-1 dark:invert dark:opacity-60"
                         />
                         <div>
                             <p><strong>Acceso a pacientes ilimitado y gratuito</strong></p>
                             <p>Date a conocer entre la comunidad neurodivergente más completa de España.</p>
                         </div>
                     </div>
-                    <div className="flex flex-row gap-4">
+                    <div className="flex flex-row items-start gap-4">
                         <Image
                             src="/iconos/iconos-otros/icono-tick-lista.svg"
                             alt="icono tick"
-                            width="20"
-                            height="20"
+                            width="18"
+                            height="18"
+                            className="py-1 dark:invert dark:opacity-60"
                         />
                         <div>
                             <p><strong>Verificación de contenido</strong></p>
