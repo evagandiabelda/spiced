@@ -158,11 +158,11 @@ const Menu = ({ tipo }: tipo) => {
         const className = "font-normal text-[var(--brand2)] hover:text-[var(--blanco)]";
 
         return (
-            <div className="w-full flex flex-col gap-0 px-7 py-2 rounded-xl bg-[var(--gris4)]">
+            <div className="w-full flex flex-col gap-0 px-4 py-4 rounded-xl bg-[var(--gris4)]">
                 <Accordion type="single" collapsible>
 
-                    <AccordionItem value="item-1">
-                        <AccordionTrigger>Spices</AccordionTrigger>
+                    <AccordionItem value="item-1" className="px-4 rounded-[0.4rem] hover:bg-[var(--gris3)]">
+                        <AccordionTrigger className="pb-5">Spices</AccordionTrigger>
                         <AccordionContent>
                             <nav className="flex flex-col">
                                 <a href="#" className={className}>TEA</a>
@@ -184,8 +184,8 @@ const Menu = ({ tipo }: tipo) => {
                         </AccordionContent>
                     </AccordionItem>
 
-                    <AccordionItem value="item-2">
-                        <AccordionTrigger>Categorías</AccordionTrigger>
+                    <AccordionItem value="item-2" className="px-4 rounded-[0.4rem] hover:bg-[var(--gris3)]">
+                        <AccordionTrigger className="pb-5">Categorías</AccordionTrigger>
                         <AccordionContent>
                             <nav className="flex flex-col">
                                 <a href="#" className={className}>Mindful cooking</a>
@@ -199,8 +199,8 @@ const Menu = ({ tipo }: tipo) => {
                         </AccordionContent>
                     </AccordionItem>
 
-                    <AccordionItem value="item-3">
-                        <AccordionTrigger>Tu espacio</AccordionTrigger>
+                    <AccordionItem value="item-3" className="px-4 rounded-[0.4rem] hover:bg-[var(--gris3)]">
+                        <AccordionTrigger className="pb-5">Tu espacio</AccordionTrigger>
                         <AccordionContent>
                             <nav className="flex flex-col">
                                 <a href="/panel-estandar/" className={className}>Espacio personal</a>

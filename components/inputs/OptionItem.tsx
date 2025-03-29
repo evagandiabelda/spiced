@@ -15,7 +15,7 @@ const OptionItem = ({ tipo, id, texto, name, checked, onChange }: OptionItemProp
 
     if (tipo === "dropdown") {
         return (
-            <option id={id} value={id}>
+            <option id={id} value={id} className="select">
                 {texto}
             </option>
         );
@@ -23,16 +23,16 @@ const OptionItem = ({ tipo, id, texto, name, checked, onChange }: OptionItemProp
 
     if (tipo === "checkbox") {
         return (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
                 <input
                     type="checkbox"
                     id={id}
                     value={id}
                     checked={checked}
                     onChange={onChange}
-                    className="cursor-pointer"
+                    className="cursor-pointer scale-[1.6]"
                 />
-                <label htmlFor={id} className="cursor-pointer">
+                <label htmlFor={id} className="cursor-pointer text-[var(--gris5)]">
                     {texto}
                 </label>
             </div>

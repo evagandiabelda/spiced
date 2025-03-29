@@ -5,7 +5,7 @@ import OptionItem from '@/components/inputs/OptionItem';
 
 type OptionsProps = {
     tipo: "dropdown" | "checkbox" | "radio";
-    label: string;
+    label?: string;
     name?: string;
     opciones: Array<{ id: string; texto: string }>;
 };
@@ -34,9 +34,9 @@ const Options = ({ tipo, label, name, opciones }: OptionsProps) => {
 
     if (tipo === "dropdown") {
         return (
-            <div className='flex flex-col gap-4'>
-                <label htmlFor={name}>{label}</label>
-                <select id={name} onChange={handleSelectChange} value={opcionSel} className="dark:border-[var(--gris-4)] dark:hover:border-[var(--gris3)] dark:active:border-[var(--brand2)] dark:focus:border-[var(--brand2)]">
+            <div className='w-full flex flex-col gap-4'>
+                {label && <label htmlFor={name}>{label}</label>}
+                <select id={name} onChange={handleSelectChange} value={opcionSel} className="select dark:border-[var(--gris-4)] dark:hover:border-[var(--gris3)] dark:active:border-[var(--brand2)] dark:focus:border-[var(--brand2)]">
                     {opciones.map(opcion => (
                         <OptionItem key={opcion.id} tipo={tipo} id={opcion.id} texto={opcion.texto} />
                     ))}
