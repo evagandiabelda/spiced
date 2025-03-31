@@ -13,6 +13,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/**
+ * --------- 🙂 TABLAS USER (con herencia): ---------
+ */
+
 model User {
   id                 String   @id @default(uuid())
   nombre_completo    String
@@ -24,9 +28,60 @@ model User {
   perfil_privado     Boolean  @default(false)
   created_at         DateTime @default(now())
 
-  // Relación: Un Usuario puede tener varios Shares
-  shares Share[] // Relación uno a muchos
+  // Herencia: Un Usuario puede tener un rol
+  admin    Admin?
+  expert   Expert?
+  standard Standard?
+
+  // Relaciones con Spices y Categorías (M:N)
+  spices_seguidos     UsuarioSpice[]
+  categorias_seguidas UsuarioCategoria[]
+
+  // Relaciones con Shares (publicados y guardados)
+  shares_publicados Share[]
+  shares_guardados  ShareGuardado[]
+
+  // Relación con Comentarios
+  comentarios Comentario[]
+
+  // Relación con Denuncias
+  denuncias_shares      DenunciaShare[]
+  denuncias_comentarios DenunciaComentario[]
 }
+
+model Admin {
+  id String @id @default(uuid()) @map("user_id") // Usa el mismo ID que User
+
+  // Relación: Un Admin es un Usuario (1:1)
+  user User @relation(fields: [id], references: [id], onDelete: Cascade)
+}
+
+model Expert {
+  id                 String   @id @default(uuid()) @map("user_id") // Usa el mismo ID que User
+  num_colegiado      String   @unique
+  anyos_experiencia  Int
+  lista_titulaciones String[]
+
+  // Relación: Un Admin es un Usuario (1:1)
+  user User @relation(fields: [id], references: [id], onDelete: Cascade)
+
+  // Relación: Un Expert puede verificar varios Shares (1:N)
+  shares_verificados Share[]
+}
+
+model Standard {
+  id               String   @id @default(uuid()) @map("user_id") // Usa el mismo ID que User
+  fecha_nacimiento DateTime
+  genero           Genero
+  insignia         Insignia @default(pequeno_saltamontes)
+
+  // Relación: Un Admin es un Usuario (1:1)
+  user User @relation(fields: [id], references: [id], onDelete: Cascade)
+}
+
+/**
+ * --------- 📝 TABLA SHARES: ---------
+ */
 
 model Share {
   id               String   @id @default(uuid())
@@ -36,9 +91,168 @@ model Share {
   img_secundaria   String?
   share_verificado Boolean  @default(false)
   created_at       DateTime @default(now())
-  slug             String?  @unique
+  slug             String?  @unique //Para crear URLs amigables
 
-  // Relación: Cada Share pertenece a un único Usuario
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  // Relación: Muchos Usuarios pueden guardar un Share (M:N)
+  guardados ShareGuardado[]
+
+  // Relaciones con los Usuarios (autor y verificación)
+  autor_id String
+  autor    User   @relation(fields: [autor_id], references: [id], onDelete: Cascade)
+
+  expert_id String?
+  expert    Expert? @relation(fields: [expert_id], references: [id], onDelete: SetNull)
+
+  // Relaciones con Spices y Categorías (M:N)
+  spices     ShareSpice[]
+  categorias ShareCategoria[]
+
+  // Relación con Comentarios (1:N)
+  comentarios Comentario[]
+
+  // Relación con Denuncias (M:N)
+  denuncias DenunciaShare[]
+}
+
+/**
+ * --------- 🔄 TABLAS INTERMEDIAS (M:N): ---------
+ */
+
+model ShareGuardado {
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  share_id String
+  share    Share  @relation(fields: [share_id], references: [id], onDelete: Cascade)
+
+  @@id([user_id, share_id]) // Clave primaria compuesta
+}
+
+model UsuarioSpice {
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id])
+
+  spice_id String
+  spice    Spice  @relation(fields: [spice_id], references: [id])
+
+  @@id([user_id, spice_id]) // Clave primaria compuesta
+}
+
+model ShareSpice {
+  share_id String
+  share    Share  @relation(fields: [share_id], references: [id])
+
+  spice_id String
+  spice    Spice  @relation(fields: [spice_id], references: [id])
+
+  @@id([share_id, spice_id]) // Clave primaria compuesta
+}
+
+model UsuarioCategoria {
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id])
+
+  categoria_id String
+  categoria    Categoria @relation(fields: [categoria_id], references: [id])
+
+  @@id([user_id, categoria_id]) // Clave primaria compuesta
+}
+
+model ShareCategoria {
+  share_id String
+  share    Share  @relation(fields: [share_id], references: [id])
+
+  categoria_id String
+  categoria    Categoria @relation(fields: [categoria_id], references: [id])
+
+  @@id([share_id, categoria_id]) // Clave primaria compuesta
+}
+
+/**
+ * --------- 🌱 TABLAS SPICES Y CATEGORIAS: ---------
+ */
+
+model Spice {
+  id     String @id @default(uuid())
+  nombre String @unique
+
+  usuarios_seguidores UsuarioSpice[]
+  shares_asociados    ShareSpice[]
+}
+
+model Categoria {
+  id     String @id @default(uuid())
+  nombre String @unique
+
+  usuarios_seguidores UsuarioCategoria[]
+  shares_asociados    ShareCategoria[]
+}
+
+/**
+ * --------- 📣 TABLA COMENTARIOS: ---------
+ */
+
+model Comentario {
+  id         String   @id @default(uuid())
+  texto      String
+  created_at DateTime @default(now())
+
+  // Relación con el Usuario
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id])
+
+  // Relación con el Share
+  share_id String
+  share    Share  @relation(fields: [share_id], references: [id])
+
+  // Relación con Denuncias (M:N)
+  denuncias DenunciaComentario[]
+}
+
+/**
+ * --------- 🚨 TABLA DENUNCIAS: ---------
+ */
+
+model DenunciaShare {
+  id         String   @id @default(uuid())
+  motivo     String // Puede ser libre o puedes usar un enum más adelante
+  created_at DateTime @default(now())
+
+  // Usuario que denuncia
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  // Share denunciado
+  share_id String
+  share    Share  @relation(fields: [share_id], references: [id], onDelete: Cascade)
+}
+
+model DenunciaComentario {
+  id         String   @id @default(uuid())
+  motivo     String // Igual que antes, esto puede ser un enum en el futuro
+  created_at DateTime @default(now())
+
+  // Usuario que denuncia
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  // Comentario denunciado
+  comentario_id String
+  comentario    Comentario @relation(fields: [comentario_id], references: [id], onDelete: Cascade)
+}
+
+/**
+ * --------- #️⃣ OTROS: ---------
+ */
+
+enum Genero {
+  Masculino
+  Femenino
+  No_binario
+}
+
+enum Insignia {
+  pequeno_saltamontes
+  cacahuete_sabio
+  cactus_legendario
 }
