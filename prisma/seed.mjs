@@ -22,6 +22,20 @@ async function main() {
     await prisma.standard.deleteMany();
     await prisma.user.deleteMany();
 
+    /* --------- 🌱 CREACIÓN DE LISTA DE SPICES Y CATEGORÍAS: --------- */
+
+    console.log('Creando lista de Spices...');
+    const spices = ['TEA', 'TDAH', 'TOC', 'TLP', 'TAG', 'TP', 'TPA', 'TB', 'TEP', 'TD', 'TE', 'TA', 'ADI', 'FOB', 'OTR'].map(spice =>
+        prisma.spice.create({ data: { nombre: spice } })
+    );
+    await Promise.all(spices);
+
+    console.log('Creando lista de Categorías...');
+    const categories = ['Arte', 'Bienestar', 'Cine', 'Compartir', 'Documentales', 'Educación', 'Gaming', 'Hogar', 'Lectura', 'Recetas'].map(category =>
+        prisma.categoria.create({ data: { nombre: category } })
+    );
+    await Promise.all(categories);
+
     /* --------- 🟢 CREACIÓN DE 1 USUARIO ADMIN: --------- */
 
     console.log('Creando usuario Admin...');
@@ -48,6 +62,11 @@ async function main() {
     for (let i = 0; i < 3; i++) {
         // Primero se crea una contraseña hasheada:
         const hashedPassword = await bcrypt.hash('password123', 10);
+        // Luego obtenemos la lista de spices y categorías creadas:
+        const allSpices = await prisma.spice.findMany();
+        const randomSpices = faker.helpers.arrayElements(allSpices, { min: 1, max: 3 });
+        const allCategories = await prisma.categoria.findMany();
+        const randomCategories = faker.helpers.arrayElements(allCategories, { min: 1, max: 3 });
         // Luego se definen los datos básicos de un usuario genérico:
         const user = await prisma.user.create({
             data: {
@@ -68,6 +87,24 @@ async function main() {
                 lista_titulaciones: [],
             },
         });
+        // Se asocian los spices al usuario:
+        for (const spice of randomSpices) {
+            await prisma.usuarioSpice.create({
+                data: {
+                    user_id: user.id,
+                    spice_id: spice.id
+                }
+            });
+        }
+        // Se asocian las categorías al usuario:
+        for (const category of randomCategories) {
+            await prisma.usuarioCategoria.create({
+                data: {
+                    user_id: user.id,
+                    categoria_id: category.id
+                }
+            });
+        }
         // Finalmente se añade a un array para su posterior uso:
         expertUsers.push(expert);
     }
@@ -79,6 +116,11 @@ async function main() {
     for (let i = 0; i < 6; i++) {
         // Primero se crea una contraseña hasheada:
         const hashedPassword = await bcrypt.hash('password123', 10);
+        // Luego obtenemos la lista de spices y categorías creadas:
+        const allSpices = await prisma.spice.findMany();
+        const randomSpices = faker.helpers.arrayElements(allSpices, { min: 1, max: 3 });
+        const allCategories = await prisma.categoria.findMany();
+        const randomCategories = faker.helpers.arrayElements(allCategories, { min: 1, max: 3 });
         // Luego se definen los datos básicos de un usuario genérico:
         const user = await prisma.user.create({
             data: {
@@ -99,23 +141,27 @@ async function main() {
                 insignia: faker.helpers.arrayElement(['pequeno_saltamontes', 'cacahuete_sabio', 'cactus_legendario'])
             },
         });
+        // Se asocian los spices al usuario:
+        for (const spice of randomSpices) {
+            await prisma.usuarioSpice.create({
+                data: {
+                    user_id: user.id,
+                    spice_id: spice.id
+                }
+            });
+        }
+        // Se asocian las categorías al usuario:
+        for (const category of randomCategories) {
+            await prisma.usuarioCategoria.create({
+                data: {
+                    user_id: user.id,
+                    categoria_id: category.id
+                }
+            });
+        }
         // Finalmente se añade a un array para su posterior uso:
         standardUsers.push(standard);
     }
-
-    /* --------- 🌱 CREACIÓN DE LISTA DE SPICES Y CATEGORÍAS: --------- */
-
-    console.log('Creando lista de Spices...');
-    const spices = ['TEA', 'TDAH', 'TOC', 'TLP', 'TAG', 'TP', 'TPA', 'TB', 'TEP', 'TD', 'TE', 'TA', 'ADI', 'FOB', 'OTR'].map(spice =>
-        prisma.spice.create({ data: { nombre: spice } })
-    );
-    await Promise.all(spices);
-
-    console.log('Creando lista de Categorías...');
-    const categories = ['Arte', 'Bienestar', 'Cine', 'Compartir', 'Documentales', 'Educación', 'Gaming', 'Hogar', 'Lectura', 'Recetas'].map(category =>
-        prisma.categoria.create({ data: { nombre: category } })
-    );
-    await Promise.all(categories);
 
     /* --------- 📝 CREACIÓN DE SHARES: --------- */
 
@@ -135,7 +181,7 @@ async function main() {
             const randomSpices = faker.helpers.arrayElements(allSpices, { min: 1, max: 3 });
             const randomCategory = faker.helpers.arrayElement(allCategories);
             // Se crea el share:
-            await prisma.share.create({
+            let share = await prisma.share.create({
                 data: {
                     titulo,
                     slug,
