@@ -25,10 +25,11 @@ model User {
   password           String
   foto               String
   descripcion_perfil String?
-  perfil_privado     Boolean  @default(false)
+  usuario_verificado Boolean  @default(false) // Determina si es 'expert' o 'standard' (sin necesidad de acceder a las relaciones)
+  is_admin           Boolean  @default(false) // Determina si es 'admin' (sin necesidad de acceder a las relaciones)
   created_at         DateTime @default(now())
 
-  // Herencia: Un Usuario puede tener un rol
+  // Relación de Herencia: Un Usuario puede tener un rol
   admin    Admin?
   expert   Expert?
   standard Standard?

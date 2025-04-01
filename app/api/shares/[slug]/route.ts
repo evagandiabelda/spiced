@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 const prisma = new PrismaClient();
 
-/* OBTENER UN SHARE */
+/* OBTENER UN SHARE ESPECÍFICO */
+
 export async function GET(request: Request) {
     try {
         // Extraer el ID desde la URL
@@ -17,6 +20,41 @@ export async function GET(request: Request) {
 
         const share = await prisma.share.findUnique({
             where: { id: shareId },
+            include: {
+                autor: {
+                    select: {
+                        id: true,
+                        name: true,
+                        foto: true,
+                        usuario_verificado: true,
+                    }
+                },
+                spices: {
+                    include: {
+                        spice: true,
+                    }
+                },
+                categorias: {
+                    include: {
+                        categoria: true,
+                    }
+                },
+                comentarios: {
+                    select: {
+                        id: true,
+                        texto: true,
+                        created_at: true,
+                        user: {
+                            select: {
+                                id: true,
+                                name: true,
+                                foto: true,
+                                usuario_verificado: true,
+                            }
+                        }
+                    }
+                }
+            }
         });
 
         if (!share) {
@@ -30,8 +68,16 @@ export async function GET(request: Request) {
     }
 }
 
-/* MODIFICAR UN SHARE */
+/* MODIFICAR UN SHARE ESPECÍFICO */
+
 export async function PUT(request: Request) {
+
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.name) {
+        return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+    }
+
     try {
         // Extraer el ID desde la URL
         const url = new URL(request.url);
@@ -42,16 +88,29 @@ export async function PUT(request: Request) {
             return NextResponse.json({ error: "ID del share es obligatorio" }, { status: 400 });
         }
 
-        const body = await request.json();
-        const { titulo, texto, img_principal, img_secundaria } = body;
+        // Obtener el Share en base al ID
+        const share = await prisma.share.findUnique({
+            where: { id: shareId },
+            select: { autor_id: true }, // Solo seleccionamos el autor_id para la verificación
+        });
 
-        if (!titulo || !texto) {
-            return NextResponse.json({ error: "Título y texto son obligatorios" }, { status: 400 });
+        if (!share) {
+            return NextResponse.json({ error: "Share no encontrado" }, { status: 404 });
         }
 
+        // Verificar que el share pertenece al usuario autenticado
+        if (share.autor_id !== session.user.id) {
+            return NextResponse.json({ error: "No tienes permisos para modificar este share" }, { status: 403 });
+        }
+
+        // Recoger los datos de la query
+        const body = await request.json();
+        const { titulo, texto, img_principal, img_secundaria, spices, categorias } = body;
+
+        // Actualizar el Share
         const updatedShare = await prisma.share.update({
             where: { id: shareId },
-            data: { titulo, texto, img_principal, img_secundaria },
+            data: { titulo, texto, img_principal, img_secundaria, spices, categorias }, // 🔴 No tengo claro si el array de 'spices' y 'categorías' llegará aquí con el formato adecuado.
         });
 
         return NextResponse.json({ message: "Share actualizado correctamente", share: updatedShare }, { status: 200 });
@@ -61,8 +120,15 @@ export async function PUT(request: Request) {
     }
 }
 
-/* ELIMINAR UN SHARE */
+/* ELIMINAR UN SHARE ESPECÍFICO */
 export async function DELETE(request: Request) {
+
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.name) {
+        return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+    }
+
     try {
         // Extraer el ID desde la URL
         const url = new URL(request.url);
@@ -71,6 +137,21 @@ export async function DELETE(request: Request) {
 
         if (!shareId) {
             return NextResponse.json({ error: "Falta el parámetro 'id'" }, { status: 400 });
+        }
+
+        // Obtener el Share en base al ID
+        const share = await prisma.share.findUnique({
+            where: { id: shareId },
+            select: { autor_id: true }, // Solo seleccionamos el autor_id para la verificación
+        });
+
+        if (!share) {
+            return NextResponse.json({ error: "Share no encontrado" }, { status: 404 });
+        }
+
+        // Verificar que el share pertenece al usuario autenticado
+        if (share.autor_id !== session.user.id) {
+            return NextResponse.json({ error: "No tienes permisos para eliminar este share" }, { status: 403 });
         }
 
         await prisma.share.delete({ where: { id: shareId } });

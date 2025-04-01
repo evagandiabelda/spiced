@@ -13,7 +13,8 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "foto" TEXT NOT NULL,
     "descripcion_perfil" TEXT,
-    "perfil_privado" BOOLEAN NOT NULL DEFAULT false,
+    "usuario_verificado" BOOLEAN NOT NULL DEFAULT false,
+    "is_admin" BOOLEAN NOT NULL DEFAULT false,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
@@ -60,46 +61,6 @@ CREATE TABLE "Share" (
     "expert_id" TEXT,
 
     CONSTRAINT "Share_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "ShareGuardado" (
-    "user_id" TEXT NOT NULL,
-    "share_id" TEXT NOT NULL,
-
-    CONSTRAINT "ShareGuardado_pkey" PRIMARY KEY ("user_id","share_id")
-);
-
--- CreateTable
-CREATE TABLE "UsuarioSpice" (
-    "user_id" TEXT NOT NULL,
-    "spice_id" TEXT NOT NULL,
-
-    CONSTRAINT "UsuarioSpice_pkey" PRIMARY KEY ("user_id","spice_id")
-);
-
--- CreateTable
-CREATE TABLE "ShareSpice" (
-    "share_id" TEXT NOT NULL,
-    "spice_id" TEXT NOT NULL,
-
-    CONSTRAINT "ShareSpice_pkey" PRIMARY KEY ("share_id","spice_id")
-);
-
--- CreateTable
-CREATE TABLE "UsuarioCategoria" (
-    "user_id" TEXT NOT NULL,
-    "categoria_id" TEXT NOT NULL,
-
-    CONSTRAINT "UsuarioCategoria_pkey" PRIMARY KEY ("user_id","categoria_id")
-);
-
--- CreateTable
-CREATE TABLE "ShareCategoria" (
-    "share_id" TEXT NOT NULL,
-    "categoria_id" TEXT NOT NULL,
-
-    CONSTRAINT "ShareCategoria_pkey" PRIMARY KEY ("share_id","categoria_id")
 );
 
 -- CreateTable
@@ -151,6 +112,46 @@ CREATE TABLE "DenunciaComentario" (
     CONSTRAINT "DenunciaComentario_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "ShareGuardado" (
+    "user_id" TEXT NOT NULL,
+    "share_id" TEXT NOT NULL,
+
+    CONSTRAINT "ShareGuardado_pkey" PRIMARY KEY ("user_id","share_id")
+);
+
+-- CreateTable
+CREATE TABLE "UsuarioSpice" (
+    "user_id" TEXT NOT NULL,
+    "spice_id" TEXT NOT NULL,
+
+    CONSTRAINT "UsuarioSpice_pkey" PRIMARY KEY ("user_id","spice_id")
+);
+
+-- CreateTable
+CREATE TABLE "ShareSpice" (
+    "share_id" TEXT NOT NULL,
+    "spice_id" TEXT NOT NULL,
+
+    CONSTRAINT "ShareSpice_pkey" PRIMARY KEY ("share_id","spice_id")
+);
+
+-- CreateTable
+CREATE TABLE "UsuarioCategoria" (
+    "user_id" TEXT NOT NULL,
+    "categoria_id" TEXT NOT NULL,
+
+    CONSTRAINT "UsuarioCategoria_pkey" PRIMARY KEY ("user_id","categoria_id")
+);
+
+-- CreateTable
+CREATE TABLE "ShareCategoria" (
+    "share_id" TEXT NOT NULL,
+    "categoria_id" TEXT NOT NULL,
+
+    CONSTRAINT "ShareCategoria_pkey" PRIMARY KEY ("share_id","categoria_id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_name_key" ON "User"("name");
 
@@ -185,6 +186,24 @@ ALTER TABLE "Share" ADD CONSTRAINT "Share_autor_id_fkey" FOREIGN KEY ("autor_id"
 ALTER TABLE "Share" ADD CONSTRAINT "Share_expert_id_fkey" FOREIGN KEY ("expert_id") REFERENCES "Expert"("user_id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Comentario" ADD CONSTRAINT "Comentario_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Comentario" ADD CONSTRAINT "Comentario_share_id_fkey" FOREIGN KEY ("share_id") REFERENCES "Share"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "DenunciaShare" ADD CONSTRAINT "DenunciaShare_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "DenunciaShare" ADD CONSTRAINT "DenunciaShare_share_id_fkey" FOREIGN KEY ("share_id") REFERENCES "Share"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "DenunciaComentario" ADD CONSTRAINT "DenunciaComentario_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "DenunciaComentario" ADD CONSTRAINT "DenunciaComentario_comentario_id_fkey" FOREIGN KEY ("comentario_id") REFERENCES "Comentario"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "ShareGuardado" ADD CONSTRAINT "ShareGuardado_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -213,21 +232,3 @@ ALTER TABLE "ShareCategoria" ADD CONSTRAINT "ShareCategoria_share_id_fkey" FOREI
 
 -- AddForeignKey
 ALTER TABLE "ShareCategoria" ADD CONSTRAINT "ShareCategoria_categoria_id_fkey" FOREIGN KEY ("categoria_id") REFERENCES "Categoria"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Comentario" ADD CONSTRAINT "Comentario_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Comentario" ADD CONSTRAINT "Comentario_share_id_fkey" FOREIGN KEY ("share_id") REFERENCES "Share"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "DenunciaShare" ADD CONSTRAINT "DenunciaShare_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "DenunciaShare" ADD CONSTRAINT "DenunciaShare_share_id_fkey" FOREIGN KEY ("share_id") REFERENCES "Share"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "DenunciaComentario" ADD CONSTRAINT "DenunciaComentario_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "DenunciaComentario" ADD CONSTRAINT "DenunciaComentario_comentario_id_fkey" FOREIGN KEY ("comentario_id") REFERENCES "Comentario"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -49,7 +49,7 @@ async function main() {
             email: 'admin@example.com',
             password: hashedPassword,
             foto: "/iconos/iconos-registro/avatar-admin.svg",
-            perfil_privado: true,
+            is_admin: true,
         }
     });
     // Luego se crea un usuario 'admin' a partir del usuario genérico:
@@ -76,6 +76,7 @@ async function main() {
                 password: hashedPassword,
                 foto: faker.image.avatar(),
                 descripcion_perfil: faker.lorem.sentences(2),
+                usuario_verificado: true,
             },
         });
         // Luego se crea un usuario 'expert' a partir del usuario genérico:

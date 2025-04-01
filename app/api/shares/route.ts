@@ -22,9 +22,24 @@ export async function GET(request: Request) {
         }
         : undefined, // Si no hay query, no aplica filtro
       include: {
-        user: {
-          select: { name: true, foto: true }, // Solo traemos el nombre y la foto
+        autor: {
+          select: {
+            id: true,
+            name: true,
+            foto: true,
+            usuario_verificado: true
+          },
         },
+        spices: {
+          include: {
+            spice: true,
+          }
+        },
+        categorias: {
+          include: {
+            categoria: true,
+          }
+        }
       },
       orderBy: { created_at: "desc" },
     });
@@ -38,18 +53,31 @@ export async function GET(request: Request) {
 
 /* CREAR UN SHARE */
 export async function POST(req: Request) {
+
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user?.name) {
+    return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+  }
+
   try {
     // Obtener los datos enviados en la petición
     const body = await req.json();
-    const { titulo, texto, imgPrincipal, imgSecundaria } = body;
+    const { titulo, texto, imgPrincipal, imgSecundaria, spices, categorias } = body;
 
-    // Obtener sesión del usuario
-    const session = await getServerSession(authOptions);
-    if (!session || !session.user) {
-      return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+    // Validar que no falten datos
+    if (!titulo || !texto || !imgPrincipal || !spices || !categorias) {
+      return NextResponse.json({ error: "Por favor, rellena los campos obligatorios" }, { status: 400 });
     }
 
-    const slug = generateSlug(titulo); // Generamos un slug.
+    // Generamos un slug.
+    const slug = generateSlug(titulo);
+
+    // Si el usuario está verificado ('expert'), se verifica automáticamente el Share:
+    let shareVerificado = false;
+    if (session.user.usuario_verificado) {
+      shareVerificado = true;
+    }
 
     // Insertar el nuevo Share en la base de datos
     const nuevoShare = await prisma.share.create({
@@ -58,8 +86,11 @@ export async function POST(req: Request) {
         texto,
         img_principal: imgPrincipal,
         img_secundaria: imgSecundaria || null,
+        share_verificado: shareVerificado,
+        spices: spices,
+        categorias: categorias,
         slug,
-        userId: session.user.id, // Asignamos el Share al usuario autenticado
+        autor_id: session.user.id, // Asignamos el Share al usuario autenticado
       },
     });
 

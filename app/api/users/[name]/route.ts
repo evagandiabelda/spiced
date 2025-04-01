@@ -1,48 +1,74 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options"; // Ajusta la ruta si es necesario
-import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
-/* LISTAR TODOS LOS SHARES DEL USUARIO */
-export async function GET() {
+/* OBTENER TODA LA INFO (pública) DE UN USUARIO ESPECÍFICO */
+// Por ejemplo, para construir el perfil público de usuario.
+
+export async function GET(req: Request, { params }: { params: { name: string } }) {
     try {
-        // Obtener la sesión del usuario autenticado
-        const session = await getServerSession(authOptions);
-
-        if (!session || !session.user || !session.user.name) {
-            return NextResponse.json({ error: "No autenticado" }, { status: 401 });
-        }
-
-        // Usar el nombre del usuario en sesión en lugar de los params
-        const name = session.user.name;
+        // Obtener el nombre de usuario desde la URL
+        const { name } = params;
 
         // Buscar el usuario en la base de datos
         const user = await prisma.user.findUnique({
             where: { name },
-            select: { id: true },
+            select: {
+                // Obtener solamente los datos públicos
+                id: true,
+                nombre_completo: true,
+                name: true,
+                foto: true,
+                descripcion_perfil: true,
+                usuario_verificado: true,
+                spices_seguidos: true,
+                shares_publicados: {
+                    include: {
+                        autor: {
+                            select: {
+                                id: true,
+                                name: true,
+                                foto: true,
+                                usuario_verificado: true,
+                            }
+                        },
+                        comentarios: {
+                            include: {
+                                user: {
+                                    select: {
+                                        id: true,
+                                        name: true,
+                                        foto: true,
+                                        usuario_verificado: true,
+                                    }
+                                }
+                            }
+                        },
+                        spices: {
+                            include: {
+                                spice: true,
+                            }
+                        },
+                        categorias: {
+                            include: {
+                                categoria: true,
+                            }
+                        }
+                    }
+                },
+            }
         });
 
         if (!user) {
             return NextResponse.json({ error: "Usuario no encontrado" }, { status: 404 });
         }
 
-        // Buscar los shares del usuario
-        const shares = await prisma.share.findMany({
-            where: { userId: user.id },
-            include: {
-                user: { select: { id: true, name: true } },
-            },
-            orderBy: { created_at: "desc" },
-        });
-
-        return NextResponse.json(shares, { status: 200 });
+        return NextResponse.json(user, { status: 200 });
 
     } catch (error) {
         console.error("Error en la API:", error);
-        return NextResponse.json({ error: "Error obteniendo los shares" }, { status: 500 });
+        return NextResponse.json({ error: "Error obteniendo la información del usuario" }, { status: 500 });
     }
 }
 
