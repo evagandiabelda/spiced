@@ -115,6 +115,79 @@ model Share {
 }
 
 /**
+ * --------- 🌱 TABLAS SPICES Y CATEGORIAS: ---------
+ */
+
+model Spice {
+  id     String @id @default(uuid())
+  nombre String @unique
+
+  usuarios_seguidores UsuarioSpice[]
+  shares_asociados    ShareSpice[]
+}
+
+model Categoria {
+  id     String @id @default(uuid())
+  nombre String @unique
+
+  usuarios_seguidores UsuarioCategoria[]
+  shares_asociados    ShareCategoria[]
+}
+
+/**
+ * --------- 📣 TABLA COMENTARIOS: ---------
+ */
+
+model Comentario {
+  id         String   @id @default(uuid())
+  texto      String
+  created_at DateTime @default(now())
+
+  // Relación con el Usuario
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id])
+
+  // Relación con el Share
+  share_id String
+  share    Share  @relation(fields: [share_id], references: [id])
+
+  // Relación con Denuncias (M:N)
+  denuncias DenunciaComentario[]
+}
+
+/**
+ * --------- 🚨 TABLAS DENUNCIAS: ---------
+ */
+
+model DenunciaShare {
+  id         String   @id @default(uuid())
+  motivo     String // Puede ser libre o puedes usar un enum más adelante
+  created_at DateTime @default(now())
+
+  // Usuario que denuncia
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  // Share denunciado
+  share_id String
+  share    Share  @relation(fields: [share_id], references: [id], onDelete: Cascade)
+}
+
+model DenunciaComentario {
+  id         String   @id @default(uuid())
+  motivo     String // Igual que antes, esto puede ser un enum en el futuro
+  created_at DateTime @default(now())
+
+  // Usuario que denuncia
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  // Comentario denunciado
+  comentario_id String
+  comentario    Comentario @relation(fields: [comentario_id], references: [id], onDelete: Cascade)
+}
+
+/**
  * --------- 🔄 TABLAS INTERMEDIAS (M:N): ---------
  */
 
@@ -166,79 +239,6 @@ model ShareCategoria {
   categoria    Categoria @relation(fields: [categoria_id], references: [id])
 
   @@id([share_id, categoria_id]) // Clave primaria compuesta
-}
-
-/**
- * --------- 🌱 TABLAS SPICES Y CATEGORIAS: ---------
- */
-
-model Spice {
-  id     String @id @default(uuid())
-  nombre String @unique
-
-  usuarios_seguidores UsuarioSpice[]
-  shares_asociados    ShareSpice[]
-}
-
-model Categoria {
-  id     String @id @default(uuid())
-  nombre String @unique
-
-  usuarios_seguidores UsuarioCategoria[]
-  shares_asociados    ShareCategoria[]
-}
-
-/**
- * --------- 📣 TABLA COMENTARIOS: ---------
- */
-
-model Comentario {
-  id         String   @id @default(uuid())
-  texto      String
-  created_at DateTime @default(now())
-
-  // Relación con el Usuario
-  user_id String
-  user    User   @relation(fields: [user_id], references: [id])
-
-  // Relación con el Share
-  share_id String
-  share    Share  @relation(fields: [share_id], references: [id])
-
-  // Relación con Denuncias (M:N)
-  denuncias DenunciaComentario[]
-}
-
-/**
- * --------- 🚨 TABLA DENUNCIAS: ---------
- */
-
-model DenunciaShare {
-  id         String   @id @default(uuid())
-  motivo     String // Puede ser libre o puedes usar un enum más adelante
-  created_at DateTime @default(now())
-
-  // Usuario que denuncia
-  user_id String
-  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
-  // Share denunciado
-  share_id String
-  share    Share  @relation(fields: [share_id], references: [id], onDelete: Cascade)
-}
-
-model DenunciaComentario {
-  id         String   @id @default(uuid())
-  motivo     String // Igual que antes, esto puede ser un enum en el futuro
-  created_at DateTime @default(now())
-
-  // Usuario que denuncia
-  user_id String
-  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
-  // Comentario denunciado
-  comentario_id String
-  comentario    Comentario @relation(fields: [comentario_id], references: [id], onDelete: Cascade)
 }
 
 /**

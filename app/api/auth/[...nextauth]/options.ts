@@ -26,6 +26,8 @@ export const authOptions: NextAuthOptions = {
                     throw new Error("Credenciales incorrectas");
                 }
 
+                /* DATOS DEL USUARIO QUE DEVUELVE PARA SER USADOS EN EL PANEL: */
+
                 return {
                     id: user.id,
                     email: user.email,
