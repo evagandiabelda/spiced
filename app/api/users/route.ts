@@ -16,14 +16,15 @@ export async function GET() {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.is_admin) {
-    return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+    return NextResponse.json({ error: "Usuario no autorizado." }, { status: 401 });
   }
 
   try {
     const users = await prisma.user.findMany();
-    return NextResponse.json({ message: "Usuarios recuperados correctamente", users }, { status: 200 });
+    return NextResponse.json({ users }, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ message: "Error recuperando los usuarios", error: error }, { status: 500 });
+    console.error("Error al obtener los usuarios.", error);
+    return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });
   }
 }
 
@@ -45,7 +46,7 @@ export async function POST(request: Request) {
 
     // Validar que no falten datos
     if (!nombre_completo || !name || !email || !password || !fecha_nacimiento || !genero) {
-      return NextResponse.json({ error: "Todos los campos son obligatorios" }, { status: 400 });
+      return NextResponse.json({ error: "Todos los campos son obligatorios." }, { status: 400 });
     }
 
     // Verificar si el email ya está en uso
@@ -54,7 +55,7 @@ export async function POST(request: Request) {
     });
 
     if (existingUser) {
-      return NextResponse.json({ error: "El email ya está registrado" }, { status: 400 });
+      return NextResponse.json({ error: "Este email ya está registrado." }, { status: 400 });
     }
 
     // Hashear la contraseña antes de guardarla
@@ -81,8 +82,9 @@ export async function POST(request: Request) {
       }
     });
 
-    return NextResponse.json({ message: "Usuario registrado correctamente", user: newStandardUser }, { status: 201 });
+    return NextResponse.json({ message: "Usuario registrado correctamente.", user: newStandardUser }, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ message: "Error registrando el usuario", error: error }, { status: 500 });
+    console.error("Error al crear el usuario.", error);
+    return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });
   }
 }

@@ -15,7 +15,7 @@ export async function GET(request: Request) {
         const shareId = segments[segments.length - 1];
 
         if (!shareId) {
-            return NextResponse.json({ error: "Falta el ID del share" }, { status: 400 });
+            return NextResponse.json({ error: "Falta el ID del share." }, { status: 400 });
         }
 
         const share = await prisma.share.findUnique({
@@ -58,24 +58,24 @@ export async function GET(request: Request) {
         });
 
         if (!share) {
-            return NextResponse.json({ error: "Share no encontrado" }, { status: 404 });
+            return NextResponse.json({ error: "Share no encontrado." }, { status: 404 });
         }
 
         return NextResponse.json({ share }, { status: 200 });
     } catch (error) {
-        console.error("Error obteniendo el share:", error);
-        return NextResponse.json({ error: "Error obteniendo el share" }, { status: 500 });
+        console.error("Error obteniendo el share.", error);
+        return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });
     }
 }
 
 /* MODIFICAR UN SHARE ESPECÍFICO */
 
-export async function PUT(request: Request) {
+export async function PATCH(request: Request) {
 
     const session = await getServerSession(authOptions);
 
     if (!session?.user?.name) {
-        return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+        return NextResponse.json({ error: "Usuario no autenticado." }, { status: 401 });
     }
 
     try {
@@ -85,7 +85,7 @@ export async function PUT(request: Request) {
         const shareId = segments[segments.length - 1]; // Último segmento es el ID
 
         if (!shareId) {
-            return NextResponse.json({ error: "ID del share es obligatorio" }, { status: 400 });
+            return NextResponse.json({ error: "Falta el ID del share." }, { status: 400 });
         }
 
         // Obtener el Share en base al ID
@@ -95,12 +95,12 @@ export async function PUT(request: Request) {
         });
 
         if (!share) {
-            return NextResponse.json({ error: "Share no encontrado" }, { status: 404 });
+            return NextResponse.json({ error: "Share no encontrado." }, { status: 404 });
         }
 
         // Verificar que el share pertenece al usuario autenticado
         if (share.autor_id !== session.user.id) {
-            return NextResponse.json({ error: "No tienes permisos para modificar este share" }, { status: 403 });
+            return NextResponse.json({ error: "No tienes permisos para modificar este share." }, { status: 403 });
         }
 
         // Recoger los datos de la query
@@ -113,10 +113,10 @@ export async function PUT(request: Request) {
             data: { titulo, texto, img_principal, img_secundaria, spices, categorias }, // 🔴 No tengo claro si el array de 'spices' y 'categorías' llegará aquí con el formato adecuado.
         });
 
-        return NextResponse.json({ message: "Share actualizado correctamente", share: updatedShare }, { status: 200 });
+        return NextResponse.json({ message: "Share actualizado correctamente.", share: updatedShare }, { status: 200 });
     } catch (error) {
-        console.error("Error actualizando el share:", error);
-        return NextResponse.json({ error: "Error actualizando el share" }, { status: 500 });
+        console.error("Error actualizando el share.", error);
+        return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });
     }
 }
 
@@ -126,7 +126,7 @@ export async function DELETE(request: Request) {
     const session = await getServerSession(authOptions);
 
     if (!session?.user?.name) {
-        return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+        return NextResponse.json({ error: "Usuario no autenticado." }, { status: 401 });
     }
 
     try {
@@ -136,7 +136,7 @@ export async function DELETE(request: Request) {
         const shareId = segments[segments.length - 1];
 
         if (!shareId) {
-            return NextResponse.json({ error: "Falta el parámetro 'id'" }, { status: 400 });
+            return NextResponse.json({ error: "Falta el ID del share." }, { status: 400 });
         }
 
         // Obtener el Share en base al ID
@@ -146,19 +146,19 @@ export async function DELETE(request: Request) {
         });
 
         if (!share) {
-            return NextResponse.json({ error: "Share no encontrado" }, { status: 404 });
+            return NextResponse.json({ error: "Share no encontrado." }, { status: 404 });
         }
 
         // Verificar que el share pertenece al usuario autenticado
         if (share.autor_id !== session.user.id) {
-            return NextResponse.json({ error: "No tienes permisos para eliminar este share" }, { status: 403 });
+            return NextResponse.json({ error: "No tienes permisos para eliminar este share." }, { status: 403 });
         }
 
         await prisma.share.delete({ where: { id: shareId } });
 
-        return NextResponse.json({ message: "Share eliminado correctamente" }, { status: 200 });
+        return NextResponse.json({ message: "Share eliminado correctamente." }, { status: 200 });
     } catch (error) {
-        console.error("Error eliminando el share:", error);
-        return NextResponse.json({ error: "No se ha podido eliminar el share" }, { status: 500 });
+        console.error("Error eliminando el share.", error);
+        return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });
     }
 }

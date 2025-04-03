@@ -46,8 +46,8 @@ export async function GET(request: Request) {
 
     return NextResponse.json({ shares }, { status: 200 });
   } catch (error) {
-    console.error("Error obteniendo los shares:", error);
-    return NextResponse.json({ error: "No se pudieron obtener los shares" }, { status: 500 });
+    console.error("Error obteniendo los shares.", error);
+    return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });
   }
 }
 
@@ -57,7 +57,7 @@ export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.name) {
-    return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+    return NextResponse.json({ error: "Usuario no autenticado." }, { status: 401 });
   }
 
   try {
@@ -67,7 +67,7 @@ export async function POST(req: Request) {
 
     // Validar que no falten datos
     if (!titulo || !texto || !imgPrincipal || !spices || !categorias) {
-      return NextResponse.json({ error: "Por favor, rellena los campos obligatorios" }, { status: 400 });
+      return NextResponse.json({ error: "Por favor, rellena los campos obligatorios." }, { status: 400 });
     }
 
     // Generamos un slug.
@@ -94,10 +94,10 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json(nuevoShare, { status: 201 });
+    return NextResponse.json({ message: "Share publicado correctamente.", user: nuevoShare }, { status: 201 });
   } catch (error) {
-    console.error("Error al crear el Share:", error);
-    return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 });
+    console.error("Error al crear el Share.", error);
+    return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });
   }
 }
 

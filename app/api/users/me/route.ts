@@ -13,7 +13,7 @@ export async function GET() {
     const session = await getServerSession(authOptions);
 
     if (!session?.user?.name) {
-        return NextResponse.json({ error: "No autenticado" }, { status: 401 });
+        return NextResponse.json({ error: "Usuario no autenticado." }, { status: 401 });
     }
 
     try {
@@ -50,7 +50,7 @@ export async function GET() {
         });
 
         if (!user) {
-            return NextResponse.json({ error: "Usuario no encontrado" }, { status: 404 });
+            return NextResponse.json({ error: "Usuario no encontrado." }, { status: 404 });
         }
 
         // Determinar el tipo de usuario (Aquí se puede hacer de forma sencilla sin necesidad de utilizar 'is_admin' o 'usuario_verificado' para determinar el rol).
@@ -69,11 +69,11 @@ export async function GET() {
             shares_publicados: user.shares_publicados,
             shares_guardados: user.shares_guardados,
             comentarios: user.comentarios,
-        });
+        }, { status: 200 });
 
     } catch (error) {
-        console.error("Error al obtener la información del usuario:", error);
-        return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 });
+        console.error("Error al obtener la información del usuario.", error);
+        return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });
     }
 }
 
@@ -84,7 +84,7 @@ export async function PATCH(req: Request) {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.user?.id) {
-        return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+        return NextResponse.json({ error: "Usuario no autorizado." }, { status: 401 });
     }
 
     try {
@@ -105,10 +105,10 @@ export async function PATCH(req: Request) {
             data: updateData, // Solo se enviarán los campos que tengan un valor definido
         });
 
-        return NextResponse.json(updatedUser);
+        return NextResponse.json({ message: "Usuario actualizado correctamente.", user: updatedUser }, { status: 200 });
     } catch (error) {
-        console.error("Error actualizando usuario:", error);
-        return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 });
+        console.error("Error actualizando usuario.", error);
+        return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });
     }
 }
 
@@ -119,7 +119,7 @@ export async function DELETE(request: Request) {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.user?.id) {
-        return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+        return NextResponse.json({ error: "Usuario no autorizado." }, { status: 401 });
     }
 
     try {
@@ -127,15 +127,16 @@ export async function DELETE(request: Request) {
         const userId = url.searchParams.get("id");
 
         if (!userId) {
-            return NextResponse.json({ error: "Missing 'userId' parameter" }, { status: 400 });
+            return NextResponse.json({ error: "Falta el ID del usuario." }, { status: 400 });
         }
 
         await prisma.user.delete({
             where: { id: userId },
         });
 
-        return NextResponse.json({ message: "Usuario eliminado correctamente" }, { status: 200 });
+        return NextResponse.json({ message: "Usuario eliminado correctamente." }, { status: 200 });
     } catch (error) {
-        return NextResponse.json({ message: "No se ha podido eliminar el usuario", error: error }, { status: 500 });
+        console.error("Error actualizando usuario.", error);
+        return NextResponse.json({ message: "Error interno del servidor.", error: error }, { status: 500 });
     }
 }
