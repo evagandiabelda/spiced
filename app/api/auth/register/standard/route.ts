@@ -3,10 +3,7 @@ import { hash } from "bcryptjs";
 import { NextResponse } from "next/server";
 import { obtenerAvatarAleatorio } from "@/lib/avatars";
 
-/* 
---------- REGISTRO DE USUARIO ESTÁNDAR (desde la web) ---------
-Para el registro de usuarios desde el panel de Admin, se usa "app/api/users/route.ts/POST".
-*/
+/*  --------- REGISTRO DE USUARIO ESTÁNDAR --------- */
 
 export async function POST(req: Request) {
     try {
@@ -14,7 +11,7 @@ export async function POST(req: Request) {
 
         // Validar que no falten datos
         if (!nombre_completo || !name || !email || !password || !fecha_nacimiento || !genero) {
-            return NextResponse.json({ error: "Todos los campos son obligatorios" }, { status: 400 });
+            return NextResponse.json({ error: "Por favor, rellena los campos son obligatorios." }, { status: 400 });
         }
 
         // Verificar si el email ya está en uso
@@ -23,7 +20,7 @@ export async function POST(req: Request) {
         });
 
         if (existingUser) {
-            return NextResponse.json({ error: "El email ya está registrado" }, { status: 400 });
+            return NextResponse.json({ error: "Este email ya está registrado." }, { status: 400 });
         }
 
         // Hashear la contraseña
@@ -50,9 +47,9 @@ export async function POST(req: Request) {
             }
         });
 
-        return NextResponse.json({ message: "Usuario registrado con éxito", user: newStandardUser }, { status: 201 });
+        return NextResponse.json({ message: "Usuario registrado con éxito.", user: newStandardUser }, { status: 201 });
     } catch (error) {
-        console.error("Error en el registro de usuario:", error);
-        return NextResponse.json({ error: "Error en el servidor. Inténtelo más tarde." }, { status: 500 });
+        console.error("Error en el registro de usuario.", error);
+        return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 });
     }
 }
