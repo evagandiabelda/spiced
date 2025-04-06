@@ -97,12 +97,9 @@ model Share {
   // Relación: Muchos Usuarios pueden guardar un Share (M:N)
   guardados ShareGuardado[]
 
-  // Relaciones con los Usuarios (autor y verificación)
+  // Relación con Usuarios (1:N)
   autor_id String
   autor    User   @relation(fields: [autor_id], references: [id], onDelete: Cascade)
-
-  expert_id String?
-  expert    Expert? @relation(fields: [expert_id], references: [id], onDelete: SetNull)
 
   // Relaciones con Spices y Categorías (M:N)
   spices     ShareSpice[]
@@ -113,6 +110,8 @@ model Share {
 
   // Relación con Denuncias (M:N)
   denuncias DenunciaShare[]
+  Expert    Expert?         @relation(fields: [expertId], references: [id])
+  expertId  String?
 }
 
 /**

@@ -58,7 +58,7 @@ CREATE TABLE "Share" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "slug" TEXT,
     "autor_id" TEXT NOT NULL,
-    "expert_id" TEXT,
+    "expertId" TEXT,
 
     CONSTRAINT "Share_pkey" PRIMARY KEY ("id")
 );
@@ -183,7 +183,7 @@ ALTER TABLE "Standard" ADD CONSTRAINT "Standard_user_id_fkey" FOREIGN KEY ("user
 ALTER TABLE "Share" ADD CONSTRAINT "Share_autor_id_fkey" FOREIGN KEY ("autor_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Share" ADD CONSTRAINT "Share_expert_id_fkey" FOREIGN KEY ("expert_id") REFERENCES "Expert"("user_id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Share" ADD CONSTRAINT "Share_expertId_fkey" FOREIGN KEY ("expertId") REFERENCES "Expert"("user_id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Comentario" ADD CONSTRAINT "Comentario_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

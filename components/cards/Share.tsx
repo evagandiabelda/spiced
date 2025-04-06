@@ -6,12 +6,14 @@ interface ShareProps {
     imagen: string;
     user: string | null;
     foto: string;
+    categorias: string[];
+    spices: string[];
     titulo: string;
     extracto: string;
     onClick: () => void;
 }
 
-export default function Share({ imagen, user = "Usuario desconocido", foto, titulo, extracto, onClick }: ShareProps) {
+export default function Share({ imagen, user, foto, categorias, spices, titulo, extracto, onClick }: ShareProps) {
 
     return (
         <div onClick={onClick} className="min-w-col2 max-w-col3 min-h-[600px] flex flex-col rounded-[1.2rem] p-[20px] bg-white dark:bg-[var(--gris4)] dark:border-2 dark:border-[var(--gris3)] hover:scale-[1.01] transition ease cursor-pointer">
@@ -20,6 +22,7 @@ export default function Share({ imagen, user = "Usuario desconocido", foto, titu
                     src={imagen}
                     alt="miniatura"
                     fill
+                    sizes="100%"
                     className="object-cover"
                 />
             </div>
@@ -31,6 +34,7 @@ export default function Share({ imagen, user = "Usuario desconocido", foto, titu
                             src={foto}
                             alt="miniatura"
                             fill
+                            sizes="100%"
                             className="object-cover"
                         />
                     </div>

@@ -33,16 +33,17 @@ export async function GET(request: Request) {
         spices: {
           include: {
             spice: true,
-          }
+          },
         },
         categorias: {
           include: {
             categoria: true,
-          }
-        }
+          },
+        },
       },
-      orderBy: { created_at: "desc" },
     });
+
+    const shuffledShares = shuffleArray(shares); // Para reordenar los shares en orden aleatorio.
 
     return NextResponse.json({ shares }, { status: 200 });
   } catch (error) {
@@ -101,3 +102,8 @@ export async function POST(req: Request) {
   }
 }
 
+/* Función para reordenar los Shares en orden Aleatorio: */
+
+function shuffleArray<T>(array: T[]): T[] {
+  return array.sort(() => Math.random() - 0.5);
+}

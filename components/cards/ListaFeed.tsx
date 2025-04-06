@@ -8,9 +8,20 @@ import ShareSkeleton from "@/components/cards/ShareSkeleton";
 interface ShareData {
     id: string;
     img_principal: string;
-    user: {
+    categorias: {
+        categoria: {
+            nombre: string;
+        };
+    }[];
+    spices: {
+        spice: {
+            nombre: string;
+        };
+    }[];
+    autor: {
         name: string;
         foto: string;
+        usuario_verificado: boolean;
     } | null;
     titulo: string;
     texto: string;
@@ -79,8 +90,10 @@ export default function ListaFeed() {
                     <Share
                         key={share.id}
                         imagen={share.img_principal || "/imgs/IMG-Ejemplo-Miniatura.png"}
-                        user={share.user?.name || "anónimo"}
-                        foto={share.user?.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
+                        user={share.autor?.name || "anónimo"}
+                        foto={share.autor?.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
+                        categorias={share.categorias.map(c => c.categoria.nombre)}
+                        spices={share.spices.map(s => s.spice.nombre)}
                         titulo={share.titulo}
                         extracto={getExcerpt(share.texto)}
                         onClick={() => router.push(`/share/${share.slug}`)}
