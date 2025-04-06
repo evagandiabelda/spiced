@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Masonry from "react-masonry-css";
 import Share from "@/components/cards/Share";
 import ShareSkeleton from "@/components/cards/ShareSkeleton";
 
@@ -80,7 +81,16 @@ export default function ListaFeed() {
         );
 
     return (
-        <div className="w-full flex flex-wrap justify-center gap-8">
+        <Masonry
+            breakpointCols={{
+                default: 4, // 4 columnas en pantallas grandes
+                1024: 3, // 3 columnas en tablets
+                768: 2, // 2 columnas en móviles grandes
+                500: 1, // 1 columna en móviles pequeños
+            }}
+            className="w-full flex gap-6"
+            columnClassName="masonry-column"
+        >
             {shares.length === 0 ? (
                 <div className="rounded-xl bg-red-200 p-4 my-16">
                     <p className="text-[var(--gris3)] text-center">🙁 No se han encontrado Shares relacionados con tu búsqueda.</p>
@@ -100,6 +110,6 @@ export default function ListaFeed() {
                     />
                 ))
             )}
-        </div>
+        </Masonry>
     );
 }
