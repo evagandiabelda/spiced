@@ -12,10 +12,9 @@ interface ItemProps {
     titulo: string;
     fecha: Date;
     slug: string;
-    onDelete: (id: string) => void;
 }
 
-const ItemListaShare = ({ id, imagen, user = "Usuario desconocido", titulo, fecha, slug, onDelete }: ItemProps) => {
+const ItemListaShareGuardado = ({ id, imagen, user, titulo, fecha, slug }: ItemProps) => {
 
     const router = useRouter();
     const objetoFecha = new Date(fecha);
@@ -48,11 +47,10 @@ const ItemListaShare = ({ id, imagen, user = "Usuario desconocido", titulo, fech
 
             <div id="caja-boton" className="mobile:hidden laptop:flex flex-row gap-4">
                 <Boton texto="Leer" enlace="#" tamano="pequeno" jerarquia="secundario" onClick={() => router.push(`/share/${slug}`)} />
-                <Boton texto="Eliminar" enlace="#" tamano="pequeno" jerarquia="secundario" customColor="var(--brand1)" onClick={() => onDelete(id)} />
             </div>
 
         </li>
     );
 };
 
-export default ItemListaShare;
+export default ItemListaShareGuardado;

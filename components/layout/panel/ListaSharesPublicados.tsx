@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import ListaSkeleton from "@/components/layout/panel/ListaSkeleton";
-import ItemListaShare from "@/components/layout/panel/ItemListaShare";
+import ItemListaSharePublicado from "@/components/layout/panel/ItemListaSharePublicado";
 
 interface Share {
   id: string;
@@ -14,7 +14,7 @@ interface Share {
   slug: string;
 }
 
-export default function ListaShares() {
+export default function ListaSharesPublicados() {
   const { data: session } = useSession(); // Obtener sesión
   const [shares, setShares] = useState<Share[]>([]);
   const [loading, setLoading] = useState(true);
@@ -88,7 +88,7 @@ export default function ListaShares() {
       ) : (
         <ul>
           {shares.map((share) => (
-            <ItemListaShare
+            <ItemListaSharePublicado
               id={share.id}
               key={share.id}
               imagen={share.img_principal}

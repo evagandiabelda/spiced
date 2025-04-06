@@ -8,7 +8,7 @@ import Image from "next/image";
 import ThemeToggle from "@/components/buttons/ThemeToggle";
 import Estadisticas from "@/components/cards/Estadisticas";
 import Boton from "@/components/buttons/Boton";
-import ListaShares from "@/components/layout/panel/ListaShares";
+import ListaSharesPublicados from "@/components/layout/panel/ListaSharesPublicados";
 import Input from "@/components/inputs/Input";
 
 export default function Inicio() {
@@ -95,7 +95,7 @@ export default function Inicio() {
                             alt="últimos shares guardados"
                         />
                     </div>
-                    <ListaShares />
+                    <ListaSharesPublicados />
                 </div>
             </div>
 

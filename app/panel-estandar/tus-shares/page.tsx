@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Boton from "@/components/buttons/Boton";
-import ListaShares from "@/components/layout/panel/ListaShares";
+import ListaSharesPublicados from "@/components/layout/panel/ListaSharesPublicados";
 
 export const metadata: Metadata = {
     title: 'Tus Shares',
@@ -29,7 +29,7 @@ export default function TusShares() {
 
                 {/* Tabla */}
                 <div className="w-full flex flex-col gap-2 rounded-l">
-                    <ListaShares />
+                    <ListaSharesPublicados />
                 </div>
             </div>
 
