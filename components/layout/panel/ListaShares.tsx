@@ -12,10 +12,6 @@ interface Share {
   img_principal: string;
   created_at: Date;
   slug: string;
-  user: {
-    id: number;
-    name: string;
-  };
 }
 
 export default function ListaShares() {
@@ -32,12 +28,13 @@ export default function ListaShares() {
       setError(null);
 
       try {
-        const response = await fetch(`/api/users/${session.user.name}`);
+        const response = await fetch(`/api/users/me/shares`);
         if (!response.ok) {
-          throw new Error("Error al recuperar los datos");
+          throw new Error("Error al recuperar los datos.");
         }
 
-        const shares: Share[] = await response.json();
+        const data = await response.json();
+        const shares: Share[] = data.shares;
 
         if (shares.length === 0) {
           setError("Todavía no has publicado ningún share.");

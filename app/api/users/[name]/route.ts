@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 export async function GET(req: Request, { params }: { params: { name: string } }) {
     try {
         // Obtener el nombre de usuario desde la URL
-        const { name } = params;
+        const { name } = await params;
 
         // Buscar el usuario en la base de datos
         const user = await prisma.user.findUnique({

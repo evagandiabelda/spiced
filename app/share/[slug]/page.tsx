@@ -28,7 +28,7 @@ export default async function SharePage({
 
     // Buscar el Usuario del Share e la BD:
     const user = await prisma.user.findUnique({
-        where: { id: share.userId },
+        where: { id: share.autor_id },
     });
 
     if (!user) {

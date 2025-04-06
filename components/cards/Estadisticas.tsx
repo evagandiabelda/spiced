@@ -7,24 +7,53 @@ import { useSession } from "next-auth/react";
 export default function Estadisticas() {
     const { data: session } = useSession();
     const [numShares, setNumShares] = useState<number | null>(null);
+    const [numComentarios, setNumComentarios] = useState<number | null>(null);
+    const [numGuardados, setNumGuardados] = useState<number | null>(null);
 
     useEffect(() => {
+        if (!session?.user?.name) return;
+
         const fetchNumShares = async () => {
-            if (!session?.user?.name) return;
 
             try {
-                const response = await fetch("/api/shares/count");
-                if (!response.ok) throw new Error("Error obteniendo el conteo de shares");
+                const response = await fetch("/api/users/me/shares");
+                if (!response.ok) throw new Error("Error obteniendo tus shares.");
 
                 const data = await response.json();
-                setNumShares(data.count);
+                setNumShares(data.shares.length);
             } catch (error) {
                 console.error(error);
                 setNumShares(0);
             }
         };
 
+        const fetchNumComentarios = async () => {
+            try {
+                const response = await fetch("/api/users/me/comentarios/count");
+                if (!response.ok) throw new Error("Error obteniendo tus comentarios.");
+                const data = await response.json();
+                setNumComentarios(data.count);
+            } catch (error) {
+                console.error(error);
+                setNumComentarios(0);
+            }
+        };
+
+        const fetchNumGuardados = async () => {
+            try {
+                const response = await fetch("/api/users/me/shares/guardados");
+                if (!response.ok) throw new Error("Error obteniendo los shares que has guardado.");
+                const data = await response.json();
+                setNumGuardados(data.length);
+            } catch (error) {
+                console.error(error);
+                setNumGuardados(0);
+            }
+        };
+
         fetchNumShares();
+        fetchNumComentarios();
+        fetchNumGuardados();
     }, [session?.user?.name]);
 
     return (
@@ -58,11 +87,11 @@ export default function Estadisticas() {
             <div id="caja-inf" className="w-full h-[100px] flex flex-row justify-between pt-6">
                 <div className="w-full h-100 flex flex-col justify-end">
                     <a href="/panel-estandar/shares-guardados">
-                        <p className="text-[0.9rem] font-bold">0 guardados</p>
+                        <p className="text-[0.9rem] font-bold">{numGuardados !== null ? `${numGuardados} guardados` : "cargando..."}</p>
                     </a>
                 </div>
                 <div className="w-full h-100 flex flex-col justify-end">
-                    <p className="text-[0.9rem] font-bold text-right">0 comentarios</p>
+                    <p className="text-[0.9rem] font-bold text-right">{numComentarios !== null ? `${numComentarios} comentarios` : "cargando..."}</p>
                 </div>
             </div>
         </div>
