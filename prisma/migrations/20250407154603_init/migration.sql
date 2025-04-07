@@ -113,6 +113,15 @@ CREATE TABLE "DenunciaComentario" (
 );
 
 -- CreateTable
+CREATE TABLE "Seguimiento" (
+    "id" TEXT NOT NULL,
+    "seguidor_id" TEXT NOT NULL,
+    "seguido_id" TEXT NOT NULL,
+
+    CONSTRAINT "Seguimiento_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "ShareGuardado" (
     "user_id" TEXT NOT NULL,
     "share_id" TEXT NOT NULL,
@@ -170,6 +179,9 @@ CREATE UNIQUE INDEX "Spice_nombre_key" ON "Spice"("nombre");
 -- CreateIndex
 CREATE UNIQUE INDEX "Categoria_nombre_key" ON "Categoria"("nombre");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "Seguimiento_seguidor_id_seguido_id_key" ON "Seguimiento"("seguidor_id", "seguido_id");
+
 -- AddForeignKey
 ALTER TABLE "Admin" ADD CONSTRAINT "Admin_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -202,6 +214,12 @@ ALTER TABLE "DenunciaComentario" ADD CONSTRAINT "DenunciaComentario_user_id_fkey
 
 -- AddForeignKey
 ALTER TABLE "DenunciaComentario" ADD CONSTRAINT "DenunciaComentario_comentario_id_fkey" FOREIGN KEY ("comentario_id") REFERENCES "Comentario"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Seguimiento" ADD CONSTRAINT "Seguimiento_seguido_id_fkey" FOREIGN KEY ("seguido_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Seguimiento" ADD CONSTRAINT "Seguimiento_seguidor_id_fkey" FOREIGN KEY ("seguidor_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ShareGuardado" ADD CONSTRAINT "ShareGuardado_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

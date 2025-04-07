@@ -34,6 +34,10 @@ model User {
   expert   Expert?
   standard Standard?
 
+  // Relaciones con otros Usuarios
+  seguidos   Seguimiento[] @relation("Seguidos")
+  seguidores Seguimiento[] @relation("Seguidores")
+
   // Relaciones con Spices y Categorías (M:N)
   spices_seguidos     UsuarioSpice[]
   categorias_seguidas UsuarioCategoria[]
@@ -190,6 +194,16 @@ model DenunciaComentario {
 /**
  * --------- 🔄 TABLAS INTERMEDIAS (M:N): ---------
  */
+
+model Seguimiento {
+  id          String @id @default(cuid())
+  seguidor_id String
+  seguido_id  String
+  seguido     User   @relation("Seguidos", fields: [seguido_id], references: [id])
+  seguidor    User   @relation("Seguidores", fields: [seguidor_id], references: [id])
+
+  @@unique([seguidor_id, seguido_id])
+}
 
 model ShareGuardado {
   user_id String

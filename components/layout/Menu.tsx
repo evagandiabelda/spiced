@@ -28,7 +28,7 @@ const Menu = ({ tipo }: tipo) => {
                 <a href="/" className="hover-underline">
                     {language === "es" ? "Inicio" : "Home"}
                 </a>
-                <a href="/feed" className="hover-underline">
+                <a href="/explorar" className="hover-underline">
                     {language === "es" ? "Explorar" : "Explore"}
                 </a>
                 <a href="/panel-estandar/nuevo-share" className="hover-underline">
@@ -60,7 +60,7 @@ const Menu = ({ tipo }: tipo) => {
                     </div>
                 </a>
 
-                <a href="/feed">
+                <a href="/explorar">
                     <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
                         <Image
                             src="/iconos/iconos-menu/icono-explorar.svg"

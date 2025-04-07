@@ -164,11 +164,34 @@ async function main() {
         standardUsers.push(standard);
     }
 
+    /* --------- SEGUIMIENTO ENTRE USUARIOS: --------- */
+
+    // Primero se unen los usuarios 'expert' y 'standard' en un solo array:
+    const allUsers = [...expertUsers, ...standardUsers];
+
+    console.log('Creando relaciones de seguimiento entre usuarios...');
+
+    // Luego se crean 3 relaciones de seguimiento entre usuarios aleatorios:
+    for (const user of allUsers) {
+        // Creamos un array de posibles usuarios a seguir (que no sea el propio usuario)
+        const possibleUsersToFollow = allUsers.filter(u => u.id !== user.id);
+        // Elegimos aleatoriamente 3 usuarios distintos de los posibles
+        const usersToFollow = faker.helpers.arrayElements(possibleUsersToFollow, { min: 1, max: 3 });
+
+        for (const followedUser of usersToFollow) {
+            await prisma.seguimiento.create({
+                data: {
+                    seguidor_id: user.id,
+                    seguido_id: followedUser.id,
+                }
+            });
+        }
+    }
+
     /* --------- 📝 CREACIÓN DE SHARES: --------- */
 
     console.log('Creando Shares...');
-    // Primero se unen los usuarios 'expert' y 'standard' en un solo array:
-    const allUsers = [...expertUsers, ...standardUsers];
+
     // Luego se obtienen todos los spices y categorías creados:
     const allSpices = await prisma.spice.findMany();
     const allCategories = await prisma.categoria.findMany();

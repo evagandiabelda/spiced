@@ -29,12 +29,16 @@ interface ShareData {
     slug: string;
 }
 
+interface ListaFeedProps {
+    filtroUsuarios: "seguidos" | "todos";
+}
+
 // Función para generar un extracto del texto (máx. 120 caracteres)
 const getExcerpt = (text: string, maxLength = 120) => {
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 };
 
-export default function ListaFeed() {
+export default function ListaFeed({ filtroUsuarios }: ListaFeedProps) {
     const [shares, setShares] = useState<ShareData[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -49,7 +53,18 @@ export default function ListaFeed() {
             setError(null);
 
             try {
-                const url = query ? `/api/shares?query=${encodeURIComponent(query)}` : "/api/shares";
+
+                let url = "/api/shares";
+
+                // Si se filtra por parámetros de búsqueda, se añade a la URL:
+                if (query) {
+                    url += `?query=${encodeURIComponent(query)}`
+                }
+
+                // Si se filtra por usuarios seguidos, se añade la lógica:
+                if (filtroUsuarios === "seguidos") {
+                    url = "/api/users/me/usuarios-siguiendo";
+                }
 
                 const res = await fetch(url);
                 if (!res.ok) throw new Error("Error al obtener los shares");
