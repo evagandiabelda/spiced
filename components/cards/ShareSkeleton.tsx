@@ -3,7 +3,7 @@
 export default function Share() {
 
     return (
-        <div className="w-col3 min-h-[600px] flex flex-col gap-4 rounded-[1.2rem] p-[1.5rem] bg-white dark:bg-[var(--gris4)] opacity-40 dark:opacity-30">
+        <div className="min-w-col2 w-full flex flex-col gap-4 rounded-[1.8rem] p-[1.5rem] bg-white dark:bg-[var(--gris4)] dark:border-2 dark:border-[var(--gris3)] opacity-40 dark:opacity-30">
             <div id="caja-imagen" className="w-full h-[300px] rounded-[0.6rem] bg-[var(--gris1)] dark:bg-[var(--gris5)] overflow-hidden"></div>
             <div id="caja-textos" className="w-full flex flex-col">
                 <div id="caja-usuario" className="w-full flex flex-row justify-end items-center gap-2 px-4">

@@ -1,13 +1,15 @@
 "use client";
 
 import { Suspense, useState, useEffect } from 'react';
+import { useSession } from "next-auth/react";
 import ListaFeed from '@/components/cards/ListaFeed';
 import ListaSkeleton from '@/components/layout/panel/ListaSkeleton';
 import Options from '@/components/inputs/Options';
 import NubeTagsDinamica from '@/components/buttons/NubeTagsDinamica';
-import { Share } from '@prisma/client';
 
 export default function Feed() {
+    const { data: session } = useSession();
+
     const [filtroUsuarios, setFiltroUsuarios] = useState<'seguidos' | 'todos'>('todos');
 
     return (
@@ -29,15 +31,18 @@ export default function Feed() {
                             { id: 'cat-5', texto: 'Categoría 5' },
                         ]}
                     />
-                    <Options
-                        tipo='dropdown'
-                        opciones={[
-                            { id: 'seguidos', texto: 'Usuarios que sigo' },
-                            { id: 'todos', texto: 'Todos los usuarios' },
-                        ]}
-                        valorSeleccionado={filtroUsuarios}
-                        onChange={(nuevoValor) => setFiltroUsuarios(nuevoValor as "seguidos" | "todos")}
-                    />
+                    {/* Este filtro solo se renderiza si el usuario está autenticado: */}
+                    {session && (
+                        <Options
+                            tipo='dropdown'
+                            opciones={[
+                                { id: 'seguidos', texto: 'Usuarios que sigo' },
+                                { id: 'todos', texto: 'Todos los usuarios' },
+                            ]}
+                            valorSeleccionado={filtroUsuarios}
+                            onChange={(nuevoValor) => setFiltroUsuarios(nuevoValor as "seguidos" | "todos")}
+                        />
+                    )}
                     <Options
                         tipo='dropdown'
                         opciones={[

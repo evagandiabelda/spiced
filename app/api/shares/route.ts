@@ -49,9 +49,10 @@ export async function GET(request: Request) {
           },
         },
       },
+      orderBy: {
+        created_at: "desc",
+      }
     });
-
-    const shuffledShares = shuffleArray(shares); // Para reordenar los shares en orden aleatorio.
 
     return NextResponse.json({ shares }, { status: 200 });
   } catch (error) {

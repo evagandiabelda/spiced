@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from "next/navigation";
 import Masonry from "react-masonry-css";
 import Share from "@/components/cards/Share";
@@ -33,19 +33,19 @@ interface ListaFeedProps {
     filtroUsuarios: "seguidos" | "todos";
 }
 
-// Función para generar un extracto del texto (máx. 120 caracteres)
 const getExcerpt = (text: string, maxLength = 120) => {
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 };
 
 export default function ListaFeed({ filtroUsuarios }: ListaFeedProps) {
+
     const [shares, setShares] = useState<ShareData[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     const router = useRouter();
     const searchParams = useSearchParams();
-    const query = searchParams.get("query") || "";  // Obtener la query desde la URL
+    const query = searchParams.get("query") || "";
 
     useEffect(() => {
         const fetchShares = async () => {
@@ -53,15 +53,14 @@ export default function ListaFeed({ filtroUsuarios }: ListaFeedProps) {
             setError(null);
 
             try {
+                let url = "/api/shares"; // URL base de la API de shares
 
-                let url = "/api/shares";
-
-                // Si se filtra por parámetros de búsqueda, se añade a la URL:
+                // Si hay un término de búsqueda, filtramos por él
                 if (query) {
-                    url += `?query=${encodeURIComponent(query)}`
+                    url = `/api/shares?query=${encodeURIComponent(query)}`;
                 }
 
-                // Si se filtra por usuarios seguidos, se añade la lógica:
+                // Si estamos filtrando por "Usuarios que sigo", utilizamos la API específica
                 if (filtroUsuarios === "seguidos") {
                     url = "/api/users/me/usuarios-siguiendo";
                 }
@@ -79,29 +78,39 @@ export default function ListaFeed({ filtroUsuarios }: ListaFeedProps) {
         };
 
         fetchShares();
-    }, [query]);  // Se ejecuta cada vez que cambia la query
+    }, [query, filtroUsuarios]); // Las dependencias no deben cambiar de tamaño entre renders
 
     if (error) return <p className="text-red-500">{error}</p>;
 
     if (loading)
         return (
-            <div className="w-full flex flex-wrap justify-center gap-8">
+            <Masonry
+                breakpointCols={{
+                    default: 4, // 4 columnas en pantallas grandes
+                    1024: 3, // 3 columnas en tablets
+                    768: 2, // 2 columnas en móviles grandes
+                    500: 1, // 1 columna en móviles pequeños
+                }}
+                className="w-full flex gap-6"
+                columnClassName="masonry-column"
+            >
                 <ShareSkeleton />
                 <ShareSkeleton />
                 <ShareSkeleton />
                 <ShareSkeleton />
                 <ShareSkeleton />
                 <ShareSkeleton />
-            </div>
+            </Masonry>
+
         );
 
     return (
         <Masonry
             breakpointCols={{
-                default: 4, // 4 columnas en pantallas grandes
-                1024: 3, // 3 columnas en tablets
-                768: 2, // 2 columnas en móviles grandes
-                500: 1, // 1 columna en móviles pequeños
+                default: 4,
+                1024: 3,
+                768: 2,
+                500: 1,
             }}
             className="w-full flex gap-6"
             columnClassName="masonry-column"
