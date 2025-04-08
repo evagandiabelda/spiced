@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 /* 🚨 REGISTRAR UNA DENUNCIA A UN SHARE */
 
-export async function POST(request: NextRequest, { params }: { params: { slug: string } }) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
 
     const session = await getServerSession(authOptions);
 
@@ -17,7 +17,7 @@ export async function POST(request: NextRequest, { params }: { params: { slug: s
 
     try {
         // Extraer el slug
-        const { slug } = params;
+        const { slug } = await params;
 
         if (!slug) {
             return NextResponse.json({ error: "Faltan el slug del Share." }, { status: 400 });
