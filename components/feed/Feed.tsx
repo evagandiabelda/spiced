@@ -48,6 +48,16 @@ export default function Feed() {
         }))
     ];
 
+    // Callback para manejar los Spices seleccionados en la nube de tags:
+    // (necesitamos recoger los tags seleccionados dentro de "NubeTagsDinamica" para poder filtrar luego los Shares en "ListaFeed")
+
+    const [tagsSeleccionados, setTagsSeleccionados] = useState<string[]>([]);
+
+    // Manejar la selección de tags
+    const manejarSeleccionDeTags = (tags: string[]) => {
+        setTagsSeleccionados(tags);
+    };
+
     return (
         <div className='w-full flex flex-col items-center gap-8'>
 
@@ -88,7 +98,11 @@ export default function Feed() {
 
                 {/* TAGS */}
                 <div className='w-full'>
-                    <NubeTagsDinamica defaultActive={true} />
+                    <NubeTagsDinamica
+                        defaultActive={true}
+                        onSeleccionarTags={manejarSeleccionDeTags} // Pasa la función de callback
+                        tagsSeleccionados={tagsSeleccionados} // Pasa los tags seleccionados
+                    />
                 </div>
 
             </div>
@@ -100,6 +114,7 @@ export default function Feed() {
                     filtroCategoria={filtroCategoria}
                     filtroUsuarios={filtroUsuarios}
                     filtroVerificados={filtroVerificados}
+                    filtroSpices={tagsSeleccionados}
                 />
             </Suspense>
 

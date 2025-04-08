@@ -35,13 +35,14 @@ interface ListaFeedProps {
     filtroCategoria: string;
     filtroUsuarios: "seguidos" | "todos";
     filtroVerificados: "verificados" | "todos";
+    filtroSpices: string[];
 }
 
 const getExcerpt = (text: string, maxLength = 90) => {
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 };
 
-export default function ListaFeed({ filtroCategoria, filtroUsuarios, filtroVerificados }: ListaFeedProps) {
+export default function ListaFeed({ filtroCategoria, filtroUsuarios, filtroVerificados, filtroSpices }: ListaFeedProps) {
 
     const [shares, setShares] = useState<ShareData[]>([]);
     const [loading, setLoading] = useState(true);
@@ -75,6 +76,12 @@ export default function ListaFeed({ filtroCategoria, filtroUsuarios, filtroVerif
                     url += "verificados=true";
                 }
 
+                // Si estamos filtrando por "Spices", añadimos el filtro a la URL
+                if (filtroSpices.length > 0) {
+                    url += url.includes("?") ? "&" : "?";
+                    url += `tags=${filtroSpices.join(",")}`; // Pasar los tags seleccionados
+                }
+
                 const res = await fetch(url);
                 if (!res.ok) throw new Error("Error al obtener los shares");
 
@@ -91,13 +98,24 @@ export default function ListaFeed({ filtroCategoria, filtroUsuarios, filtroVerif
         fetchShares();
     }, [query, filtroUsuarios, filtroVerificados]);
 
+    let sharesFiltrados: ShareData[] = [...shares];
+
     // Si estamos filtrando por "Categoría", aplicamos el filtro
-    const sharesFiltrados = filtroCategoria === 'todas'
-        ? shares
-        : shares.filter((share) => {
+    if (filtroCategoria !== 'todas') {
+        sharesFiltrados = shares.filter((share) => {
             const idsCategoriasDelShare = share.categorias.map((sc) => sc.categoria.id);
             return idsCategoriasDelShare.includes(filtroCategoria);
         });
+    }
+
+    // Si estamos filtrando por "Spices", aplicamos el filtro
+    if (filtroSpices.length > 0) {
+        sharesFiltrados = shares.filter((share) => {
+            return filtroSpices.length === 0 || filtroSpices.some(spice =>
+                share.spices.some(s => s.spice.nombre === spice)
+            );
+        });
+    }
 
     if (error) return <p className="text-red-500">{error}</p>;
 
