@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 /* OBTENER TODA LA INFO (pública) DE UN USUARIO ESPECÍFICO */
 // Por ejemplo, para construir el perfil público de usuario.
 
-export async function GET(req: Request, { params }: { params: { name: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ name: string }> }) {
     try {
         // Obtener el nombre de usuario desde la URL
         const { name } = await params;

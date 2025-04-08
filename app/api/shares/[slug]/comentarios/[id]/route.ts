@@ -7,11 +7,11 @@ const prisma = new PrismaClient();
 
 /* OBTENER UN COMENTARIO ESPECÍFICO */
 
-export async function GET(request: NextRequest, { params }: { params: { slug: string, id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string, id: string }> }) {
     try {
 
         // Extraer slug y id del comentario
-        const { slug, id } = params;
+        const { slug, id } = await params;
         if (!slug || !id) {
             return NextResponse.json({ error: "Faltan parámetros en la URL" }, { status: 400 });
         }
@@ -54,7 +54,7 @@ export async function GET(request: NextRequest, { params }: { params: { slug: st
 
 /* ELIMINAR UN COMENTARIO ESPECÍFICO */
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
 
     const session = await getServerSession(authOptions);
 
@@ -63,7 +63,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     }
 
     try {
-        const { id } = params;
+        const { id } = await params;
 
         if (!id) {
             return NextResponse.json({ error: "Falta el ID del comentario." }, { status: 400 });
