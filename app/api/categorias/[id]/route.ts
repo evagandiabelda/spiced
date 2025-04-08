@@ -33,7 +33,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
 /* MODIFICAR UNA CATEGORÍA ESPECÍFICA */
 
-export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
 
     const session = await getServerSession(authOptions);
 
@@ -42,7 +42,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
     }
 
     try {
-        const { id } = params;
+        const { id } = await params;
 
         if (!id) {
             return NextResponse.json({ error: "Falta el ID de la categoría." }, { status: 400 });
@@ -78,7 +78,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
 
 /* ELIMINAR UNA CATEGORÍA ESPECÍFICA */
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
 
     const session = await getServerSession(authOptions);
 
@@ -87,7 +87,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     }
 
     try {
-        const { id } = params;
+        const { id } = await params;
 
         if (!id) {
             return NextResponse.json({ error: "Falta el ID de la categoría." }, { status: 400 });
