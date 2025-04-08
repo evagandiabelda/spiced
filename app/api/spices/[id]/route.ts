@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 /* OBTENER UN SPICE ESPECÍFICO */
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     try {
         const { id } = await params;
 
@@ -32,7 +32,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 
 /* MODIFICAR UN SPICE ESPECÍFICO */
 
-export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
 
     const session = await getServerSession(authOptions);
 
@@ -41,7 +41,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
     }
 
     try {
-        const { id } = params;
+        const { id } = await params;
 
         if (!id) {
             return NextResponse.json({ error: "Falta el ID del Spice." }, { status: 400 });
@@ -77,7 +77,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
 
 /* ELIMINAR UN SPICE ESPECÍFICO */
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
 
     const session = await getServerSession(authOptions);
 
@@ -86,7 +86,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     }
 
     try {
-        const { id } = params;
+        const { id } = await params;
 
         if (!id) {
             return NextResponse.json({ error: "Falta el ID del Spice." }, { status: 400 });

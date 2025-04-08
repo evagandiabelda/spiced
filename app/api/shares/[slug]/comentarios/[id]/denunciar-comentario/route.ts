@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 /* 🚨 REGISTRAR UNA DENUNCIA A UN COMENTARIO */
 
-export async function POST(request: NextRequest, { params }: { params: { slug: string, id: string } }) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ slug: string, id: string }> }) {
 
     const session = await getServerSession(authOptions);
 
@@ -17,7 +17,7 @@ export async function POST(request: NextRequest, { params }: { params: { slug: s
 
     try {
         // Extraer slug y id del comentario
-        const { slug, id } = params;
+        const { slug, id } = await params;
         if (!slug || !id) {
             return NextResponse.json({ error: "Faltan parámetros en la URL" }, { status: 400 });
         }
