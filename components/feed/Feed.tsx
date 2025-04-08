@@ -7,30 +7,61 @@ import ListaSkeleton from '@/components/layout/panel/ListaSkeleton';
 import Options from '@/components/inputs/Options';
 import NubeTagsDinamica from '@/components/buttons/NubeTagsDinamica';
 
+type Categoria = {
+    id: string;
+    nombre: string;
+}
+
 export default function Feed() {
     const { data: session } = useSession();
 
+    const [filtroCategoria, setFiltroCategoria] = useState<string>('todas');
     const [filtroUsuarios, setFiltroUsuarios] = useState<'seguidos' | 'todos'>('todos');
     const [filtroVerificados, setFiltroVerificados] = useState<'verificados' | 'todos'>('todos');
+
+    // Obtener las categorías en la BD:
+
+    const [categorias, setCategorias] = useState<Categoria[]>([]);
+
+    useEffect(() => {
+        const fetchCategorias = async () => {
+            try {
+                const res = await fetch('/api/categorias');
+                if (!res.ok) throw new Error('Error al obtener categorías.');
+                const data = await res.json();
+                setCategorias(data);
+            } catch (error) {
+                console.error('Error al cargar las categorías.', error);
+            }
+        };
+
+        fetchCategorias();
+    }, []);
+
+    const opcionesCategoria = [
+        // La primera opción será sin filtrar:
+        { id: 'todas', texto: 'Filtrar por categoría' },
+        // El resto de opciones corresponderán a cada categoría:
+        ...categorias.map((cat) => ({
+            id: cat.id,
+            texto: cat.nombre
+        }))
+    ];
 
     return (
         <div className='w-full flex flex-col items-center gap-8'>
 
             {/* FILTROS */}
 
-            <div className='w-full flex flex-col items-center text-center gap-8 py-[2rem] bg-[#dfd8d8] dark:bg-[#2d2d2d] rounded-[1.4rem]'>
+            <div className='w-full flex flex-col items-center text-center gap-8 py-3'>
 
                 {/* DROPDOWNS */}
-                <div className='w-full flex flex-row items-center gap-4 px-col1'>
+                <div className='w-full flex flex-row items-center gap-4 mobile:px-col1 laptop:px-col2'>
                     <Options
                         tipo='dropdown'
-                        opciones={[
-                            { id: 'todas', texto: 'Filtrar por categoría' },
-                            { id: 'cat-2', texto: 'Categoría 2' },
-                            { id: 'cat-3', texto: 'Categoría 3' },
-                            { id: 'cat-4', texto: 'Categoría 4' },
-                            { id: 'cat-5', texto: 'Categoría 5' },
-                        ]}
+                        opciones={opcionesCategoria}
+                        valorSeleccionado={filtroCategoria}
+                        onChange={(nuevoValor) => setFiltroCategoria(nuevoValor)}
                     />
                     {/* Este filtro solo se renderiza si el usuario está autenticado: */}
                     {session && (
@@ -57,7 +88,7 @@ export default function Feed() {
 
                 {/* TAGS */}
                 <div className='w-full'>
-                    <NubeTagsDinamica />
+                    <NubeTagsDinamica defaultActive={true} />
                 </div>
 
             </div>
@@ -66,6 +97,7 @@ export default function Feed() {
 
             <Suspense fallback={<ListaSkeleton />}>
                 <ListaFeed
+                    filtroCategoria={filtroCategoria}
                     filtroUsuarios={filtroUsuarios}
                     filtroVerificados={filtroVerificados}
                 />

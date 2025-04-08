@@ -11,11 +11,13 @@ interface ShareData {
     img_principal: string;
     categorias: {
         categoria: {
+            id: string,
             nombre: string;
         };
     }[];
     spices: {
         spice: {
+            id: string;
             nombre: string;
         };
     }[];
@@ -30,6 +32,7 @@ interface ShareData {
 }
 
 interface ListaFeedProps {
+    filtroCategoria: string;
     filtroUsuarios: "seguidos" | "todos";
     filtroVerificados: "verificados" | "todos";
 }
@@ -38,7 +41,7 @@ const getExcerpt = (text: string, maxLength = 90) => {
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 };
 
-export default function ListaFeed({ filtroUsuarios, filtroVerificados }: ListaFeedProps) {
+export default function ListaFeed({ filtroCategoria, filtroUsuarios, filtroVerificados }: ListaFeedProps) {
 
     const [shares, setShares] = useState<ShareData[]>([]);
     const [loading, setLoading] = useState(true);
@@ -76,6 +79,7 @@ export default function ListaFeed({ filtroUsuarios, filtroVerificados }: ListaFe
                 if (!res.ok) throw new Error("Error al obtener los shares");
 
                 const data = await res.json();
+
                 setShares(data.shares);
             } catch (err) {
                 setError("No se pudieron cargar los shares.");
@@ -87,20 +91,33 @@ export default function ListaFeed({ filtroUsuarios, filtroVerificados }: ListaFe
         fetchShares();
     }, [query, filtroUsuarios, filtroVerificados]);
 
+    // Si estamos filtrando por "Categoría", aplicamos el filtro
+    const sharesFiltrados = filtroCategoria === 'todas'
+        ? shares
+        : shares.filter((share) => {
+            const idsCategoriasDelShare = share.categorias.map((sc) => sc.categoria.id);
+            return idsCategoriasDelShare.includes(filtroCategoria);
+        });
+
     if (error) return <p className="text-red-500">{error}</p>;
 
     if (loading)
         return (
             <Masonry
                 breakpointCols={{
-                    default: 4, // 4 columnas en pantallas grandes
-                    1024: 3, // 3 columnas en tablets
-                    768: 2, // 2 columnas en móviles grandes
-                    500: 1, // 1 columna en móviles pequeños
+                    default: 5, // Ordenadores grandes
+                    1600: 4, // Ordenadores pequeños
+                    1024: 3, // Tablets
+                    768: 2, // Móviles grandes
+                    500: 1, // Móviles pequeños
                 }}
-                className="w-full flex gap-6"
+                className="w-full flex gap-5"
                 columnClassName="masonry-column"
             >
+                <ShareSkeleton />
+                <ShareSkeleton />
+                <ShareSkeleton />
+                <ShareSkeleton />
                 <ShareSkeleton />
                 <ShareSkeleton />
                 <ShareSkeleton />
@@ -114,20 +131,21 @@ export default function ListaFeed({ filtroUsuarios, filtroVerificados }: ListaFe
     return (
         <Masonry
             breakpointCols={{
-                default: 4,
-                1024: 3,
-                768: 2,
-                500: 1,
+                default: 5, // Ordenadores grandes
+                1600: 4, // Ordenadores pequeños
+                1024: 3, // Tablets
+                768: 2, // Móviles grandes
+                500: 1, // Móviles pequeños
             }}
-            className="w-full flex gap-6"
+            className="w-full flex gap-5"
             columnClassName="masonry-column"
         >
-            {shares.length === 0 ? (
+            {sharesFiltrados.length === 0 ? (
                 <div className="rounded-xl bg-red-200 p-4 my-16">
                     <p className="text-[var(--gris3)] text-center">🙁 No se han encontrado Shares relacionados con tu búsqueda.</p>
                 </div>
             ) : (
-                shares.map((share) => (
+                sharesFiltrados.map((share) => (
                     <Share
                         key={share.id}
                         imagen={share.img_principal || "/imgs/IMG-Ejemplo-Miniatura.png"}

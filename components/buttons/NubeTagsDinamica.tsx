@@ -4,8 +4,16 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Tag from "@/components/buttons/Tag";
 
-const NubeTagsDinamica = () => {
-    const [activeTags, setActiveTags] = useState<string[]>([]);
+interface NubeTagsDinamicaProps {
+    defaultActive?: boolean;
+}
+
+const NubeTagsDinamica = ({ defaultActive = false }: NubeTagsDinamicaProps) => {
+    const listaTags = ["TEA", "TDAH", "TOC", "TLP", "TAG", "TP", "TPA", "TB", "TEP", "TD", "TE", "TA", "ADI", "FOB", "OTR"];
+
+    const [activeTags, setActiveTags] = useState<string[]>(() =>
+        defaultActive ? listaTags : []
+    );
 
     // Manejar la selección/deselección de tags:
     const handleTagClick = (tag: string) => {
@@ -16,7 +24,7 @@ const NubeTagsDinamica = () => {
 
     return (
         <div className="flex gap-2 flex-wrap justify-center">
-            {["TEA", "TDAH", "TOC", "TLP", "TAG", "TP", "TPA", "TB", "TEP", "TD", "TE", "TA", "ADI", "FOB", "OTR"].map((tag) => (
+            {listaTags.map((tag) => (
                 <Tag
                     key={tag}
                     nombre={tag}

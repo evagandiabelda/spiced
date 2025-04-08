@@ -40,7 +40,7 @@ export async function GET() {
             }
         });
 
-        return NextResponse.json({ categorias }, { status: 200 });
+        return NextResponse.json(categorias, { status: 200 });
     } catch (error) {
         console.error("Error obteniendo las categorías.", error);
         return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });
