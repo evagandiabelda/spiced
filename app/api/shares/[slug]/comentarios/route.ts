@@ -8,9 +8,9 @@ const prisma = new PrismaClient();
 
 /* LISTAR TODOS LOS COMENTARIOS DE UN SHARE (en base a su slug) */
 
-export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
     try {
-        const { slug } = params;
+        const { slug } = await params;
 
         if (!slug) {
             return NextResponse.json({ error: "Falta el slug del Share." }, { status: 400 });
@@ -50,7 +50,7 @@ export async function GET(request: NextRequest, { params }: { params: { slug: st
 }
 
 /* CREAR UN COMENTARIO */
-export async function POST(request: NextRequest, { params }: { params: { slug: string } }) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
 
     const session = await getServerSession(authOptions);
 
@@ -59,7 +59,7 @@ export async function POST(request: NextRequest, { params }: { params: { slug: s
     }
 
     try {
-        const { slug } = params;
+        const { slug } = await params;
 
         if (!slug) {
             return NextResponse.json({ error: "Falta el slug del Share." }, { status: 400 });
