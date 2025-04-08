@@ -18,12 +18,12 @@ interface ShareProps {
 export default function Share({ imagen, verificado, user, foto, categorias, spices, titulo, extracto, onClick }: ShareProps) {
 
     return (
-        <div onClick={onClick} className="w-full flex flex-col rounded-[1.8rem] p-[10px] bg-white dark:bg-[var(--gris4)] dark:border-2 dark:border-[var(--gris3)] hover:drop-shadow-xl transition ease cursor-pointer">
+        <div onClick={onClick} className="w-full flex flex-col rounded-[1.8rem] p-[10px] bg-white dark:bg-[var(--gris4)] hover:drop-shadow-xl transition ease cursor-pointer">
 
             <div id="caja-imagen" className="relative w-full min-h-[200px] rounded-tl-[1.2rem] rounded-tr-[1.2rem] rounded-bl-[1.2rem] overflow-hidden">
 
                 {verificado &&
-                    <div id="caja-verificado" className="absolute top-0 left-0 bg-white p-[0.7rem] rounded-br-[1.2rem] z-10">
+                    <div id="caja-verificado" className="absolute top-0 left-0 bg-white dark:bg-[var(--gris4)] p-[0.7rem] rounded-br-[1.2rem] z-10">
                         <Image
                             src="/iconos/iconos-otros/icono-verificado-relleno.svg"
                             alt="Verificado"
@@ -72,8 +72,8 @@ export default function Share({ imagen, verificado, user, foto, categorias, spic
                 )}
 
                 <div id="caja-textos" className="w-full flex flex-col items-start gap-4 pt-4 pb-3 px-2 border-t border-t-1 border-t-[var(--gris2)] dark:border-t-[var(--gris5)]">
-                    <h4 className="text-left">{titulo}</h4>
-                    <p className="text-left text-[var(--gris3)] text-[0.9rem] opacity-80 dark:opacity-50">{extracto}</p>
+                    <h4 className="text-left dark:text-[var(--foreground)]">{titulo}</h4>
+                    <p className="text-left text-[var(--gris3)] dark:text-[var(--gris2)] text-[0.9rem] opacity-80 dark:opacity-50">{extracto}</p>
                 </div>
 
                 {spices.length > 0 && (
