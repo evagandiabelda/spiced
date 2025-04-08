@@ -203,7 +203,12 @@ async function main() {
             const slug = generateSlug(titulo);
             // Se seleccionan aleatoriamente 3 spices y 1 categoría:
             const randomSpices = faker.helpers.arrayElements(allSpices, { min: 1, max: 3 });
-            const randomCategory = faker.helpers.arrayElement(allCategories);
+            const randomCategories = faker.helpers.arrayElements(allCategories, { min: 1, max: 3 });
+            // Se obtiene el estado de verificación del autor:
+            const autor = await prisma.user.findUnique({
+                where: { id: user.id },
+                select: { usuario_verificado: true },
+            });
             // Se crea el share:
             let share = await prisma.share.create({
                 data: {
@@ -213,7 +218,7 @@ async function main() {
                     img_principal: faker.image.urlPicsumPhotos(),
                     img_secundaria: faker.image.urlPicsumPhotos(),
                     autor_id: user.id,
-                    share_verificado: faker.datatype.boolean(),
+                    share_verificado: autor?.usuario_verificado ?? false,
                 },
             });
             // Se asocian los spices al share:
@@ -225,13 +230,16 @@ async function main() {
                     }
                 });
             }
-            // Se asocia la categoría al share:
-            await prisma.shareCategoria.create({
-                data: {
-                    share_id: share.id,
-                    categoria_id: randomCategory.id
-                }
-            });
+            // Se asocia las categorías al share:
+            for (const category of randomCategories) {
+                await prisma.shareCategoria.create({
+                    data: {
+                        share_id: share.id,
+                        categoria_id: category.id
+                    }
+                });
+            }
+
         }
     }
 

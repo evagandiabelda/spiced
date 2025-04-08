@@ -9,26 +9,33 @@ const prisma = new PrismaClient();
 /* LISTAR TODOS LOS SHARES */
 export async function GET(request: Request) {
   try {
-    // Se obtienen los parámetros de búsqueda y/o filtrado de la URL:
+    // Filtro según parámetros de búsqueda (componente Search):
     const { searchParams } = new URL(request.url);
     const query = searchParams.get("query");
 
-    // Filtros del Feed:
-    const categoriaId = searchParams.get("categoriaId");
-    const contenidoVerificado = searchParams.get("contenidoVerificado") === "true";
-    let idsUsuariosSeguidos = [];
+    // Filtro según verificados (Feed):
+    const verificados = searchParams.get("verificados") === "true";
 
-    // -----
+    // Se construyen los filtros ("where") dinámicamente:
+    const filtros: any[] = [];
+
+    if (query) {
+      filtros.push({
+        OR: [
+          { titulo: { contains: query, mode: "insensitive" } }, // Busca en título
+          { texto: { contains: query, mode: "insensitive" } },  // Busca en descripción
+        ],
+      });
+    }
+
+    if (verificados) {
+      filtros.push({ share_verificado: true })
+    }
 
     const shares = await prisma.share.findMany({
-      where: query
-        ? {
-          OR: [
-            { titulo: { contains: query, mode: "insensitive" } }, // Busca en título
-            { texto: { contains: query, mode: "insensitive" } },  // Busca en descripción
-          ],
-        }
-        : undefined, // Si no hay query, no aplica filtro
+      where: {
+        AND: filtros,
+      },
       include: {
         autor: {
           select: {

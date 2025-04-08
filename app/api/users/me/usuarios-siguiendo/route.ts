@@ -31,12 +31,28 @@ export async function GET(request: Request) {
         // Extraer el ID de cada usuario seguido y crear un array:
         const idsSeguidos = seguimientos.map((s) => s.seguido_id)
 
+        // Filtro según verificados (Feed):
+        const { searchParams } = new URL(request.url);
+        const verificados = searchParams.get("verificados") === "true";
+
+        // El filtro base filtra por los IDs de los usuarios seguidos:
+        let filtros: any[] = [
+            {
+                autor_id: {
+                    in: idsSeguidos,
+                },
+            }
+        ];
+
+        // Si se filtra por verificados, se añade:
+        if (verificados) {
+            filtros.push({ share_verificado: true });
+        }
+
         // Obtener los Shares publicados por los usuarios seguidos:
         const shares = await prisma.share.findMany({
             where: {
-                autor_id: {
-                    in: idsSeguidos,
-                }
+                AND: filtros,
             },
             include: {
                 autor: {

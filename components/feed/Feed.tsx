@@ -11,6 +11,7 @@ export default function Feed() {
     const { data: session } = useSession();
 
     const [filtroUsuarios, setFiltroUsuarios] = useState<'seguidos' | 'todos'>('todos');
+    const [filtroVerificados, setFiltroVerificados] = useState<'verificados' | 'todos'>('todos');
 
     return (
         <div className='w-full flex flex-col items-center gap-8'>
@@ -46,9 +47,11 @@ export default function Feed() {
                     <Options
                         tipo='dropdown'
                         opciones={[
-                            { id: 'verificado', texto: 'Contenido verificado' },
+                            { id: 'verificados', texto: 'Contenido verificado' },
                             { id: 'todos', texto: 'Todo el contenido' },
                         ]}
+                        valorSeleccionado={filtroVerificados}
+                        onChange={(nuevoValor) => setFiltroVerificados(nuevoValor as "verificados" | "todos")}
                     />
                 </div>
 
@@ -64,6 +67,7 @@ export default function Feed() {
             <Suspense fallback={<ListaSkeleton />}>
                 <ListaFeed
                     filtroUsuarios={filtroUsuarios}
+                    filtroVerificados={filtroVerificados}
                 />
             </Suspense>
 

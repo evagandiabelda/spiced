@@ -31,13 +31,14 @@ interface ShareData {
 
 interface ListaFeedProps {
     filtroUsuarios: "seguidos" | "todos";
+    filtroVerificados: "verificados" | "todos";
 }
 
-const getExcerpt = (text: string, maxLength = 120) => {
+const getExcerpt = (text: string, maxLength = 90) => {
     return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 };
 
-export default function ListaFeed({ filtroUsuarios }: ListaFeedProps) {
+export default function ListaFeed({ filtroUsuarios, filtroVerificados }: ListaFeedProps) {
 
     const [shares, setShares] = useState<ShareData[]>([]);
     const [loading, setLoading] = useState(true);
@@ -65,6 +66,12 @@ export default function ListaFeed({ filtroUsuarios }: ListaFeedProps) {
                     url = "/api/users/me/usuarios-siguiendo";
                 }
 
+                // Si estamos filtrando por "Contenido verificado", añadimos el filtro a la URL
+                if (filtroVerificados === "verificados") {
+                    url += url.includes("?") ? "&" : "?";
+                    url += "verificados=true";
+                }
+
                 const res = await fetch(url);
                 if (!res.ok) throw new Error("Error al obtener los shares");
 
@@ -78,7 +85,7 @@ export default function ListaFeed({ filtroUsuarios }: ListaFeedProps) {
         };
 
         fetchShares();
-    }, [query, filtroUsuarios]); // Las dependencias no deben cambiar de tamaño entre renders
+    }, [query, filtroUsuarios, filtroVerificados]);
 
     if (error) return <p className="text-red-500">{error}</p>;
 
@@ -124,6 +131,7 @@ export default function ListaFeed({ filtroUsuarios }: ListaFeedProps) {
                     <Share
                         key={share.id}
                         imagen={share.img_principal || "/imgs/IMG-Ejemplo-Miniatura.png"}
+                        verificado={share.autor?.usuario_verificado || false}
                         user={share.autor?.name || "anónimo"}
                         foto={share.autor?.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
                         categorias={share.categorias.map(c => c.categoria.nombre)}

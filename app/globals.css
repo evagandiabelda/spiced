@@ -102,9 +102,9 @@
   }
 
   h4 { /* Títulos de las Cards */
-    @apply font-inter font-bold text-[1.1rem] m-0 p-0;
-    color: var(--foreground);
-    line-height: normal;
+    @apply font-inter font-black text-[1rem] m-0 p-0;
+    color: var(--gris4);
+    line-height: 1.3rem;
   }
 
   p {

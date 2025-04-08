@@ -36,7 +36,7 @@ const Tag = ({ nombre, tamano, isActive = false, icon = false, mode = "static", 
 
     if (tamano === "pequeno") {
         texto = nombre.toUpperCase();
-        className += "tag-pq px-[0.8rem] py-[0.1rem] ";
+        className += "tag-pq px-[0.8rem] py-[0.03rem] ";
     } else if (tamano === "grande") {
         texto = etiquetas[nombre as keyof typeof etiquetas];
         className += "tag-gr px-[1rem] py-[0.2rem] ";
