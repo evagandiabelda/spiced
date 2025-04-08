@@ -8,8 +8,9 @@ const prisma = new PrismaClient();
 /* OBTENER UNA CATEGORÍA ESPECÍFICA */
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+
     try {
-        const { id } = params;
+        const { id } = await params;
 
         if (!id) {
             return NextResponse.json({ error: "Falta el ID de la categoría." }, { status: 400 });
