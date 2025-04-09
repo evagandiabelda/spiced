@@ -20,7 +20,7 @@ export default function HeroBanner() {
                         </a>
                     </div>
                     <div className="inline-block">
-                        <a href="/feed" className="inline-block gap-4 text-center font-semibold rounded-full border-2 hover:scale-[1.02] transition ease duration-300 cursor-pointer a-boton-gr px-[1.8rem] py-[0.4rem] hover:bg-black/10 text-[var(--gris5)] border-[var(--gris5)]">
+                        <a href="/explorar" className="inline-block gap-4 text-center font-semibold rounded-full border-2 hover:scale-[1.02] transition ease duration-300 cursor-pointer a-boton-gr px-[1.8rem] py-[0.4rem] hover:bg-black/10 text-[var(--gris5)] border-[var(--gris5)]">
                             <div className="flex flex-row justify-center gap-4">
                                 Explorar por mi cuenta
                             </div>

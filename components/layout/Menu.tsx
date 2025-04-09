@@ -105,13 +105,16 @@ const Menu = ({ tipo }: tipo) => {
                 <div className="flex flex-col gap-5">
                     <h3 className='text-white'>Categorías</h3>
                     <nav className="flex flex-col gap-3">
-                        <a href="#" className={className}>Mindful cooking</a>
-                        <a href="#" className={className}>Tips para el hogar</a>
-                        <a href="#" className={className}>Cultura neurospicy</a>
-                        <a href="#" className={className}>Bienestar emocional</a>
-                        <a href="#" className={className}>Compartiendo experiencias</a>
-                        <a href="#" className={className}>Recursos educativos</a>
-                        <a href="#" className={className}>Gaming inclusivo</a>
+                        <a href="#" className={className}>Arte</a>
+                        <a href="#" className={className}>Bienestar</a>
+                        <a href="#" className={className}>Cine</a>
+                        <a href="#" className={className}>Compartir</a>
+                        <a href="#" className={className}>Documentales</a>
+                        <a href="#" className={className}>Educación</a>
+                        <a href="#" className={className}>Gaming</a>
+                        <a href="#" className={className}>Hogar</a>
+                        <a href="#" className={className}>Lectura</a>
+                        <a href="#" className={className}>Recetas</a>
                     </nav>
                 </div>
                 <div className="flex flex-col gap-5">
@@ -164,13 +167,16 @@ const Menu = ({ tipo }: tipo) => {
                         <AccordionTrigger className="pb-5">Categorías</AccordionTrigger>
                         <AccordionContent>
                             <nav className="flex flex-col">
-                                <a href="#" className={className}>Mindful cooking</a>
-                                <a href="#" className={className}>Tips para el hogar</a>
-                                <a href="#" className={className}>Cultura neurospicy</a>
-                                <a href="#" className={className}>Bienestar emocional</a>
-                                <a href="#" className={className}>Compartiendo experiencias</a>
-                                <a href="#" className={className}>Recursos educativos</a>
-                                <a href="#" className={className}>Gaming inclusivo</a>
+                                <a href="#" className={className}>Arte</a>
+                                <a href="#" className={className}>Bienestar</a>
+                                <a href="#" className={className}>Cine</a>
+                                <a href="#" className={className}>Compartir</a>
+                                <a href="#" className={className}>Documentales</a>
+                                <a href="#" className={className}>Educación</a>
+                                <a href="#" className={className}>Gaming</a>
+                                <a href="#" className={className}>Hogar</a>
+                                <a href="#" className={className}>Lectura</a>
+                                <a href="#" className={className}>Recetas</a>
                             </nav>
                         </AccordionContent>
                     </AccordionItem>
