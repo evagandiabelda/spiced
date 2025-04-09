@@ -25,6 +25,17 @@ export default function RootLayout({
     <html lang="es" className="light">
       <head>
         <meta name="color-scheme" content="light" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                const theme = localStorage.getItem('theme') || 'light';
+                document.documentElement.classList.add(theme);
+                document.documentElement.style.colorScheme = theme;
+              })();
+            `,
+          }}
+        />
       </head>
 
       <body className="antialiased min-h-screen">
