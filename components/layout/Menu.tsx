@@ -1,7 +1,6 @@
 'use client';
 
 import { useLanguage } from "@/context/LanguageContext";
-import { usePathname } from 'next/navigation';
 import Image from "next/image";
 import Boton from "../buttons/Boton";
 import {
@@ -19,27 +18,12 @@ type tipo = {
 
 const Menu = ({ tipo }: tipo) => {
 
-    const { language, toggleLanguage } = useLanguage();
-    const pathname = usePathname();
-
     if (tipo === "header") {
         return (
             <nav className="mobile:hidden laptop:flex items-center space-x-6">
-                <a href="/" className="hover-underline">
-                    {language === "es" ? "Inicio" : "Home"}
-                </a>
-                <a href="/explorar" className="hover-underline">
-                    {language === "es" ? "Explorar" : "Explore"}
-                </a>
-                <a href="/panel-estandar/nuevo-share" className="hover-underline">
-                    {language === "es" ? "Compartir" : "Share"}
-                </a>
-                <Boton
-                    texto={language === "es" ? "English" : "Español"}
-                    tamano="pequeno"
-                    jerarquia="primario"
-                    onClick={toggleLanguage}
-                />
+                <a href="/" className="hover-underline">Inicio</a>
+                <a href="/explorar" className="hover-underline">Explorar</a>
+                <a href="/panel-estandar/nuevo-share" className="hover-underline">Compartir</a>
             </nav>
         );
     }
@@ -56,7 +40,7 @@ const Menu = ({ tipo }: tipo) => {
                             className="dark:invert"
                             alt="inicio"
                         />
-                        <p className="font-bold mb-0">{language === "es" ? "Inicio" : "Home"}</p>
+                        <p className="font-bold mb-0">Inicio</p>
                     </div>
                 </a>
 
@@ -69,7 +53,7 @@ const Menu = ({ tipo }: tipo) => {
                             className="dark:invert"
                             alt="explorar"
                         />
-                        <p className="font-bold mb-0">{language === "es" ? "Explorar" : "Explore"}</p>
+                        <p className="font-bold mb-0">Explorar</p>
                     </div>
                 </a>
 
@@ -82,17 +66,9 @@ const Menu = ({ tipo }: tipo) => {
                             className="dark:invert"
                             alt="compartir"
                         />
-                        <p className="font-bold mb-0">{language === "es" ? "Compartir" : "Share"}</p>
+                        <p className="font-bold mb-0">Compartir</p>
                     </div>
                 </a>
-                <div className="py-12">
-                    <Boton
-                        texto={language === "es" ? "English" : "Español"}
-                        tamano="pequeno"
-                        jerarquia="primario"
-                        onClick={toggleLanguage}
-                    />
-                </div>
             </nav>
         );
     }
