@@ -289,3 +289,8 @@ input:-webkit-autofill:active {
   flex-direction: column;
   gap: 20px;
 }
+
+/* Ocultar contenido hasta que el tema esté sincronizado */
+body[data-theme-initializing="true"] {
+  visibility: hidden;
+}

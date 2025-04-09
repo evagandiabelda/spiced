@@ -11,35 +11,35 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType>({
     theme: 'light',
-    setTheme: () => { }, // Valor inicial (se sobreescribe en el provider)
+    setTheme: () => { },
 });
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-    const [theme, setTheme] = useState<Theme>('light');
+    const [theme, setThemeState] = useState<Theme>('light');
     const [isMounted, setIsMounted] = useState(false);
 
-    // Evitar que se aplique el tema hasta que estemos en cliente
-    useEffect(() => {
-        const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-        if (savedTheme) {
-            setTheme(savedTheme);
+    const setTheme = (newTheme: Theme) => {
+        setThemeState(newTheme);
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('theme', newTheme);
+            document.documentElement.classList.remove('light', 'dark');
+            document.documentElement.classList.add(newTheme);
+            document.documentElement.style.colorScheme = newTheme;
         }
+    };
+
+    useEffect(() => {
+        const storedTheme = (localStorage.getItem('theme') as Theme | null) || 'light';
+        setTheme(storedTheme);
         setIsMounted(true);
     }, []);
 
-    useEffect(() => {
-        if (!isMounted) return;
-        const html = document.documentElement;
-        html.classList.remove('light', 'dark');
-        html.classList.add(theme);
-        html.style.colorScheme = theme;
-        localStorage.setItem('theme', theme);
-    }, [theme, isMounted]);
+    // Importante: no renderizar nada hasta que el cliente haya montado
+    if (!isMounted) return null;
 
     return (
         <ThemeContext.Provider value={{ theme, setTheme }}>
-            {/* Espera a montar antes de renderizar hijos */}
-            {isMounted ? children : null}
+            {children}
         </ThemeContext.Provider>
     );
 };
