@@ -6,8 +6,10 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 /* LISTAR LOS SHARES PUBLICADOS POR LOS USUARIOS A LOS QUE SIGUE EL USUARIO EN SESIÓN */
+
 // El usuario en sesión sigue a otros usuarios. Estos ususarios publican Shares.
 // Esta petición se usará como filtro en el Feed ("Usuarios que sigo").
+// Se define por separado (y no en '/api/shares') porque ésta necesita autenticación.
 
 export async function GET(request: Request) {
 
@@ -18,6 +20,8 @@ export async function GET(request: Request) {
     }
 
     try {
+        const { searchParams } = new URL(request.url);
+
         // Obtener los usuarios seguidos por el usuario en sesión:
         const seguimientos = await prisma.seguimiento.findMany({
             where: {
@@ -31,9 +35,16 @@ export async function GET(request: Request) {
         // Extraer el ID de cada usuario seguido y crear un array:
         const idsSeguidos = seguimientos.map((s) => s.seguido_id)
 
-        // Filtro según verificados (Feed):
-        const { searchParams } = new URL(request.url);
+        // 🔎 Filtro según Categoría (Feed):
+        const categoria = searchParams.get("categoria");
+
+        // 🔎 Filtro según Verificados (Feed):
         const verificados = searchParams.get("verificados") === "true";
+
+        // 🔎 Filtro según Spices (Feed):
+        const tags = searchParams.get("tags")?.split(",") ?? [];
+
+        // SE CONSTRUYEN LOS FILTROS ("where") DINÁMICAMENTE:
 
         // El filtro base filtra por los IDs de los usuarios seguidos:
         let filtros: any[] = [
@@ -44,12 +55,38 @@ export async function GET(request: Request) {
             }
         ];
 
-        // Si se filtra por verificados, se añade:
-        if (verificados) {
-            filtros.push({ share_verificado: true });
+        if (categoria) {
+            filtros.push({
+                categorias: {
+                    some: {
+                        categoria: {
+                            nombre: categoria,
+                        },
+                    },
+                },
+            });
         }
 
-        // Obtener los Shares publicados por los usuarios seguidos:
+        if (verificados) {
+            filtros.push({ share_verificado: true })
+        }
+
+        if (tags) {
+            filtros.push({
+                spices: {
+                    some: {
+                        spice: {
+                            nombre: {
+                                in: tags,
+                            },
+                        },
+                    },
+                },
+            });
+        }
+
+        // SE OBTIENEN LOS SHARES FILTRADOS (o no):
+
         const shares = await prisma.share.findMany({
             where: {
                 AND: filtros,

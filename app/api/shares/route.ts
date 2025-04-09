@@ -9,14 +9,22 @@ const prisma = new PrismaClient();
 /* LISTAR TODOS LOS SHARES */
 export async function GET(request: Request) {
   try {
-    // Filtro según parámetros de búsqueda (componente Search):
     const { searchParams } = new URL(request.url);
+
+    // 🔎 Filtro según parámetros de búsqueda (componente Search):
     const query = searchParams.get("query");
 
-    // Filtro según verificados (Feed):
+    // 🔎 Filtro según Categoría (Feed):
+    const categoria = searchParams.get("categoria");
+
+    // 🔎 Filtro según Verificados (Feed):
     const verificados = searchParams.get("verificados") === "true";
 
-    // Se construyen los filtros ("where") dinámicamente:
+    // 🔎 Filtro según Spices (Feed):
+    const tags = searchParams.get("tags")?.split(",") ?? [];
+
+    // SE CONSTRUYEN LOS FILTROS ("where") DINÁMICAMENTE:
+
     const filtros: any[] = [];
 
     if (query) {
@@ -28,9 +36,37 @@ export async function GET(request: Request) {
       });
     }
 
+    if (categoria) {
+      filtros.push({
+        categorias: {
+          some: {
+            categoria: {
+              nombre: categoria,
+            },
+          },
+        },
+      });
+    }
+
     if (verificados) {
       filtros.push({ share_verificado: true })
     }
+
+    if (tags) {
+      filtros.push({
+        spices: {
+          some: {
+            spice: {
+              nombre: {
+                in: tags,
+              },
+            },
+          },
+        },
+      });
+    }
+
+    // SE OBTIENEN LOS SHARES FILTRADOS (o no):
 
     const shares = await prisma.share.findMany({
       where: {
