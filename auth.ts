@@ -45,6 +45,7 @@ export const { auth, signIn, signOut } = NextAuth({
             email: user.email,
             name: user.name,
             foto: user.foto,
+            nombre_completo: user.nombre_completo,
           };
         }
 
@@ -59,6 +60,7 @@ export const { auth, signIn, signOut } = NextAuth({
         session.user.id = token.id as string;
         session.user.name = token.name as string;
         session.user.foto = token.foto as string;
+        session.user.nombre_completo = token.nombre_completo as string;
       }
       return session;
     },
@@ -67,11 +69,13 @@ export const { auth, signIn, signOut } = NextAuth({
         token.id = user.id;
         token.name = user.name;
         token.foto = user.foto;
+        token.nombre_completo = user.nombre_completo;
       }
       if (trigger === "update") {
         token.id = user.id;
         token.name = user.name;
         token.foto = user.foto;
+        token.nombre_completo = user.nombre_completo;
       }
       return token;
     },

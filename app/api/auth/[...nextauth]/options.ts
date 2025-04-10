@@ -32,6 +32,7 @@ export const authOptions: NextAuthOptions = {
                     id: user.id,
                     email: user.email,
                     name: user.name,
+                    nombre_completo: user.nombre_completo,
                     foto: user.foto,
                 };
             },
@@ -42,11 +43,13 @@ export const authOptions: NextAuthOptions = {
             if (user) {
                 token.id = user.id;
                 token.name = user.name;
+                token.nombre_completo = user.nombre_completo;
                 token.foto = user.foto;
             }
             if (trigger === "update") {
                 token.id = user.id;
                 token.name = user.name;
+                token.nombre_completo = user.nombre_completo;
                 token.foto = user.foto;
             }
             return token;
@@ -56,6 +59,7 @@ export const authOptions: NextAuthOptions = {
             if (session.user) {
                 session.user.id = token.id as string;
                 session.user.name = token.name as string;
+                session.user.nombre_completo = token.nombre_completo as string;
                 session.user.foto = token.foto as string;
             }
 
