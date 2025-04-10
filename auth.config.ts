@@ -15,6 +15,7 @@ export const authConfig: NextAuthOptions = {
         session.user.email = token.email ?? "";
         session.user.name = token.name ?? "";
         session.user.foto = token.foto ?? "";
+        session.user.nombre_completo = token.nombre_completo ?? "";
       }
       return session;
     },
@@ -25,12 +26,14 @@ export const authConfig: NextAuthOptions = {
         token.email = user.email ?? "";
         token.name = user.name ?? "";
         token.foto = user.foto ?? "";
+        token.nombre_completo = user.nombre_completo ?? "";
       }
       if (trigger === "update") {
         token.id = user.id;
         token.email = user.email;
         token.name = user.name;
         token.foto = user.foto;
+        token.nombre_completo = user.nombre_completo;
       }
       return token;
     }
@@ -63,6 +66,7 @@ export const authConfig: NextAuthOptions = {
           email: user.email,
           name: user.name,
           foto: user.foto,
+          nombre_completo: user.nombre_completo,
         };
       }
 
