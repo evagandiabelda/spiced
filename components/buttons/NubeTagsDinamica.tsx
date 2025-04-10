@@ -14,6 +14,8 @@ const NubeTagsDinamica = ({ defaultActive = false, onSeleccionarTags, tagsSelecc
 
     const listaTags = ["TEA", "TDAH", "TOC", "TLP", "TAG", "TP", "TPA", "TB", "TEP", "TD", "TE", "TA", "ADI", "FOB", "OTR"];
 
+    const router = useRouter();
+
     // Si los tagsSeleccionados son proporcionados, usarlos, si no, iniciar con los tags por defecto
     const [activeTags, setActiveTags] = useState<string[]>(() =>
         tagsSeleccionados ? tagsSeleccionados : defaultActive ? listaTags : []
@@ -26,6 +28,7 @@ const NubeTagsDinamica = ({ defaultActive = false, onSeleccionarTags, tagsSelecc
             : [...activeTags, tag];
 
         setActiveTags(updatedTags);
+        router.push(`/explorar?spices=${updatedTags}`);
         if (onSeleccionarTags) onSeleccionarTags(updatedTags);  // Notificar a Feed sobre los cambios
     };
 
