@@ -32,10 +32,10 @@ interface ShareData {
 }
 
 interface ListaFeedProps {
+    filtroUsuarios?: "seguidos" | "todos";
+    filtroVerificados?: "verificados" | "todos";
     filtroCategoria: string;
-    filtroUsuarios: "seguidos" | "todos";
-    filtroVerificados: "verificados" | "todos";
-    filtroSpices: string[];
+    filtroSpices: String[];
 }
 
 const getExcerpt = (text: string, maxLength = 90) => {
@@ -52,41 +52,20 @@ export default function ListaFeed({ filtroCategoria, filtroUsuarios, filtroVerif
     const searchParams = useSearchParams();
     const query = searchParams.get("query") || "";
 
+    // PARA LA QUERY:
+
     useEffect(() => {
         const fetchShares = async () => {
             setLoading(true);
             setError(null);
 
             try {
-                let url = "/api/shares"; // URL base de la API de shares
-
-                // Si hay un término de búsqueda, filtramos por él
-                if (query) {
-                    url = `/api/shares?query=${encodeURIComponent(query)}`;
-                }
-
-                // Si estamos filtrando por "Usuarios que sigo", utilizamos la API específica
-                if (filtroUsuarios === "seguidos") {
-                    url = "/api/users/me/usuarios-siguiendo";
-                }
-
-                // Si estamos filtrando por "Contenido verificado", añadimos el filtro a la URL
-                if (filtroVerificados === "verificados") {
-                    url += url.includes("?") ? "&" : "?";
-                    url += "verificados=true";
-                }
-
-                // Si estamos filtrando por "Spices", añadimos el filtro a la URL
-                if (filtroSpices.length > 0) {
-                    url += url.includes("?") ? "&" : "?";
-                    url += `tags=${filtroSpices.join(",")}`; // Pasar los tags seleccionados
-                }
+                const url = query ? `/api/shares?query=${encodeURIComponent(query)}` : "/api/shares";
 
                 const res = await fetch(url);
                 if (!res.ok) throw new Error("Error al obtener los shares");
 
                 const data = await res.json();
-
                 setShares(data.shares);
             } catch (err) {
                 setError("No se pudieron cargar los shares.");
@@ -96,26 +75,55 @@ export default function ListaFeed({ filtroCategoria, filtroUsuarios, filtroVerif
         };
 
         fetchShares();
-    }, [query, filtroUsuarios, filtroVerificados]);
+    }, [query]);
 
-    let sharesFiltrados: ShareData[] = [...shares];
+    // PARA EL RESTO DE FILTROS:
 
-    // Si estamos filtrando por "Categoría", aplicamos el filtro
-    if (filtroCategoria !== 'todas') {
-        sharesFiltrados = shares.filter((share) => {
-            const idsCategoriasDelShare = share.categorias.map((sc) => sc.categoria.id);
-            return idsCategoriasDelShare.includes(filtroCategoria);
-        });
-    }
+    useEffect(() => {
+        const fetchShares = async () => {
+            setLoading(true);
+            setError(null);
 
-    // Si estamos filtrando por "Spices", aplicamos el filtro
-    if (filtroSpices.length > 0) {
-        sharesFiltrados = shares.filter((share) => {
-            return filtroSpices.length === 0 || filtroSpices.some(spice =>
-                share.spices.some(s => s.spice.nombre === spice)
-            );
-        });
-    }
+            try {
+
+                let url = '';
+                const params = new URLSearchParams();
+
+                // Definir URL base según el filtro de usuarios
+                if (filtroUsuarios === 'seguidos') {
+                    url = '/api/users/me/siguiendo';
+                } else {
+                    url = '/api/shares';
+                }
+
+                if (filtroVerificados == "verificados") {
+                    params.set('verificados', String(filtroVerificados));
+                }
+
+                if (filtroSpices.length > 0) {
+                    params.set('spices', filtroSpices.join(','));
+                }
+
+                if (filtroCategoria && filtroCategoria !== 'todas') {
+                    params.set('categoria', filtroCategoria);
+                }
+
+                const res = await fetch(`${url}?${params.toString()}`);
+                if (!res.ok) throw new Error("Error al obtener los shares");
+
+                const data = await res.json();
+                setShares(data.shares);
+            } catch (err) {
+                setError("No se pudieron cargar los shares.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchShares();
+    }, [filtroCategoria, filtroUsuarios, filtroVerificados, filtroSpices]);
+
+
 
     if (error) return <p className="text-red-500">{error}</p>;
 
@@ -158,12 +166,12 @@ export default function ListaFeed({ filtroCategoria, filtroUsuarios, filtroVerif
             className="w-full flex gap-5"
             columnClassName="masonry-column"
         >
-            {sharesFiltrados.length === 0 ? (
+            {shares.length === 0 ? (
                 <div className="rounded-xl bg-red-200 p-4 my-16">
                     <p className="text-[var(--gris3)] text-center">🙁 No se han encontrado Shares relacionados con tu búsqueda.</p>
                 </div>
             ) : (
-                sharesFiltrados.map((share) => (
+                shares.map((share) => (
                     <Share
                         key={share.id}
                         imagen={share.img_principal || "/imgs/IMG-Ejemplo-Miniatura.png"}

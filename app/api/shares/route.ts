@@ -17,61 +17,42 @@ export async function GET(request: Request) {
     // 🔎 Filtro según Categoría (Feed):
     const categoria = searchParams.get("categoria");
 
-    // 🔎 Filtro según Verificados (Feed):
-    const verificados = searchParams.get("verificados") === "true";
-
     // 🔎 Filtro según Spices (Feed):
-    const tags = searchParams.get("tags")?.split(",") ?? [];
+    const spices = searchParams.getAll("spices");
 
-    // SE CONSTRUYEN LOS FILTROS ("where") DINÁMICAMENTE:
-
-    const filtros: any[] = [];
-
-    if (query) {
-      filtros.push({
-        OR: [
-          { titulo: { contains: query, mode: "insensitive" } }, // Busca en título
-          { texto: { contains: query, mode: "insensitive" } },  // Busca en descripción
-        ],
-      });
-    }
-
-    if (categoria) {
-      filtros.push({
-        categorias: {
-          some: {
-            categoria: {
-              nombre: categoria,
-            },
-          },
-        },
-      });
-    }
-
-    if (verificados) {
-      filtros.push({ share_verificado: true })
-    }
-
-    if (tags) {
-      filtros.push({
-        spices: {
-          some: {
-            spice: {
-              nombre: {
-                in: tags,
-              },
-            },
-          },
-        },
-      });
-    }
-
-    // SE OBTIENEN LOS SHARES FILTRADOS (o no):
+    // 🔎 Filtro según Verificados (Feed):
+    const verificados = searchParams.get("verificados");
 
     const shares = await prisma.share.findMany({
-      where: {
-        AND: filtros,
-      },
+      where: query
+        ? {
+          OR: [
+            { titulo: { contains: query, mode: "insensitive" } },
+            { texto: { contains: query, mode: "insensitive" } },
+          ],
+        }
+        : {
+          AND: {
+            share_verificado: verificados === 'verificados' ? true : undefined,
+            categorias: categoria
+              ? {
+                some: {
+                  categoria: { id: categoria },
+                },
+              }
+              : undefined,
+            spices:
+              spices.length > 0
+                ? {
+                  some: {
+                    spice: {
+                      nombre: { in: spices },
+                    },
+                  },
+                }
+                : undefined,
+          },
+        },
       include: {
         autor: {
           select: {
@@ -98,6 +79,7 @@ export async function GET(request: Request) {
     });
 
     return NextResponse.json({ shares }, { status: 200 });
+
   } catch (error) {
     console.error("Error obteniendo los shares.", error);
     return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });

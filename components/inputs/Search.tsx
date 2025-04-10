@@ -6,6 +6,7 @@ import Image from "next/image";
 const Search = () => {
 
     const searchParams = useSearchParams();
+    const pathname = usePathname();
     const { replace } = useRouter();
 
     function handleSearch(term: string) {

@@ -35,16 +35,18 @@ export async function GET(request: Request) {
         // Extraer el ID de cada usuario seguido y crear un array:
         const idsSeguidos = seguimientos.map((s) => s.seguido_id)
 
+        // 🔎 Filtro según parámetros de búsqueda (componente Search):
+        const query = searchParams.get("query");
+
         // 🔎 Filtro según Categoría (Feed):
         const categoria = searchParams.get("categoria");
 
-        // 🔎 Filtro según Verificados (Feed):
-        const verificados = searchParams.get("verificados") === "true";
-
         // 🔎 Filtro según Spices (Feed):
-        const tags = searchParams.get("tags")?.split(",") ?? [];
+        const spices = searchParams.getAll("spices");
 
-        // SE CONSTRUYEN LOS FILTROS ("where") DINÁMICAMENTE:
+        // 🔎 Filtro según Verificados (Feed):
+        const verificados = searchParams.get("verificados");
+
 
         // El filtro base filtra por los IDs de los usuarios seguidos:
         let filtros: any[] = [
@@ -55,42 +57,39 @@ export async function GET(request: Request) {
             }
         ];
 
-        if (categoria) {
-            filtros.push({
-                categorias: {
-                    some: {
-                        categoria: {
-                            nombre: categoria,
-                        },
-                    },
-                },
-            });
-        }
-
-        if (verificados) {
-            filtros.push({ share_verificado: true })
-        }
-
-        if (tags) {
-            filtros.push({
-                spices: {
-                    some: {
-                        spice: {
-                            nombre: {
-                                in: tags,
-                            },
-                        },
-                    },
-                },
-            });
-        }
-
-        // SE OBTIENEN LOS SHARES FILTRADOS (o no):
-
         const shares = await prisma.share.findMany({
-            where: {
-                AND: filtros,
-            },
+            where: query
+                ? {
+                    OR: [
+                        { titulo: { contains: query, mode: "insensitive" } },
+                        { texto: { contains: query, mode: "insensitive" } },
+                    ],
+                }
+                : {
+                    AND: {
+                        autor_id: {
+                            in: idsSeguidos,
+                        },
+                        share_verificado: verificados === 'verificados' ? true : undefined,
+                        categorias: categoria
+                            ? {
+                                some: {
+                                    categoria: { id: categoria },
+                                },
+                            }
+                            : undefined,
+                        spices:
+                            spices.length > 0
+                                ? {
+                                    some: {
+                                        spice: {
+                                            nombre: { in: spices },
+                                        },
+                                    },
+                                }
+                                : undefined,
+                    },
+                },
             include: {
                 autor: {
                     select: {

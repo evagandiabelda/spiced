@@ -8,7 +8,7 @@ type OptionsProps = {
     tipo: "dropdown" | "checkbox" | "radio";
     label?: string;
     name?: string;
-    opciones: Array<{ id: string; texto: string }>;
+    opciones: Array<{ id: string; nombre: string }>;
     valorSeleccionado?: string; // Para gestionar el valor del Dropdown desde el elemento padre
     onChange?: (nuevoValor: string) => void;
 };
@@ -47,7 +47,7 @@ const Options = ({ tipo, label, name, opciones, valorSeleccionado, onChange }: O
                 {label && <label htmlFor={name}>{label}</label>}
                 <select id={name} onChange={handleSelectChange} value={valorSeleccionado ?? opcionSel} className="select dark:bg-[var(--gris4)] dark:border-[var(--gris3)] dark:hover:border-[var(--gris2)] dark:active:border-[var(--brand2)] dark:focus:border-[var(--brand2)]">
                     {opciones.map(opcion => (
-                        <OptionItem key={opcion.id} tipo={tipo} id={opcion.id} texto={opcion.texto} />
+                        <OptionItem key={opcion.id} tipo={tipo} id={opcion.id} texto={opcion.nombre} />
                     ))}
                 </select>
             </div>
@@ -60,7 +60,7 @@ const Options = ({ tipo, label, name, opciones, valorSeleccionado, onChange }: O
                 <p>{label}</p>
                 <div role="group" aria-labelledby={label}>
                     {opciones.map(opcion => (
-                        <OptionItem key={opcion.id} tipo={tipo} id={opcion.id} texto={opcion.texto} checked={seleccionados.includes(opcion.id)} onChange={handleCheckboxChange} />
+                        <OptionItem key={opcion.id} tipo={tipo} id={opcion.id} texto={opcion.nombre} checked={seleccionados.includes(opcion.id)} onChange={handleCheckboxChange} />
                     ))}
                 </div>
             </div>
@@ -73,7 +73,7 @@ const Options = ({ tipo, label, name, opciones, valorSeleccionado, onChange }: O
                 <p>{label}</p>
                 <div role="radiogroup">
                     {opciones.map(opcion => (
-                        <OptionItem key={opcion.id} tipo={tipo} id={opcion.id} name={name} texto={opcion.texto} checked={seleccionado === opcion.id} onChange={handleRadioChange} />
+                        <OptionItem key={opcion.id} tipo={tipo} id={opcion.id} name={name} texto={opcion.nombre} checked={seleccionado === opcion.id} onChange={handleRadioChange} />
                     ))}
                 </div>
             </div>

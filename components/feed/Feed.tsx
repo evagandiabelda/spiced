@@ -2,6 +2,7 @@
 
 import { Suspense, useState, useEffect } from 'react';
 import { useSession } from "next-auth/react";
+import { useSearchParams, useRouter } from 'next/navigation';
 import ListaFeed from '@/components/cards/ListaFeed';
 import ListaSkeleton from '@/components/layout/panel/ListaSkeleton';
 import Options from '@/components/inputs/Options';
@@ -14,14 +15,22 @@ type Categoria = {
 
 export default function Feed() {
     const { data: session } = useSession();
+    const searchParams = useSearchParams();
+    const router = useRouter();
 
-    const [filtroCategoria, setFiltroCategoria] = useState<string>('todas');
-    const [filtroUsuarios, setFiltroUsuarios] = useState<'seguidos' | 'todos'>('todos');
-    const [filtroVerificados, setFiltroVerificados] = useState<'verificados' | 'todos'>('todos');
+    // Lee los filtros desde los parámetros de la URL (por ejemplo, si queremos filtrar automáticamentee desde uno de los enlaces del Footer):
+    const filtroUsuarios = searchParams.get('usuarios') === 'seguidos' ? 'seguidos' : 'todos';
+    const filtroVerificados = searchParams.get('verificados') === 'verificados' ? 'verificados' : 'todos';
+    const filtroCategoria = searchParams.get('categoria') || '';
+    const filtroSpices = searchParams.get('spices') ? searchParams.get('spices')!.split(',') : [];
 
     // Obtener las categorías en la BD:
 
     const [categorias, setCategorias] = useState<Categoria[]>([]);
+
+    // Callback para manejar los Spices seleccionados en la nube de tags:
+    // (necesitamos recoger los tags seleccionados dentro de "NubeTagsDinamica" para poder filtrar luego los Shares en "ListaFeed")
+    const [tagsSeleccionados, setTagsSeleccionados] = useState<string[]>(filtroSpices);
 
     useEffect(() => {
         const fetchCategorias = async () => {
@@ -40,18 +49,13 @@ export default function Feed() {
 
     const opcionesCategoria = [
         // La primera opción será sin filtrar:
-        { id: 'todas', texto: 'Filtrar por categoría' },
+        { id: 'todas', nombre: 'Filtrar por categoría' },
         // El resto de opciones corresponderán a cada categoría:
         ...categorias.map((cat) => ({
             id: cat.id,
-            texto: cat.nombre
+            nombre: cat.nombre
         }))
     ];
-
-    // Callback para manejar los Spices seleccionados en la nube de tags:
-    // (necesitamos recoger los tags seleccionados dentro de "NubeTagsDinamica" para poder filtrar luego los Shares en "ListaFeed")
-
-    const [tagsSeleccionados, setTagsSeleccionados] = useState<string[]>([]);
 
     // Manejar la selección de tags
     const manejarSeleccionDeTags = (tags: string[]) => {
@@ -71,28 +75,28 @@ export default function Feed() {
                         tipo='dropdown'
                         opciones={opcionesCategoria}
                         valorSeleccionado={filtroCategoria}
-                        onChange={(nuevoValor) => setFiltroCategoria(nuevoValor)}
+                        onChange={(nuevoValor) => router.push(`/explorar?categoria=${nuevoValor}`)}
                     />
                     {/* Este filtro solo se renderiza si el usuario está autenticado: */}
                     {session && (
                         <Options
                             tipo='dropdown'
                             opciones={[
-                                { id: 'seguidos', texto: 'Usuarios que sigo' },
-                                { id: 'todos', texto: 'Todos los usuarios' },
+                                { id: 'seguidos', nombre: 'Usuarios que sigo' },
+                                { id: 'todos', nombre: 'Todos los usuarios' },
                             ]}
                             valorSeleccionado={filtroUsuarios}
-                            onChange={(nuevoValor) => setFiltroUsuarios(nuevoValor as "seguidos" | "todos")}
+                            onChange={(nuevoValor) => router.push(`/explorar?usuarios=${nuevoValor}`)}
                         />
                     )}
                     <Options
                         tipo='dropdown'
                         opciones={[
-                            { id: 'verificados', texto: 'Contenido verificado' },
-                            { id: 'todos', texto: 'Todo el contenido' },
+                            { id: 'verificados', nombre: 'Contenido verificado' },
+                            { id: 'todos', nombre: 'Todo el contenido' },
                         ]}
                         valorSeleccionado={filtroVerificados}
-                        onChange={(nuevoValor) => setFiltroVerificados(nuevoValor as "verificados" | "todos")}
+                        onChange={(nuevoValor) => router.push(`/explorar?verificados=${nuevoValor}`)}
                     />
                 </div>
 
