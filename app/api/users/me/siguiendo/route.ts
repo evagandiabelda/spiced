@@ -42,7 +42,8 @@ export async function GET(request: Request) {
         const categoria = searchParams.get("categoria");
 
         // 🔎 Filtro según Spices (Feed):
-        const spices = searchParams.getAll("spices");
+        const spicesParam = searchParams.get("spices");
+        const spices = spicesParam?.split(",") ?? [];
 
         // 🔎 Filtro según Verificados (Feed):
         const verificados = searchParams.get("verificados");
