@@ -104,7 +104,7 @@ export default function ListaFeed({ filtroCategoria, filtroUsuarios, filtroVerif
                     params.set('spices', filtroSpices.join(','));
                 }
 
-                if (filtroCategoria && filtroCategoria !== 'todas') {
+                if (filtroCategoria && filtroCategoria !== 'Categoría') {
                     params.set('categoria', filtroCategoria);
                 }
 

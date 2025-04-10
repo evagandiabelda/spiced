@@ -49,7 +49,7 @@ export default function Feed() {
 
     const opcionesCategoria = [
         // La primera opción será sin filtrar:
-        { id: 'todas', nombre: 'Filtrar por categoría' },
+        { id: 'todas', nombre: 'Categoría' },
         // El resto de opciones corresponderán a cada categoría:
         ...categorias.map((cat) => ({
             id: cat.id,
