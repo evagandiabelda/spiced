@@ -47,7 +47,7 @@ const Options = ({ tipo, label, name, opciones, valorSeleccionado, onChange }: O
                 {label && <label htmlFor={name}>{label}</label>}
                 <select id={name} onChange={handleSelectChange} value={valorSeleccionado ?? opcionSel} className="select dark:bg-[var(--gris4)] dark:border-[var(--gris3)] dark:hover:border-[var(--gris2)] dark:active:border-[var(--brand2)] dark:focus:border-[var(--brand2)]">
                     {opciones.map(opcion => (
-                        <OptionItem key={opcion.id} tipo={tipo} id={opcion.id} texto={opcion.nombre} />
+                        <OptionItem key={opcion.id} tipo={tipo} id={opcion.nombre} texto={opcion.nombre} />
                     ))}
                 </select>
             </div>

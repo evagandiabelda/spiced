@@ -82,39 +82,39 @@ const Menu = ({ tipo }: tipo) => {
                     <h3 className='text-white'>Spices</h3>
                     <div className="flex flex-row gap-6">
                         <nav className="flex flex-col gap-3">
-                            <a href="#" className={className}>TEA</a>
-                            <a href="#" className={className}>TDAH</a>
-                            <a href="#" className={className}>TOC</a>
-                            <a href="#" className={className}>TLP</a>
-                            <a href="#" className={className}>TAG</a>
-                            <a href="#" className={className}>TP</a>
-                            <a href="#" className={className}>TPA</a>
-                            <a href="#" className={className}>TB</a>
+                            <a href="/explorar?spices=TEA" className={className}>TEA</a>
+                            <a href="/explorar?spices=TDAH" className={className}>TDAH</a>
+                            <a href="/explorar?spices=TOC" className={className}>TOC</a>
+                            <a href="/explorar?spices=TLP" className={className}>TLP</a>
+                            <a href="/explorar?spices=TAG" className={className}>TAG</a>
+                            <a href="/explorar?spices=TP" className={className}>TP</a>
+                            <a href="/explorar?spices=TPA" className={className}>TPA</a>
+                            <a href="/explorar?spices=TB" className={className}>TB</a>
                         </nav>
                         <nav className="flex flex-col gap-3">
-                            <a href="#" className={className}>TEP</a>
-                            <a href="#" className={className}>TD</a>
-                            <a href="#" className={className}>TE</a>
-                            <a href="#" className={className}>TA</a>
-                            <a href="#" className={className}>Adicciones</a>
-                            <a href="#" className={className}>Fobias</a>
-                            <a href="#" className={className}>Otros</a>
+                            <a href="/explorar?spices=TEP" className={className}>TEP</a>
+                            <a href="/explorar?spices=TD" className={className}>TD</a>
+                            <a href="/explorar?spices=TE" className={className}>TE</a>
+                            <a href="/explorar?spices=TA" className={className}>TA</a>
+                            <a href="/explorar?spices=ADI" className={className}>Adicciones</a>
+                            <a href="/explorar?spices=FOB" className={className}>Fobias</a>
+                            <a href="/explorar?spices=OTR" className={className}>Otros</a>
                         </nav>
                     </div>
                 </div>
                 <div className="flex flex-col gap-5">
                     <h3 className='text-white'>Categorías</h3>
                     <nav className="flex flex-col gap-3">
-                        <a href="#" className={className}>Arte</a>
-                        <a href="#" className={className}>Bienestar</a>
-                        <a href="#" className={className}>Cine</a>
-                        <a href="#" className={className}>Compartir</a>
-                        <a href="#" className={className}>Documentales</a>
-                        <a href="#" className={className}>Educación</a>
-                        <a href="#" className={className}>Gaming</a>
-                        <a href="#" className={className}>Hogar</a>
-                        <a href="#" className={className}>Lectura</a>
-                        <a href="#" className={className}>Recetas</a>
+                        <a href="/explorar?categoria=Arte" className={className}>Arte</a>
+                        <a href="/explorar?categoria=Bienestar" className={className}>Bienestar</a>
+                        <a href="/explorar?categoria=Cine" className={className}>Cine</a>
+                        <a href="/explorar?categoria=Compartir" className={className}>Compartir</a>
+                        <a href="/explorar?categoria=Documentales" className={className}>Documentales</a>
+                        <a href="/explorar?categoria=Educación" className={className}>Educación</a>
+                        <a href="/explorar?categoria=Gaming" className={className}>Gaming</a>
+                        <a href="/explorar?categoria=Hogar" className={className}>Hogar</a>
+                        <a href="/explorar?categoria=Lectura" className={className}>Lectura</a>
+                        <a href="/explorar?categoria=Recetas" className={className}>Recetas</a>
                     </nav>
                 </div>
                 <div className="flex flex-col gap-5">
@@ -144,21 +144,21 @@ const Menu = ({ tipo }: tipo) => {
                         <AccordionTrigger className="pb-5">Spices</AccordionTrigger>
                         <AccordionContent>
                             <nav className="flex flex-col">
-                                <a href="#" className={className}>TEA</a>
-                                <a href="#" className={className}>TDAH</a>
-                                <a href="#" className={className}>TOC</a>
-                                <a href="#" className={className}>TLP</a>
-                                <a href="#" className={className}>TAG</a>
-                                <a href="#" className={className}>TP</a>
-                                <a href="#" className={className}>TPA</a>
-                                <a href="#" className={className}>TB</a>
-                                <a href="#" className={className}>TEP</a>
-                                <a href="#" className={className}>TD</a>
-                                <a href="#" className={className}>TE</a>
-                                <a href="#" className={className}>TA</a>
-                                <a href="#" className={className}>Adicciones</a>
-                                <a href="#" className={className}>Fobias</a>
-                                <a href="#" className={className}>Otros</a>
+                                <a href="/explorar?spices=TEA" className={className}>TEA</a>
+                                <a href="/explorar?spices=TDAH" className={className}>TDAH</a>
+                                <a href="/explorar?spices=TOC" className={className}>TOC</a>
+                                <a href="/explorar?spices=TLP" className={className}>TLP</a>
+                                <a href="/explorar?spices=TAG" className={className}>TAG</a>
+                                <a href="/explorar?spices=TP" className={className}>TP</a>
+                                <a href="/explorar?spices=TPA" className={className}>TPA</a>
+                                <a href="/explorar?spices=TB" className={className}>TB</a>
+                                <a href="/explorar?spices=TEP" className={className}>TEP</a>
+                                <a href="/explorar?spices=TD" className={className}>TD</a>
+                                <a href="/explorar?spices=TE" className={className}>TE</a>
+                                <a href="/explorar?spices=TA" className={className}>TA</a>
+                                <a href="/explorar?spices=ADI" className={className}>Adicciones</a>
+                                <a href="/explorar?spices=FOB" className={className}>Fobias</a>
+                                <a href="/explorar?spices=OTR" className={className}>Otros</a>
                             </nav>
                         </AccordionContent>
                     </AccordionItem>
@@ -167,16 +167,16 @@ const Menu = ({ tipo }: tipo) => {
                         <AccordionTrigger className="pb-5">Categorías</AccordionTrigger>
                         <AccordionContent>
                             <nav className="flex flex-col">
-                                <a href="#" className={className}>Arte</a>
-                                <a href="#" className={className}>Bienestar</a>
-                                <a href="#" className={className}>Cine</a>
-                                <a href="#" className={className}>Compartir</a>
-                                <a href="#" className={className}>Documentales</a>
-                                <a href="#" className={className}>Educación</a>
-                                <a href="#" className={className}>Gaming</a>
-                                <a href="#" className={className}>Hogar</a>
-                                <a href="#" className={className}>Lectura</a>
-                                <a href="#" className={className}>Recetas</a>
+                                <a href="/explorar?categoria=Arte" className={className}>Arte</a>
+                                <a href="/explorar?categoria=Bienestar" className={className}>Bienestar</a>
+                                <a href="/explorar?categoria=Cine" className={className}>Cine</a>
+                                <a href="/explorar?categoria=Compartir" className={className}>Compartir</a>
+                                <a href="/explorar?categoria=Documentales" className={className}>Documentales</a>
+                                <a href="/explorar?categoria=Educación" className={className}>Educación</a>
+                                <a href="/explorar?categoria=Gaming" className={className}>Gaming</a>
+                                <a href="/explorar?categoria=Hogar" className={className}>Hogar</a>
+                                <a href="/explorar?categoria=Lectura" className={className}>Lectura</a>
+                                <a href="/explorar?categoria=Recetas" className={className}>Recetas</a>
                             </nav>
                         </AccordionContent>
                     </AccordionItem>

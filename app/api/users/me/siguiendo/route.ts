@@ -75,7 +75,7 @@ export async function GET(request: Request) {
                         categorias: categoria
                             ? {
                                 some: {
-                                    categoria: { id: categoria },
+                                    categoria: { nombre: categoria },
                                 },
                             }
                             : undefined,
