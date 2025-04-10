@@ -35,7 +35,7 @@ interface ListaFeedProps {
     filtroUsuarios?: "seguidos" | "todos";
     filtroVerificados?: "verificados" | "todos";
     filtroCategoria: string;
-    filtroSpices: String[];
+    filtroSpices: string[];
 }
 
 const getExcerpt = (text: string, maxLength = 90) => {
