@@ -20,6 +20,30 @@ export default async function SharePage({
     // Buscar el Share en la BD:
     const share = await prisma.share.findUnique({
         where: { slug },
+        include: {
+            spices: {
+                include: {
+                    spice: true,
+                }
+            },
+            categorias: {
+                include: {
+                    categoria: true
+                }
+            },
+            comentarios: {
+                include: {
+                    user: {
+                        select: {
+                            id: true,
+                            name: true,
+                            foto: true,
+                            usuario_verificado: true,
+                        }
+                    }
+                }
+            },
+        }
     });
 
     if (!share) {
@@ -42,7 +66,11 @@ export default async function SharePage({
             img_principal={share.img_principal}
             img_secundaria={share.img_secundaria}
             fecha={share.created_at}
+            verificado={share.share_verificado}
             user={user}
+            spices={share.spices}
+            categorias={share.categorias}
+            comentarios={share.comentarios}
         />
     );
 }
