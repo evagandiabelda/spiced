@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import { PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { notFound } from "next/navigation";
 import DetalleShare from "@/components/layout/DetalleShare";
 
@@ -14,6 +16,8 @@ export default async function SharePage({
 }: {
     params: Promise<{ slug: string }>
 }) {
+
+    const session = await getServerSession(authOptions);
 
     const slug = (await params).slug;
 
@@ -50,7 +54,8 @@ export default async function SharePage({
         return notFound();
     }
 
-    // Buscar el Usuario del Share e la BD:
+    // Buscar el Autor del Share e la BD:
+
     const user = await prisma.user.findUnique({
         where: { id: share.autor_id },
     });
@@ -59,18 +64,36 @@ export default async function SharePage({
         return notFound();
     }
 
-    return (
-        <DetalleShare
-            titulo={share.titulo}
-            texto={share.texto}
-            img_principal={share.img_principal}
-            img_secundaria={share.img_secundaria}
-            fecha={share.created_at}
-            verificado={share.share_verificado}
-            user={user}
-            spices={share.spices}
-            categorias={share.categorias}
-            comentarios={share.comentarios}
-        />
-    );
+    // Comprobar si sigue al autor del Share:
+
+    let yaLoSigue = false;
+
+    if (session?.user?.id && share.autor_id !== session.user.id) {
+        const seguimiento = await prisma.seguimiento.findFirst({
+            where: {
+                seguidor_id: session.user.id,
+                seguido_id: share.autor_id,
+            },
+        });
+
+        yaLoSigue = Boolean(seguimiento);
+
+        return (
+            <DetalleShare
+                titulo={share.titulo}
+                texto={share.texto}
+                img_principal={share.img_principal}
+                img_secundaria={share.img_secundaria}
+                fecha={share.created_at}
+                verificado={share.share_verificado}
+                autor={user}
+                spices={share.spices}
+                categorias={share.categorias}
+                comentarios={share.comentarios}
+                sessionUserId={session?.user?.id ?? null}
+                yaLoSigue={yaLoSigue}
+            />
+        );
+    }
+
 }

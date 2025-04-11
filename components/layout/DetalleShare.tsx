@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Avatar from "@/components/icons/Avatar";
 import Boton from "@/components/buttons/Boton";
@@ -13,7 +14,8 @@ interface DetalleShareProps {
     img_secundaria: string | null;
     fecha: Date;
     verificado: boolean;
-    user: {
+    autor: {
+        id: string;
         name: string;
         foto: string;
         usuario_verificado: boolean;
@@ -41,9 +43,31 @@ interface DetalleShareProps {
             usuario_verificado: boolean;
         };
     }[];
+    sessionUserId: string | null;
+    yaLoSigue: boolean;
 }
 
-export default function DetalleShare({ titulo, texto, img_principal, img_secundaria, fecha, verificado, user, spices, categorias, comentarios }: DetalleShareProps) {
+export default function DetalleShare({ titulo, texto, img_principal, img_secundaria, fecha, verificado, autor, spices, categorias, comentarios, sessionUserId, yaLoSigue }: DetalleShareProps) {
+
+    const [isFollowing, setIsFollowing] = useState(yaLoSigue);
+
+    const handleToggleFollow = async () => {
+        try {
+            const response = await fetch("/api/users/me/siguiendo", {
+                method: isFollowing ? "DELETE" : "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ seguido_id: autor.id }), // el ID del autor del share
+            });
+
+            if (!response.ok) {
+                throw new Error("Error en la petición.");
+            }
+
+            setIsFollowing(!isFollowing); // Invertimos el estado
+        } catch (error) {
+            console.error("Error al seguir/dejar de seguir al autor del Share.", error);
+        }
+    }
 
     return (
         <div className="w-full flex flex-col items-center gap-16 pb-[160px]">
@@ -85,11 +109,11 @@ export default function DetalleShare({ titulo, texto, img_principal, img_secunda
                     <div className="w-full flex flex-col gap-5 border-b border-b-1 border-b-[var(--gris2)] px-2 pb-8">
                         <div className="w-full flex flex-col gap-3">
                             <div className="max-w-[120px]">
-                                <a href="#"><Avatar borde="color" foto={user.foto} /></a>
+                                <a href="#"><Avatar borde="color" foto={autor.foto} /></a>
                             </div>
                             <div className="flex flex-row gap-2 pl-2">
-                                <a href="#"><h4>@{user.name}</h4></a>
-                                {user.usuario_verificado && <Image
+                                <a href="#"><h4>@{autor.name}</h4></a>
+                                {autor.usuario_verificado && <Image
                                     src="/iconos/iconos-otros/icono-verificado-relleno2.svg"
                                     alt="Verificado"
                                     width={16}
@@ -97,12 +121,12 @@ export default function DetalleShare({ titulo, texto, img_principal, img_secunda
                                 />}
                             </div>
                         </div>
-                        <Boton
-                            texto="Seguir contenido"
-                            enlace="#"
+                        {sessionUserId && <Boton
+                            texto={isFollowing ? "Dejar de seguir" : "Seguir contenido"}
+                            onClick={handleToggleFollow}
                             tamano="pequeno"
-                            jerarquia="primario"
-                        />
+                            jerarquia={isFollowing ? "secundario" : "primario"}
+                        />}
                     </div>
 
                     <div className="w-full flex flex-col gap-5 border-b border-b-1 border-b-[var(--gris2)] px-2 py-8">
