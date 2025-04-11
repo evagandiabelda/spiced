@@ -19,7 +19,7 @@ export default function Feed() {
     const router = useRouter();
 
     // Lee los filtros desde los parámetros de la URL (por ejemplo, si queremos filtrar automáticamentee desde uno de los enlaces del Footer):
-    const filtroUsuarios = searchParams.get('usuarios') === 'seguidos' ? 'seguidos' : 'todos';
+    const filtroUsuarios = searchParams.get('usuarios') === 'siguiendo' ? 'siguiendo' : 'todos';
     const filtroVerificados = searchParams.get('verificados') === 'verificados' ? 'verificados' : 'todos';
     const filtroCategoria = searchParams.get('categoria') || '';
     const filtroSpices = searchParams.get('spices') ? searchParams.get('spices')!.split(',') : [];
@@ -49,10 +49,10 @@ export default function Feed() {
 
     const opcionesCategoria = [
         // La primera opción será sin filtrar:
-        { id: 'todas', nombre: 'Categoría' },
+        { id: 'todas', nombre: 'Todas las categorías' },
         // El resto de opciones corresponderán a cada categoría:
         ...categorias.map((cat) => ({
-            id: cat.id,
+            id: cat.nombre, // Para que construya la URL en base al nombre y no a un ID.
             nombre: cat.nombre
         }))
     ];
@@ -82,8 +82,8 @@ export default function Feed() {
                         <Options
                             tipo='dropdown'
                             opciones={[
-                                { id: 'seguidos', nombre: 'Usuarios que sigo' },
                                 { id: 'todos', nombre: 'Todos los usuarios' },
+                                { id: 'siguiendo', nombre: 'Usuarios que sigo' },
                             ]}
                             valorSeleccionado={filtroUsuarios}
                             onChange={(nuevoValor) => router.push(`/explorar?usuarios=${nuevoValor}`)}
@@ -92,8 +92,8 @@ export default function Feed() {
                     <Options
                         tipo='dropdown'
                         opciones={[
-                            { id: 'verificados', nombre: 'Contenido verificado' },
-                            { id: 'todos', nombre: 'Todo el contenido' },
+                            { id: 'todos', nombre: 'Todos los Shares' },
+                            { id: 'verificados', nombre: 'Shares verificados' },
                         ]}
                         valorSeleccionado={filtroVerificados}
                         onChange={(nuevoValor) => router.push(`/explorar?verificados=${nuevoValor}`)}

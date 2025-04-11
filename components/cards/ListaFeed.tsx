@@ -32,7 +32,7 @@ interface ShareData {
 }
 
 interface ListaFeedProps {
-    filtroUsuarios?: "seguidos" | "todos";
+    filtroUsuarios?: "siguiendo" | "todos";
     filtroVerificados?: "verificados" | "todos";
     filtroCategoria: string;
     filtroSpices: string[];
@@ -90,7 +90,7 @@ export default function ListaFeed({ filtroCategoria, filtroUsuarios, filtroVerif
                 const params = new URLSearchParams();
 
                 // Definir URL base según el filtro de usuarios
-                if (filtroUsuarios === 'seguidos') {
+                if (filtroUsuarios === 'siguiendo') {
                     url = '/api/users/me/siguiendo';
                 } else {
                     url = '/api/shares';
@@ -104,7 +104,7 @@ export default function ListaFeed({ filtroCategoria, filtroUsuarios, filtroVerif
                     params.set('spices', filtroSpices.join(','));
                 }
 
-                if (filtroCategoria && filtroCategoria !== 'Categoría') {
+                if (filtroCategoria && filtroCategoria !== 'todas') {
                     params.set('categoria', filtroCategoria);
                 }
 
