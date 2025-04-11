@@ -167,7 +167,7 @@ export default function DetalleShare({ titulo, texto, img_principal, img_secunda
                     <div className="inline-block px-2 py-8">
                         <Boton
                             texto="Volver al Feed"
-                            enlace="/feed"
+                            enlace="/explorar"
                             tamano="pequeno"
                             jerarquia="secundario"
                             icon="/iconos/iconos-otros/icono-arrow-left.svg"

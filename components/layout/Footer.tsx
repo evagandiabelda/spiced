@@ -66,9 +66,9 @@ const Footer = () => {
                                 />
                             </a>
                         </div>
-                        <div className='flex flex-col gap-5'>
-                            <div className="flex flex-col gap-3">
-                                <h4>Ayuda y prevención contra el suicidio</h4>
+                        <div className='flex flex-col gap-6'>
+                            <div className="flex flex-col gap-5">
+                                <h3 className='text-white'>Ayuda y prevención contra el suicidio</h3>
                                 <p className='text-[var(--brand2)]'>No dudes en utilizar nuestro chat en vivo 24/7 y gratuito, con profesionales voluntarios y totalmente anónimo.</p>
                             </div>
                             <div>
