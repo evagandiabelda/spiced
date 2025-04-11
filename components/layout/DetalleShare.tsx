@@ -6,6 +6,7 @@ import Image from "next/image";
 import Avatar from "@/components/icons/Avatar";
 import Boton from "@/components/buttons/Boton";
 import Tag from "@/components/buttons/Tag";
+import Comentario from "@/components/cards/Comentario";
 
 interface DetalleShareProps {
     id: string;
@@ -194,7 +195,7 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                 </div>
 
                 {/* Artículo */}
-                <div className="w-full flex flex-col items-start gap-2 gap-4">
+                <div className="w-full flex flex-col items-start gap-4">
                     {texto.split("\n").map((parrafo, index) => (
                         <React.Fragment key={index}>
                             {/* Renderizamos el primer párrafo + la imagen secundaria (si hay) */}
@@ -212,7 +213,7 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                             <p className="text-[1.2rem]">{parrafo}</p>
                         </React.Fragment>
                     ))}
-                    <div className="inline-block px-2 py-8">
+                    <div className="inline-block px-2 pt-8 pb-20">
                         <Boton
                             texto="Volver al Feed"
                             enlace="/explorar"
@@ -221,7 +222,22 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                             icon="/iconos/iconos-otros/icono-arrow-left.svg"
                         />
                     </div>
+
+                    {/* Comentarios */}
+                    <div className="w-full flex flex-col items-start gap-12 py-12 border-t border-gray-400">
+                        {comentarios.map((comentario, index) => (
+                            <Comentario
+                                key={index}
+                                texto={comentario.texto}
+                                fecha={comentario.created_at}
+                                user={comentario.user}
+                                sessionUserId={sessionUserId}
+                            />
+                        ))}
+                    </div>
+
                 </div>
+
             </div>
 
         </div>
