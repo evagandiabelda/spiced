@@ -8,6 +8,7 @@ import Boton from "@/components/buttons/Boton";
 import Tag from "@/components/buttons/Tag";
 
 interface DetalleShareProps {
+    id: string;
     titulo: string;
     texto: string;
     img_principal: string;
@@ -45,11 +46,13 @@ interface DetalleShareProps {
     }[];
     sessionUserId: string | null;
     yaLoSigue: boolean;
+    estaGuardado: boolean;
 }
 
-export default function DetalleShare({ titulo, texto, img_principal, img_secundaria, fecha, verificado, autor, spices, categorias, comentarios, sessionUserId, yaLoSigue }: DetalleShareProps) {
+export default function DetalleShare({ id, titulo, texto, img_principal, img_secundaria, fecha, verificado, autor, spices, categorias, comentarios, sessionUserId, yaLoSigue, estaGuardado }: DetalleShareProps) {
 
     const [isFollowing, setIsFollowing] = useState(yaLoSigue);
+    const [guardado, setGuardado] = useState(estaGuardado);
 
     const handleToggleFollow = async () => {
         try {
@@ -66,6 +69,27 @@ export default function DetalleShare({ titulo, texto, img_principal, img_secunda
             setIsFollowing(!isFollowing); // Invertimos el estado
         } catch (error) {
             console.error("Error al seguir/dejar de seguir al autor del Share.", error);
+        }
+    }
+
+    const handleToggleGuardado = async () => {
+        try {
+            const res = await fetch(`/api/users/me/shares/guardados`, {
+                method: guardado ? 'DELETE' : 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ share_id: id }),
+            })
+
+            if (!res.ok) {
+                const data = await res.json()
+                throw new Error(data.error || 'Error al guardar/guardar el Share.')
+            }
+
+            setGuardado(!guardado)
+        } catch (error: any) {
+            console.error("Error al guardar/olvidar el Share.", error);
         }
     }
 
@@ -158,13 +182,13 @@ export default function DetalleShare({ titulo, texto, img_principal, img_secunda
                     </div>
 
                     <div className="inline-block px-2 py-8">
-                        <Boton
-                            texto="Guardar"
-                            enlace="#"
+                        {sessionUserId && <Boton
+                            texto={guardado ? "Olvidar" : "Guardar"}
+                            onClick={handleToggleGuardado}
                             tamano="pequeno"
-                            jerarquia="secundario"
+                            jerarquia={guardado ? "secundario" : "primario"}
                             icon="/iconos/iconos-menu/icono-guardado.svg"
-                        />
+                        />}
                     </div>
 
                 </div>

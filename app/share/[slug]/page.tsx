@@ -77,23 +77,33 @@ export default async function SharePage({
         });
 
         yaLoSigue = Boolean(seguimiento);
-
-        return (
-            <DetalleShare
-                titulo={share.titulo}
-                texto={share.texto}
-                img_principal={share.img_principal}
-                img_secundaria={share.img_secundaria}
-                fecha={share.created_at}
-                verificado={share.share_verificado}
-                autor={user}
-                spices={share.spices}
-                categorias={share.categorias}
-                comentarios={share.comentarios}
-                sessionUserId={session?.user?.id ?? null}
-                yaLoSigue={yaLoSigue}
-            />
-        );
     }
+
+    // Comprobar si el Share está guardado:
+
+    let estaGuardado = false;
+
+    if (session?.user?.id && session?.user?.shares_guardados) {
+        estaGuardado = session.user.shares_guardados.some((share: any) => share.share_id === share.id);
+    }
+
+    return (
+        <DetalleShare
+            id={share.id}
+            titulo={share.titulo}
+            texto={share.texto}
+            img_principal={share.img_principal}
+            img_secundaria={share.img_secundaria}
+            fecha={share.created_at}
+            verificado={share.share_verificado}
+            autor={user}
+            spices={share.spices}
+            categorias={share.categorias}
+            comentarios={share.comentarios}
+            sessionUserId={session?.user?.id ?? null}
+            yaLoSigue={yaLoSigue}
+            estaGuardado={estaGuardado}
+        />
+    );
 
 }
