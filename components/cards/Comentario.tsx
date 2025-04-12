@@ -21,17 +21,17 @@ export default function Comentario({ texto, fecha, user, sessionUserId }: Coment
     const fechaFormateada = format(new Date(fecha), "HH:mm'h' - d 'de' MMMM yyyy", { locale: es });
 
     return (
-        <div className="w-full flex flex-col p-[10px] gap-6">
+        <div className="w-full flex flex-col gap-6 p-[10px] pb-10 border-b border-gray-300">
 
             {/* Caja Superior: */}
             <div className="w-full flex flex-row justify-between items-center gap-4">
                 <div className="flex flex-row items-center gap-2">
-                    <div className="max-w-[60px]">
+                    <div className="max-w-[40px]">
                         <a href="#"><Avatar borde="color" foto={user.foto} /></a>
                     </div>
-                    <p>{user.name}</p>
+                    <p className="font-bold text-[0.9rem] text-[var(--gris4)]">@{user.name}</p>
                 </div>
-                <p className="text-end text-[var(--gris2)] font-bold">{fechaFormateada}</p>
+                <p className="text-end text-[0.9rem] text-[var(--gris2)] font-bold">{fechaFormateada}</p>
             </div>
 
             {/* Caja Central: */}
@@ -41,7 +41,7 @@ export default function Comentario({ texto, fecha, user, sessionUserId }: Coment
 
             {/* Caja Inferior: */}
             <div className="w-full flex flex-row justify-between items-center gap-4">
-                <a href="#" className="text-end text-[0.8rem] font-bold underline text-[var(--gris2)] hover:text-[var(--gris4)] transition ease">Denunciar contenido inapropiado</a>
+                <a href="#" className="text-end text-[0.9rem] font-bold underline text-[var(--gris2)] hover:text-[var(--gris4)] transition ease">Denunciar contenido inapropiado</a>
                 {sessionUserId && <Boton
                     texto="Responder"
                     tamano="pequeno"

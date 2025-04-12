@@ -101,7 +101,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
             }
         });
 
-        return NextResponse.json({ message: "Comentario publicado correctamente.", user: nuevoComentario }, { status: 201 });
+        return NextResponse.json({ message: "Comentario publicado correctamente.", comentario: nuevoComentario }, { status: 201 });
     } catch (error) {
         console.error("Error al publicar el comentario.", error);
         return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });

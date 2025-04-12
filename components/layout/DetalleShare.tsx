@@ -6,6 +6,7 @@ import Image from "next/image";
 import Avatar from "@/components/icons/Avatar";
 import Boton from "@/components/buttons/Boton";
 import Tag from "@/components/buttons/Tag";
+import ComentarioForm from "@/components/inputs/forms/comentario-form";
 import Comentario from "@/components/cards/Comentario";
 
 interface DetalleShareProps {
@@ -16,6 +17,7 @@ interface DetalleShareProps {
     img_secundaria: string | null;
     fecha: Date;
     verificado: boolean;
+    slug: string | null;
     autor: {
         id: string;
         name: string;
@@ -50,7 +52,7 @@ interface DetalleShareProps {
     estaGuardado: boolean;
 }
 
-export default function DetalleShare({ id, titulo, texto, img_principal, img_secundaria, fecha, verificado, autor, spices, categorias, comentarios, sessionUserId, yaLoSigue, estaGuardado }: DetalleShareProps) {
+export default function DetalleShare({ id, titulo, texto, img_principal, img_secundaria, fecha, verificado, slug, autor, spices, categorias, comentarios, sessionUserId, yaLoSigue, estaGuardado }: DetalleShareProps) {
 
     const [isFollowing, setIsFollowing] = useState(yaLoSigue);
     const [guardado, setGuardado] = useState(estaGuardado);
@@ -224,16 +226,24 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                     </div>
 
                     {/* Comentarios */}
-                    <div className="w-full flex flex-col items-start gap-12 py-12 border-t border-gray-400">
-                        {comentarios.map((comentario, index) => (
-                            <Comentario
-                                key={index}
-                                texto={comentario.texto}
-                                fecha={comentario.created_at}
-                                user={comentario.user}
-                                sessionUserId={sessionUserId}
-                            />
-                        ))}
+                    <div className="w-full flex flex-col items-start gap-16 py-12 border-t border-gray-400">
+
+                        {sessionUserId && <ComentarioForm
+                            slug={slug}
+                        />}
+
+                        <div className="w-full flex flex-col items-start gap-8">
+                            {comentarios.map((comentario, index) => (
+                                <Comentario
+                                    key={index}
+                                    texto={comentario.texto}
+                                    fecha={comentario.created_at}
+                                    user={comentario.user}
+                                    sessionUserId={sessionUserId}
+                                />
+                            ))}
+                        </div>
+
                     </div>
 
                 </div>

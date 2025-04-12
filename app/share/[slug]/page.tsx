@@ -96,6 +96,7 @@ export default async function SharePage({
             img_secundaria={share.img_secundaria}
             fecha={share.created_at}
             verificado={share.share_verificado}
+            slug={share.slug}
             autor={user}
             spices={share.spices}
             categorias={share.categorias}
