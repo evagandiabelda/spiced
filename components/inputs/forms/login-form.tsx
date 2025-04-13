@@ -34,10 +34,10 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full flex flex-col items-center gap-4 justify-centerspace-y-3">
+    <form onSubmit={handleSubmit} className="w-full flex flex-col items-center gap-4 justify-center space-y-3">
       <h1>Accede a tu cuenta</h1>
 
-      <div className="flex flex-col flex-1 align-center gap-8 rounded-lg px-6 pb-4 pt-8 w-full max-w-[400px]">
+      <div className="w-full flex flex-col flex-1 align-center gap-16 pb-4 pt-8 max-w-[360px]">
 
         <div className="w-full">
 

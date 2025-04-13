@@ -2,118 +2,65 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { BotonLogin } from "@/components/buttons/BotonLogin";
+import { useRegistro } from "@/components/RegistroContext";
 import Input from "@/components/inputs/Input";
+import BotonSubmit from "@/components/buttons/BotonSubmit";
 
 export default function SigninForm() {
+
     const router = useRouter();
-    const [form, setForm] = useState({
-        nombre_completo: "",
-        name: "",
-        email: "",
-        password: "",
-    });
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
 
-    // Manejar cambios en los inputs
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
+    const { email, password, setEmail, setPassword } = useRegistro();
 
-    // Enviar formulario
-    const handleSubmit = async (e: React.FormEvent) => {
+    // Guardar los datos temporalmente en localStorage y redirigir:
+
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        setLoading(true);
-        setError("");
 
-        const res = await fetch("/api/auth/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(form),
-        });
+        if (!email || !password) return;
 
-        const data = await res.json();
-        setLoading(false);
+        // Guardar en contexto (useRegistro):
+        setEmail(email);
+        setPassword(password);
 
-        if (!res.ok) {
-            setError(data.error);
-            return;
-        }
-
-        // Redirigir al login después de registrar
-        router.push("/login");
+        // Redirigir al primer paso:
+        router.push("/register/paso-1");
     };
 
     return (
-        <form onSubmit={handleSubmit} className="w-full flex flex-col items-center gap-4 justify-center">
+        <form onSubmit={handleSubmit} className="w-full flex flex-col justify-center items-center gap-4 px-col1">
             <h1>Regístrate en Spiced</h1>
 
-            <div className="w-full flex flex-col flex-1 align-center gap-16 rounded-lg px-6 pb-4 pt-8">
+            <div className="w-full flex flex-col flex-1 align-center gap-16 pb-4 pt-8 max-w-[360px]">
 
                 {/* INPUTS */}
 
                 <div className="w-full flex flex-col gap-8">
 
-                    {/* Fila superior */}
-                    <div className="w-full flex flex-row gap-8">
-
-                        <div className="w-full">
-                            <label className="mb-3 mt-5 block" htmlFor="nombre_completo">¿Cómo te llamas?</label>
-                            <Input
-                                tipo="text"
-                                id="nombre_completo"
-                                placeholder="Nombre completo"
-                                required={true}
-                                value={form.nombre_completo}
-                                onChange={handleChange}
-                            />
-                        </div>
-
-                        <div className="w-full">
-                            <label className="mb-3 mt-5 block" htmlFor="name">Elige un nombre de usuario único</label>
-                            <Input
-                                tipo="text"
-                                icon={true}
-                                id="name"
-                                placeholder="Nombre de usuario"
-                                required={true}
-                                value={form.name}
-                                onChange={handleChange}
-                            />
-                        </div>
-
+                    <div className="w-full">
+                        <label className="mb-3 mt-5 block" htmlFor="email">Tu correo electrónico</label>
+                        <Input
+                            tipo="email"
+                            icon={true}
+                            id="email"
+                            placeholder="email@ejemplo.com"
+                            required={true}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                     </div>
 
-                    {/* Fila inferior */}
-                    <div className="w-full flex flex-row gap-8">
-
-                        <div className="w-full">
-                            <label className="mb-3 mt-5 block" htmlFor="email">Tu correo electrónico</label>
-                            <Input
-                                tipo="email"
-                                icon={true}
-                                id="email"
-                                placeholder="email@ejemplo.com"
-                                required={true}
-                                value={form.email}
-                                onChange={handleChange}
-                            />
-                        </div>
-
-                        <div className="w-full">
-                            <label className="mb-3 mt-5 block" htmlFor="password">Escribe una contraseña segura</label>
-                            <Input
-                                tipo="password"
-                                icon={true}
-                                id="password"
-                                placeholder="Contraseña"
-                                required={true}
-                                value={form.password}
-                                onChange={handleChange}
-                            />
-                        </div>
-
+                    <div className="w-full">
+                        <label className="mb-3 mt-5 block" htmlFor="password">Escribe una contraseña segura</label>
+                        <Input
+                            tipo="password"
+                            icon={true}
+                            id="password"
+                            placeholder="Contraseña"
+                            required={true}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
                     </div>
 
                 </div>
@@ -121,10 +68,9 @@ export default function SigninForm() {
                 {/* BOTONES */}
 
                 <div className="flex flex-row justify-end">
-                    <BotonLogin aria-disabled={loading}>
-                        {loading ? "Registrando..." : "Registrarse"}
-                    </BotonLogin>
-                    {error && <p className="text-red-500">{error}</p>}
+                    <BotonSubmit
+                        texto="Regístrate"
+                    />
                 </div>
 
             </div>
