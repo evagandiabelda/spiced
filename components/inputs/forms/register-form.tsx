@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useRegistro } from "@/components/RegistroContext";
 import Input from "@/components/inputs/Input";
 import BotonSubmit from "@/components/buttons/BotonSubmit";
 
-export default function SigninForm() {
+export default function RegisterForm() {
 
     const router = useRouter();
 

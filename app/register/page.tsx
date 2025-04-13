@@ -1,12 +1,9 @@
-import SigninForm from '@/components/inputs/forms/signin-form';
-import { Suspense } from 'react';
+import RegisterForm from '@/components/inputs/forms/register-form';
 
-export default function LoginPage() {
+export default function RegisterPage() {
     return (
         <div className="mx-auto h-full flex items-center justify-center w-full flex-col p-8">
-            <Suspense>
-                <SigninForm />
-            </Suspense>
+            <RegisterForm />
         </div>
     );
 }
