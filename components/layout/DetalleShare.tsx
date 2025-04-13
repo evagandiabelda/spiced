@@ -8,6 +8,8 @@ import Boton from "@/components/buttons/Boton";
 import Tag from "@/components/buttons/Tag";
 import ComentarioForm from "@/components/inputs/forms/comentario-form";
 import Comentario from "@/components/cards/Comentario";
+import Modal from "@/components/layout/Modal";
+import DenunciaForm from "@/components/inputs/forms/denuncia-form";
 
 interface DetalleShareProps {
     id: string;
@@ -101,6 +103,10 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
         }
     }
 
+    // Gestionar la acción de Denunciar el Share:
+
+    const [mostrarDenuncia, setMostrarDenuncia] = useState(false);
+
     // Gestionar la acción de responder a otro comentario:
 
     const comentarioFormRef = useRef<HTMLDivElement>(null);
@@ -117,7 +123,7 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
 
             {/* CABECERA */}
             <div className="w-full min-h-[500px] max-h-[600px] flex flex-row">
-                <div className="relative w-1/2">
+                <div className="relative w-2/3">
                     <Image
                         src={img_principal}
                         alt="miniatura"
@@ -126,7 +132,7 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                     />
                 </div>
 
-                <div className="w-1/2 h-full flex flex-col justify-center gap-8 p-20 bg-black/5 dark:bg-white/5">
+                <div className="w-full h-full flex flex-col justify-center gap-8 p-20 bg-black/5 dark:bg-white/5">
                     <div className="flex flex-row gap-4 items-center">
                         <Image
                             src="/iconos/iconos-genericos/icono-spiced.svg"
@@ -149,7 +155,7 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                 {/* Sidebar */}
                 <div className="w-col3 flex flex-col gap-2">
 
-                    <div className="w-full flex flex-col gap-5 border-b border-b-1 border-b-[var(--gris2)] px-2 pb-8">
+                    <div className="w-full flex flex-col gap-5 border-b border-b-1 border-b-[var(--gris2)] px-2 pb-12">
                         <div className="w-full flex flex-col gap-3">
                             <div className="max-w-[120px]">
                                 <a href="#"><Avatar borde="color" foto={autor.foto} /></a>
@@ -172,7 +178,7 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                         />}
                     </div>
 
-                    <div className="w-full flex flex-col gap-5 border-b border-b-1 border-b-[var(--gris2)] px-2 py-8">
+                    <div className="w-full flex flex-col gap-5 border-b border-b-1 border-b-[var(--gris2)] px-2 pt-8 pb-12">
                         <div className="w-full flex flex-col gap-3">
                             <h4 className="pl-2">Sobre este share:</h4>
                         </div>
@@ -200,7 +206,10 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                         </div>
                     </div>
 
-                    <div className="inline-block px-2 py-8">
+                    <div className="w-full flex flex-col gap-6 px-2 py-8">
+                        {sessionUserId &&
+                            <a href="#" onClick={() => setMostrarDenuncia(true)} className="text-[0.8rem] font-bold underline text-[var(--gris2)] hover:text-[var(--gris4)] transition ease">Denunciar contenido inapropiado</a>
+                        }
                         {sessionUserId && <Boton
                             texto={guardado ? "Olvidar" : "Guardar"}
                             onClick={handleToggleGuardado}
@@ -273,6 +282,13 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                 </div>
 
             </div>
+
+            <Modal isOpen={mostrarDenuncia} onClose={() => setMostrarDenuncia(false)}>
+                <DenunciaForm
+                    slug={slug}
+                    onClose={() => setMostrarDenuncia(false)}
+                />
+            </Modal>
 
         </div>
     );

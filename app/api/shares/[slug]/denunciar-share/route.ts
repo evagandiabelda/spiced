@@ -25,7 +25,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
 
         // Buscar el Share por su slug
         const share = await prisma.share.findUnique({
-            where: { slug: slug },
+            where: { slug },
             include: {
                 autor: true,
                 denuncias: true,
