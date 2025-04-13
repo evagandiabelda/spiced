@@ -42,7 +42,10 @@ export default function Paso1() {
 
     return (
         <form onSubmit={handleSubmit} className="w-full flex flex-col justify-center items-center gap-4 px-col1">
-            <h1>Regístrate en Spiced</h1>
+            <div className='w-full text-center flex flex-col gap-6'>
+                <h2 className='w-full'>Información básica</h2>
+                <p>Estos datos nos ayudarán a ofrecerte contenido más personalizado. Prometemos no usarlos para nada más.</p>
+            </div>
 
             <div className="w-full flex flex-col flex-1 align-center gap-8 pb-4 pt-8">
 

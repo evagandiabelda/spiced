@@ -103,6 +103,7 @@ export default function Feed() {
                 {/* TAGS */}
                 <div className='w-full'>
                     <NubeTagsDinamica
+                        uso='feed'
                         defaultActive={true}
                         onSeleccionarTags={manejarSeleccionDeTags} // Pasa la función de callback
                         tagsSeleccionados={tagsSeleccionados} // Pasa los tags seleccionados

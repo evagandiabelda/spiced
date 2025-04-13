@@ -27,8 +27,33 @@ export default function Paso4() {
     }
 
     return (
-        <div className="w-full h-full flex flex-col justify-center items-center p-8">
-            {/* Contenido... */}
-        </div>
+        <form onSubmit={handleSubmit} className="w-full h-full flex flex-col justify-center items-center gap-4 px-col1">
+            <div className='w-full text-center flex flex-col gap-6'>
+                <h2 className='w-full'>Vamos a construir tu feed</h2>
+                <p>Elige qué tipo de contenido te gustaría ver. Puedes elegir más de una opción. ¿No lo tienes claro? ¡No te preocupes! Puedes cambiar esto más adelante.</p>
+            </div>
+
+            <div className="w-full flex flex-col flex-1 align-center gap-8 pb-4 pt-8">
+
+
+
+            </div>
+
+            {/* BOTONES */}
+
+            <div className="w-full flex flex-row justify-end items-center gap-4 py-10">
+                <Boton
+                    texto='Atrás'
+                    enlace='/register/paso-1'
+                    tamano='grande'
+                    jerarquia='secundario'
+                />
+                <BotonSubmit
+                    texto="Siguiente"
+                    icon="/iconos/iconos-otros/icono-arrow-right.svg"
+                />
+            </div>
+
+        </form>
     );
 }

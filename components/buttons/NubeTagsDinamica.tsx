@@ -5,12 +5,13 @@ import { useRouter } from "next/navigation";
 import Tag from "@/components/buttons/Tag";
 
 interface NubeTagsDinamicaProps {
+    uso: "feed" | "register";
     defaultActive?: boolean;
     onSeleccionarTags?: (tags: string[]) => void;
     tagsSeleccionados?: string[];
 }
 
-const NubeTagsDinamica = ({ defaultActive = false, onSeleccionarTags, tagsSeleccionados }: NubeTagsDinamicaProps) => {
+const NubeTagsDinamica = ({ uso, defaultActive = false, onSeleccionarTags, tagsSeleccionados }: NubeTagsDinamicaProps) => {
 
     const listaTags = ["TEA", "TDAH", "TOC", "TLP", "TAG", "TP", "TPA", "TB", "TEP", "TD", "TE", "TA", "ADI", "FOB", "OTR"];
 
@@ -28,7 +29,11 @@ const NubeTagsDinamica = ({ defaultActive = false, onSeleccionarTags, tagsSelecc
             : [...activeTags, tag];
 
         setActiveTags(updatedTags);
-        router.push(`/explorar?spices=${updatedTags}`);
+
+        if (uso === "feed") {
+            router.push(`/explorar?spices=${updatedTags}`);
+        }
+
         if (onSeleccionarTags) onSeleccionarTags(updatedTags);  // Notificar a Feed sobre los cambios
     };
 
