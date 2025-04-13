@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useRegistro } from "@/components/RegistroContext";
 import Input from "@/components/inputs/Input";
@@ -9,20 +10,21 @@ export default function RegisterForm() {
 
     const router = useRouter();
 
-    const { email, password, setEmail, setPassword } = useRegistro();
+    const { setRegistroData } = useRegistro();
 
-    // Guardar los datos temporalmente en localStorage y redirigir:
+    // Datos que se piden en este paso:
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
+    // Guardado de datos en contexto y Redirección:
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!email || !password) return;
+        setRegistroData({
+            email,
+            password,
+        });
 
-        // Guardar en contexto (useRegistro):
-        setEmail(email);
-        setPassword(password);
-
-        // Redirigir al primer paso:
         router.push("/register/paso-1");
     };
 

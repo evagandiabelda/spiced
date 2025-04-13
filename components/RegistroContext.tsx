@@ -10,27 +10,53 @@ cuando se envian los datos a la petición POST para crear un nuevo usuario.
  */
 
 type RegistroData = {
-  email: string;
-  password: string;
-  setEmail: (email: string) => void;
-  setPassword: (password: string) => void;
-};
+  email: string
+  password: string
+  nombreCompleto: string
+  name: string
+  fechaNacimiento: string
+  genero: string
+  foto: string
+  spices: string[]
+  categorias: string[]
+  setRegistroData: (data: Partial<RegistroData>) => void
+}
 
-const RegistroContext = createContext<RegistroData | undefined>(undefined);
+const RegistroContext = createContext<RegistroData | undefined>(undefined)
 
-export const RegistroProvider = ({ children }: { children: ReactNode }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export const RegistroProvider = ({ children }: { children: React.ReactNode }) => {
+  const [registroData, setRegistroDataState] = useState<RegistroData>({
+    email: '',
+    password: '',
+    nombreCompleto: '',
+    name: '',
+    fechaNacimiento: '',
+    genero: '',
+    foto: '',
+    spices: [],
+    categorias: [],
+    setRegistroData: () => { }
+  })
+
+  const setRegistroData = (data: Partial<RegistroData>) => {
+    setRegistroDataState((prev) => ({
+      ...prev,
+      ...data,
+      setRegistroData // mantener la función dentro del objeto
+    }))
+  }
 
   return (
-    <RegistroContext.Provider value={{ email, password, setEmail, setPassword }}>
+    <RegistroContext.Provider value={{ ...registroData, setRegistroData }}>
       {children}
     </RegistroContext.Provider>
-  );
-};
+  )
+}
 
 export const useRegistro = () => {
-  const context = useContext(RegistroContext);
-  if (!context) throw new Error("'useRegistro' debe ser usado dentro de 'RegistroProvider'.");
-  return context;
-};
+  const context = useContext(RegistroContext)
+  if (!context) {
+    throw new Error('useRegistro debe usarse dentro de un RegistroProvider')
+  }
+  return context
+}

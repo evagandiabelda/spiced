@@ -4,7 +4,7 @@ import { ChangeEvent } from "react";
 import Image from "next/image";
 
 type InputProps = {
-    tipo: "text" | "number" | "email" | "password" | "textarea";
+    tipo: "text" | "number" | "email" | "password" | "textarea" | "date";
     icon?: boolean;
     id: string;
     placeholder?: string | "";
@@ -134,7 +134,34 @@ const Input = ({ tipo, icon, id, placeholder, rows, value, required, onChange }:
                     className={inputClassName}
                     placeholder={placeholder}
                     required={required}
-                    onChange={onChange} rows={rows}
+                    onChange={onChange}
+                    rows={rows}
+                />
+            </div>
+        );
+    }
+    else if (tipo === "date") {
+
+        return (
+            <div className={divClassName}>
+                {/* La imagen solo se muestra si 'icon' es true: */}
+                {icon && (
+                    <Image
+                        src="/iconos/iconos-registro/icono-registro-fecha.svg"
+                        width={18}
+                        height={18}
+                        className="dark:invert"
+                        alt="campo fecha nacimiento"
+                    />
+                )}
+                <input
+                    type="date"
+                    id={id}
+                    name={id}
+                    value={value}
+                    className={inputClassName}
+                    required={required}
+                    onChange={onChange}
                 />
             </div>
         );

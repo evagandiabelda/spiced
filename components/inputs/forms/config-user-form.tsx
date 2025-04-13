@@ -52,6 +52,7 @@ export default function ConfigUserForm() {
         uploadData.append("file", file);
 
         try {
+            // En la petición '/api/upload' se gestiona la subida de la imagen a Cloudinary:
             const response = await fetch("/api/upload", {
                 method: "POST",
                 body: uploadData,
