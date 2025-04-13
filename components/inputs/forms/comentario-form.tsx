@@ -1,19 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Input from "@/components/inputs/Input";
 import BotonSubmit from "@/components/buttons/BotonSubmit";
 
 interface ComentarioFormProps {
     slug: string | null;
+    usernameRespondiendoA?: string | null;
 }
 
-export default function ComentarioForm({ slug }: ComentarioFormProps) {
+export default function ComentarioForm({ slug, usernameRespondiendoA }: ComentarioFormProps) {
+
+    const router = useRouter();
 
     const [texto, setTexto] = useState('');
     const [cargando, setCargando] = useState(false);
     const [error, setError] = useState('');
     const [exito, setExito] = useState(false);
+
+    // Añadir al textarea el nombre de usuario al que se está respondiendo:
+    useEffect(() => {
+        if (usernameRespondiendoA !== null) {
+            setTexto(`@${usernameRespondiendoA} `);
+        }
+    }, [usernameRespondiendoA]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -33,8 +44,11 @@ export default function ComentarioForm({ slug }: ComentarioFormProps) {
             if (!res.ok) {
                 setError(data.error || 'Error al publicar el comentario.');
             } else {
+                usernameRespondiendoA = null;
                 setTexto('');
                 setExito(true);
+                setTimeout(() => setExito(false), 3000);
+                router.refresh();
             }
         } catch (err) {
             setError('Error de conexión.');

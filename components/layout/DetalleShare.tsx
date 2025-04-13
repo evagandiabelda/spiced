@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import Avatar from "@/components/icons/Avatar";
 import Boton from "@/components/buttons/Boton";
@@ -54,8 +54,9 @@ interface DetalleShareProps {
 
 export default function DetalleShare({ id, titulo, texto, img_principal, img_secundaria, fecha, verificado, slug, autor, spices, categorias, comentarios, sessionUserId, yaLoSigue, estaGuardado }: DetalleShareProps) {
 
+    // Determinar si el usuario en sesión sigue al autor de Share. Gestionar la acción de seguir / dejar de seguir:
+
     const [isFollowing, setIsFollowing] = useState(yaLoSigue);
-    const [guardado, setGuardado] = useState(estaGuardado);
 
     const handleToggleFollow = async () => {
         try {
@@ -74,6 +75,10 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
             console.error("Error al seguir/dejar de seguir al autor del Share.", error);
         }
     }
+
+    // Determinar si el usuario en sesión ha guardado anteriormente el Share. Gestionar la acción de guardar / olvidar:
+
+    const [guardado, setGuardado] = useState(estaGuardado);
 
     const handleToggleGuardado = async () => {
         try {
@@ -95,6 +100,17 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
             console.error("Error al guardar/olvidar el Share.", error);
         }
     }
+
+    // Gestionar la acción de responder a otro comentario:
+
+    const comentarioFormRef = useRef<HTMLDivElement>(null);
+    const [respondiendoA, setRespondiendoA] = useState<string | null>(null);
+
+    const handleResponderClick = (username: string) => {
+        setRespondiendoA(username);
+        comentarioFormRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+
 
     return (
         <div className="w-full flex flex-col items-center gap-16 pb-[160px]">
@@ -228,18 +244,26 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                     {/* Comentarios */}
                     <div className="w-full flex flex-col items-start gap-16 py-12 border-t border-gray-400">
 
-                        {sessionUserId && <ComentarioForm
-                            slug={slug}
-                        />}
+                        {sessionUserId &&
+                            <div ref={comentarioFormRef} className="w-full">
+                                <ComentarioForm
+                                    slug={slug}
+                                    usernameRespondiendoA={respondiendoA}
+                                />
+                            </div>
+                        }
 
                         <div className="w-full flex flex-col items-start gap-8">
                             {comentarios.map((comentario, index) => (
                                 <Comentario
                                     key={index}
+                                    id={comentario.id}
                                     texto={comentario.texto}
                                     fecha={comentario.created_at}
                                     user={comentario.user}
                                     sessionUserId={sessionUserId}
+                                    slug={slug}
+                                    onResponderClick={handleResponderClick}
                                 />
                             ))}
                         </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import Avatar from "@/components/icons/Avatar";
 import Boton from "@/components/buttons/Boton";
 import Image from "next/image";
@@ -7,6 +8,7 @@ import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
 interface ComentarioProps {
+    id: string;
     texto: string;
     fecha: Date;
     user: {
@@ -16,12 +18,36 @@ interface ComentarioProps {
         usuario_verificado: boolean;
     };
     sessionUserId: string | null;
+    slug: string | null;
+    onResponderClick?: (username: string) => void;
 }
 
-export default function Comentario({ texto, fecha, user, sessionUserId }: ComentarioProps) {
+export default function Comentario({ id, texto, fecha, user, sessionUserId, slug, onResponderClick }: ComentarioProps) {
+
+    const router = useRouter();
 
     const fechaFormateada = format(new Date(fecha), "HH:mm'h' - d 'de' MMMM yyyy", { locale: es });
     const comentarioPropio = sessionUserId === user.id;
+
+    const handleEliminarComentario = async (slug: string | null, id: string) => {
+        const confirmado = window.confirm("¿Estás seguro de que quieres eliminar este comentario?");
+        if (!confirmado) return;
+
+        try {
+            const res = await fetch(`/api/shares/${slug}/comentarios/${id}`, {
+                method: "DELETE",
+            });
+
+            if (res.ok) {
+                router.refresh();
+            } else {
+                alert("No se pudo eliminar el comentario.");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Ha ocurrido un error al eliminar el comentario.");
+        }
+    };
 
     return (
         <div className="w-full flex flex-col gap-6 p-[10px] pb-10 border-b border-gray-300">
@@ -47,11 +73,12 @@ export default function Comentario({ texto, fecha, user, sessionUserId }: Coment
             {!comentarioPropio &&
 
                 <div className="w-full flex flex-row justify-between items-center gap-4">
-                    <a href="#" className="text-end text-[0.9rem] font-bold underline text-[var(--gris2)] hover:text-[var(--gris4)] transition ease">Denunciar contenido inapropiado</a>
+                    <a href="#" className="text-end text-[0.9rem] font-bold underline text-[var(--gris2)] hover:text-[var(--gris4)] transition ease">Denunciar comentario inapropiado</a>
                     {sessionUserId && <Boton
                         texto="Responder"
                         tamano="pequeno"
                         jerarquia="secundario"
+                        onClick={() => onResponderClick?.(user.name)}
                     />}
                 </div>
 
@@ -59,7 +86,10 @@ export default function Comentario({ texto, fecha, user, sessionUserId }: Coment
 
             {comentarioPropio &&
                 <div className="w-full flex flex-row justify-end items-center gap-2">
-                    <a href="#" className="text-end text-[0.9rem] font-bold underline text-[var(--brand1)]">Eliminar</a>
+                    <a href="#" onClick={(e) => {
+                        e.preventDefault(); // Evita que el enlace recargue o navegue
+                        handleEliminarComentario(slug, id);
+                    }} className="text-end text-[0.9rem] font-bold underline text-[var(--brand1)]">Eliminar tu comentario</a>
                     <Image
                         src="/iconos/iconos-otros/icono-papelera.svg"
                         alt="Eliminar"

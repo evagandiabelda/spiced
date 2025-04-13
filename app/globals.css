@@ -165,7 +165,7 @@
   }
 
   .placeholder-light::placeholder {
-    @apply text-[var(--gris2)] opacity-60;
+    @apply text-[var(--gris3)] opacity-60;
   }
 
   .placeholder-dark::placeholder {
