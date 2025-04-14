@@ -29,7 +29,7 @@ export default function PanelEstandarLayout({
             </section>
 
             {/* CAJA PRINCIPAL: */}
-            <section className='flex flex-col w-full h-full p-[4rem] pb-[6rem] bg-[var(--gris1)] dark:bg-[var(--gris5)]'>
+            <section className='flex flex-col w-full h-full px-col1 py-[6rem] bg-[var(--gris1)] dark:bg-[var(--gris5)]'>
                 <RegistroProvider>
                     {children}
                 </RegistroProvider>

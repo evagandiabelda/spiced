@@ -32,10 +32,10 @@ export default function Paso3() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="w-full h-full flex flex-col justify-center items-center gap-4 px-col1">
-            <div className='w-full text-center flex flex-col gap-6'>
+        <form onSubmit={handleSubmit} className="w-full h-full flex flex-col items-center gap-4">
+            <div className='w-full text-center flex flex-col gap-6 px-col1'>
                 <h2 className='w-full'>¿Cuál es tu Spice?</h2>
-                <p>¡Aquí no juzgamos a nadie! No importa si tienes un diagnóstico clínico o simplemente tienes tus sospechas. En cualquier caso, adelante. Puedes elegir más de una condición.</p>
+                <p>¡Aquí no juzgamos a nadie! No importa si tienes un diagnóstico clínico o simplemente tienes tus sospechas.<br /> En cualquier caso, adelante. Puedes elegir más de una condición.</p>
             </div>
 
             <div className="w-full flex flex-col justify-center items-center gap-8 pb-4 pt-8">
@@ -52,7 +52,7 @@ export default function Paso3() {
             <div className="w-full flex flex-row justify-end items-center gap-4 py-10">
                 <Boton
                     texto='Atrás'
-                    enlace='/register/paso-1'
+                    enlace='/register/paso-2'
                     tamano='grande'
                     jerarquia='secundario'
                 />

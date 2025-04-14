@@ -12,7 +12,7 @@ const Footer = () => {
         <footer className="w-full -mt-4 -mb-5 flex flex-col gap-0 dark">
 
             <div className='flex flex-col justify-end items-center min-h-[16px] w-full m-0 p-0 overflow-hidden'>
-                <img src="/iconos/iconos-genericos/wavy-footer.svg" alt="Inicio del footer" className='translate-y-[1px] min-w-[1920px] object-cover' />
+                <img src="/iconos/iconos-genericos/wavy-footer.svg" alt="Inicio del footer" className='w-full min-w-[1920px] translate-y-[1px] object-cover' />
             </div>
 
             {/* Caja Principal del Footer: */}
