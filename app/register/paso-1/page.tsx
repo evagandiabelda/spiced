@@ -10,9 +10,9 @@ import BotonSubmit from "@/components/buttons/BotonSubmit";
 
 // Opciones para las cards de Género:
 const opcionesGenero = [
-    { valor: "femenino", icono: "/iconos/iconos-registro/avatar-genero-fem.svg", texto: "Femenino" },
-    { valor: "masculino", icono: "/iconos/iconos-registro/avatar-genero-mas.svg", texto: "Masculino" },
-    { valor: "neutro", icono: "/iconos/iconos-registro/avatar-genero-sin.svg", texto: "Neutro" },
+    { valor: "Femenino", icono: "/iconos/iconos-registro/avatar-genero-fem.svg", texto: "Femenino" },
+    { valor: "Masculino", icono: "/iconos/iconos-registro/avatar-genero-mas.svg", texto: "Masculino" },
+    { valor: "No-binario", icono: "/iconos/iconos-registro/avatar-genero-sin.svg", texto: "Neutro" },
 ];
 
 export default function Paso1() {

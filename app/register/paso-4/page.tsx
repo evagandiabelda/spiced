@@ -10,20 +10,70 @@ import BotonSubmit from "@/components/buttons/BotonSubmit";
 export default function Paso4() {
 
     const router = useRouter();
-    const { setRegistroData } = useRegistro();
+    const {
+        email,
+        password,
+        nombreCompleto,
+        name,
+        fechaNacimiento,
+        genero,
+        foto,
+        spices,
+        setRegistroData,
+    } = useRegistro();
+
+    const [cargando, setCargando] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     // Datos que se piden en este paso:
     const [categorias, setCategorias] = useState<string[]>([]);
 
     // Guardado de datos en contexto y Redirección:
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setCargando(true);
+        setError(null);
 
         setRegistroData({
             categorias,
         });
 
-        router.push('/register/paso-3'); // ---------------> CAMBIAR POR LA PETICIÓN POST Y REDIRIGIR AL PANEL DE USUARIO.
+        // Datos acumulados:
+        const datosRegistroCompleto = {
+            email,
+            password,
+            nombre_completo: nombreCompleto,
+            name,
+            fecha_nacimiento: fechaNacimiento,
+            genero,
+            foto,
+            spices,
+            categorias,
+        };
+
+        console.log(datosRegistroCompleto);
+
+        try {
+            const res = await fetch('/api/auth/register/standard', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(datosRegistroCompleto),
+            });
+
+            if (!res.ok) {
+                const data = await res.json();
+                throw new Error(data.message || 'Error al registrar usuario');
+            }
+
+            router.push('/panel-estandar');
+        } catch (err: any) {
+            console.error(err);
+            setError(err.message || 'Error inesperado');
+        } finally {
+            setCargando(false);
+        }
     }
 
     return (

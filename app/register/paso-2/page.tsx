@@ -16,10 +16,8 @@ export default function Paso2() {
     // Datos que se piden en este paso:
     const [foto, setFoto] = useState<File | null>(null);
 
-    // Gestión de carga de imagen:
-    const [formData, setFormData] = useState({
-        foto: "",
-    });
+    // URL definitiva de Cloudinary:
+    const [fotoURL, setFotoURL] = useState("");
 
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -46,12 +44,7 @@ export default function Paso2() {
 
             const data = await response.json();
 
-            // Actualizar el estado global de formData:
-            setFormData((prev) => ({
-                ...prev,
-                foto: data.url,
-            }));
-
+            setFotoURL(data.url);
 
         } catch (error) {
             console.error("Error al subir la imagen:", error);
@@ -63,7 +56,7 @@ export default function Paso2() {
         e.preventDefault();
 
         setRegistroData({
-            foto: formData.foto,
+            foto: fotoURL,
         });
 
         router.push('/register/paso-3');
