@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { RegistroProvider } from "@/components/RegistroContext";
-import Boton from "@/components/buttons/Boton";
+import RegistroSidebar from "@/components/layout/RegistroSidebar";
 
 export const metadata: Metadata = {
     title: 'Regístrate',
@@ -16,15 +16,9 @@ export default function PanelEstandarLayout({
         <div className='w-full flex mobile:flex-col tablet:flex-row gap-0 mobile:justify-start tablet:justify-between align-start'>
             {/* CAJA SIDEBAR: */}
             <section className='dark h-full mobile:w-full laptop:w-col4'>
-                <div className="bg-[url('/imgs/IMG-Fondo-Aside-Expertos.webp')] bg-cover bg-center flex flex-col items-center gap-16 w-full h-full p-16 pt-36">
-                    <div className="flex flex-col gap-6">
-                        <h3 className="text-white underline">Creando tu cuenta</h3>
-                        <h1 className="text-white">Vamos a conocernos mejor</h1>
-                    </div>
-                    <div className="flex flex-col items-center gap-6 w-full">
-                        {/* TIMELINE VERTICAL */}
-                    </div>
-                </div>
+                <RegistroSidebar
+                    usuario="expert"
+                />
             </section>
 
             {/* CAJA PRINCIPAL: */}

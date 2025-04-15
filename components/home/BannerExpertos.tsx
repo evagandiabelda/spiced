@@ -47,7 +47,7 @@ export default function BannerExpertos() {
                 <div className="flex flex-col mobile:items-center tablet:items-end gap-4 w-full">
                     <Boton
                         texto="Verifica tu cuenta gratis"
-                        enlace="/register"
+                        enlace="/register-expert"
                         tamano="grande"
                         jerarquia="primario"
                     />

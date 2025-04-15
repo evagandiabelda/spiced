@@ -1,7 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
-import internal from "stream";
+import { createContext, useContext, useState } from "react";
 
 /* 
 Este componente envuelve el proceso de registro.
@@ -11,6 +10,7 @@ cuando se envian los datos a la petición POST para crear un nuevo usuario.
  */
 
 type RegistroData = {
+
   // Campos genéricos:
   email: string
   password: string
@@ -19,9 +19,11 @@ type RegistroData = {
   foto: string
   spices: string[]
   categorias: string[]
+
   // Campos usuario Standard:
   fechaNacimiento: string
   genero: string
+
   //Campos usuario Expert:
   numColegiado: string
   anyosExperiencia: number
@@ -33,7 +35,9 @@ type RegistroData = {
 const RegistroContext = createContext<RegistroData | undefined>(undefined)
 
 export const RegistroProvider = ({ children }: { children: React.ReactNode }) => {
+
   const [registroData, setRegistroDataState] = useState<RegistroData>({
+
     // Campos genéricos:
     email: '',
     password: '',
@@ -42,16 +46,18 @@ export const RegistroProvider = ({ children }: { children: React.ReactNode }) =>
     foto: '',
     spices: [],
     categorias: [],
+
     // Campos usuario Standard:
     fechaNacimiento: '',
     genero: '',
+
     // Campos usuario Expert:
     numColegiado: '',
     anyosExperiencia: 0,
     listaTitulaciones: [],
 
     setRegistroData: () => { }
-  })
+  });
 
   const setRegistroData = (data: Partial<RegistroData>) => {
     setRegistroDataState((prev) => ({

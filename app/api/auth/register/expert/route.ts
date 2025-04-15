@@ -7,7 +7,7 @@ import { obtenerAvatarAleatorio } from "@/lib/avatars";
 
 export async function POST(req: Request) {
     try {
-        const { nombre_completo, name, email, password, foto, num_colegiado, anyos_experiencia, lista_titulaciones } = await req.json();
+        const { nombre_completo, name, email, password, foto, num_colegiado, anyos_experiencia, lista_titulaciones, spices, categorias } = await req.json();
 
         // Validar que no falten datos
         if (!nombre_completo || !name || !email || !password || !num_colegiado || !anyos_experiencia || !lista_titulaciones) {
@@ -47,6 +47,68 @@ export async function POST(req: Request) {
                 lista_titulaciones: lista_titulaciones,
             }
         });
+
+        // Añadir relación con Spices:
+
+        if (Array.isArray(spices) && spices.length > 0) {
+            // Buscar las spices por nombre
+            const spicesEnBD = await prisma.spice.findMany({
+                where: {
+                    nombre: {
+                        in: spices,
+                        mode: 'insensitive',
+                    },
+                },
+                select: {
+                    id: true,
+                },
+            });
+
+            // Extraer los IDs
+            const spiceIds = spicesEnBD.map((spice) => spice.id);
+
+            // Insertar relaciones en la tabla intermedia
+            if (spiceIds.length > 0) {
+                await prisma.usuarioSpice.createMany({
+                    data: spiceIds.map((spice_id: string) => ({
+                        user_id: newUser.id,
+                        spice_id,
+                    })),
+                    skipDuplicates: true,
+                });
+            }
+        }
+
+        // Añadir relación con Categorías:
+
+        if (Array.isArray(categorias) && categorias.length > 0) {
+            // Buscar las categorías por nombre
+            const categoriasEnBD = await prisma.categoria.findMany({
+                where: {
+                    nombre: {
+                        in: categorias,
+                        mode: 'insensitive',
+                    },
+                },
+                select: {
+                    id: true,
+                },
+            });
+
+            // Extraer los IDs
+            const categoriaIds = categoriasEnBD.map((cat) => cat.id);
+
+            // Insertar relaciones en la tabla intermedia
+            if (categoriaIds.length > 0) {
+                await prisma.usuarioCategoria.createMany({
+                    data: categoriaIds.map((categoria_id: string) => ({
+                        user_id: newUser.id,
+                        categoria_id,
+                    })),
+                    skipDuplicates: true,
+                });
+            }
+        }
 
         return NextResponse.json({ message: "Usuario registrado con éxito", user: newExpertUser }, { status: 201 });
     } catch (error) {

@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useRegistro } from "@/components/RegistroContext";
-import InputFile from '@/components/inputs/InputFile';
 import Image from 'next/image';
 import Boton from '@/components/buttons/Boton';
 import BotonSubmit from "@/components/buttons/BotonSubmit";
