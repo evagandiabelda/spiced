@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { useRegistro } from "@/components/RegistroContext";
+import { useRegistro } from "@/context/RegistroContext";
 import Image from 'next/image';
 import Boton from '@/components/buttons/Boton';
 import BotonSubmit from "@/components/buttons/BotonSubmit";
@@ -58,7 +58,7 @@ export default function Paso2() {
             foto: fotoURL,
         });
 
-        router.push('/register/paso-3');
+        router.push('/register-expert/paso-3');
     }
 
     return (

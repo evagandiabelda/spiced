@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { useRegistro } from "@/components/RegistroContext";
+import { useRegistro } from "@/context/RegistroContext";
 import InputFile from '@/components/inputs/InputFile';
 import Image from 'next/image';
 import Boton from '@/components/buttons/Boton';
@@ -73,7 +73,7 @@ export default function Paso2() {
 
                 <label
                     htmlFor="foto"
-                    className="w-[360px] h-[360px] rounded-[800px] cursor-pointer hover:scale-[1.03] transition ease-in-out"
+                    className="w-[360px] h-[360px] rounded-[800px] opacity-100 cursor-pointer hover:scale-[1.03] transition ease-in-out"
                 >
                     <Image
                         src={

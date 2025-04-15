@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { RegistroProvider } from "@/components/RegistroContext";
+import { RegistroProvider } from "@/context/RegistroContext";
 import RegistroSidebar from "@/components/layout/RegistroSidebar";
 
 export const metadata: Metadata = {

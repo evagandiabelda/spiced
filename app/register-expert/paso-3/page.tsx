@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { useRegistro } from "@/components/RegistroContext";
+import { useRegistro } from "@/context/RegistroContext";
 import NubeTagsDinamica from '@/components/buttons/NubeTagsDinamica';
 import Boton from '@/components/buttons/Boton';
 import BotonSubmit from "@/components/buttons/BotonSubmit";
@@ -28,7 +28,7 @@ export default function Paso3() {
             spices,
         });
 
-        router.push('/register/paso-4');
+        router.push('/register-expert/paso-4');
     }
 
     return (

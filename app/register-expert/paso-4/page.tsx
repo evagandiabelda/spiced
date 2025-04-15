@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { useRegistro } from "@/components/RegistroContext";
+import { useRegistro } from "@/context/RegistroContext";
 import BentoCategorias from '@/components/cards/BentoCategorias';
 import Boton from '@/components/buttons/Boton';
 import BotonSubmit from "@/components/buttons/BotonSubmit";

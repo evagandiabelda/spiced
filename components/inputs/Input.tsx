@@ -6,6 +6,7 @@ import Image from "next/image";
 type InputProps = {
     tipo: "text" | "number" | "email" | "password" | "textarea" | "date";
     icon?: boolean;
+    customIcon?: string;
     id: string;
     placeholder?: string | "";
     rows?: number;
@@ -14,7 +15,7 @@ type InputProps = {
     onChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
-const Input = ({ tipo, icon, id, placeholder, rows, value, required, onChange }: InputProps) => {
+const Input = ({ tipo, icon, customIcon, id, placeholder, rows, value, required, onChange }: InputProps) => {
 
     const divClassName = "flex flex-row justify-between items-center gap-3 px-3 py-1 rounded-[12px] bg-white dark:bg-[var(--gris4)] cursor-text";
     const inputClassName = "flex-1 text-[1rem] !bg-transparent py-1 px-4 focus:outline-none active:outline-none cursor-text placeholder-light dark:placeholder-dark ";
@@ -25,7 +26,7 @@ const Input = ({ tipo, icon, id, placeholder, rows, value, required, onChange }:
                 {/* La imagen solo se muestra si 'icon' es true: */}
                 {icon && (
                     <Image
-                        src="/iconos/iconos-registro/icono-registro-nombre.svg"
+                        src={customIcon ? customIcon : "/iconos/iconos-registro/icono-registro-nombre.svg"}
                         width={18}
                         height={18}
                         className="dark:invert"
@@ -51,7 +52,7 @@ const Input = ({ tipo, icon, id, placeholder, rows, value, required, onChange }:
                 {/* La imagen solo se muestra si 'icon' es true: */}
                 {icon && (
                     <Image
-                        src="/iconos/iconos-registro/icono-registro-edad.svg"
+                        src={customIcon ? customIcon : "/iconos/iconos-registro/icono-registro-edad.svg"}
                         width={18}
                         height={18}
                         className="dark:invert"
@@ -77,7 +78,7 @@ const Input = ({ tipo, icon, id, placeholder, rows, value, required, onChange }:
                 {/* La imagen solo se muestra si 'icon' es true: */}
                 {icon && (
                     <Image
-                        src="/iconos/iconos-registro/icono-registro-email.svg"
+                        src={customIcon ? customIcon : "/iconos/iconos-registro/icono-registro-email.svg"}
                         width={18}
                         height={18}
                         className="dark:invert"
@@ -103,7 +104,7 @@ const Input = ({ tipo, icon, id, placeholder, rows, value, required, onChange }:
                 {/* La imagen solo se muestra si 'icon' es true: */}
                 {icon && (
                     <Image
-                        src="/iconos/iconos-registro/icono-registro-password.svg"
+                        src={customIcon ? customIcon : "/iconos/iconos-registro/icono-registro-password.svg"}
                         width={18}
                         height={18}
                         className="dark:invert"
@@ -147,7 +148,7 @@ const Input = ({ tipo, icon, id, placeholder, rows, value, required, onChange }:
                 {/* La imagen solo se muestra si 'icon' es true: */}
                 {icon && (
                     <Image
-                        src="/iconos/iconos-registro/icono-registro-fecha.svg"
+                        src={customIcon ? customIcon : "/iconos/iconos-registro/icono-registro-fecha.svg"}
                         width={18}
                         height={18}
                         className="dark:invert"

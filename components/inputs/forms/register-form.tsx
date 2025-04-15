@@ -2,11 +2,15 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useRegistro } from "@/components/RegistroContext";
+import { useRegistro } from "@/context/RegistroContext";
 import Input from "@/components/inputs/Input";
 import BotonSubmit from "@/components/buttons/BotonSubmit";
 
-export default function RegisterForm() {
+interface RegisterFormProps {
+    usuario: "standard" | "expert";
+}
+
+export default function RegisterForm({ usuario }: RegisterFormProps) {
 
     const router = useRouter();
 
@@ -25,7 +29,13 @@ export default function RegisterForm() {
             password,
         });
 
-        router.push("/register/paso-1");
+        if (usuario === "standard") {
+            router.push("/register/paso-1");
+        }
+        else if (usuario === "expert") {
+            router.push("/register-expert/paso-1");
+        }
+
     };
 
     return (
