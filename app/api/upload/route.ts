@@ -1,14 +1,14 @@
 import cloudinary from "cloudinary";
 import { NextResponse } from "next/server";
 
-/* --------- SUBIR LAS IMÁGENES CARGADAS A CLOUDINARY --------- */
-
 cloudinary.v2.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
     secure: true,
 });
+
+/* --------- SUBIR LAS IMÁGENES/ARCHIVOS A CLOUDINARY --------- */
 
 export async function POST(req: Request) {
     try {
@@ -32,9 +32,35 @@ export async function POST(req: Request) {
         const secureUrl = uploadResponse.secure_url;
         console.log(secureUrl);
 
-        return NextResponse.json({ url: secureUrl });
+        return NextResponse.json({
+            url: uploadResponse.secure_url,
+            public_id: uploadResponse.public_id
+        });
     } catch (error) {
         console.error("Error subiendo la imagen a Cloudinary:", error);
         return NextResponse.json({ error: "Error interno del servidor" }, { status: 500 });
+    }
+}
+
+/* --------- ELIMINAR LAS IMÁGENES/ARCHIVOS DE CLOUDINARY --------- */
+
+export async function DELETE(req: Request) {
+    try {
+        const { public_id } = await req.json();
+
+        if (!public_id) {
+            return NextResponse.json({ error: "No se ha proporcionado el public_id." }, { status: 400 });
+        }
+
+        const result = await cloudinary.v2.uploader.destroy(public_id);
+
+        if (result.result !== "ok") {
+            return NextResponse.json({ error: "Error al eliminar el archivo." }, { status: 500 });
+        }
+
+        return NextResponse.json({ success: true });
+    } catch (error) {
+        console.error("Error eliminando archivo de Cloudinary.", error);
+        return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });
     }
 }
