@@ -19,11 +19,30 @@ export default function RegisterForm({ usuario }: RegisterFormProps) {
     // Datos que se piden en este paso:
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorEmail, setErrorEmail] = useState('');
 
     // Guardado de datos en contexto y Redirección:
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setErrorEmail('');
 
+        // Comprobar si el email ya existe:
+        const res = await fetch('/api/auth/register/check-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+
+        const data = await res.json();
+
+        if (data.exists) {
+            setErrorEmail('Ya existe una cuenta registrada con este correo.');
+            return;
+        }
+
+        // Si todo está bien, guardar en contexto y continuar:
         setRegistroData({
             email,
             password,
@@ -59,6 +78,9 @@ export default function RegisterForm({ usuario }: RegisterFormProps) {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
+                        {errorEmail && (
+                            <p className="text-sm text-red-500 mt-2">{errorEmail}</p>
+                        )}
                     </div>
 
                     <div className="w-full">

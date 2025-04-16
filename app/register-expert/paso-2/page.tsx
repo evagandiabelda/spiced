@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useRegistro } from "@/context/RegistroContext";
 import Image from 'next/image';
 import Boton from '@/components/buttons/Boton';
@@ -49,6 +49,9 @@ export default function Paso2() {
 
     }
 
+    // Para resetear el valor del input después de que se haya procesado:
+    const inputFileRef = useRef<HTMLInputElement>(null);
+
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
 
         const files = event.target.files;
@@ -82,6 +85,11 @@ export default function Paso2() {
             } catch (error) {
                 console.error("Error al subir el archivo:", error);
             }
+        }
+
+        // Resetear el input (si no, daba error al intentar resubir el mismo archivo tras borrarlo):
+        if (inputFileRef.current) {
+            inputFileRef.current.value = "";
         }
     };
 
@@ -152,9 +160,9 @@ export default function Paso2() {
                         id="titulacion"
                         accept=".pdf,image/jpeg,image/png"
                         multiple
-                        required
                         className="hidden"
                         onChange={handleFileChange}
+                        ref={inputFileRef}
                     />
 
                     <label htmlFor="titulacion" className='opacity-100 cursor-pointer'>

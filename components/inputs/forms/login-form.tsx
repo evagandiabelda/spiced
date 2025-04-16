@@ -8,7 +8,6 @@ import Input from "@/components/inputs/Input";
 
 export default function LoginForm() {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/panel-estandar";
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,13 +22,31 @@ export default function LoginForm() {
       redirect: false,
       email,
       password,
-      callbackUrl,
     });
 
     if (result?.error) {
       setErrorMessage(result.error);
-    } else {
-      window.location.href = callbackUrl; // Redirigir manualmente
+    }
+
+    // Si el login es exitoso, consulta el tipo de usuario:
+    try {
+      const response = await fetch("/api/auth/user-type", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (data.tipo === "expert") {
+        window.location.href = "/panel-experto";
+      } else if (data.tipo === "standard") {
+        window.location.href = "/panel-estandar";
+      } else {
+        setErrorMessage("No se pudo determinar el tipo de usuario.");
+      }
+    } catch (err) {
+      setErrorMessage("Error al determinar el tipo de usuario.");
     }
   };
 
