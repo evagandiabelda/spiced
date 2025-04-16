@@ -30,7 +30,7 @@ const Header = () => {
 
             {/* Caja Avatar */}
             <a href="/panel-estandar" className="w-12 flex items-center space-x-4 mobile:hidden laptop:flex">
-                <Avatar borde='color' />
+                <Avatar borde='standard' />
             </a>
 
             {/* Menú Mobile */}
