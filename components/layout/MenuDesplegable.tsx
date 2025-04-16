@@ -32,7 +32,7 @@ const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
                     <a href="/panel" id="enlace">
                         <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
                             <div className="w-12">
-                                <Avatar borde="color" />
+                                <Avatar borde="standard" />
                             </div>
                             <p className="font-bold mb-0">Espacio personal</p>
                         </div>
