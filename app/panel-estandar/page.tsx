@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import Image from "next/image";
 import ThemeToggle from "@/components/buttons/ThemeToggle";
@@ -86,7 +86,7 @@ export default function Inicio() {
                 {/* Card Últimos Shares Guardados: */}
                 <div className="w-full flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-shares)] dark:border-2 dark:border-[var(--borde-shares)]">
                     <div className="w-full flex flex-row justify-between items-center">
-                        <h4>Tus últimos shares</h4>
+                        <h3>Tus últimos shares</h3>
                         <Image
                             src="/iconos/iconos-menu/icono-guardado.svg"
                             width={18}

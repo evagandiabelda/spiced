@@ -26,14 +26,14 @@ const SidebarPanel = ({ usuario }: SidebarPanelProps) => {
     return (
         <div className="w-full flex flex-col">
             <div>
-                <div className="w-full flex flex-row items-center gap-4 pb-7 border-b border-b-[var(--brand2)] dark:border-b-[var(--gris4)]">
+                <div className="w-full flex flex-row items-center gap-4 pb-7 border-b border-b-[var(--gris2)] dark:border-b-[var(--gris3)]">
                     {/* Avatar Modo Claro */}
                     <a href={href} className="mobile:w-12 laptop:w-16 dark:hidden">
                         <Avatar borde="blanco" />
                     </a>
                     {/* Avatar Modo Oscuro */}
                     <a href={href} className="mobile:w-12 laptop:w-16 hidden dark:block">
-                        <Avatar borde="color" />
+                        <Avatar borde={usuario === "estandar" ? "standard" : "expert"} />
                     </a>
                     <div className="mobile:flex tablet:hidden laptop:flex flex-col gap-3">
                         <h3 className="m-0 text-[var(--blanco)] dark:text-[var(--gris2)]">¡Hola, {session?.user.nombre_completo}!</h3>

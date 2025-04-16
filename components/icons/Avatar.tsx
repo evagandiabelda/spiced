@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 
 type BordeProps = {
-    borde: "blanco" | "color";
+    borde: "blanco" | "standard" | "expert";
     foto?: string;
 };
 
@@ -12,7 +12,15 @@ const Avatar = ({ borde, foto }: BordeProps) => {
     const { data: session } = useSession();
     const userPhoto = session?.user?.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"; // Imagen por defecto
 
-    const colorBorde = borde === "blanco" ? "border-white" : "border-[var(--brand1)]";
+    let colorBorde = "border-white";
+
+    if (borde === "standard") {
+        colorBorde = "border-[var(--brand1)]";
+    }
+    else if (borde === "expert") {
+        colorBorde = "border-[#653a70]";
+    }
+
     const src = foto || userPhoto;
 
     return (

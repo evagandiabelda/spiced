@@ -1,6 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { PrismaClient } from "@prisma/client";
+import { Insignia, PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
@@ -34,6 +34,7 @@ export const authOptions: NextAuthOptions = {
                     name: user.name,
                     nombre_completo: user.nombre_completo,
                     foto: user.foto,
+                    usuario_verificado: user.usuario_verificado,
                 };
             },
         }),
@@ -45,12 +46,14 @@ export const authOptions: NextAuthOptions = {
                 token.name = user.name;
                 token.nombre_completo = user.nombre_completo;
                 token.foto = user.foto;
+                token.usuario_verificado = user.usuario_verificado;
             }
             if (trigger === "update") {
                 token.id = user.id;
                 token.name = user.name;
                 token.nombre_completo = user.nombre_completo;
                 token.foto = user.foto;
+                token.usuario_verificado = user.usuario_verificado;
             }
             return token;
         },
@@ -61,6 +64,7 @@ export const authOptions: NextAuthOptions = {
                 session.user.name = token.name as string;
                 session.user.nombre_completo = token.nombre_completo as string;
                 session.user.foto = token.foto as string;
+                session.user.usuario_verificado = token.usuario_verificado as boolean;
             }
 
             return session;
