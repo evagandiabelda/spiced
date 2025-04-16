@@ -114,8 +114,10 @@ model Share {
 
   // Relación con Denuncias (M:N)
   denuncias DenunciaShare[]
-  Expert    Expert?         @relation(fields: [expertId], references: [id])
-  expertId  String?
+
+  // Relación con Expertos (para verificaciones):
+  Expert   Expert? @relation(fields: [expertId], references: [id])
+  expertId String?
 }
 
 /**
