@@ -13,8 +13,6 @@ export default function ConfigUserForm() {
 
     const { data: session, update } = useSession();
 
-    let userPhoto = session?.user?.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"; // Imagen por defecto
-
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 

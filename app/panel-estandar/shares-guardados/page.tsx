@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Boton from "@/components/buttons/Boton";
 import ListaSharesGuardados from "@/components/layout/panel/ListaSharesGuardados";
 
 export const metadata: Metadata = {
