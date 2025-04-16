@@ -7,12 +7,15 @@ export default withAuth(
   },
   {
     pages: {
-      signIn: "/panel-estandar", // Redirige al login si no está autenticado
+      signIn: "/login", // Redirige al login si no está autenticado
     },
   }
 );
 
 // Especificar qué rutas requieren autenticación
 export const config = {
-  matcher: ["/panel-estandar/:path*"], // Protege todas las rutas dentro de /panel/
+  matcher: [
+    "/panel-estandar/:path*",
+    "/panel-experto/:path*",
+  ], // Protege todas las rutas dentro de /panel/
 };

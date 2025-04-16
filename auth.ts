@@ -46,6 +46,7 @@ export const { auth, signIn, signOut } = NextAuth({
             name: user.name,
             foto: user.foto,
             nombre_completo: user.nombre_completo,
+            usuario_verificado: user.usuario_verificado,
           };
         }
 
@@ -61,6 +62,7 @@ export const { auth, signIn, signOut } = NextAuth({
         session.user.name = token.name as string;
         session.user.foto = token.foto as string;
         session.user.nombre_completo = token.nombre_completo as string;
+        session.user.usuario_verificado = token.usuario_verificado as boolean;
       }
       return session;
     },
@@ -70,12 +72,14 @@ export const { auth, signIn, signOut } = NextAuth({
         token.name = user.name;
         token.foto = user.foto;
         token.nombre_completo = user.nombre_completo;
+        token.usuario_verificado = user.usuario_verificado;
       }
       if (trigger === "update") {
         token.id = user.id;
         token.name = user.name;
         token.foto = user.foto;
         token.nombre_completo = user.nombre_completo;
+        token.usuario_verificado = user.usuario_verificado;
       }
       return token;
     },

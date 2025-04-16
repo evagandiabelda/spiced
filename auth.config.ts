@@ -16,17 +16,29 @@ export const authConfig: NextAuthOptions = {
         session.user.name = token.name ?? "";
         session.user.foto = token.foto ?? "";
         session.user.nombre_completo = token.nombre_completo ?? "";
+        session.user.usuario_verificado = token.usuario_verificado ?? false;
+        session.user.insignia = token.insignia ?? null;
       }
       return session;
     },
 
     async jwt({ token, user, trigger }) {
       if (user) {
+
+        const dbUser = await prisma.user.findUnique({
+          where: { email: user.email! },
+          include: {
+            standard: true, // Incluimos la relación para acceder a la insignia
+          },
+        });
+
         token.id = user.id as string;
         token.email = user.email ?? "";
         token.name = user.name ?? "";
         token.foto = user.foto ?? "";
         token.nombre_completo = user.nombre_completo ?? "";
+        token.usuario_verificado = user.usuario_verificado ?? false;
+        token.insignia = dbUser?.standard?.insignia || null;
       }
       if (trigger === "update") {
         token.id = user.id;
@@ -34,6 +46,7 @@ export const authConfig: NextAuthOptions = {
         token.name = user.name;
         token.foto = user.foto;
         token.nombre_completo = user.nombre_completo;
+        token.usuario_verificado = user.usuario_verificado;
       }
       return token;
     }
@@ -67,6 +80,7 @@ export const authConfig: NextAuthOptions = {
           name: user.name,
           foto: user.foto,
           nombre_completo: user.nombre_completo,
+          usuario_verificado: user.usuario_verificado,
         };
       }
 

@@ -35,9 +35,17 @@ const SidebarPanel = ({ usuario }: SidebarPanelProps) => {
                     <a href={href} className="mobile:w-12 laptop:w-16 hidden dark:block">
                         <Avatar borde="color" />
                     </a>
-                    <div className="mobile:flex tablet:hidden laptop:flex flex-col gap-2">
+                    <div className="mobile:flex tablet:hidden laptop:flex flex-col gap-3">
                         <h3 className="m-0 text-[var(--blanco)] dark:text-[var(--gris2)]">¡Hola, {session?.user.nombre_completo}!</h3>
-                        <p className="mobile:hidden laptop:block font-normal text-[0.7rem] m-0"><span className="text-[var(--blanco)] dark:text-[var(--gris2)]">Pequeño saltamontes</span></p>
+                        {usuario === "estandar" &&
+                            <p className="mobile:hidden laptop:block font-normal text-[0.7rem] opacity-60"><span className="text-[var(--blanco)] dark:text-[var(--gris2)]">{session?.user.insignia}</span></p>
+                        }
+                        {usuario === "experto" && session?.user.usuario_verificado &&
+                            <p className="mobile:hidden laptop:block font-normal text-[0.7rem] opacity-60"><span className="text-[var(--blanco)] dark:text-[var(--gris2)]">Usuario verificado</span></p>
+                        }
+                        {usuario === "experto" && session?.user.usuario_verificado === false &&
+                            <p className="mobile:hidden laptop:block font-normal text-[0.7rem] opacity-60"><span className="text-[var(--blanco)] dark:text-[var(--gris2)]">Verificación en proceso</span></p>
+                        }
                     </div>
                 </div>
 
