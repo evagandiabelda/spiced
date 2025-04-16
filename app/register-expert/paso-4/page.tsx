@@ -15,10 +15,11 @@ export default function Paso4() {
         password,
         nombreCompleto,
         name,
-        fechaNacimiento,
-        genero,
         foto,
         spices,
+        numColegiado,
+        anyosExperiencia,
+        listaTitulaciones,
         setRegistroData,
     } = useRegistro();
 
@@ -44,17 +45,18 @@ export default function Paso4() {
             password,
             nombre_completo: nombreCompleto,
             name,
-            fecha_nacimiento: fechaNacimiento,
-            genero,
             foto,
             spices,
             categorias,
+            num_colegiado: numColegiado,
+            anyos_experiencia: anyosExperiencia,
+            lista_titulaciones: listaTitulaciones,
         };
 
         console.log(datosRegistroCompleto);
 
         try {
-            const res = await fetch('/api/auth/register/standard', {
+            const res = await fetch('/api/auth/register/expert', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,7 +69,7 @@ export default function Paso4() {
                 throw new Error(data.message || 'Error al registrar usuario');
             }
 
-            router.push('/panel-estandar');
+            router.push('/panel-experto');
         } catch (err: any) {
             console.error(err);
             setError(err.message || 'Error inesperado');
@@ -92,7 +94,7 @@ export default function Paso4() {
             <div className="w-full flex flex-row justify-end items-center gap-4 py-10">
                 <Boton
                     texto='Atrás'
-                    enlace='/register/paso-3'
+                    enlace='/register-expert/paso-3'
                     tamano='grande'
                     jerarquia='secundario'
                 />

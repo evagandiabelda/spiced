@@ -152,6 +152,7 @@ export default function Paso2() {
                         id="titulacion"
                         accept=".pdf,image/jpeg,image/png"
                         multiple
+                        required
                         className="hidden"
                         onChange={handleFileChange}
                     />
@@ -169,7 +170,7 @@ export default function Paso2() {
 
                 <div className='mobile:w-full laptop:w-2/3 h-full flex flex-col gap-8'>
                     <h3>Archivos subidos</h3>
-                    {titulaciones.length === 0 && <p className='text-sm text-[var(--gris3)]'>Todavía no has subido ningún archivo.</p>}
+                    {titulaciones.length === 0 && <p className='text-sm text-[var(--gris3)]'>Es necesario cargar al menos un archivo.</p>}
                     <div className='w-full flex flex-col gap-6'>
                         {titulaciones.map((titulacion, index) => (
                             <div key={index} className='w-full flex flex-row justify-between items-center gap-8'>
@@ -207,8 +208,8 @@ export default function Paso2() {
 
             <div className="w-full flex flex-row justify-end items-center gap-4">
                 <Boton
-                    texto='Cancelar'
-                    enlace='/'
+                    texto='Atrás'
+                    enlace='/register-expert/paso-1'
                     tamano='grande'
                     jerarquia='secundario'
                 />

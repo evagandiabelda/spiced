@@ -99,6 +99,7 @@ export default function Paso1() {
                         accept="image/*"
                         className="hidden"
                         onChange={handleFileChange}
+                        required
                     />
 
                     <label htmlFor="foto" className='opacity-100 cursor-pointer'>
