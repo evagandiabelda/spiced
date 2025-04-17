@@ -1,1 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><defs><style>.a{fill:#fff;}.b{fill:#1d1d1b;}</style></defs><circle class="a" cx="10" cy="10" r="10"/><path class="b" d="M15.4785,8.2034H11.7966V4.5215a.5244.5244,0,0,0-.5244-.5244H8.7278a.5244.5244,0,0,0-.5244.5244V8.2034H4.5215a.5244.5244,0,0,0-.5244.5244v2.5444a.5244.5244,0,0,0,.5244.5244H8.2034v3.6819a.5244.5244,0,0,0,.5244.5244h2.5444a.5244.5244,0,0,0,.5244-.5244V11.7966h3.6819a.5244.5244,0,0,0,.5244-.5244V8.7278A.5244.5244,0,0,0,15.4785,8.2034Z"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#1D1D1B;}
+</style>
+<path class="st0" d="M10,0C4.5,0,0,4.5,0,10s4.5,10,10,10s10-4.5,10-10S15.5,0,10,0z M16,11.3c0,0.3-0.2,0.5-0.5,0.5h-3.7v3.7
+	c0,0.3-0.2,0.5-0.5,0.5H8.7c-0.3,0-0.5-0.2-0.5-0.5v-3.7H4.5c-0.3,0-0.5-0.2-0.5-0.5V8.7c0-0.3,0.2-0.5,0.5-0.5h3.7V4.5
+	C8.2,4.2,8.4,4,8.7,4h2.5c0.3,0,0.5,0.2,0.5,0.5v3.7h3.7c0.3,0,0.5,0.2,0.5,0.5V11.3z"/>
+</svg>

@@ -6,7 +6,7 @@ type AvatarOtrosProps = {
     autor: {
         id: string;
         name: string;
-        foto: string;
+        foto: string | "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg";
         usuario_verificado: boolean;
     };
     customBorder?: string;
@@ -30,7 +30,7 @@ const AvatarOtros = ({ autor, customBorder }: AvatarOtrosProps) => {
             <div className="rounded-full overflow-hidden">
                 <a href={href}>
                     <Image
-                        src={autor.foto}
+                        src={autor.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
                         width={200}
                         height={200}
                         alt="avatar"

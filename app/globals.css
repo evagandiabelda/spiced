@@ -53,6 +53,11 @@
     --fob: #CDB0F7;
     --otr: #A1AEFF;
 
+    /* Colores Insignias: */
+    --insignia1: #D877B5;
+    --insignia2: #83B70F;
+    --insignia3: #FF9C00;
+
     /* Degradados: */
     --degradado1: linear-gradient(45deg, #D84C60, #D78E55);
     --degradado2: linear-gradient(45deg, #653a70, #d84c60);
