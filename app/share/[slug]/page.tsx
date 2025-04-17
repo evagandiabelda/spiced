@@ -87,6 +87,14 @@ export default async function SharePage({
         estaGuardado = session.user.shares_guardados.some((share: any) => share.share_id === share.id);
     }
 
+    // Comprobar si el usuario en sesión está verificado (si tiene permisos para verificar el Share):
+
+    let usuarioVerificado = false;
+
+    if (session?.user.usuario_verificado) {
+        usuarioVerificado = true;
+    }
+
     return (
         <DetalleShare
             id={share.id}
@@ -104,6 +112,7 @@ export default async function SharePage({
             sessionUserId={session?.user?.id ?? null}
             yaLoSigue={yaLoSigue}
             estaGuardado={estaGuardado}
+            usuarioVerificado={usuarioVerificado}
         />
     );
 

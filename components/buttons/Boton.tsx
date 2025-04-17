@@ -10,9 +10,10 @@ interface BotonProps {
     icon?: string;
     customColor?: string; /* Color personalizado */
     onClick?: () => void;
+    deshabilitado?: boolean;
 }
 
-const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick }: BotonProps) => {
+const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick, deshabilitado }: BotonProps) => {
     let className = "inline-block gap-4 text-center font-semibold rounded-full border-2 hover:scale-[1.02] transition ease duration-300 cursor-pointer ";
     let style: React.CSSProperties = {};
     let iconClassName = ""
@@ -45,6 +46,12 @@ const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick }:
             className += "text-[var(--gris5)] dark:text-[var(--gris2)] border-[var(--gris5)] dark:border-[var(--gris2)] ";
         }
 
+    }
+
+    if (deshabilitado) {
+        className += "opacity-50 cursor-not-allowed pointer-events-none ";
+    } else {
+        className += "cursor-pointer ";
     }
 
     return (

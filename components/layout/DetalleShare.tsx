@@ -52,9 +52,10 @@ interface DetalleShareProps {
     sessionUserId: string | null;
     yaLoSigue: boolean;
     estaGuardado: boolean;
+    usuarioVerificado: boolean;
 }
 
-export default function DetalleShare({ id, titulo, texto, img_principal, img_secundaria, fecha, verificado, slug, autor, spices, categorias, comentarios, sessionUserId, yaLoSigue, estaGuardado }: DetalleShareProps) {
+export default function DetalleShare({ id, titulo, texto, img_principal, img_secundaria, fecha, verificado, slug, autor, spices, categorias, comentarios, sessionUserId, yaLoSigue, estaGuardado, usuarioVerificado }: DetalleShareProps) {
 
     // Determinar si el usuario en sesión sigue al autor de Share. Gestionar la acción de seguir / dejar de seguir:
 
@@ -106,6 +107,31 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
     // Gestionar la acción de Denunciar el Share:
 
     const [mostrarDenuncia, setMostrarDenuncia] = useState(false);
+
+    // Gestionar la acción de Verificar el Share:
+
+    const [estaVerificado, setEstaVerificado] = useState(verificado);
+
+    const handleVerificarShare = async () => {
+        try {
+            const res = await fetch("/api/users/me/shares/verificados", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ shareId: id }),
+            });
+
+            if (!res.ok) {
+                const data = await res.json();
+                throw new Error(data.error || "Error al verificar el Share.");
+            }
+
+            setEstaVerificado(true);
+        } catch (error) {
+            console.error("Error al verificar el Share:", error);
+        }
+    };
 
     // Gestionar la acción de responder a otro comentario:
 
@@ -183,15 +209,16 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                             <h4 className="pl-2">Sobre este share:</h4>
                         </div>
                         <div className="w-full flex flex-col gap-4 px-2">
-                            <div className="flex flex-row gap-2">
-                                <a href="#"><p className="font-bold text-[var(--gris4)] text-[0.9rem]">Verificado</p></a>
-                                {verificado && <Image
-                                    src="/iconos/iconos-otros/icono-verificado-relleno2.svg"
-                                    alt="Verificado"
-                                    width={16}
-                                    height={16}
-                                />}
-                            </div>
+                            {verificado &&
+                                <div className="flex flex-row gap-2">
+                                    <p className="font-bold text-[var(--gris4)] text-[0.9rem]">Verificado</p>
+                                    <Image
+                                        src="/iconos/iconos-otros/icono-verificado-relleno2.svg"
+                                        alt="Verificado"
+                                        width={16}
+                                        height={16}
+                                    />
+                                </div>}
                             <div>
                                 <p className="font-bold text-[0.8rem] text-[var(--gris2)]">Publicado el:</p>
                                 <p className="font-bold text-[0.8rem] text-[var(--gris2)]">
@@ -217,6 +244,17 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                             jerarquia={guardado ? "secundario" : "primario"}
                             icon="/iconos/iconos-menu/icono-guardado.svg"
                         />}
+                        {/* Si el usuario en sesión está verificado, si el autor del Share es Standard y si el Share todavía NO ha sido verificado: */}
+                        {usuarioVerificado && autor.usuario_verificado === false && verificado === false && (
+                            <Boton
+                                texto={estaVerificado ? "Verificado" : "Verificar"}
+                                onClick={handleVerificarShare}
+                                tamano="pequeno"
+                                jerarquia="secundario"
+                                icon="/iconos/iconos-otros/icono-verificado-relleno2.svg"
+                                deshabilitado={estaVerificado}
+                            />
+                        )}
                     </div>
 
                 </div>
