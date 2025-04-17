@@ -3,7 +3,7 @@
 import React from "react";
 import { useState, useRef } from "react";
 import Image from "next/image";
-import Avatar from "@/components/icons/Avatar";
+import AvatarOtros from "@/components/icons/AvatarOtros";
 import Boton from "@/components/buttons/Boton";
 import Tag from "@/components/buttons/Tag";
 import ComentarioForm from "@/components/inputs/forms/comentario-form";
@@ -158,7 +158,7 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                     <div className="w-full flex flex-col gap-5 border-b border-b-1 border-b-[var(--gris2)] px-2 pb-12">
                         <div className="w-full flex flex-col gap-3">
                             <div className="max-w-[120px]">
-                                <a href="#"><Avatar borde="standard" foto={autor.foto} /></a>
+                                <AvatarOtros autor={autor} />
                             </div>
                             <div className="flex flex-row gap-2 pl-2">
                                 <a href="#"><h4>@{autor.name}</h4></a>

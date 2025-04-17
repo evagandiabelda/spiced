@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
-import Avatar from "@/components/icons/Avatar";
+import AvatarPropio from "@/components/icons/AvatarPropio";
 import Search from "@/components/inputs/Search";
 import Menu from "@/components/layout/Menu";
 
@@ -11,6 +12,10 @@ type DesplegableProps = {
 };
 
 const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
+
+    const { data: session } = useSession();
+    const [userType, setUserType] = useState<string | null>(null);
+
     // Evitar scroll al obrir el menú:
     useEffect(() => {
         if (isOpen) {
@@ -25,14 +30,50 @@ const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
 
     if (!isOpen) return null;
 
+    // Obtener el tipo de usuario (Standard, Expert o Admin):
+    useEffect(() => {
+        const fetchUserType = async () => {
+            if (!session?.user?.email) return;
+
+            try {
+                const res = await fetch("/api/auth/user-type", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ email: session.user.email }),
+                });
+
+                const data = await res.json();
+
+                if (data.tipo) {
+                    setUserType(data.tipo);
+                }
+            } catch (error) {
+                console.error("Error al obtener el tipo de usuario:", error);
+            }
+        };
+
+        fetchUserType();
+    }, [session?.user?.email]);
+
+    const avatarHref =
+        userType === "standard"
+            ? "/panel-estandar"
+            : userType === "expert"
+                ? "/panel-experto"
+                : userType === "admin"
+                    ? "/panel-admin"
+                    : "#";
+
     return createPortal( // Crea un 'body' paral·lel per a renderitzar el menú desplegable sobre el body principal.
         <div className="fixed inset-0 bg-[--blanco] z-50 h-screen flex flex-col justify-between">
             <div>
                 <div className="px-[30px] py-[24px] border-y-2 border-[--gris1] dark:border-[--gris4] cursor-pointer">
-                    <a href="/panel" id="enlace">
+                    <a href={avatarHref} id="enlace">
                         <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
                             <div className="w-12">
-                                <Avatar borde="standard" />
+                                <AvatarPropio />
                             </div>
                             <p className="font-bold mb-0">Espacio personal</p>
                         </div>

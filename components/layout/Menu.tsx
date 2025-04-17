@@ -1,8 +1,6 @@
 'use client';
 
-import { useLanguage } from "@/context/LanguageContext";
 import Image from "next/image";
-import Boton from "../buttons/Boton";
 import {
     Accordion,
     AccordionContent,

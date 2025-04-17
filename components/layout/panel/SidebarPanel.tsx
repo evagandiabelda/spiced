@@ -1,6 +1,6 @@
 "use client";
 
-import Avatar from "@/components/icons/Avatar";
+import AvatarPropio from "@/components/icons/AvatarPropio";
 import MenuSidebar from "@/components/layout/panel/MenuSidebar";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -21,20 +21,18 @@ const SidebarPanel = ({ usuario }: SidebarPanelProps) => {
         }
     }, [status, router]);
 
-    const href = "/panel-" + usuario + "/configuracion";
-
     return (
         <div className="w-full flex flex-col">
             <div>
                 <div className="w-full flex flex-row items-center gap-4 pb-7 border-b border-b-[var(--gris2)] dark:border-b-[var(--gris3)]">
                     {/* Avatar Modo Claro */}
-                    <a href={href} className="mobile:w-12 laptop:w-16 dark:hidden">
-                        <Avatar borde="blanco" />
-                    </a>
+                    <div className="mobile:w-12 laptop:w-16 dark:hidden">
+                        <AvatarPropio customBorder="#fff" />
+                    </div>
                     {/* Avatar Modo Oscuro */}
-                    <a href={href} className="mobile:w-12 laptop:w-16 hidden dark:block">
-                        <Avatar borde={usuario === "estandar" ? "standard" : "expert"} />
-                    </a>
+                    <div className="mobile:w-12 laptop:w-16 hidden dark:block">
+                        <AvatarPropio />
+                    </div>
                     <div className="mobile:flex tablet:hidden laptop:flex flex-col gap-3">
                         <h3 className="m-0 text-[var(--blanco)] dark:text-[var(--gris2)]">¡Hola, {session?.user.nombre_completo}!</h3>
                         {usuario === "estandar" &&
@@ -43,7 +41,7 @@ const SidebarPanel = ({ usuario }: SidebarPanelProps) => {
                         {usuario === "experto" && session?.user.usuario_verificado &&
                             <p className="mobile:hidden laptop:block font-normal text-[0.7rem] opacity-60"><span className="text-[var(--blanco)] dark:text-[var(--gris2)]">Usuario verificado</span></p>
                         }
-                        {usuario === "experto" && session?.user.usuario_verificado === false &&
+                        {usuario === "experto" && !session?.user.usuario_verificado &&
                             <p className="mobile:hidden laptop:block font-normal text-[0.7rem] opacity-60"><span className="text-[var(--blanco)] dark:text-[var(--gris2)]">Verificación en proceso</span></p>
                         }
                     </div>

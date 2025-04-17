@@ -5,10 +5,11 @@ import { useState, Suspense } from "react";
 import Logo from '@/components/icons/Logo';
 import Menu from '@/components/layout/Menu';
 import Search from '@/components/inputs/Search';
-import Avatar from '@/components/icons/Avatar';
+import AvatarPropio from '@/components/icons/AvatarPropio';
 import MenuDesplegable from "@/components/layout/MenuDesplegable";
 
 const Header = () => {
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
@@ -29,9 +30,9 @@ const Header = () => {
             </div>
 
             {/* Caja Avatar */}
-            <a href="/panel-estandar" className="w-12 flex items-center space-x-4 mobile:hidden laptop:flex">
-                <Avatar borde='standard' />
-            </a>
+            <div className="w-12 flex items-center space-x-4 mobile:hidden laptop:flex">
+                <AvatarPropio />
+            </div>
 
             {/* Menú Mobile */}
             <div className="flex items-center mobile:flex laptop:hidden">

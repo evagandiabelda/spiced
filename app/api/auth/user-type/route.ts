@@ -6,15 +6,15 @@ import { prisma } from "@/app/lib/prisma";
 // Se utiliza tras el Login para redirigir a un panel u otro, dependiendo del tipo de usuario.
 
 export async function POST(req: Request) {
-    const { email } = await req.json();
+    const { email, id } = await req.json();
 
-    if (!email) {
-        return NextResponse.json({ error: "Email requerido" }, { status: 400 });
+    if (!email && !id) {
+        return NextResponse.json({ error: "Se requiere 'email' o 'id'" }, { status: 400 });
     }
 
     try {
         const user = await prisma.user.findUnique({
-            where: { email },
+            where: email ? { email } : { id },
             include: {
                 expert: true,
                 standard: true,
