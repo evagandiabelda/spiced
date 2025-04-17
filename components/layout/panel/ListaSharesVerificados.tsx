@@ -32,7 +32,10 @@ export default function ListaSharesVerificados() {
             setError(null);
 
             try {
-                const response = await fetch(`/api/users/me/shares/verificados`);
+                const response = await fetch(`/api/users/me/shares/verificados`, {
+                    method: "GET",
+                });
+
                 if (!response.ok) {
                     throw new Error("Error al recuperar los datos.");
                 }
@@ -41,7 +44,6 @@ export default function ListaSharesVerificados() {
                 const shares: Share[] = data.shares;
 
                 if (shares.length === 0) {
-                    setError("Todavía no has verificado ningún share.");
                     setShares([]);
                 } else {
                     setShares(shares);
@@ -70,7 +72,11 @@ export default function ListaSharesVerificados() {
     return (
         <div className="w-full flex flex-col gap-8 px-[30px] pt-[10px] pb-[24px] rounded-xl bg-white dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--borde-shares)]">
             {shares.length === 0 ? (
-                <p>Todavía no hay shares por aquí...</p>
+                <p className="text-sm text-[var(--gris3)] pt-4">
+                    {session.user.usuario_verificado
+                        ? "Todavía no has verificado ningún Share."
+                        : "La verificación de tu cuenta de Experto está en proceso. Muy pronto podrás verificar Shares de otros usuarios."}
+                </p>
             ) : (
                 <ul>
                     {shares.map((share) => (

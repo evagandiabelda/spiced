@@ -12,7 +12,7 @@ export async function GET(request: Request) {
 
     const session = await getServerSession(authOptions);
 
-    if (!session?.user?.name || !session?.user.usuario_verificado) {
+    if (!session?.user?.name) {
         return NextResponse.json({ error: "Usuario no autenticado." }, { status: 401 });
     }
 
@@ -30,7 +30,7 @@ export async function GET(request: Request) {
             return NextResponse.json({ error: "Usuario no encontrado." }, { status: 404 });
         }
 
-        return NextResponse.json(user.shares_verificados, { status: 200 });
+        return NextResponse.json({ shares: user.shares_verificados }, { status: 200 });
     } catch (error) {
         console.error("Error obteniendo tus Shares.", error);
         return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });

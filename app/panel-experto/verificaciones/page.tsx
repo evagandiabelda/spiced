@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Boton from "@/components/buttons/Boton";
 import ListaSharesVerificados from "@/components/layout/panel/ListaSharesVerificados";
 
 export const metadata: Metadata = {
@@ -7,6 +6,7 @@ export const metadata: Metadata = {
 };
 
 export default function Sesiones() {
+
     return (
         <div className="w-full flex flex-col gap-12">
 
@@ -24,12 +24,6 @@ export default function Sesiones() {
 
             {/* CONTENIDO: */}
             <div className="w-full flex flex-col gap-6">
-                {/* Filtros */}
-                <div className="w-full flex flex-row justify-end items-center pr-4">
-                    <Boton texto="Nuevo Share" enlace="/panel-estandar/nuevo-share" tamano="grande" jerarquia="primario" icon="/iconos/iconos-menu/icono-nuevo.svg" />
-                </div>
-
-                {/* Tabla */}
                 <div className="w-full flex flex-col gap-2 rounded-l">
                     <ListaSharesVerificados />
                 </div>
