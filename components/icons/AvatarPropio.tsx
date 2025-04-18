@@ -10,36 +10,10 @@ type AvatarPropioProps = {
 };
 
 const AvatarPropio = ({ customBorder, foto }: AvatarPropioProps) => {
+
     const { data: session } = useSession();
-    const [userType, setUserType] = useState<string | null>(null);
+    const userType = session?.user.userType;
     const userPhoto = session?.user?.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"; // Imagen por defecto
-
-    // Obtener el tipo de usuario (Standard, Expert o Admin):
-    useEffect(() => {
-        const fetchUserType = async () => {
-            if (!session?.user?.email) return;
-
-            try {
-                const res = await fetch("/api/auth/user-type", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ email: session.user.email }),
-                });
-
-                const data = await res.json();
-
-                if (data.tipo) {
-                    setUserType(data.tipo);
-                }
-            } catch (error) {
-                console.error("Error al obtener el tipo de usuario:", error);
-            }
-        };
-
-        fetchUserType();
-    }, [session?.user?.email]);
 
     let colorBorde = "border-white";
     let href = "#";

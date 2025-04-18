@@ -18,6 +18,7 @@ export async function POST(req: Request) {
             include: {
                 expert: true,
                 standard: true,
+                admin: true,
             },
         });
 
@@ -25,10 +26,12 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Usuario no encontrado" }, { status: 404 });
         }
 
-        if (user.expert) {
-            return NextResponse.json({ tipo: "expert" });
-        } else if (user.standard) {
+        if (user.standard) {
             return NextResponse.json({ tipo: "standard" });
+        } else if (user.expert) {
+            return NextResponse.json({ tipo: "expert" });
+        } else if (user.admin) {
+            return NextResponse.json({ tipo: "admin" });
         } else {
             return NextResponse.json({ tipo: "desconocido" });
         }

@@ -20,10 +20,10 @@ export default function PanelEstandarLayout({
         if (!session) {
             // Si no hay sesión, redirigir al login:
             router.push("/login");
-        } else if (session.user.userType !== "expert") {
+        } else if (session.user.userType !== "admin") {
             // Redirigir al panel correspondiente
-            if (session.user.userType === "admin") {
-                router.push("/panel-admin");
+            if (session.user.userType === "expert") {
+                router.push("/panel-experto");
             } else if (session.user.userType === "standard") {
                 router.push("/panel-estandar");
             }
@@ -33,15 +33,15 @@ export default function PanelEstandarLayout({
 
     if (status === "loading") return <Loader />;
 
-    if (session?.user.userType !== "expert") return null;
+    if (session?.user.userType !== "admin") return null;
 
     return (
         <>
             {/* CAJA MODO CLARO */}
-            <div className="w-full flex mobile:flex-col tablet:flex-row gap-0 mobile:justify-start tablet:justify-between align-start pt-[30px] pb-0 dark:hidden fondo-degradado2">
+            <div className="w-full flex mobile:flex-col tablet:flex-row gap-0 mobile:justify-start tablet:justify-between align-start pt-[30px] pb-0 dark:hidden bg-[var(--gris3)]">
                 {/* CAJA SIDEBAR */}
                 <section className="h-full mobile:w-full tablet:w-fit laptop:w-full laptop:max-w-[360px] px-[2rem] mobile:py-0 tablet:py-5">
-                    <SidebarPanel usuario="experto" />
+                    <SidebarPanel usuario="admin" />
                 </section>
 
                 {/* CAJA PRINCIPAL */}
@@ -54,7 +54,7 @@ export default function PanelEstandarLayout({
             <div className="w-full flex mobile:flex-col tablet:flex-row gap-0 mobile:justify-start tablet:justify-between align-start pt-[30px] pb-0 hidden dark:flex bg-[var(--gris4)]">
                 {/* CAJA SIDEBAR */}
                 <section className="h-full mobile:w-full tablet:w-fit laptop:w-full laptop:max-w-[360px] px-[2rem] mobile:py-0 tablet:py-5">
-                    <SidebarPanel usuario="experto" />
+                    <SidebarPanel usuario="admin" />
                 </section>
 
                 {/* CAJA PRINCIPAL */}

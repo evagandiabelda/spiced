@@ -14,19 +14,26 @@ export default function PanelEstandarLayout({
     const { data: session, status } = useSession();
     const router = useRouter();
 
-    // Redirigir a login si el usuario no está autenticado
     useEffect(() => {
-        if (status === "unauthenticated") {
-            router.replace("/login");
+        if (status === "loading") return; // Esperar a que cargue la sesión
+
+        if (!session) {
+            // Si no hay sesión, redirigir al login:
+            router.push("/login");
+        } else if (session.user.userType !== "standard") {
+            // Redirigir al panel correspondiente
+            if (session.user.userType === "expert") {
+                router.push("/panel-experto");
+            } else if (session.user.userType === "admin") {
+                router.push("/panel-admin");
+            }
         }
-    }, [status, router]);
+    }, [session, status, router]);
 
-    // Mientras se carga la sesión, mostramos un loader
-    if (status === "loading") {
-        return <Loader />;
-    }
 
-    if (!session) return null; // Evita renderizar contenido innecesario antes de la redirección
+    if (status === "loading") return <Loader />;
+
+    if (session?.user.userType !== "standard") return null;
 
     return (
         <>

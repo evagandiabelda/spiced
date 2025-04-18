@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
 import { BotonLogin } from "@/components/buttons/BotonLogin";
 import Input from "@/components/inputs/Input";
 
 export default function LoginForm() {
-  const searchParams = useSearchParams();
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,10 +36,12 @@ export default function LoginForm() {
 
       const data = await response.json();
 
-      if (data.tipo === "expert") {
-        window.location.href = "/panel-experto";
-      } else if (data.tipo === "standard") {
+      if (data.tipo === "standard") {
         window.location.href = "/panel-estandar";
+      } else if (data.tipo === "expert") {
+        window.location.href = "/panel-experto";
+      } else if (data.tipo === "admin") {
+        window.location.href = "/panel-admin";
       } else {
         setErrorMessage("No se pudo determinar el tipo de usuario.");
       }
