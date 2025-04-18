@@ -1,0 +1,103 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import ListaSkeleton from "@/components/layout/panel/ListaSkeleton";
+import { UserData } from "@/types/user";
+import ItemListaUsuarioRegistrado from "@/components/layout/panel/ItemListaUsuarioRegistrado";
+
+interface ListaUsuariosRegistradosProps {
+    numItems?: number;
+}
+
+export default function ListaUsuariosRegistrados({ numItems }: ListaUsuariosRegistradosProps) {
+    const { data: session } = useSession();
+    const [usuarios, setUsuarios] = useState<UserData[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            if (!session?.user?.name) return; // Evitar la llamada si no hay usuario autenticado
+
+            setLoading(true);
+            setError(null);
+
+            try {
+                const response = await fetch(`/api/users`);
+                if (!response.ok) {
+                    throw new Error("Error al recuperar los usuarios.");
+                }
+
+                const data = await response.json();
+                const users: UserData[] = data.users;
+
+                if (users.length === 0) {
+                    setError("Todavía no se ha registrado ningún usuario.");
+                    setUsuarios([]);
+                } else {
+                    if (!numItems) {
+                        numItems = users.length;
+                    }
+                    setUsuarios(users);
+                }
+            } catch (error) {
+                setError("Error cargando los usuarios.");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUsers();
+    }, [session?.user?.name]); // Se ejecuta solo cuando el usuario cambia
+
+    const handleDelete = async (name: string, id: string) => {
+        try {
+            const res = await fetch(`/api/users/${name}?id=${id}`, {
+                method: "DELETE",
+            });
+
+            if (!res.ok) {
+                throw new Error("Error al eliminar el usuario");
+            }
+
+            // Actualizar el estado eliminando el share de la lista
+            setUsuarios((prevUsers) => prevUsers.filter((user) => user.id !== id));
+        } catch (error) {
+            console.error(error);
+            alert("Hubo un error al eliminar el usuario.");
+        }
+    };
+
+    if (!session?.user) return <p>Debes iniciar sesión para ver los usuarios.</p>;
+    if (error) return <p>{error}</p>;
+
+    if (loading) return (
+        <div className="w-full flex flex-col gap-8 p-[30px] rounded-xl bg-white dark:bg-[var(--gris4)]">
+            <ListaSkeleton />
+            <ListaSkeleton />
+            <ListaSkeleton />
+        </div>
+    );
+
+    return (
+        <div className="w-full flex flex-col gap-8 p-[10px] pb-[24px] rounded-xl bg-white dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--borde-shares)]">
+            {usuarios.length === 0 ? (
+                <p>Todavía no hay shares por aquí...</p>
+            ) : (
+                <ul>
+                    {usuarios.slice(0, numItems).map((usuario) => (
+                        <ItemListaUsuarioRegistrado
+                            id={usuario.id}
+                            key={usuario.id}
+                            name={usuario.name}
+                            foto={usuario.foto}
+                            usuario_verificado={usuario.usuario_verificado}
+                            fecha={usuario.created_at as Date}
+                        />
+                    ))}
+                </ul>
+            )}
+        </div>
+    );
+}

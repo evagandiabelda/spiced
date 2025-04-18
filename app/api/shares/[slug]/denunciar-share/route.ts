@@ -5,6 +5,51 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 const prisma = new PrismaClient();
 
+/* OBTENER TODAS LAS DENUNCIAS DE UN SHARE */
+
+export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
+
+    const session = await getServerSession(authOptions);
+
+    if (session?.user?.userType !== "admin") {
+        return NextResponse.json({ error: "Usuario no autorizado." }, { status: 401 });
+    }
+
+    try {
+        // Extraer el slug
+        const { slug } = await params;
+
+        if (!slug) {
+            return NextResponse.json({ error: "Faltan el slug del Share." }, { status: 400 });
+        }
+
+        // Buscar el Share por su slug
+        const share = await prisma.share.findUnique({
+            where: { slug },
+            select: {
+                id: true,
+            }
+        });
+
+        if (!share) {
+            return NextResponse.json({ error: "Share no encontrado." }, { status: 404 });
+        }
+
+        // Obtener las denuncias:
+        const denuncia = await prisma.denunciaShare.findMany({
+            where: {
+                share_id: share.id,
+            }
+        });
+
+        return NextResponse.json({ denuncia }, { status: 200 });
+    } catch (error) {
+        console.error("Error obteniendo las denuncias.", error);
+        return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });
+    }
+
+}
+
 /* 🚨 REGISTRAR UNA DENUNCIA A UN SHARE */
 
 export async function POST(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {

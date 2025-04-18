@@ -136,7 +136,7 @@ export async function DELETE(request: Request) {
 
         return NextResponse.json({ message: "Usuario eliminado correctamente." }, { status: 200 });
     } catch (error) {
-        console.error("Error actualizando usuario.", error);
+        console.error("Error eliminando usuario.", error);
         return NextResponse.json({ message: "Error interno del servidor.", error: error }, { status: 500 });
     }
 }

@@ -82,6 +82,8 @@
   --borde-pinguinadas: rgba(205, 176, 247, 0.2);
   --fondo-shares: rgba(255, 202, 116, 0.1);
   --borde-shares: rgba(255, 202, 116, 0.2);
+  --fondo-denuncias: rgba(255, 116, 116, 0.1);
+  --borde-denuncias: rgba(255, 116, 116, 0.2);
 }
 
 /* ------------ ESTILOS BASE DE TAILWIND ------------ */

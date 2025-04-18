@@ -5,6 +5,51 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 const prisma = new PrismaClient();
 
+/* OBTENER TODAS LAS DENUNCIAS DE UN COMENTARIO */
+
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+
+    const session = await getServerSession(authOptions);
+
+    if (session?.user?.userType !== "admin") {
+        return NextResponse.json({ error: "Usuario no autorizado." }, { status: 401 });
+    }
+
+    try {
+        // Extraer el ID del comentario:
+        const { id } = await params;
+
+        if (!id) {
+            return NextResponse.json({ error: "Faltan el ID del comentario." }, { status: 400 });
+        }
+
+        // Buscar el Comentario por su ID:
+        const comentario = await prisma.share.findUnique({
+            where: { id },
+            select: {
+                id: true,
+            }
+        });
+
+        if (!comentario) {
+            return NextResponse.json({ error: "Comentario no encontrado." }, { status: 404 });
+        }
+
+        // Obtener las denuncias:
+        const denuncia = await prisma.denunciaComentario.findMany({
+            where: {
+                comentario_id: comentario.id,
+            }
+        });
+
+        return NextResponse.json({ denuncia }, { status: 200 });
+    } catch (error) {
+        console.error("Error obteniendo las denuncias.", error);
+        return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });
+    }
+
+}
+
 /* 🚨 REGISTRAR UNA DENUNCIA A UN COMENTARIO */
 
 export async function POST(request: NextRequest, { params }: { params: Promise<{ slug: string, id: string }> }) {

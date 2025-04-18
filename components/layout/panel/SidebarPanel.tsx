@@ -35,7 +35,7 @@ const SidebarPanel = ({ usuario }: SidebarPanelProps) => {
                     </div>
                     <div className="mobile:flex tablet:hidden laptop:flex flex-col gap-3">
 
-                        <h3 className="m-0 text-[var(--blanco)] dark:text-[var(--gris2)]">¡Hola, {session?.user.nombre_completo}!</h3>
+                        <h4 className="m-0 text-[var(--blanco)] dark:text-[var(--gris2)]">¡Hola, {session?.user.nombre_completo}!</h4>
 
                         {/* Usuario Estándar (muestra insignia): */}
                         {usuario === "estandar" &&

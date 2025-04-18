@@ -32,6 +32,7 @@ export type UserData = {
     foto: string;
     descripcion_perfil: string;
     usuario_verificado: boolean;
+    created_at: Date;
     spices_seguidos: {
         spice: {
             id: string;

@@ -6,7 +6,9 @@ import { useEffect } from "react";
 
 import Image from "next/image";
 import ThemeToggle from "@/components/buttons/ThemeToggle";
-import Estadisticas from "@/components/cards/Estadisticas";
+import EstadisticasAdmin from "@/components/cards/EstadisticasAdmin";
+import ListaUsuariosRegistrados from "@/components/layout/panel/ListaUsuariosRegistrados";
+import ListaDenuncias from "@/components/layout/panel/ListaDenuncias";
 
 export default function Inicio() {
 
@@ -27,38 +29,46 @@ export default function Inicio() {
                 <div className="w-full flex mobile:flex-col-reverse tablet:flex-row justify-between mobile:items-between tablet:items-center mobile:gap-12 tablet:gap-3">
                     <h2>Panel de Administrador</h2>
                     <div className="flex flex-row justify-end gap-6">
-                        <div className="flex flex-row justify-end gap-4">
-                            <Image
-                                src="/iconos/iconos-menu/icono-notificaciones.svg"
-                                width={32}
-                                height={32}
-                                className="cursor-pointer hover:scale-110 transition ease dark:invert dark:opacity-70 dark:hover:opacity-100"
-                                alt="notificaciones"
-                            />
-                        </div>
                         <ThemeToggle />
                     </div>
                 </div>
             </div>
 
             {/* CONTENIDO: */}
-            <div className="w-full flex flex-col gap-4">
+            <div className="w-full flex mobile:flex-col tablet:flex-row gap-4">
                 <div className="w-full flex mobile:flex-col laptop:flex-row justify-between gap-4">
-                    {/* Card Estadísticas: */}
-                    <Estadisticas />
+                    <div className="w-full flex flex-col gap-4">
+                        {/* Card Estadísticas: */}
+                        <EstadisticasAdmin />
+                        {/* Card Últimas Denuncias: */}
+                        <div className="w-full flex flex-col rounded-xl bg-[#D84C60] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-denuncias)] dark:border-2 dark:border-[var(--borde-denuncias)]">
+                            <div className="w-full flex flex-row justify-between items-center">
+                                <h3 className="text-white">Últimas denuncias</h3>
+                                <Image
+                                    src="/iconos/iconos-menu/icono-denuncias.svg"
+                                    width={20}
+                                    height={20}
+                                    className="dark:invert opacity-50"
+                                    alt="últimos shares guardados"
+                                />
+                            </div>
+                            <ListaDenuncias numItems={5} />
+                        </div>
+                    </div>
                 </div>
-                {/* Card Últimos Shares Guardados: */}
-                <div className="w-full flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-shares)] dark:border-2 dark:border-[var(--borde-shares)]">
+                {/* Card Últimos Usuarios: */}
+                <div className="self-start w-full h-auto flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-shares)] dark:border-2 dark:border-[var(--borde-shares)]">
                     <div className="w-full flex flex-row justify-between items-center">
-                        <h3>Tus últimos shares</h3>
+                        <h3>Últimos usuarios</h3>
                         <Image
-                            src="/iconos/iconos-menu/icono-guardado.svg"
-                            width={18}
-                            height={18}
+                            src="/iconos/iconos-menu/icono-usuarios.svg"
+                            width={20}
+                            height={20}
                             className="dark:invert opacity-50"
                             alt="últimos shares guardados"
                         />
                     </div>
+                    <ListaUsuariosRegistrados numItems={5} />
                 </div>
             </div>
 

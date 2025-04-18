@@ -14,12 +14,24 @@ export async function GET() {
 
   const session = await getServerSession(authOptions);
 
-  if (!session?.user?.is_admin) {
+  if (session?.user.userType !== "admin") {
     return NextResponse.json({ error: "Usuario no autorizado." }, { status: 401 });
   }
 
   try {
-    const users = await prisma.user.findMany();
+    const users = await prisma.user.findMany({
+      include: {
+        admin: true,
+        expert: true,
+        standard: true,
+        seguidos: true,
+        seguidores: true,
+        shares_publicados: true,
+        denuncias_shares: true,
+        denuncias_comentarios: true,
+      }
+    });
+
     return NextResponse.json({ users }, { status: 200 });
   } catch (error) {
     console.error("Error al obtener los usuarios.", error);
