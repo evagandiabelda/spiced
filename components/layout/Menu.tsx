@@ -132,6 +132,7 @@ const Menu = ({ tipo }: tipo) => {
                             <a href="/register-expert" className={className}>Convertirse en experto</a>
                         }
                         <a href="#" className={className}>Preguntas frecuentes</a>
+                        <a href="#" className={className}>Política de Privacidad</a>
                         <a href="#" className={className}>Ayúdanos a mejorar</a>
                         {session?.user &&
                             <a href={session?.user.userType === "expert" ? "/panel-experto/configuracion" : "/panel-estandar/configuracion"} className={className}>Salir</a>
@@ -201,6 +202,7 @@ const Menu = ({ tipo }: tipo) => {
                                     <a href="/register-expert" className={className}>Convertirse en experto</a>
                                 }
                                 <a href="#" className={className}>Preguntas frecuentes</a>
+                                <a href="#" className={className}>Política de Privacidad</a>
                                 <a href="#" className={className}>Ayúdanos a mejorar</a>
                                 {session?.user &&
                                     <a href={session?.user.userType === "expert" ? "/panel-experto/configuracion" : "/panel-estandar/configuracion"} className={className}>Salir</a>
