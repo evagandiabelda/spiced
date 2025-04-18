@@ -113,7 +113,7 @@ export default function ListaFeedUsuario({ idAutor, nameAutor }: ListaFeedUsuari
         <div>
             {shares.length === 0 &&
                 <div className="w-full flex flex-col items-center">
-                    <p className="w-full text-[var(--gris3)] text-center">Este usuario todavía no ha publicado ningún Share.</p>
+                    <p className="w-full text-[var(--gris3)] text-center">Todavía no hay Shares publicados.</p>
                 </div>}
             <Masonry
                 breakpointCols={{

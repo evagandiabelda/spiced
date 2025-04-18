@@ -2,53 +2,19 @@
 
 import { useEffect, useState } from 'react';
 import { useSession } from "next-auth/react";
+import type { UserData } from '@/types/user';
 import ListaFeedUsuario from '@/components/cards/ListaFeedUsuario';
 import AvatarOtros from "@/components/icons/AvatarOtros";
 import Image from "next/image";
+import Tag from '@/components/buttons/Tag';
 import Boton from '@/components/buttons/Boton';
 
-interface UserData {
-    id: string;
-    nombre_completo: string;
-    name: string;
-    foto: string;
-    descripcion_perfil: string;
-    usuario_verificado: boolean;
-    spices_seguidos: {
-        spice: {
-            id: string;
-            nombre: string;
-        }
-    }[];
-    categorias_seguidas: {
-        categoria: {
-            id: string;
-            nombre: string;
-        }
-    }[];
-    shares_publicados: {
-        share: {
-            id: string;
-            titulo: string;
-            texto: string;
-            img_principal: string;
-            share_verificado: boolean;
-            slug: string;
-            spices: {
-                spice: {
-                    id: string;
-                    nombre: string;
-                }
-            }[];
-            categorias: {
-                categoria: {
-                    id: string;
-                    nombre: string;
-                }
-            }[];
-        }
-    }
-}
+// Opciones para las Insignias:
+const opcionesInsignia = [
+    { valor: "pequeno_saltamontes", icono: "/iconos/iconos-otros/icono-insignia-mini-1.svg", texto: "Pequeño Saltamontes", estiloTexto: "font-bold text-[var(--insignia1)]" },
+    { valor: "cacahuete_sabio", icono: "/iconos/iconos-otros/icono-insignia-mini-2.svg", texto: "Cacahuete Sabio", estiloTexto: "font-bold text-[var(--insignia2)]" },
+    { valor: "cactus_legendario", icono: "/iconos/iconos-otros/icono-insignia-mini-3.svg", texto: "Cactus Legendario", estiloTexto: "font-bold text-[var(--insignia3)]" },
+];
 
 interface PerfilUsuarioProps {
     name: string;
@@ -93,7 +59,7 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
     }, [name]);
 
     return (
-        <div className="w-full flex flex-col items-center gap-12 px-col1 py-[3rem]">
+        <div className="w-full flex flex-col items-center gap-12 px-col1 pt-[3rem] pb-32">
 
             {/* Cabecera 'Volver' */}
 
@@ -110,18 +76,23 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
 
             {/* Datos Usuario */}
 
-            <div className="w-full flex flex-row gap-8 px-col1 pb-12 border-b border-b-1 border-b-[#b0aaaa]">
+            <div className="w-full flex mobile:flex-col tablet:flex-row mobile:gap-0 tablet:gap-8 px-col1 pb-12 border-b border-b-1 border-b-[#b0aaaa]">
 
-                <div className="w-col1">
+                <div className="mobile:w-col3 tablet:w-col2 laptop:w-col1">
                     <AvatarOtros autor={usuario} />
                 </div>
 
-                <div className='w-full flex flex-col items-center pt-7 gap-12'>
-                    <div className='w-full flex flex-row justify-between gap-8'>
+                <div className='w-full flex flex-col pt-7 mobile:gap-8 tablet:gap-12'>
+                    <div className='w-full flex mobile:flex-col laptop:flex-row justify-between gap-8'>
                         <div className='w-full flex flex-col gap-4'>
                             <h3>{usuario.nombre_completo}</h3>
-                            <div className='w-full flex flex-row items-center gap-2'>
+                            <div className='w-full flex flex-row justify-start items-center gap-2'>
                                 <p className='text-[0.8rem] text-[var(--gris3)] font-bold'>@{usuario.name}</p>
+                            </div>
+                        </div>
+                        {usuario.usuario_verificado &&
+                            <div className='w-full flex flex-row justify-end items-center gap-2'>
+                                <p className='text-[0.9rem] text-[var(--gris3)] font-bold'>Usuario Verificado</p>
                                 <Image
                                     src="/iconos/iconos-otros/icono-verificado-relleno2.svg"
                                     alt='usuario verificado'
@@ -130,37 +101,70 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
                                     className='opacity-70'
                                 />
                             </div>
-                        </div>
-                        <div className='w-full flex flex-row justify-end items-center gap-2'>
-                            <p className='font-bold text-[var(--insignia1)]'>Pequeño Saltamontes</p>
-                            <Image
-                                src="/iconos/iconos-otros/icono-insignia-mini-1.svg"
-                                alt='icono insignia'
-                                width={24}
-                                height={24}
-                            />
-                        </div>
+                        }
+                        {usuario.standard && (
+                            <div className='w-full flex flex-row justify-end items-center gap-2'>
+                                {(() => {
+                                    const insigniaSeleccionada = opcionesInsignia.find(
+                                        (insignia) => insignia.valor === usuario.standard?.insignia
+                                    );
+
+                                    if (!insigniaSeleccionada) return null;
+
+                                    return (
+                                        <>
+                                            <p className={insigniaSeleccionada.estiloTexto}>
+                                                {insigniaSeleccionada.texto}
+                                            </p>
+                                            <Image
+                                                src={insigniaSeleccionada.icono}
+                                                alt={`icono insignia ${insigniaSeleccionada.texto}`}
+                                                width={24}
+                                                height={24}
+                                            />
+                                        </>
+                                    );
+                                })()}
+                            </div>
+                        )}
+
                     </div>
-                    <div className='w-full'>
+                    <div className='mobile:w-full laptop:w-1/2'>
                         <p className='text-[0.9rem]'>{usuario.descripcion_perfil}</p>
                     </div>
-                    <div className='w-full flex flex-row justify-between gap-8'>
-                        <div className='w-full flex flex-wrap gap-4'>
-                            {/* SPICES DEL USUARIO */}
+                    <div className='w-full flex mobile:flex-col laptop:flex-row justify-between gap-8'>
+                        <div className='w-1/2 flex flex-wrap gap-2'>
+                            {usuario.spices_seguidos?.map(({ spice }) => (
+                                spice ? (
+                                    <Tag key={spice.id} nombre={spice.nombre} tamano="pequeno" isActive={true} />
+                                ) : null
+                            ))}
                         </div>
-                        <div className='w-full flex flex-row justify-end items-center gap-6'>
-                            <Boton
-                                texto='Enviar una pingüinada'
-                                tamano='pequeno'
-                                jerarquia='secundario'
-                            />
-                            <Boton
-                                texto='Seguir su contenido'
-                                tamano='pequeno'
-                                jerarquia='primario'
-                                icon='/iconos/iconos-otros/icono-agregar.svg'
-                            />
-                        </div>
+                        {usuario.id === session?.user.id &&
+                            <div className='w-full flex flex-wrap justify-end items-center gap-4'>
+                                <Boton
+                                    texto='Editar mi perfil'
+                                    enlace={session?.user.role === "standard" ? "/panel-estandar/configuracion" : "/panel-experto/configuracion"}
+                                    tamano='pequeno'
+                                    jerarquia='secundario'
+                                />
+                            </div>
+                        }
+                        {usuario.id !== session?.user.id &&
+                            <div className='w-full flex flex-wrap justify-end items-center gap-4'>
+                                <Boton
+                                    texto='Enviar una pingüinada'
+                                    tamano='pequeno'
+                                    jerarquia='secundario'
+                                />
+                                <Boton
+                                    texto='Seguir su contenido'
+                                    tamano='pequeno'
+                                    jerarquia='primario'
+                                    icon='/iconos/iconos-otros/icono-agregar.svg'
+                                />
+                            </div>
+                        }
                     </div>
 
                 </div>
@@ -170,7 +174,11 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
             {/* Shares del Usuario */}
 
             <div className='w-full flex flex-col items-center gap-10'>
-                <h3>Sus Shares</h3>
+                {usuario.id === session?.user.id
+                    ? <h3>Tus Shares</h3>
+                    : <h3>Sus Shares</h3>
+                }
+
                 <div className='w-full flex flex-col items-center'>
                     <ListaFeedUsuario idAutor={usuario.id} nameAutor={usuario.name} />
                 </div>

@@ -2,7 +2,6 @@ import NextAuth from 'next-auth';
 import { authConfig } from './auth.config';
 import CredentialsProvider from 'next-auth/providers/credentials'; // 🔹 Corrección de importación
 import { z } from 'zod';
-import type { User } from '@/app/lib/definitions';
 import bcrypt from 'bcryptjs';
 import { PrismaClient } from '@prisma/client'; // 🔹 Usamos Prisma en lugar de SQL
 
@@ -10,7 +9,14 @@ const prisma = new PrismaClient();
 
 async function getUser(email: string) {
   try {
-    return await prisma.user.findUnique({ where: { email } });
+    return await prisma.user.findUnique({
+      where: { email },
+      include: {
+        standard: true,
+        expert: true,
+        admin: true,
+      },
+    });
   } catch (error) {
     console.error('Failed to fetch user:', error);
     return null;
@@ -40,6 +46,13 @@ export const { auth, signIn, signOut } = NextAuth({
 
         const passwordsMatch = await bcrypt.compare(password, user.password);
         if (passwordsMatch) {
+
+          let role: "standard" | "expert" | "admin" | null = null;
+
+          if (user.admin) role = "admin";
+          else if (user.expert) role = "expert";
+          else if (user.standard) role = "standard";
+
           return {
             id: user.id.toString(),
             email: user.email,
@@ -47,6 +60,7 @@ export const { auth, signIn, signOut } = NextAuth({
             foto: user.foto,
             nombre_completo: user.nombre_completo,
             usuario_verificado: user.usuario_verificado,
+            role: role,
           };
         }
 
@@ -63,6 +77,7 @@ export const { auth, signIn, signOut } = NextAuth({
         session.user.foto = token.foto as string;
         session.user.nombre_completo = token.nombre_completo as string;
         session.user.usuario_verificado = token.usuario_verificado as boolean;
+        session.user.role = token.role ?? null;
       }
       return session;
     },
@@ -73,6 +88,7 @@ export const { auth, signIn, signOut } = NextAuth({
         token.foto = user.foto;
         token.nombre_completo = user.nombre_completo;
         token.usuario_verificado = user.usuario_verificado;
+        token.role = user.role;
       }
       if (trigger === "update") {
         token.id = user.id;
@@ -80,6 +96,7 @@ export const { auth, signIn, signOut } = NextAuth({
         token.foto = user.foto;
         token.nombre_completo = user.nombre_completo;
         token.usuario_verificado = user.usuario_verificado;
+        token.role = user.role;
       }
       return token;
     },

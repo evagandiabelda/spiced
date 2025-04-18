@@ -56,6 +56,10 @@ const AvatarPropio = ({ customBorder, foto }: AvatarPropioProps) => {
         colorBorde = "border-[var(--brand4)]";
         href = "/panel-admin";
     }
+    else {
+        colorBorde = "border-[var(--brand1)]";
+        href = "/login";
+    }
 
     if (customBorder) {
         colorBorde = customBorder;

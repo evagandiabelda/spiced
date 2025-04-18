@@ -22,7 +22,16 @@ export async function GET(req: Request, { params }: { params: Promise<{ name: st
                 foto: true,
                 descripcion_perfil: true,
                 usuario_verificado: true,
-                spices_seguidos: true,
+                spices_seguidos: {
+                    include: {
+                        spice: true,
+                    }
+                },
+                standard: {
+                    select: {
+                        insignia: true,
+                    }
+                },
                 shares_publicados: {
                     include: {
                         autor: {
