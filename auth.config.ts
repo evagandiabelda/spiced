@@ -18,14 +18,13 @@ export const authConfig: NextAuthOptions = {
         session.user.nombre_completo = token.nombre_completo ?? "";
         session.user.usuario_verificado = token.usuario_verificado ?? false;
         session.user.insignia = token.insignia ?? null;
-        session.user.role = token.role ?? null; // 👈 Añadimos el rol
+        session.user.userType = token.userType ?? null;
       }
       return session;
     },
 
     async jwt({ token, user, trigger }) {
       if (user) {
-        // Incluimos las relaciones necesarias para determinar el rol
         const dbUser = await prisma.user.findUnique({
           where: { email: user.email! },
           include: {
@@ -35,11 +34,12 @@ export const authConfig: NextAuthOptions = {
           },
         });
 
-        let role: "standard" | "expert" | "admin" | null = null;
+        let userType: "standard" | "expert" | "admin" | null = null;
 
-        if (dbUser?.admin) role = "admin";
-        else if (dbUser?.expert) role = "expert";
-        else if (dbUser?.standard) role = "standard";
+        // Asignamos el tipo de usuario según la relación
+        if (dbUser?.admin) userType = "admin";
+        else if (dbUser?.expert) userType = "expert";
+        else if (dbUser?.standard) userType = "standard";
 
         token.id = dbUser?.id ?? user.id;
         token.email = dbUser?.email ?? user.email ?? "";
@@ -48,7 +48,7 @@ export const authConfig: NextAuthOptions = {
         token.nombre_completo = dbUser?.nombre_completo ?? user.nombre_completo ?? "";
         token.usuario_verificado = dbUser?.usuario_verificado ?? user.usuario_verificado ?? false;
         token.insignia = dbUser?.standard?.insignia || null;
-        token.role = role; // 👈 Guardamos el rol en el token
+        token.userType = userType || null;
       }
 
       if (trigger === "update") {
@@ -58,7 +58,6 @@ export const authConfig: NextAuthOptions = {
         token.foto = user.foto;
         token.nombre_completo = user.nombre_completo;
         token.usuario_verificado = user.usuario_verificado;
-        // No actualizamos insignia o rol aquí porque puede que no estén en `user`
       }
 
       return token;
@@ -95,11 +94,11 @@ export const authConfig: NextAuthOptions = {
         const passwordsMatch = await bcrypt.compare(password, user.password);
         if (!passwordsMatch) return null;
 
-        // Determinamos el rol
-        let role: "standard" | "expert" | "admin" | null = null;
-        if (user.admin) role = "admin";
-        else if (user.expert) role = "expert";
-        else if (user.standard) role = "standard";
+        // Determinamos el tipo de usuario basado en las relaciones con las tablas
+        let userType: "standard" | "expert" | "admin" | null = null;
+        if (user.admin) userType = "admin";
+        else if (user.expert) userType = "expert";
+        else if (user.standard) userType = "standard";
 
         // Retornamos el objeto con la propiedad 'role'
         return {
@@ -109,7 +108,7 @@ export const authConfig: NextAuthOptions = {
           foto: user.foto,
           nombre_completo: user.nombre_completo,
           usuario_verificado: user.usuario_verificado,
-          role: role, // Aquí añadimos el rol
+          userType: userType || null,
         };
       }
     }),

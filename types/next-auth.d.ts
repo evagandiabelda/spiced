@@ -9,7 +9,7 @@ declare module "next-auth" {
             foto: string;
             nombre_completo: string;
             usuario_verificado: boolean;
-            role: "admin" | "expert" | "standard" | null;
+            userType: "admin" | "expert" | "standard" | null;
             insignia?: string | null;
         } & DefaultSession["user"];
     }
@@ -21,7 +21,7 @@ declare module "next-auth" {
         foto?: string;
         nombre_completo: string;
         usuario_verificado: boolean;
-        role: "admin" | "expert" | "standard" | null;
+        userType: "admin" | "expert" | "standard" | null;
         insignia?: string | null;
     }
 
@@ -31,7 +31,7 @@ declare module "next-auth" {
         foto: string;
         nombre_completo: string;
         usuario_verificado: boolean;
-        role: "admin" | "expert" | "standard" | null;
+        userType: "admin" | "expert" | "standard" | null;
         insignia?: string | null;
     }
 }
