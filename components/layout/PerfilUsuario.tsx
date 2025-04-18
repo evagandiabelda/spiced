@@ -144,7 +144,7 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
                             <div className='w-full flex flex-wrap justify-end items-center gap-4'>
                                 <Boton
                                     texto='Editar mi perfil'
-                                    enlace={session?.user.role === "standard" ? "/panel-estandar/configuracion" : "/panel-experto/configuracion"}
+                                    enlace={session?.user.userType === "standard" ? "/panel-estandar/configuracion" : "/panel-experto/configuracion"}
                                     tamano='pequeno'
                                     jerarquia='secundario'
                                 />
