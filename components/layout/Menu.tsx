@@ -1,5 +1,6 @@
 'use client';
 
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import {
     Accordion,
@@ -16,12 +17,16 @@ type tipo = {
 
 const Menu = ({ tipo }: tipo) => {
 
+    const { data: session } = useSession();
+
     if (tipo === "header") {
         return (
             <nav className="mobile:hidden laptop:flex items-center space-x-6">
                 <a href="/" className="hover-underline">Inicio</a>
                 <a href="/explorar" className="hover-underline">Explorar</a>
-                <a href="/panel-estandar/nuevo-share" className="hover-underline">Compartir</a>
+                {session?.user.userType !== "admin" &&
+                    <a href={session?.user.userType === "expert" ? "/panel-experto/nuevo-share" : "/panel-estandar/nuevo-share"} className="hover-underline">Compartir</a>
+                }
             </nav>
         );
     }
@@ -55,18 +60,20 @@ const Menu = ({ tipo }: tipo) => {
                     </div>
                 </a>
 
-                <a href="/panel-estandar/nuevo-share">
-                    <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
-                        <Image
-                            src="/iconos/iconos-menu/icono-compartir.svg"
-                            width={24}
-                            height={24}
-                            className="dark:invert"
-                            alt="compartir"
-                        />
-                        <p className="font-bold mb-0">Compartir</p>
-                    </div>
-                </a>
+                {session?.user.userType !== "admin" &&
+                    <a href={session?.user.userType === "expert" ? "/panel-experto/nuevo-share" : "/panel-estandar/nuevo-share"}>
+                        <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
+                            <Image
+                                src="/iconos/iconos-menu/icono-compartir.svg"
+                                width={24}
+                                height={24}
+                                className="dark:invert"
+                                alt="compartir"
+                            />
+                            <p className="font-bold mb-0">Compartir</p>
+                        </div>
+                    </a>
+                }
             </nav>
         );
     }
@@ -118,13 +125,17 @@ const Menu = ({ tipo }: tipo) => {
                 <div className="flex flex-col gap-5">
                     <h3 className='text-white'>Tu espacio</h3>
                     <nav className="flex flex-col gap-3">
-                        <a href="/panel-estandar" className={className}>Espacio personal</a>
-                        <a href="/panel-estandar/nuevo-share" className={className}>Compartir contenido</a>
-                        <a href="/panel-estandar/shares-guardados" className={className}>Contenido guardado</a>
-                        <a href="#" className={className}>Convertirse en experto</a>
+                        <a href={session?.user.userType === "expert" ? "/panel-experto" : "/panel-estandar"} className={className}>Espacio personal</a>
+                        <a href={session?.user.userType === "expert" ? "/panel-experto/nuevo-share" : "/panel-estandar/nuevo-share"} className={className}>Compartir contenido</a>
+                        <a href={session?.user.userType === "expert" ? "/panel-experto/shares-guardados" : "/panel-estandar/shares-guardados"} className={className}>Contenido guardado</a>
+                        {!session?.user &&
+                            <a href="/register-expert" className={className}>Convertirse en experto</a>
+                        }
                         <a href="#" className={className}>Preguntas frecuentes</a>
                         <a href="#" className={className}>Ayúdanos a mejorar</a>
-                        <a href="/panel-estandar/configuracion" className={className}>Salir</a>
+                        {session?.user &&
+                            <a href={session?.user.userType === "expert" ? "/panel-experto/configuracion" : "/panel-estandar/configuracion"} className={className}>Salir</a>
+                        }
                     </nav>
                 </div>
             </div>
@@ -183,13 +194,17 @@ const Menu = ({ tipo }: tipo) => {
                         <AccordionTrigger className="pb-5">Tu espacio</AccordionTrigger>
                         <AccordionContent>
                             <nav className="flex flex-col">
-                                <a href="/panel-estandar/" className={className}>Espacio personal</a>
-                                <a href="/panel-estandar/nuevo-share" className={className}>Compartir contenido</a>
-                                <a href="/panel-estandar/shares-guardados" className={className}>Contenido guardado</a>
-                                <a href="#" className={className}>Convertirse en experto</a>
+                                <a href={session?.user.userType === "expert" ? "/panel-experto" : "/panel-estandar"} className={className}>Espacio personal</a>
+                                <a href={session?.user.userType === "expert" ? "/panel-experto/nuevo-share" : "/panel-estandar/nuevo-share"} className={className}>Compartir contenido</a>
+                                <a href={session?.user.userType === "expert" ? "/panel-experto/shares-guardados" : "/panel-estandar/shares-guardados"} className={className}>Contenido guardado</a>
+                                {!session?.user &&
+                                    <a href="/register-expert" className={className}>Convertirse en experto</a>
+                                }
                                 <a href="#" className={className}>Preguntas frecuentes</a>
                                 <a href="#" className={className}>Ayúdanos a mejorar</a>
-                                <a href="/panel-estandar/configuracion" className={className}>Salir</a>
+                                {session?.user &&
+                                    <a href={session?.user.userType === "expert" ? "/panel-experto/configuracion" : "/panel-estandar/configuracion"} className={className}>Salir</a>
+                                }
                             </nav>
                         </AccordionContent>
                     </AccordionItem>

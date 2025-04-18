@@ -7,6 +7,7 @@ import ListaFeed from '@/components/cards/ListaFeed';
 import ListaSkeleton from '@/components/layout/panel/ListaSkeleton';
 import Options from '@/components/inputs/Options';
 import NubeTagsDinamica from '@/components/buttons/NubeTagsDinamica';
+import Boton from '@/components/buttons/Boton';
 
 type Categoria = {
     id: string;
@@ -122,6 +123,21 @@ export default function Feed() {
                     filtroSpices={tagsSeleccionados}
                 />
             </Suspense>
+
+            {/* ACCIÓN CIERRE */}
+            <div className='flex flex-col gap-8 pt-16'>
+                <p>¡Esto es todo! ¿Te animas a publicar tu propio Share?</p>
+                {session?.user.userType !== "admin" &&
+                    <div>
+                        <Boton
+                            texto="Nuevo Share"
+                            enlace={session?.user.userType === "expert" ? "/panel-experto/nuevo-share" : "/panel-estandar/nuevo-share"}
+                            tamano='grande'
+                            jerarquia='secundario'
+                        />
+                    </div>
+                }
+            </div>
 
         </div>
     );

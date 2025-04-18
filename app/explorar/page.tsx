@@ -1,3 +1,4 @@
+
 import Boton from '@/components/buttons/Boton';
 import Feed from '@/components/feed/Feed';
 
@@ -19,18 +20,6 @@ export default async function Explorar() {
             {/* CONTENIDO */}
             <Feed />
 
-            {/* ACCIÓN CIERRE */}
-            <div className='flex flex-col gap-8'>
-                <p>¡Esto es todo! ¿Te animas a publicar tu propio Share?</p>
-                <div>
-                    <Boton
-                        texto="Nuevo Share"
-                        enlace="/panel-estandar/nuevo-share"
-                        tamano='grande'
-                        jerarquia='secundario'
-                    />
-                </div>
-            </div>
         </div>
     );
 }

@@ -29,6 +29,8 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
+    const [siguiendo, setSiguiendo] = useState<boolean>(false);
+
     useEffect(() => {
         const fetchUsuario = async () => {
             setLoading(true);
@@ -47,6 +49,10 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
                     setError("Este usuario no existe.");
                 } else {
                     setUsuario(usuario);
+                    // Verificar si el usuario en sesión ya sigue a este usuario
+                    if (usuario?.seguidores?.some((seguimiento: { seguidor_id: string }) => seguimiento.seguidor_id === session?.user.id)) {
+                        setSiguiendo(true);
+                    }
                 }
             } catch (err) {
                 setError("No se pudo cargar la información del usuario.");
@@ -56,7 +62,31 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
         };
 
         fetchUsuario();
-    }, [name]);
+    }, [name, session?.user.id]);
+
+    // Función para seguir o dejar de seguir
+    const toggleSeguir = async () => {
+        try {
+            const url = '/api/users/me/siguiendo';
+            const method = siguiendo ? 'DELETE' : 'POST'; // Cambiar a DELETE si ya está siguiendo
+            const response = await fetch(url, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ seguido_id: usuario.id }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al seguir o dejar de seguir al usuario.');
+            }
+
+            setSiguiendo(!siguiendo); // Cambiar estado del seguimiento
+        } catch (error) {
+            console.error(error);
+            setError("No se pudo realizar la acción.");
+        }
+    };
 
     return (
         <div className="w-full flex flex-col items-center gap-12 px-col1 pt-[3rem] pb-32">
@@ -158,10 +188,11 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
                                     jerarquia='secundario'
                                 />
                                 <Boton
-                                    texto='Seguir su contenido'
+                                    texto={siguiendo ? 'Dejar de seguir' : 'Seguir su contenido'}
                                     tamano='pequeno'
                                     jerarquia='primario'
                                     icon='/iconos/iconos-otros/icono-agregar.svg'
+                                    onClick={toggleSeguir}
                                 />
                             </div>
                         }
