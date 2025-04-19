@@ -22,15 +22,15 @@ export default function TusShares() {
 
             {/* CONTENIDO: */}
             <div className="w-full flex flex-col gap-6">
-                {/* Filtros */}
+
                 <div className="w-full flex flex-row justify-end items-center pr-4">
                     <Boton texto="Nuevo Share" enlace="/panel-estandar/nuevo-share" tamano="grande" jerarquia="primario" icon="/iconos/iconos-menu/icono-nuevo.svg" />
                 </div>
 
-                {/* Tabla */}
                 <div className="w-full flex flex-col gap-2 rounded-l">
                     <ListaSharesPublicados />
                 </div>
+
             </div>
 
         </div>

@@ -9,38 +9,9 @@ const prisma = new PrismaClient();
 
 export async function GET() {
     try {
-        const categorias = await prisma.categoria.findMany({
-            include: {
-                shares_asociados: {
-                    include: {
-                        share: {
-                            include: {
-                                autor: {
-                                    select: {
-                                        id: true,
-                                        name: true,
-                                        foto: true,
-                                        usuario_verificado: true
-                                    },
-                                },
-                                spices: {
-                                    include: {
-                                        spice: true,
-                                    }
-                                },
-                                categorias: {
-                                    include: {
-                                        categoria: true,
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        });
+        const categorias = await prisma.categoria.findMany();
 
-        return NextResponse.json(categorias, { status: 200 });
+        return NextResponse.json({ categorias }, { status: 200 });
     } catch (error) {
         console.error("Error obteniendo las categorías.", error);
         return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });
@@ -53,7 +24,7 @@ export async function POST(req: Request) {
 
     const session = await getServerSession(authOptions);
 
-    if (!session?.user?.is_admin) {
+    if (session?.user?.userType !== "admin") {
         return NextResponse.json({ error: "Usuario no autorizado." }, { status: 401 });
     }
 

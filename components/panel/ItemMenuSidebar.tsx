@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type ItemMenuSidebarProps = {
+type ItemProps = {
     enlace: string;
     icono: string;
     texto: string;
 }
 
 
-const ItemMenuSidebar = ({ enlace, icono, texto }: ItemMenuSidebarProps) => {
+const ItemMenuSidebar = ({ enlace, icono, texto }: ItemProps) => {
 
     // Per a determinar si l'enllaç està actiu:
     const pathname = usePathname();

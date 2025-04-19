@@ -219,40 +219,40 @@ model ShareGuardado {
 
 model UsuarioSpice {
   user_id String
-  user    User   @relation(fields: [user_id], references: [id])
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   spice_id String
-  spice    Spice  @relation(fields: [spice_id], references: [id])
+  spice    Spice  @relation(fields: [spice_id], references: [id], onDelete: Cascade)
 
   @@id([user_id, spice_id]) // Clave primaria compuesta
 }
 
 model ShareSpice {
   share_id String
-  share    Share  @relation(fields: [share_id], references: [id])
+  share    Share  @relation(fields: [share_id], references: [id], onDelete: Cascade)
 
   spice_id String
-  spice    Spice  @relation(fields: [spice_id], references: [id])
+  spice    Spice  @relation(fields: [spice_id], references: [id], onDelete: Cascade)
 
   @@id([share_id, spice_id]) // Clave primaria compuesta
 }
 
 model UsuarioCategoria {
   user_id String
-  user    User   @relation(fields: [user_id], references: [id])
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   categoria_id String
-  categoria    Categoria @relation(fields: [categoria_id], references: [id])
+  categoria    Categoria @relation(fields: [categoria_id], references: [id], onDelete: Cascade)
 
   @@id([user_id, categoria_id]) // Clave primaria compuesta
 }
 
 model ShareCategoria {
   share_id String
-  share    Share  @relation(fields: [share_id], references: [id])
+  share    Share  @relation(fields: [share_id], references: [id], onDelete: Cascade)
 
   categoria_id String
-  categoria    Categoria @relation(fields: [categoria_id], references: [id])
+  categoria    Categoria @relation(fields: [categoria_id], references: [id], onDelete: Cascade)
 
   @@id([share_id, categoria_id]) // Clave primaria compuesta
 }
