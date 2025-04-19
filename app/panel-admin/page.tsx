@@ -35,7 +35,7 @@ export default function Inicio() {
             </div>
 
             {/* CONTENIDO: */}
-            <div className="w-full flex mobile:flex-col tablet:flex-row gap-4">
+            <div className="w-full flex mobile:flex-col laptop:flex-row gap-4">
                 <div className="w-full flex mobile:flex-col laptop:flex-row justify-between gap-4">
                     <div className="w-full flex flex-col gap-4">
                         {/* Card Estadísticas: */}

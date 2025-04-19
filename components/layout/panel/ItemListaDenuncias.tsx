@@ -33,9 +33,9 @@ const ItemListaDenuncias = ({ motivo, fecha, share, user }: ItemProps) => {
     const objetoFecha = new Date(fecha);
 
     return (
-        <li className="w-full flex flex-col justify-between items-center gap-4 rounded-xl p-4 hover:bg-[var(--gris1)] cursor-pointer" onClick={() => router.push(`/shares/${share.slug}`)}>
+        <li className="w-full flex flex-col justify-between items-center gap-4 rounded-xl p-4 hover:bg-[var(--gris1)] dark:hover:bg-[var(--gris4)] cursor-pointer" onClick={() => router.push(`/shares/${share.slug}`)}>
 
-            <div className="flex-1 flex flex-col mobile:items-start tablet:items-center gap-8">
+            <div className="w-full flex-1 flex flex-col mobile:items-start tablet:items-center gap-8">
 
                 <div id="caja-share" className="w-full flex flex-row gap-4">
                     <div className="relative w-[4rem] h-[4rem]">
@@ -57,7 +57,7 @@ const ItemListaDenuncias = ({ motivo, fecha, share, user }: ItemProps) => {
                     <div className="w-full pb-2 border-b border-b-2 border-[#b0aaa]">
                         <p className='text-[0.7rem] text-[var(--gris2)]'>Denunciante:</p>
                     </div>
-                    <div className="w-full flex flex-row justify-between items-center gap-8">
+                    <div className="w-full flex mobile:flex-col laptop:flex-row tablet:justify-between items-center gap-8">
                         <div className="w-full">
                             <p><span className="text-[var(--gris2)] opacity-60">{objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</span></p>
                         </div>

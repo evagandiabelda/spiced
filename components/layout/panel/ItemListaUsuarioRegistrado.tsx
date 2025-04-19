@@ -27,7 +27,7 @@ const ItemListaUsuarioRegistrado = ({ id, name, foto, usuario_verificado, fecha,
     }
 
     return (
-        <li className="w-full flex flex-row justify-between items-center gap-12 rounded-xl p-4 hover:bg-[var(--gris1)] cursor-pointer" onClick={() => router.push(`/perfil/${name}`)}>
+        <li className="w-full flex flex-row justify-between items-center gap-12 rounded-xl p-4 hover:bg-[var(--gris1)] dark:hover:bg-[var(--gris4)] cursor-pointer" onClick={() => router.push(`/perfil/${name}`)}>
 
             <div className="flex-1 flex flex-row mobile:items-start tablet:items-center gap-4">
 
@@ -48,10 +48,10 @@ const ItemListaUsuarioRegistrado = ({ id, name, foto, usuario_verificado, fecha,
 
             </div>
 
-            <div id="caja-boton" className="mobile:hidden laptop:flex flex-row gap-4">
+            <div id="caja-verificado" className="flex flex-row gap-4">
                 {usuario_verificado &&
                     <div className='w-full flex flex-row justify-end items-center gap-2'>
-                        <p className='text-[0.8rem] text-[var(--gris2)] font-bold'>Verificado</p>
+                        <p className='mobile:hidden tablet:block text-[0.8rem] text-[var(--gris2)] font-bold'>Verificado</p>
                         <Image
                             src="/iconos/iconos-otros/icono-verificado-relleno2.svg"
                             alt='usuario verificado'
