@@ -8,7 +8,7 @@ import Image from "next/image";
 import ThemeToggle from "@/components/buttons/ThemeToggle";
 import Estadisticas from "@/components/cards/Estadisticas";
 import Boton from "@/components/buttons/Boton";
-import ListaSharesPublicados from "@/components/layout/panel/ListaSharesPublicados";
+import ListaSharesPublicados from "@/components/panel/ListaSharesPublicados";
 import Input from "@/components/inputs/Input";
 
 export default function Inicio() {

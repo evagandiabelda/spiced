@@ -4,7 +4,7 @@ import { Suspense, useState, useEffect } from 'react';
 import { useSession } from "next-auth/react";
 import { useSearchParams, useRouter } from 'next/navigation';
 import ListaFeed from '@/components/cards/ListaFeed';
-import ListaSkeleton from '@/components/layout/panel/ListaSkeleton';
+import ListaSkeleton from '@/components/panel/ListaSkeleton';
 import Options from '@/components/inputs/Options';
 import NubeTagsDinamica from '@/components/buttons/NubeTagsDinamica';
 import Boton from '@/components/buttons/Boton';

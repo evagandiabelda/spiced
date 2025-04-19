@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Boton from "@/components/buttons/Boton";
-import ListaSharesPublicados from "@/components/layout/panel/ListaSharesPublicados";
+import ListaSharesPublicados from "@/components/panel/ListaSharesPublicados";
 
 export const metadata: Metadata = {
     title: 'Tus Shares',

@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import ListaSharesGuardados from "@/components/layout/panel/ListaSharesGuardados";
+import ListaSharesGuardados from "@/components/panel/ListaSharesGuardados";
 
 export const metadata: Metadata = {
     title: 'Shares guardados',
