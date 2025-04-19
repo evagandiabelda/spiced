@@ -1,39 +1,33 @@
-"use client";
-
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { Metadata } from "next";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
 import SidebarPanel from "@/components/layout/panel/SidebarPanel";
-import Loader from "@/components/ui/Loader";
 
-export default function PanelEstandarLayout({
+export const metadata: Metadata = {
+    title: 'Tu Panel',
+};
+
+export default async function PanelEstandarLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const { data: session, status } = useSession();
-    const router = useRouter();
+    const session = await getServerSession(authOptions);
 
-    useEffect(() => {
-        if (status === "loading") return; // Esperar a que cargue la sesión
+    if (!session) {
+        redirect("/login");
+    }
 
-        if (!session) {
-            // Si no hay sesión, redirigir al login:
-            router.push("/login");
-        } else if (session.user.userType !== "admin") {
-            // Redirigir al panel correspondiente
-            if (session.user.userType === "expert") {
-                router.push("/panel-experto");
-            } else if (session.user.userType === "standard") {
-                router.push("/panel-estandar");
-            }
+    if (session.user.userType !== "admin") {
+        if (session.user.userType === "expert") {
+            redirect("/panel-experto");
+        } else if (session.user.userType === "standard") {
+            redirect("/panel-estandar");
+        } else {
+            redirect("/"); // fallback por si acaso
         }
-    }, [session, status, router]);
-
-
-    if (status === "loading") return <Loader />;
-
-    if (session?.user.userType !== "admin") return null;
+    }
 
     return (
         <>
