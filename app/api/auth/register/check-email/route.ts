@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { prisma } from "@/app/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 /* --------- RUTA PARA VALIDAR QUE EL EMAIL NO ESTÉ YA EN LA BD --------- */
 

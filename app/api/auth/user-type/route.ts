@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/app/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 /* --------- RUTA PARA OBTENER EL TIPO DE USUARIO (Standard o Expert) --------- */
 
