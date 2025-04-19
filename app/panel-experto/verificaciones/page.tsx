@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import ListaSharesVerificados from "@/components/layout/panel/ListaSharesVerificados";
+import ListaSharesVerificados from "@/components/panel/ListaSharesVerificados";
 
 export const metadata: Metadata = {
     title: 'Verificaciones',
