@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import ListaSkeleton from "@/components/layout/panel/ListaSkeleton";
-import ItemListaShareGuardado from "@/components/layout/panel/ItemListaShareGuardado";
+import ListaSkeleton from "@/components/panel/ListaSkeleton";
+import ItemListaShareGuardado from "@/components/panel/ItemListaShareGuardado";
 
 interface Share {
     id: string;

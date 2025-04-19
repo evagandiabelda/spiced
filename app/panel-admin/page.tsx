@@ -7,8 +7,8 @@ import { useEffect } from "react";
 import Image from "next/image";
 import ThemeToggle from "@/components/buttons/ThemeToggle";
 import EstadisticasAdmin from "@/components/cards/EstadisticasAdmin";
-import ListaUsuariosRegistrados from "@/components/layout/panel/ListaUsuariosRegistrados";
-import ListaDenuncias from "@/components/layout/panel/ListaDenuncias";
+import ListaUsuariosRegistrados from "@/components/panel/ListaUsuariosRegistrados";
+import ListaDenuncias from "@/components/panel/ListaDenuncias";
 
 export default function Inicio() {
 

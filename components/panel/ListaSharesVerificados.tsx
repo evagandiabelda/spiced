@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import ListaSkeleton from "@/components/layout/panel/ListaSkeleton";
+import ListaSkeleton from "@/components/panel/ListaSkeleton";
 import ItemListaShareVerificado from "./ItemListaShareVerificado";
 
 interface Share {

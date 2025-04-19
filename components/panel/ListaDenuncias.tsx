@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import ListaSkeleton from "@/components/layout/panel/ListaSkeleton";
+import ListaSkeleton from "@/components/panel/ListaSkeleton";
 import { DenunciaShare } from "@prisma/client";
-import ItemListaDenuncias from "@/components/layout/panel/ItemListaDenuncias";
+import ItemListaDenuncias from "@/components/panel/ItemListaDenuncias";
 
 type DenunciaData = DenunciaShare & {
     share: {

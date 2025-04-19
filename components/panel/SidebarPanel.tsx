@@ -1,7 +1,7 @@
 "use client";
 
 import AvatarPropio from "@/components/icons/AvatarPropio";
-import MenuSidebar from "@/components/layout/panel/MenuSidebar";
+import MenuSidebar from "@/components/panel/MenuSidebar";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
-import SidebarPanel from "@/components/layout/panel/SidebarPanel";
+import SidebarPanel from "@/components/panel/SidebarPanel";
 
 export const metadata: Metadata = {
     title: 'Tu Panel',

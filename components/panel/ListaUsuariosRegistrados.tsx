@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import ListaSkeleton from "@/components/layout/panel/ListaSkeleton";
+import ListaSkeleton from "@/components/panel/ListaSkeleton";
 import { UserData } from "@/types/user";
-import ItemListaUsuarioRegistrado from "@/components/layout/panel/ItemListaUsuarioRegistrado";
+import ItemListaUsuarioRegistrado from "@/components/panel/ItemListaUsuarioRegistrado";
 
 interface ListaUsuariosRegistradosProps {
     numItems?: number;
