@@ -26,8 +26,16 @@ export async function GET() {
         standard: true,
         seguidos: true,
         seguidores: true,
-        shares_publicados: true,
-        comentarios: true,
+        shares_publicados: {
+          include: {
+            denuncias: true,
+          }
+        },
+        comentarios: {
+          include: {
+            denuncias: true,
+          }
+        },
         spices_seguidos: true,
         categorias_seguidas: true,
         denuncias_shares: true,
@@ -35,7 +43,34 @@ export async function GET() {
       }
     });
 
-    return NextResponse.json({ users }, { status: 200 });
+    // Obtenemos el número de denuncias recibidas en cada Share de cada usuario:
+
+    const usuariosConDenuncias = await Promise.all(
+      users.map(async (user) => {
+        const denunciasShares = await prisma.denunciaShare.count({
+          where: {
+            share: {
+              autor_id: user.id,
+            },
+          },
+        });
+
+        const denunciasComentarios = await prisma.denunciaComentario.count({
+          where: {
+            comentario: {
+              user_id: user.id,
+            },
+          },
+        });
+
+        return {
+          userId: user.id,
+          totalDenunciasRecibidas: denunciasShares + denunciasComentarios,
+        };
+      })
+    );
+
+    return NextResponse.json({ users, usuariosConDenuncias }, { status: 200 });
   } catch (error) {
     console.error("Error al obtener los usuarios.", error);
     return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });

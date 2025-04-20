@@ -13,6 +13,7 @@ interface ListaUsuariosProps {
 export default function ListaUsuarios({ numItems }: ListaUsuariosProps) {
     const { data: session } = useSession();
     const [usuarios, setUsuarios] = useState<UserData[]>([]);
+    const [denunciasRecibidasPorUsuario, setDenunciasRecibidasPorUsuario] = useState<{ [userId: string]: number }>({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -32,6 +33,15 @@ export default function ListaUsuarios({ numItems }: ListaUsuariosProps) {
                 const data = await response.json();
                 const users: UserData[] = data.users;
 
+                // Obtener el número total de denuncias recibidas por cada usuario:
+                const usuariosConDenuncias: { userId: string, totalDenunciasRecibidas: number }[] = data.usuariosConDenuncias;
+
+                // Convertir a un objeto para acceso rápido por ID
+                const mapaDenuncias = usuariosConDenuncias.reduce((acc, item) => {
+                    acc[item.userId] = item.totalDenunciasRecibidas;
+                    return acc;
+                }, {} as { [userId: string]: number });
+
                 // Eliminar del array los usuarios que no sean admin:
                 const filteredUsers = users.filter((user) => !user.is_admin);
 
@@ -39,11 +49,16 @@ export default function ListaUsuarios({ numItems }: ListaUsuariosProps) {
                     setError("Todavía no se ha registrado ningún usuario.");
                     setUsuarios([]);
                 } else {
+
                     if (!numItems) {
                         numItems = users.length;
                     }
+
                     setUsuarios(filteredUsers);
+
+                    setDenunciasRecibidasPorUsuario(mapaDenuncias);
                 }
+
             } catch (error) {
                 setError("Error cargando los usuarios.");
             } finally {
@@ -101,7 +116,8 @@ export default function ListaUsuarios({ numItems }: ListaUsuariosProps) {
                             numSeguidores={usuario.seguidores.length}
                             numCategorias={usuario.categorias_seguidas.length}
                             numSpices={usuario.spices_seguidos.length}
-                            numDenuncias={usuario.denuncias_comentarios.length + usuario.denuncias_shares.length}
+                            numDenunciasHechas={usuario.denuncias_comentarios.length + usuario.denuncias_shares.length}
+                            numDenunciasRecibidas={denunciasRecibidasPorUsuario[usuario.id] || 0}
                             onDelete={() => handleDelete(usuario.name, usuario.id)}
                         />
                     ))}

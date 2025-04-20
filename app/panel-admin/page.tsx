@@ -35,29 +35,31 @@ export default function Inicio() {
             </div>
 
             {/* CONTENIDO: */}
-            <div className="w-full flex mobile:flex-col laptop:flex-row gap-4">
+            <div className="w-full flex flex-col gap-4">
+
                 <div className="w-full flex mobile:flex-col laptop:flex-row justify-between gap-4">
-                    <div className="w-full flex flex-col gap-4">
-                        {/* Card Estadísticas: */}
-                        <EstadisticasAdmin />
-                        {/* Card Últimas Denuncias: */}
-                        <div className="w-full flex flex-col rounded-xl bg-[#D84C60] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-denuncias)] dark:border-2 dark:border-[var(--borde-denuncias)]">
-                            <div className="w-full flex flex-row justify-between items-center">
-                                <h3 className="text-white">Últimas denuncias</h3>
-                                <Image
-                                    src="/iconos/iconos-menu/icono-denuncias.svg"
-                                    width={20}
-                                    height={20}
-                                    className="dark:invert opacity-50"
-                                    alt="últimos shares guardados"
-                                />
-                            </div>
-                            <ListaDenuncias numItems={5} />
+
+                    {/* Card Estadísticas: */}
+                    <EstadisticasAdmin />
+                    {/* Card Últimas Denuncias: */}
+                    <div className="w-full flex flex-col rounded-xl bg-[#D84C60] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-denuncias)] dark:border-2 dark:border-[var(--borde-denuncias)]">
+                        <div className="w-full flex flex-row justify-between items-center">
+                            <h3 className="text-white">Últimas denuncias</h3>
+                            <Image
+                                src="/iconos/iconos-menu/icono-denuncias.svg"
+                                width={20}
+                                height={20}
+                                className="dark:invert opacity-50"
+                                alt="últimos shares guardados"
+                            />
                         </div>
+                        <ListaDenuncias numItems={5} />
                     </div>
+
                 </div>
+
                 {/* Card Últimos Usuarios: */}
-                <div className="self-start w-full h-auto flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-shares)] dark:border-2 dark:border-[var(--borde-shares)]">
+                <div className="w-full h-auto flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-shares)] dark:border-2 dark:border-[var(--borde-shares)]">
                     <div className="w-full flex flex-row justify-between items-center">
                         <h3>Últimos usuarios</h3>
                         <Image

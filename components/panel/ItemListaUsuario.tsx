@@ -17,11 +17,12 @@ interface ItemProps {
     numSeguidores: number;
     numCategorias: number;
     numSpices: number;
-    numDenuncias: number;
+    numDenunciasHechas: number;
+    numDenunciasRecibidas: number;
     onDelete?: (name: string, id: string) => void;
 }
 
-const ItemListaUsuario = ({ id, name, foto, usuario_verificado, fecha, numShares, numComentarios, numSeguidores, numCategorias, numSpices, numDenuncias, onDelete }: ItemProps) => {
+const ItemListaUsuario = ({ id, name, foto, usuario_verificado, fecha, numShares, numComentarios, numSeguidores, numCategorias, numSpices, numDenunciasHechas, numDenunciasRecibidas, onDelete }: ItemProps) => {
 
     const router = useRouter();
     const objetoFecha = new Date(fecha);
@@ -67,12 +68,12 @@ const ItemListaUsuario = ({ id, name, foto, usuario_verificado, fecha, numShares
                 <div id="caja-verificado" className="flex flex-col items-end gap-4">
                     <div className='w-full flex flex-wrap justify-end items-center gap-2'>
                         <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--tea)]">{numShares} Shares publicados</p>
-                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--toc)]">{numShares} comentarios</p>
-                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--tag)]">{numShares} seguidores</p>
-                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--tpa)]">{numShares} spices</p>
-                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--tep)]">{numShares} categorías</p>
-                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--te)]">{numShares} denuncias hechas</p>
-                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--adi)]">{numShares} denuncias recibidas</p>
+                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--toc)]">{numComentarios} comentarios</p>
+                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--tag)]">{numSeguidores} seguidores</p>
+                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--tpa)]">{numSpices} spices</p>
+                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--tep)]">{numCategorias} categorías</p>
+                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--te)]">{numDenunciasHechas} denuncias hechas</p>
+                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--adi)]">{numDenunciasRecibidas} denuncias recibidas</p>
                     </div>
                 </div>
 
