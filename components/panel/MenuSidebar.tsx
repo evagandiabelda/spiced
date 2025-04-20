@@ -42,11 +42,12 @@ const MenuSidebar = ({ usuario }: MenuSidebarProps) => {
     if (usuario === "admin") {
         return (
             <nav className={className}>
-                <ItemMenuSidebar enlace="/panel-experto" icono="/iconos/iconos-menu/icono-inicio.svg" texto="Inicio" />
+                <ItemMenuSidebar enlace="/panel-admin" icono="/iconos/iconos-menu/icono-inicio.svg" texto="Inicio" />
                 <ItemMenuSidebar enlace="/panel-admin/verificaciones" icono="/iconos/iconos-otros/icono-verificado-lineal.svg" texto="Verificaciones" />
                 <ItemMenuSidebar enlace="/panel-admin/usuarios" icono="/iconos/iconos-menu/icono-usuarios.svg" texto="Usuarios" />
                 <ItemMenuSidebar enlace="/panel-admin/shares" icono="/iconos/iconos-menu/icono-share.svg" texto="Shares" />
                 <ItemMenuSidebar enlace="/panel-admin/comentarios" icono="/iconos/iconos-menu/icono-comentario.svg" texto="Comentarios" />
+                <ItemMenuSidebar enlace="/panel-admin/denuncias" icono="/iconos/iconos-menu/icono-denuncias.svg" texto="Denuncias" />
                 <ItemMenuSidebar enlace="/panel-admin/spices" icono="/iconos/iconos-menu/icono-spices.svg" texto="Spices" />
                 <ItemMenuSidebar enlace="/panel-admin/categorias" icono="/iconos/iconos-menu/icono-categorias.svg" texto="Categorías" />
             </nav>

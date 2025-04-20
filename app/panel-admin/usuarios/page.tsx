@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import ListaUsuarios from "@/components/panel/ListaUsuarios";
 
 export default function Usuarios() {
 
@@ -27,7 +28,7 @@ export default function Usuarios() {
 
             {/* CONTENIDO: */}
             <div className="w-full flex flex-col gap-4">
-
+                <ListaUsuarios />
             </div>
 
         </div>

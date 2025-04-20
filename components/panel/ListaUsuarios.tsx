@@ -4,13 +4,13 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import ListaSkeleton from "@/components/panel/ListaSkeleton";
 import { UserData } from "@/types/user";
-import ItemListaUsuarioRegistrado from "@/components/panel/ItemListaUsuarioRegistrado";
+import ItemListaUsuario from "@/components/panel/ItemListaUsuario";
 
-interface ListaUsuariosRegistradosProps {
+interface ListaUsuariosProps {
     numItems?: number;
 }
 
-export default function ListaUsuariosRegistrados({ numItems }: ListaUsuariosRegistradosProps) {
+export default function ListaUsuarios({ numItems }: ListaUsuariosProps) {
     const { data: session } = useSession();
     const [usuarios, setUsuarios] = useState<UserData[]>([]);
     const [loading, setLoading] = useState(true);
@@ -32,14 +32,17 @@ export default function ListaUsuariosRegistrados({ numItems }: ListaUsuariosRegi
                 const data = await response.json();
                 const users: UserData[] = data.users;
 
-                if (users.length === 0) {
+                // Eliminar del array los usuarios que no sean admin:
+                const filteredUsers = users.filter((user) => !user.is_admin);
+
+                if (filteredUsers.length === 0) {
                     setError("Todavía no se ha registrado ningún usuario.");
                     setUsuarios([]);
                 } else {
                     if (!numItems) {
                         numItems = users.length;
                     }
-                    setUsuarios(users);
+                    setUsuarios(filteredUsers);
                 }
             } catch (error) {
                 setError("Error cargando los usuarios.");
@@ -69,7 +72,6 @@ export default function ListaUsuariosRegistrados({ numItems }: ListaUsuariosRegi
         }
     };
 
-    if (!session?.user) return <p>Debes iniciar sesión para ver los usuarios.</p>;
     if (error) return <p>{error}</p>;
 
     if (loading) return (
@@ -87,13 +89,20 @@ export default function ListaUsuariosRegistrados({ numItems }: ListaUsuariosRegi
             ) : (
                 <ul>
                     {usuarios.slice(0, numItems).map((usuario) => (
-                        <ItemListaUsuarioRegistrado
+                        <ItemListaUsuario
                             id={usuario.id}
                             key={usuario.id}
                             name={usuario.name}
                             foto={usuario.foto}
                             usuario_verificado={usuario.usuario_verificado}
                             fecha={usuario.created_at as Date}
+                            numShares={usuario.shares_publicados.length}
+                            numComentarios={usuario.comentarios.length}
+                            numSeguidores={usuario.seguidores.length}
+                            numCategorias={usuario.categorias_seguidas.length}
+                            numSpices={usuario.spices_seguidos.length}
+                            numDenuncias={usuario.denuncias_comentarios.length + usuario.denuncias_shares.length}
+                            onDelete={() => handleDelete(usuario.name, usuario.id)}
                         />
                     ))}
                 </ul>

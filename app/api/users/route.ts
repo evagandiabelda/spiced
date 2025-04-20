@@ -27,6 +27,9 @@ export async function GET() {
         seguidos: true,
         seguidores: true,
         shares_publicados: true,
+        comentarios: true,
+        spices_seguidos: true,
+        categorias_seguidas: true,
         denuncias_shares: true,
         denuncias_comentarios: true,
       }

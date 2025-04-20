@@ -133,7 +133,7 @@ export default function ListaComentarios({ numItems }: ListaComentariosProps) {
                             user={comentario.user}
                             share={comentario.share}
                             numDenuncias={comentario.denuncias.length}
-                            onDelete={handleDelete}
+                            onDelete={() => handleDelete(comentario.id)}
                         />
                     ))}
                 </ul>

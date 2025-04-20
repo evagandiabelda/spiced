@@ -25,7 +25,7 @@ model User {
   password           String
   foto               String
   descripcion_perfil String?
-  usuario_verificado Boolean  @default(false) // Determina si es 'expert' o 'standard' (sin necesidad de acceder a las relaciones)
+  usuario_verificado Boolean  @default(false)
   is_admin           Boolean  @default(false) // Determina si es 'admin' (sin necesidad de acceder a las relaciones)
   created_at         DateTime @default(now())
 

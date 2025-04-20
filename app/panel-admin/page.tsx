@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import Image from "next/image";
 import ThemeToggle from "@/components/buttons/ThemeToggle";
 import EstadisticasAdmin from "@/components/cards/EstadisticasAdmin";
-import ListaUsuariosRegistrados from "@/components/panel/ListaUsuariosRegistrados";
+import ListaUsuarios from "@/components/panel/ListaUsuarios";
 import ListaDenuncias from "@/components/panel/ListaDenuncias";
 
 export default function Inicio() {
@@ -68,7 +68,7 @@ export default function Inicio() {
                             alt="últimos shares guardados"
                         />
                     </div>
-                    <ListaUsuariosRegistrados numItems={5} />
+                    <ListaUsuarios numItems={5} />
                 </div>
             </div>
 

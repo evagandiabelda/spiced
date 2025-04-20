@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import ListaShares from "@/components/panel/ListaShares";
 
-export default function Comentarios() {
+export default function Shares() {
 
     const { status } = useSession();
     const router = useRouter();

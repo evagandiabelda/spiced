@@ -31,15 +31,10 @@ export type UserData = {
     name: string;
     foto: string;
     descripcion_perfil: string;
+    is_admin: boolean;
     usuario_verificado: boolean;
-    created_at: Date;
-    spices_seguidos: {
-        spice: {
-            id: string;
-            nombre: string;
-        }
-    }[];
     standard?: StandardData;
+    created_at: Date;
     shares_publicados: {
         share: {
             id: string;
@@ -61,5 +56,64 @@ export type UserData = {
                 }
             }[];
         }
-    }
+    }[];
+    comentarios: {
+        comentario: {
+            id: string;
+            texto: string;
+            created_at: Date;
+            share: {
+                id: string;
+                titulo: string;
+                img_principal: string;
+                slug: string;
+            }
+        }
+    }[];
+    seguidores: {
+        id: string;
+        nombre_completo: string;
+        name: string;
+        foto: string;
+        usuario_verificado: boolean;
+    }[];
+    spices_seguidos: {
+        spice: {
+            id: string;
+            nombre: string;
+        }
+    }[];
+    categorias_seguidas: {
+        categoria: {
+            id: string;
+            nombre: string;
+        }
+    }[];
+    denuncias_shares: {
+        id: string;
+        motivo: string;
+        created_at: Date;
+        share: {
+            id: string;
+            titulo: string;
+            img_principal: string;
+            slug: string;
+        }
+    }[];
+    denuncias_comentarios: {
+        id: string;
+        motivo: string;
+        created_at: Date;
+        comentario: {
+            id: string;
+            texto: string;
+            created_at: Date;
+            share: {
+                id: string;
+                titulo: string;
+                img_principal: string;
+                slug: string;
+            }
+        }
+    }[];
 };
