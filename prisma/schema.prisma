@@ -116,7 +116,7 @@ model Share {
   denuncias DenunciaShare[]
 
   // Relación con Expertos (para verificaciones):
-  Expert   Expert? @relation(fields: [expertId], references: [id])
+  Expert   Expert? @relation(fields: [expertId], references: [id], onDelete: Cascade)
   expertId String?
 }
 
@@ -151,11 +151,11 @@ model Comentario {
 
   // Relación con el Usuario
   user_id String
-  user    User   @relation(fields: [user_id], references: [id])
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   // Relación con el Share
   share_id String
-  share    Share  @relation(fields: [share_id], references: [id])
+  share    Share  @relation(fields: [share_id], references: [id], onDelete: Cascade)
 
   // Relación con Denuncias (M:N)
   denuncias DenunciaComentario[]

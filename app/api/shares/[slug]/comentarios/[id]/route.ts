@@ -50,17 +50,15 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
 /* MODIFICAR UN COMENTARIO ESPECÍFICO */
 // No interesa que el autor del comentario pueda editarlo.
+// Se pueden añadir Denuncias desde '/api/shares/[slug]/comentarios/[id]/denunciar-comentario'.
 
 
 /* ELIMINAR UN COMENTARIO ESPECÍFICO */
+// Solo el autor del comentario o el Admin.
 
 export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
 
     const session = await getServerSession(authOptions);
-
-    if (!session?.user?.name) {
-        return NextResponse.json({ error: "Usuario no autenticado." }, { status: 401 });
-    }
 
     try {
         const { id } = await params;
@@ -77,8 +75,8 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
             return NextResponse.json({ error: "Comentario no encontrado." }, { status: 404 });
         }
 
-        // Comprobar si el usuario es Admin o es el autor del comentario
-        if (!session.user.is_admin && session.user.id !== comentario.user_id) {
+        // Si no es el Autor del comentario o el Admin:
+        if (session?.user.userType !== "admin" && session?.user.id !== comentario.user_id) {
             return NextResponse.json({ error: "No tienes permiso para eliminar este comentario." }, { status: 403 });
         }
 

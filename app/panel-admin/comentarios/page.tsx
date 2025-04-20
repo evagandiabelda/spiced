@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import ListaComentarios from "@/components/panel/ListaComentarios";
 
 export default function Comentarios() {
 
@@ -27,7 +28,7 @@ export default function Comentarios() {
 
             {/* CONTENIDO: */}
             <div className="w-full flex flex-col gap-4">
-
+                <ListaComentarios />
             </div>
 
         </div>

@@ -4,7 +4,6 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import AvatarOtros from "@/components/icons/AvatarOtros";
 import Image from "next/image";
-import Boton from "@/components/buttons/Boton";
 
 interface ItemProps {
     motivo: string;

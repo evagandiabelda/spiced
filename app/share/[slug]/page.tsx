@@ -54,7 +54,7 @@ export default async function SharePage({
         return notFound();
     }
 
-    // Buscar el Autor del Share e la BD:
+    // Buscar el Autor del Share en la BD:
 
     const user = await prisma.user.findUnique({
         where: { id: share.autor_id },

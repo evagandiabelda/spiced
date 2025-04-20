@@ -37,7 +37,7 @@ export default function ListaDenuncias({ numItems }: ListaDenunciasProps) {
 
     useEffect(() => {
         const fetchDenuncias = async () => {
-            if (!session?.user?.name) return; // Evitar la llamada si no hay usuario autenticado
+            if (session?.user.userType !== "admin") return; // Evitar la llamada si no es Admin
 
             setLoading(true);
             setError(null);
@@ -68,9 +68,8 @@ export default function ListaDenuncias({ numItems }: ListaDenunciasProps) {
         };
 
         fetchDenuncias();
-    }, [session?.user?.name]); // Se ejecuta solo cuando el usuario cambia
+    }, [session]); // Se ejecuta solo cuando el usuario cambia
 
-    if (!session?.user) return <p>Debes iniciar sesión para ver las denuncias.</p>;
     if (error) return <p>{error}</p>;
 
     if (loading) return (
@@ -84,7 +83,7 @@ export default function ListaDenuncias({ numItems }: ListaDenunciasProps) {
     return (
         <div className="w-full flex flex-col gap-8 p-[10px] pb-[24px] rounded-xl bg-white dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--borde-denuncias)]">
             {denuncias.length === 0 ? (
-                <p>Todavía no hay shares por aquí...</p>
+                <p>Todavía no hay denuncias.</p>
             ) : (
                 <ul>
                     {denuncias.slice(0, numItems).map((denuncia) => (

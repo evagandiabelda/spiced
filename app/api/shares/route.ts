@@ -73,6 +73,7 @@ export async function GET(request: Request) {
             categoria: true,
           },
         },
+        denuncias: true,
       },
       orderBy: {
         created_at: "desc",

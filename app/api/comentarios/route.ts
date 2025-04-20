@@ -13,17 +13,14 @@ export async function GET() {
             include: {
                 user: {
                     select: {
-                        id: true,
                         name: true,
-                        foto: true,
                         usuario_verificado: true,
                     }
                 },
                 share: {
                     select: {
-                        id: true,
                         titulo: true,
-                        share_verificado: true,
+                        img_principal: true,
                         slug: true,
                     }
                 },

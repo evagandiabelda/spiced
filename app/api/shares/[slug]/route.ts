@@ -7,19 +7,17 @@ const prisma = new PrismaClient();
 
 /* OBTENER UN SHARE ESPECÍFICO */
 
-export async function GET(request: Request) {
+export async function GET(request: Request, { params }: { params: Promise<{ slug: string }> }) {
     try {
-        // Extraer el ID desde la URL
-        const url = new URL(request.url);
-        const segments = url.pathname.split("/");
-        const shareId = segments[segments.length - 1];
+        // Obtener el Slug desde la URL
+        const { slug } = await params;
 
-        if (!shareId) {
-            return NextResponse.json({ error: "Falta el ID del share." }, { status: 400 });
+        if (!slug) {
+            return NextResponse.json({ error: "Falta el slug del share." }, { status: 400 });
         }
 
         const share = await prisma.share.findUnique({
-            where: { id: shareId },
+            where: { slug },
             include: {
                 autor: {
                     select: {
@@ -70,7 +68,7 @@ export async function GET(request: Request) {
 
 /* MODIFICAR UN SHARE ESPECÍFICO */
 
-export async function PATCH(request: Request) {
+export async function PATCH(request: Request, { params }: { params: Promise<{ slug: string }> }) {
 
     const session = await getServerSession(authOptions);
 
@@ -79,18 +77,16 @@ export async function PATCH(request: Request) {
     }
 
     try {
-        // Extraer el ID desde la URL
-        const url = new URL(request.url);
-        const segments = url.pathname.split("/"); // Extraer los segmentos de la ruta
-        const shareId = segments[segments.length - 1]; // Último segmento es el ID
+        // Obtener el Slug desde la URL
+        const { slug } = await params;
 
-        if (!shareId) {
-            return NextResponse.json({ error: "Falta el ID del share." }, { status: 400 });
+        if (!slug) {
+            return NextResponse.json({ error: "Falta el slug del share." }, { status: 400 });
         }
 
         // Obtener el Share en base al ID
         const share = await prisma.share.findUnique({
-            where: { id: shareId },
+            where: { slug },
             select: { autor_id: true }, // Solo seleccionamos el autor_id para la verificación
         });
 
@@ -109,7 +105,7 @@ export async function PATCH(request: Request) {
 
         // Actualizar el Share
         const updatedShare = await prisma.share.update({
-            where: { id: shareId },
+            where: { slug },
             data: { titulo, texto, img_principal, img_secundaria, spices, categorias }, // 🔴 No tengo claro si el array de 'spices' y 'categorías' llegará aquí con el formato adecuado.
         });
 
@@ -121,7 +117,7 @@ export async function PATCH(request: Request) {
 }
 
 /* ELIMINAR UN SHARE ESPECÍFICO */
-export async function DELETE(request: Request) {
+export async function DELETE(request: Request, { params }: { params: Promise<{ slug: string }> }) {
 
     const session = await getServerSession(authOptions);
 
@@ -130,18 +126,16 @@ export async function DELETE(request: Request) {
     }
 
     try {
-        // Extraer el ID desde la URL
-        const url = new URL(request.url);
-        const segments = url.pathname.split("/");
-        const shareId = segments[segments.length - 1];
+        // Obtener el Slug desde la URL
+        const { slug } = await params;
 
-        if (!shareId) {
-            return NextResponse.json({ error: "Falta el ID del share." }, { status: 400 });
+        if (!slug) {
+            return NextResponse.json({ error: "Falta el slug del share." }, { status: 400 });
         }
 
         // Obtener el Share en base al ID
         const share = await prisma.share.findUnique({
-            where: { id: shareId },
+            where: { slug },
             select: { autor_id: true }, // Solo seleccionamos el autor_id para la verificación
         });
 
@@ -149,12 +143,12 @@ export async function DELETE(request: Request) {
             return NextResponse.json({ error: "Share no encontrado." }, { status: 404 });
         }
 
-        // Verificar que el share pertenece al usuario autenticado
-        if (share.autor_id !== session.user.id) {
+        // Si el usuario no es Admin o no es el Autor del Share:
+        if (session?.user.userType !== "admin" && session?.user.id !== share.autor_id) {
             return NextResponse.json({ error: "No tienes permisos para eliminar este share." }, { status: 403 });
         }
 
-        await prisma.share.delete({ where: { id: shareId } });
+        await prisma.share.delete({ where: { slug } });
 
         return NextResponse.json({ message: "Share eliminado correctamente." }, { status: 200 });
     } catch (error) {

@@ -3,8 +3,9 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import ListaShares from "@/components/panel/ListaShares";
 
-export default function Shares() {
+export default function Comentarios() {
 
     const { status } = useSession();
     const router = useRouter();
@@ -27,7 +28,7 @@ export default function Shares() {
 
             {/* CONTENIDO: */}
             <div className="w-full flex flex-col gap-4">
-
+                <ListaShares />
             </div>
 
         </div>

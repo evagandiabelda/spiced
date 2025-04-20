@@ -13,6 +13,10 @@ export async function GET(req: Request, { params }: { params: Promise<{ name: st
         // Obtener el nombre de usuario desde la URL
         const { name } = await params;
 
+        if (!name) {
+            return NextResponse.json({ error: "Falta el name del share." }, { status: 400 });
+        }
+
         // Buscar el usuario en la base de datos
         const user = await prisma.user.findUnique({
             where: { name },
@@ -98,6 +102,10 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ name: 
         // Obtener el nombre de usuario desde la URL
         const { name } = await params;
 
+        if (!name) {
+            return NextResponse.json({ error: "Falta el name del share." }, { status: 400 });
+        }
+
         // Obtener los datos a modificar de la request:
         const requestData = await req.json();
 
@@ -107,7 +115,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ name: 
         );
 
         const updatedUser = await prisma.user.update({
-            where: { id: session.user.id },
+            where: { name },
             data: updateData, // Solo se enviarán los campos que tengan un valor definido
         });
 
@@ -121,7 +129,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ name: 
 
 /* ELIMINAR UN USUARIO (Solo Admin) */
 
-export async function DELETE(request: Request) {
+export async function DELETE(request: Request, { params }: { params: Promise<{ name: string }> }) {
 
     const session = await getServerSession(authOptions);
 
@@ -130,15 +138,15 @@ export async function DELETE(request: Request) {
     }
 
     try {
-        const url = new URL(request.url);
-        const userId = url.searchParams.get("id");
+        // Obtener el nombre de usuario desde la URL
+        const { name } = await params;
 
-        if (!userId) {
-            return NextResponse.json({ error: "Falta el ID del usuario." }, { status: 400 });
+        if (!name) {
+            return NextResponse.json({ error: "Falta el name del share." }, { status: 400 });
         }
 
         await prisma.user.delete({
-            where: { id: userId },
+            where: { name },
         });
 
         return NextResponse.json({ message: "Usuario eliminado correctamente." }, { status: 200 });
