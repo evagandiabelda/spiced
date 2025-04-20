@@ -8,8 +8,15 @@ export default function LoginPage() {
 
     const { data: session, status } = useSession();
 
-    console.log("Session data:", session);
-    console.log("Session status:", status);
+    if (session) {
+        if (session?.user.userType === "admin") {
+            window.location.href = "/panel-admin";
+        } else if (session?.user.userType === "expert") {
+            window.location.href = "/panel-experto";
+        } else if (session?.user.userType === "standard") {
+            window.location.href = "/panel-estandar";
+        }
+    }
 
     return (
         <div className="mx-auto h-full flex items-center justify-center w-full max-w-[600px] flex-col p-4">
