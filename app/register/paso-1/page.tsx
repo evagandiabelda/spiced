@@ -21,7 +21,7 @@ export default function Paso1() {
     const { setRegistroData } = useRegistro();
 
     // Datos que se piden en este paso:
-    const [nombreCompleto, setNombreCompleto] = useState('');
+    const [nombreReal, setnombreReal] = useState('');
     const [name, setName] = useState('');
     const [fechaNacimiento, setFechaNacimiento] = useState('');
     const [genero, setGenero] = useState('');
@@ -31,7 +31,7 @@ export default function Paso1() {
         e.preventDefault();
 
         setRegistroData({
-            nombreCompleto,
+            nombreReal,
             name,
             fechaNacimiento,
             genero,
@@ -60,11 +60,11 @@ export default function Paso1() {
                             <Input
                                 tipo="text"
                                 icon={true}
-                                id="nombreCompleto"
+                                id="nombreReal"
                                 placeholder="Tu nombre"
                                 required={true}
-                                value={nombreCompleto}
-                                onChange={(e) => setNombreCompleto(e.target.value)}
+                                value={nombreReal}
+                                onChange={(e) => setnombreReal(e.target.value)}
                             />
                         </div>
 

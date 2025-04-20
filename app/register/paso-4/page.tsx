@@ -13,7 +13,7 @@ export default function Paso4() {
     const {
         email,
         password,
-        nombreCompleto,
+        nombreReal,
         name,
         fechaNacimiento,
         genero,
@@ -42,7 +42,7 @@ export default function Paso4() {
         const datosRegistroCompleto = {
             email,
             password,
-            nombre_completo: nombreCompleto,
+            nombre_real: nombreReal,
             name,
             fecha_nacimiento: fechaNacimiento,
             genero,

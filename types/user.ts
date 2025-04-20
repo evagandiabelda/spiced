@@ -27,7 +27,7 @@ export type StandardData = {
 
 export type UserData = {
     id: string;
-    nombre_completo: string;
+    nombre_real: string;
     name: string;
     foto: string;
     descripcion_perfil: string;
@@ -72,7 +72,7 @@ export type UserData = {
     }[];
     seguidores: {
         id: string;
-        nombre_completo: string;
+        nombre_real: string;
         name: string;
         foto: string;
         usuario_verificado: boolean;

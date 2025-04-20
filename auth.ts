@@ -59,7 +59,7 @@ export const { auth, signIn, signOut } = NextAuth({
             email: user.email,
             name: user.name,
             foto: user.foto,
-            nombre_completo: user.nombre_completo,
+            nombre_real: user.nombre_real,
             usuario_verificado: user.usuario_verificado,
             userType: userType,
           };
@@ -76,7 +76,7 @@ export const { auth, signIn, signOut } = NextAuth({
         session.user.id = token.id as string;
         session.user.name = token.name as string;
         session.user.foto = token.foto as string;
-        session.user.nombre_completo = token.nombre_completo as string;
+        session.user.nombre_real = token.nombre_real as string;
         session.user.usuario_verificado = token.usuario_verificado as boolean;
         session.user.userType = token.userType as string;
       }
@@ -87,7 +87,7 @@ export const { auth, signIn, signOut } = NextAuth({
         token.id = user.id;
         token.name = user.name;
         token.foto = user.foto;
-        token.nombre_completo = user.nombre_completo;
+        token.nombre_real = user.nombre_real;
         token.usuario_verificado = user.usuario_verificado;
         token.userType = user.userType;
       }
@@ -95,7 +95,7 @@ export const { auth, signIn, signOut } = NextAuth({
         token.id = user.id;
         token.name = user.name;
         token.foto = user.foto;
-        token.nombre_completo = user.nombre_completo;
+        token.nombre_real = user.nombre_real;
         token.usuario_verificado = user.usuario_verificado;
         token.userType = user.userType;
       }

@@ -8,10 +8,10 @@ import { Genero } from "@prisma/client";
 
 export async function POST(req: Request) {
     try {
-        const { nombre_completo, name, email, password, foto, fecha_nacimiento, genero, spices, categorias } = await req.json();
+        const { nombre_real, name, email, password, foto, fecha_nacimiento, genero, spices, categorias } = await req.json();
 
         // Validar que no falten datos
-        if (!nombre_completo || !name || !email || !password || !fecha_nacimiento || !genero) {
+        if (!nombre_real || !name || !email || !password || !fecha_nacimiento || !genero) {
             return NextResponse.json({ error: "Por favor, rellena los campos son obligatorios." }, { status: 400 });
         }
 
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
         // Crear el usuario en la base de datos
         const newUser = await prisma.user.create({
             data: {
-                nombre_completo,
+                nombre_real,
                 name,
                 email,
                 password: hashedPassword,

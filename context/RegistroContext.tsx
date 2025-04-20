@@ -14,7 +14,7 @@ type RegistroData = {
   // Campos genéricos:
   email: string
   password: string
-  nombreCompleto: string
+  nombreReal: string
   name: string
   foto: string
   spices: string[]
@@ -41,7 +41,7 @@ export const RegistroProvider = ({ children }: { children: React.ReactNode }) =>
     // Campos genéricos:
     email: '',
     password: '',
-    nombreCompleto: '',
+    nombreReal: '',
     name: '',
     foto: '',
     spices: [],

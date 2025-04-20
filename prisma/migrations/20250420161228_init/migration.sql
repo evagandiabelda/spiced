@@ -7,7 +7,7 @@ CREATE TYPE "Insignia" AS ENUM ('pequeno_saltamontes', 'cacahuete_sabio', 'cactu
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
-    "nombre_completo" TEXT NOT NULL,
+    "nombre_real" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
@@ -195,13 +195,13 @@ ALTER TABLE "Standard" ADD CONSTRAINT "Standard_user_id_fkey" FOREIGN KEY ("user
 ALTER TABLE "Share" ADD CONSTRAINT "Share_autor_id_fkey" FOREIGN KEY ("autor_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Share" ADD CONSTRAINT "Share_expertId_fkey" FOREIGN KEY ("expertId") REFERENCES "Expert"("user_id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Share" ADD CONSTRAINT "Share_expertId_fkey" FOREIGN KEY ("expertId") REFERENCES "Expert"("user_id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Comentario" ADD CONSTRAINT "Comentario_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Comentario" ADD CONSTRAINT "Comentario_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Comentario" ADD CONSTRAINT "Comentario_share_id_fkey" FOREIGN KEY ("share_id") REFERENCES "Share"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Comentario" ADD CONSTRAINT "Comentario_share_id_fkey" FOREIGN KEY ("share_id") REFERENCES "Share"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "DenunciaShare" ADD CONSTRAINT "DenunciaShare_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -228,25 +228,25 @@ ALTER TABLE "ShareGuardado" ADD CONSTRAINT "ShareGuardado_user_id_fkey" FOREIGN 
 ALTER TABLE "ShareGuardado" ADD CONSTRAINT "ShareGuardado_share_id_fkey" FOREIGN KEY ("share_id") REFERENCES "Share"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UsuarioSpice" ADD CONSTRAINT "UsuarioSpice_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "UsuarioSpice" ADD CONSTRAINT "UsuarioSpice_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UsuarioSpice" ADD CONSTRAINT "UsuarioSpice_spice_id_fkey" FOREIGN KEY ("spice_id") REFERENCES "Spice"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "UsuarioSpice" ADD CONSTRAINT "UsuarioSpice_spice_id_fkey" FOREIGN KEY ("spice_id") REFERENCES "Spice"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ShareSpice" ADD CONSTRAINT "ShareSpice_share_id_fkey" FOREIGN KEY ("share_id") REFERENCES "Share"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ShareSpice" ADD CONSTRAINT "ShareSpice_share_id_fkey" FOREIGN KEY ("share_id") REFERENCES "Share"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ShareSpice" ADD CONSTRAINT "ShareSpice_spice_id_fkey" FOREIGN KEY ("spice_id") REFERENCES "Spice"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ShareSpice" ADD CONSTRAINT "ShareSpice_spice_id_fkey" FOREIGN KEY ("spice_id") REFERENCES "Spice"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UsuarioCategoria" ADD CONSTRAINT "UsuarioCategoria_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "UsuarioCategoria" ADD CONSTRAINT "UsuarioCategoria_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "UsuarioCategoria" ADD CONSTRAINT "UsuarioCategoria_categoria_id_fkey" FOREIGN KEY ("categoria_id") REFERENCES "Categoria"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "UsuarioCategoria" ADD CONSTRAINT "UsuarioCategoria_categoria_id_fkey" FOREIGN KEY ("categoria_id") REFERENCES "Categoria"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ShareCategoria" ADD CONSTRAINT "ShareCategoria_share_id_fkey" FOREIGN KEY ("share_id") REFERENCES "Share"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ShareCategoria" ADD CONSTRAINT "ShareCategoria_share_id_fkey" FOREIGN KEY ("share_id") REFERENCES "Share"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ShareCategoria" ADD CONSTRAINT "ShareCategoria_categoria_id_fkey" FOREIGN KEY ("categoria_id") REFERENCES "Categoria"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ShareCategoria" ADD CONSTRAINT "ShareCategoria_categoria_id_fkey" FOREIGN KEY ("categoria_id") REFERENCES "Categoria"("id") ON DELETE CASCADE ON UPDATE CASCADE;

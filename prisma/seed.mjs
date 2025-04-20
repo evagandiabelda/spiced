@@ -44,7 +44,7 @@ async function main() {
     // Primero se definen los datos básicos de un usuario genérico:
     const adminUser = await prisma.user.create({
         data: {
-            nombre_completo: 'Administrador',
+            nombre_real: 'Administrador',
             name: 'admin',
             email: 'admin@example.com',
             password: hashedPassword,
@@ -70,7 +70,7 @@ async function main() {
         // Luego se definen los datos básicos de un usuario genérico:
         const user = await prisma.user.create({
             data: {
-                nombre_completo: faker.person.fullName(),
+                nombre_real: faker.person.fullName(),
                 name: faker.internet.username(),
                 email: faker.internet.email(),
                 password: hashedPassword,
@@ -125,7 +125,7 @@ async function main() {
         // Luego se definen los datos básicos de un usuario genérico:
         const user = await prisma.user.create({
             data: {
-                nombre_completo: faker.person.fullName(),
+                nombre_real: faker.person.fullName(),
                 name: faker.internet.username(),
                 email: faker.internet.email(),
                 password: hashedPassword,

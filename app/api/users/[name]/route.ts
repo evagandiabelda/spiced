@@ -23,7 +23,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ name: st
             select: {
                 // Obtener solamente los datos públicos
                 id: true,
-                nombre_completo: true,
+                nombre_real: true,
                 name: true,
                 foto: true,
                 descripcion_perfil: true,

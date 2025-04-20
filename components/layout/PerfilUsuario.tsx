@@ -115,7 +115,7 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
                 <div className='w-full flex flex-col pt-7 mobile:gap-8 tablet:gap-12'>
                     <div className='w-full flex mobile:flex-col laptop:flex-row justify-between gap-8'>
                         <div className='w-full flex flex-col gap-4'>
-                            <h3>{usuario.nombre_completo}</h3>
+                            <h3>{usuario.nombre_real}</h3>
                             <div className='w-full flex flex-row justify-start items-center gap-2'>
                                 <p className='text-[0.8rem] text-[var(--gris3)] font-bold'>@{usuario.name}</p>
                             </div>

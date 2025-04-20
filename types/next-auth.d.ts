@@ -7,7 +7,7 @@ declare module "next-auth" {
             email: string;
             name: string;
             foto: string;
-            nombre_completo: string;
+            nombre_real: string;
             usuario_verificado: boolean;
             userType: "admin" | "expert" | "standard" | null;
             insignia?: string | null;
@@ -19,7 +19,7 @@ declare module "next-auth" {
         email: string;
         name: string;
         foto?: string;
-        nombre_completo: string;
+        nombre_real: string;
         usuario_verificado: boolean;
         userType: "admin" | "expert" | "standard" | null;
         insignia?: string | null;
@@ -29,7 +29,7 @@ declare module "next-auth" {
         id: string;
         name: string;
         foto: string;
-        nombre_completo: string;
+        nombre_real: string;
         usuario_verificado: boolean;
         userType: "admin" | "expert" | "standard" | null;
         insignia?: string | null;

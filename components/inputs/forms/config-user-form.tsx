@@ -17,7 +17,7 @@ export default function ConfigUserForm() {
     const [errorMessage, setErrorMessage] = useState("");
 
     const [formData, setFormData] = useState({
-        nombre_completo: "",
+        nombre_real: "",
         email: "",
         password: "",
         foto: session?.user.foto,
@@ -101,7 +101,7 @@ export default function ConfigUserForm() {
             setTimeout(() => setSuccessMessage(""), 5000);
 
             await update({
-                nombre_completo: formData.nombre_completo,
+                nombre_real: formData.nombre_real,
                 foto: formData.foto,
             });
 
@@ -139,9 +139,9 @@ export default function ConfigUserForm() {
                                 <label className="block mb-2">Tu nombre</label>
                                 <Input
                                     tipo="text"
-                                    id="nombre_completo"
-                                    placeholder={session?.user.nombre_completo}
-                                    value={formData.nombre_completo}
+                                    id="nombre_real"
+                                    placeholder={session?.user.nombre_real}
+                                    value={formData.nombre_real}
                                     onChange={handleChange}
                                     required={false}
                                 />

@@ -7,10 +7,10 @@ import { obtenerAvatarAleatorio } from "@/lib/avatars";
 
 export async function POST(req: Request) {
     try {
-        const { nombre_completo, name, email, password, foto, num_colegiado, anyos_experiencia, lista_titulaciones, spices, categorias } = await req.json();
+        const { nombre_real, name, email, password, foto, num_colegiado, anyos_experiencia, lista_titulaciones, spices, categorias } = await req.json();
 
         // Validar que no falten datos
-        if (!nombre_completo || !name || !email || !password || !num_colegiado || !anyos_experiencia || !lista_titulaciones) {
+        if (!nombre_real || !name || !email || !password || !num_colegiado || !anyos_experiencia || !lista_titulaciones) {
             return NextResponse.json({ error: "Por favor, rellena los campos son obligatorios." }, { status: 400 });
         }
 
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
         // Crear el usuario en la base de datos
         const newUser = await prisma.user.create({
             data: {
-                nombre_completo,
+                nombre_real,
                 name,
                 email,
                 password: hashedPassword,
