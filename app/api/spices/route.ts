@@ -53,7 +53,7 @@ export async function POST(req: Request) {
 
     const session = await getServerSession(authOptions);
 
-    if (!session?.user?.is_admin) {
+    if (session?.user?.userType !== "admin") {
         return NextResponse.json({ error: "Usuario no autorizado." }, { status: 401 });
     }
 

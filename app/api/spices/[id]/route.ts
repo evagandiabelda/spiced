@@ -36,7 +36,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 
     const session = await getServerSession(authOptions);
 
-    if (!session?.user?.is_admin) {
+    if (session?.user?.userType !== "admin") {
         return NextResponse.json({ error: "Usuario no autorizado." }, { status: 401 });
     }
 
@@ -81,7 +81,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
 
     const session = await getServerSession(authOptions);
 
-    if (!session?.user?.is_admin) {
+    if (session?.user?.userType !== "admin") {
         return NextResponse.json({ error: "Usuario no autorizado." }, { status: 401 });
     }
 
