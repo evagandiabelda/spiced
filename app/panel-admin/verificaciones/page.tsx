@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import ListaVerificaciones from "@/components/panel/ListaVerificaciones";
 
 export default function Verificaciones() {
 
@@ -28,7 +29,7 @@ export default function Verificaciones() {
 
             {/* CONTENIDO: */}
             <div className="w-full flex flex-col gap-6">
-
+                <ListaVerificaciones />
             </div>
 
         </div>

@@ -14,7 +14,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ name: st
         const { name } = await params;
 
         if (!name) {
-            return NextResponse.json({ error: "Falta el name del share." }, { status: 400 });
+            return NextResponse.json({ error: "Falta el name del usuario." }, { status: 400 });
         }
 
         // Buscar el usuario en la base de datos
@@ -103,7 +103,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ name: 
         const { name } = await params;
 
         if (!name) {
-            return NextResponse.json({ error: "Falta el name del share." }, { status: 400 });
+            return NextResponse.json({ error: "Falta el name del usuario." }, { status: 400 });
         }
 
         // Obtener los datos a modificar de la request:
@@ -142,7 +142,7 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ n
         const { name } = await params;
 
         if (!name) {
-            return NextResponse.json({ error: "Falta el name del share." }, { status: 400 });
+            return NextResponse.json({ error: "Falta el name del usuario." }, { status: 400 });
         }
 
         await prisma.user.delete({

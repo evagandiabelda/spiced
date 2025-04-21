@@ -67,33 +67,46 @@ export default function RegisterForm({ usuario }: RegisterFormProps) {
 
                 <div className="w-full flex flex-col gap-8">
 
-                    <div className="w-full">
-                        <label className="mb-3 mt-5 block" htmlFor="email">Tu correo electrónico</label>
-                        <Input
-                            tipo="email"
-                            icon={true}
-                            id="email"
-                            placeholder="email@ejemplo.com"
-                            required={true}
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        {errorEmail && (
-                            <p className="text-sm text-red-500 mt-2">{errorEmail}</p>
-                        )}
-                    </div>
+                    {usuario === "standard" &&
+                        <div>
+                            <p className="w-full text-[0.9rem] font-bold text-[var(--gris2)] text-center">¿Eres un profesional de la salud mental?</p>
+                            <p className="w-full text-center"><a href="/register-expert" className="underline text-[0.9rem] font-bold text-[var(--gris2)] text-center">Verifica tu cuenta gratis.</a></p>
+                        </div>
+                    }
 
-                    <div className="w-full">
-                        <label className="mb-3 mt-5 block" htmlFor="password">Escribe una contraseña segura</label>
-                        <Input
-                            tipo="password"
-                            icon={true}
-                            id="password"
-                            placeholder="Contraseña"
-                            required={true}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
+                    {usuario === "expert" &&
+                        <p className="w-full text-[0.9rem] font-bold text-[var(--gris2)] text-center">Registro exclusivo para profesionales.</p>
+                    }
+
+                    <div className="w-full flex flex-col gap-10">
+                        <div className="w-full flex flex-col gap-4">
+                            <label htmlFor="email">Tu correo electrónico</label>
+                            <Input
+                                tipo="email"
+                                icon={true}
+                                id="email"
+                                placeholder="email@ejemplo.com"
+                                required={true}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            {errorEmail && (
+                                <p className="text-sm text-red-500 mt-2">{errorEmail}</p>
+                            )}
+                        </div>
+
+                        <div className="w-full flex flex-col gap-4">
+                            <label htmlFor="password">Escribe una contraseña segura</label>
+                            <Input
+                                tipo="password"
+                                icon={true}
+                                id="password"
+                                placeholder="Contraseña"
+                                required={true}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
                     </div>
 
                 </div>
