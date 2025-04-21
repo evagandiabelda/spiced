@@ -15,7 +15,7 @@ interface Share {
 }
 
 export default function ListaSharesGuardados() {
-    const { data: session } = useSession(); // Obtener sesión
+    const { data: session } = useSession();
     const [shares, setShares] = useState<Share[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
