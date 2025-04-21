@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useSession } from "next-auth/react";
 import { useState, useRef } from "react";
 import Image from "next/image";
 import AvatarOtros from "@/components/icons/AvatarOtros";
@@ -49,13 +50,14 @@ interface DetalleShareProps {
             usuario_verificado: boolean;
         };
     }[];
-    sessionUserId: string | null;
     yaLoSigue: boolean;
     estaGuardado: boolean;
     usuarioVerificado: boolean;
 }
 
-export default function DetalleShare({ id, titulo, texto, img_principal, img_secundaria, fecha, verificado, slug, autor, spices, categorias, comentarios, sessionUserId, yaLoSigue, estaGuardado, usuarioVerificado }: DetalleShareProps) {
+export default function DetalleShare({ id, titulo, texto, img_principal, img_secundaria, fecha, verificado, slug, autor, spices, categorias, comentarios, yaLoSigue, estaGuardado, usuarioVerificado }: DetalleShareProps) {
+
+    const { data: session } = useSession();
 
     // Determinar si el usuario en sesión sigue al autor de Share. Gestionar la acción de seguir / dejar de seguir:
 
@@ -196,12 +198,13 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                                 />}
                             </div>
                         </div>
-                        {sessionUserId && <Boton
-                            texto={isFollowing ? "Dejar de seguir" : "Seguir contenido"}
-                            onClick={handleToggleFollow}
-                            tamano="pequeno"
-                            jerarquia={isFollowing ? "secundario" : "primario"}
-                        />}
+                        {session && session?.user.userType !== "admin" &&
+                            <Boton
+                                texto={isFollowing ? "Dejar de seguir" : "Seguir contenido"}
+                                onClick={handleToggleFollow}
+                                tamano="pequeno"
+                                jerarquia={isFollowing ? "secundario" : "primario"}
+                            />}
                     </div>
 
                     <div className="w-full flex flex-col gap-8 border-b border-b-1 border-b-[var(--gris2)] px-2 pt-8 pb-12">
@@ -234,10 +237,10 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                     </div>
 
                     <div className="w-full flex flex-col gap-6 px-2 py-8">
-                        {sessionUserId &&
+                        {session && session?.user.userType !== "admin" &&
                             <a href="#" onClick={() => setMostrarDenuncia(true)} className="text-[0.8rem] font-bold underline text-[var(--gris2)] hover:text-[var(--gris4)] transition ease">Denunciar contenido inapropiado</a>
                         }
-                        {sessionUserId && <Boton
+                        {session && session?.user.userType !== "admin" && <Boton
                             texto={guardado ? "Olvidar" : "Guardar"}
                             onClick={handleToggleGuardado}
                             tamano="pequeno"
@@ -291,7 +294,7 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                     {/* Comentarios */}
                     <div className="w-full flex flex-col items-start gap-16 py-12 border-t border-gray-400">
 
-                        {sessionUserId &&
+                        {session &&
                             <div ref={comentarioFormRef} className="w-full">
                                 <ComentarioForm
                                     slug={slug}
@@ -308,7 +311,7 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                                     texto={comentario.texto}
                                     fecha={comentario.created_at}
                                     user={comentario.user}
-                                    sessionUserId={sessionUserId}
+                                    sessionUserId={session?.user.id}
                                     slug={slug}
                                     onResponderClick={handleResponderClick}
                                 />

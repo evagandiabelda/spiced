@@ -89,8 +89,8 @@ export default function Feed() {
                         valorSeleccionado={filtroCategoria}
                         onChange={(nuevoValor) => router.push(`/explorar?categoria=${nuevoValor}`)}
                     />
-                    {/* Este filtro solo se renderiza si el usuario está autenticado: */}
-                    {session && (
+                    {/* Este filtro solo se renderiza si el usuario está autenticado y no es Admin (no interesa): */}
+                    {session && session?.user.userType !== "admin" && (
                         <Options
                             tipo='dropdown'
                             opciones={[

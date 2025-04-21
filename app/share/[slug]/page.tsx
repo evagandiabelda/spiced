@@ -109,7 +109,6 @@ export default async function SharePage({
             spices={share.spices}
             categorias={share.categorias}
             comentarios={share.comentarios}
-            sessionUserId={session?.user?.id ?? null}
             yaLoSigue={yaLoSigue}
             estaGuardado={estaGuardado}
             usuarioVerificado={usuarioVerificado}
