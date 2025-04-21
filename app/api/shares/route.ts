@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { PrismaClient } from "@prisma/client";
 import { generateSlug } from "@/lib/slug";
+import { comprobarInsignia } from "@/lib/insignias";
 
 const prisma = new PrismaClient();
 
@@ -130,6 +131,8 @@ export async function POST(req: Request) {
         autor_id: session.user.id, // Asignamos el Share al usuario autenticado
       },
     });
+
+    await comprobarInsignia(session?.user.id);
 
     return NextResponse.json({ message: "Share publicado correctamente.", user: nuevoShare }, { status: 201 });
   } catch (error) {

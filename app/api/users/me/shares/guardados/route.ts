@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { PrismaClient } from "@prisma/client";
+import { comprobarInsignia } from "@/lib/insignias";
 
 const prisma = new PrismaClient();
 
@@ -79,6 +80,21 @@ export async function POST(request: Request) {
                 share_id,
             },
         });
+
+        const share = await prisma.share.findUnique({
+            where: { id: share_id },
+            select: {
+                autor: {
+                    select: {
+                        id: true,
+                    }
+                }
+            },
+        });
+
+        if (share) {
+            await comprobarInsignia(share.autor.id);
+        }
 
         return NextResponse.json(nuevoGuardado, { status: 201 });
     } catch (error) {

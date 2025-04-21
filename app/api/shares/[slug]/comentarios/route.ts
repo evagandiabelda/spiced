@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { PrismaClient } from "@prisma/client";
-import { generateSlug } from "@/lib/slug";
+import { comprobarInsignia } from "@/lib/insignias";
 
 const prisma = new PrismaClient();
 
@@ -68,7 +68,14 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
         // Buscar el Share por su slug
         const share = await prisma.share.findUnique({
             where: { slug },
-            select: { id: true } // Solo necesitamos el ID
+            select: {
+                id: true,
+                autor: {
+                    select: {
+                        id: true,
+                    }
+                }
+            }
         });
 
         if (!share) {
@@ -100,6 +107,8 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
                 }
             }
         });
+
+        await comprobarInsignia(share.autor.id);
 
         return NextResponse.json({ message: "Comentario publicado correctamente.", comentario: nuevoComentario }, { status: 201 });
     } catch (error) {

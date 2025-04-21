@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { PrismaClient } from "@prisma/client";
+import { comprobarInsignia } from "@/lib/insignias";
 
 const prisma = new PrismaClient();
 
@@ -58,7 +59,11 @@ export async function POST(req: Request) {
             where: { id: shareId },
             include: {
                 autor: {
-                    include: { standard: true, expert: true }
+                    select: {
+                        id: true,
+                        standard: true,
+                        expert: true
+                    }
                 }
             }
         });
@@ -87,6 +92,8 @@ export async function POST(req: Request) {
                 }
             }
         });
+
+        await comprobarInsignia(share.autor.id);
 
         return NextResponse.json({ success: true, share: shareActualizado }, { status: 200 });
 
