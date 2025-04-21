@@ -181,9 +181,9 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                 {/* Sidebar */}
                 <div className="w-col3 flex flex-col gap-2">
 
-                    <div className="w-full flex flex-col gap-5 border-b border-b-1 border-b-[var(--gris2)] px-2 pb-12">
-                        <div className="w-full flex flex-col gap-3">
-                            <div className="max-w-[120px]">
+                    <div className="w-full flex flex-col gap-8 border-b border-b-1 border-b-[var(--gris2)] px-2 pb-12">
+                        <div className="w-full flex flex-col gap-4">
+                            <div className="max-w-[6rem] pl-2">
                                 <AvatarOtros autor={autor} />
                             </div>
                             <div className="flex flex-row gap-2 pl-2">
@@ -204,11 +204,11 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                         />}
                     </div>
 
-                    <div className="w-full flex flex-col gap-5 border-b border-b-1 border-b-[var(--gris2)] px-2 pt-8 pb-12">
+                    <div className="w-full flex flex-col gap-8 border-b border-b-1 border-b-[var(--gris2)] px-2 pt-8 pb-12">
                         <div className="w-full flex flex-col gap-3">
                             <h4 className="pl-2">Sobre este share:</h4>
                         </div>
-                        <div className="w-full flex flex-col gap-4 px-2">
+                        <div className="w-full flex flex-col gap-6 px-2">
                             {verificado &&
                                 <div className="flex flex-row gap-2">
                                     <p className="font-bold text-[var(--gris4)] text-[0.9rem]">Verificado</p>

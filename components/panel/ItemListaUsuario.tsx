@@ -34,7 +34,7 @@ const ItemListaUsuario = ({ id, name, foto, usuario_verificado, fecha, numShares
     }
 
     return (
-        <li className="w-full flex flex-col gap-4 px-4 pt-4 pb-8 border-b border-b-1 border-[var(--gris1)]">
+        <li className="w-full flex flex-col gap-3 px-4 pt-4 pb-8 border-b border-b-1 border-[var(--gris1)]">
 
             <div onClick={() => router.push(`/perfil/${name}`)} className="w-full flex mobile:flex-col laptop:flex-row justify-between mobile:gap-8 laptop:gap-16 rounded-xl p-4 hover:bg-[var(--gris1)] dark:hover:bg-[var(--gris4)] cursor-pointer">
 
@@ -67,20 +67,20 @@ const ItemListaUsuario = ({ id, name, foto, usuario_verificado, fecha, numShares
 
                 <div id="caja-verificado" className="flex flex-col items-end gap-4">
                     <div className='w-full flex flex-wrap justify-end items-center gap-2'>
-                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--tea)]">{numShares} Shares publicados</p>
-                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--toc)]">{numComentarios} comentarios</p>
-                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--tag)]">{numSeguidores} seguidores</p>
-                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--tpa)]">{numSpices} spices</p>
-                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--tep)]">{numCategorias} categorías</p>
-                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--te)]">{numDenunciasHechas} denuncias hechas</p>
-                        <p className="text-[0.8rem] font-bold px-3 py-1 rounded-xl bg-[var(--adi)]">{numDenunciasRecibidas} denuncias recibidas</p>
+                        <p className="text-[0.7rem] font-bold px-3 py-1 rounded-xl bg-[var(--tea)]">{numShares} Shares publicados</p>
+                        <p className="text-[0.7rem] font-bold px-3 py-1 rounded-xl bg-[var(--toc)]">{numComentarios} comentarios</p>
+                        <p className="text-[0.7rem] font-bold px-3 py-1 rounded-xl bg-[var(--tag)]">{numSeguidores} seguidores</p>
+                        <p className="text-[0.7rem] font-bold px-3 py-1 rounded-xl bg-[var(--tpa)]">{numSpices} spices</p>
+                        <p className="text-[0.7rem] font-bold px-3 py-1 rounded-xl bg-[var(--tep)]">{numCategorias} categorías</p>
+                        <p className="text-[0.7rem] font-bold px-3 py-1 rounded-xl bg-[var(--te)]">{numDenunciasHechas} denuncias hechas</p>
+                        <p className="text-[0.7rem] font-bold px-3 py-1 rounded-xl bg-[var(--adi)]">{numDenunciasRecibidas} denuncias recibidas</p>
                     </div>
                 </div>
 
             </div>
 
             {onDelete &&
-                <div className="w-full flex items-center gap-4 px-4">
+                <div className="w-full flex justify-end items-center gap-4 px-4">
                     <Boton texto="Eliminar usuario" enlace="#" tamano="pequeno" jerarquia="primario" onClick={() => onDelete(name, id)} />
                 </div>
             }

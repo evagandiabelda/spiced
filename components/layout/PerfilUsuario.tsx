@@ -112,23 +112,22 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
                     <AvatarOtros autor={usuario} />
                 </div>
 
-                <div className='w-full flex flex-col pt-7 mobile:gap-8 tablet:gap-12'>
-                    <div className='w-full flex mobile:flex-col laptop:flex-row justify-between gap-8'>
-                        <div className='w-full flex flex-col gap-4'>
+                <div className='w-full flex flex-col pt-7 mobile:gap-8 tablet:gap-10'>
+                    <div className='w-full flex mobile:flex-col laptop:flex-row justify-between items-start gap-8'>
+                        <div className='flex flex-col flex-1 gap-4'>
                             <h3>{usuario.nombre_real}</h3>
                             <div className='w-full flex flex-row justify-start items-center gap-2'>
-                                <p className='text-[0.8rem] text-[var(--gris3)] font-bold'>@{usuario.name}</p>
+                                <p className='text-[var(--gris2)] font-bold'>@{usuario.name}</p>
                             </div>
                         </div>
                         {usuario.usuario_verificado &&
-                            <div className='w-full flex flex-row justify-end items-center gap-2'>
-                                <p className='text-[0.9rem] text-[var(--gris3)] font-bold'>Usuario Verificado</p>
+                            <div className='flex flex-row justify-end items-center gap-2'>
+                                <p className='text-[0.9rem] font-bold'>Verificado</p>
                                 <Image
                                     src="/iconos/iconos-otros/icono-verificado-relleno2.svg"
                                     alt='usuario verificado'
                                     width={16}
                                     height={16}
-                                    className='opacity-70'
                                 />
                             </div>
                         }
@@ -162,7 +161,7 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
                     <div className='mobile:w-full laptop:w-1/2'>
                         <p className='text-[0.9rem]'>{usuario.descripcion_perfil}</p>
                     </div>
-                    <div className='w-full flex mobile:flex-col laptop:flex-row justify-between gap-8'>
+                    <div className='w-full flex mobile:flex-col laptop:flex-row justify-between items-end gap-8'>
                         <div className='w-1/2 flex flex-wrap gap-2'>
                             {usuario.spices_seguidos?.map(({ spice }) => (
                                 spice ? (
