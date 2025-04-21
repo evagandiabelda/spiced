@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
 
         const denuncias = await prisma.denunciaShare.findMany({
             include: {
-                user: {
+                user: { // Denunciante
                     select: {
                         id: true,
                         name: true,
@@ -33,9 +33,8 @@ export async function GET(request: NextRequest) {
                         titulo: true,
                         img_principal: true,
                         slug: true,
-                        autor: {
+                        autor: { // Denunciado
                             select: {
-                                id: true,
                                 name: true,
                             }
                         }

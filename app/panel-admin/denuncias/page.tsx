@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import ListaDenuncias from "@/components/panel/ListaDenuncias";
 
 export default function Denuncias() {
 
@@ -28,7 +29,7 @@ export default function Denuncias() {
 
             {/* CONTENIDO: */}
             <div className="w-full flex flex-col gap-6">
-
+                <ListaDenuncias />
             </div>
 
         </div>

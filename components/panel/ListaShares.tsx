@@ -12,6 +12,7 @@ import { DenunciaShare } from "@prisma/client";
 type ShareData = {
     id: string;
     titulo: string;
+    texto: string;
     img_principal: string;
     created_at: Date;
     slug: string;
@@ -127,6 +128,7 @@ export default function ListaShares({ numItems }: ListaSharesProps) {
                             key={share.id}
                             id={share.id}
                             titulo={share.titulo}
+                            texto={share.texto}
                             imagen={share.img_principal}
                             fecha={share.created_at as Date}
                             slug={share.slug}

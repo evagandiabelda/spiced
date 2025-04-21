@@ -38,8 +38,8 @@ const ItemListaShareGuardado = ({ id, imagen, user, titulo, fecha, slug }: ItemP
                         <p className="font-bold">{titulo}</p>
                     </div>
                     <div className="w-full mobile:hidden tablet:flex flex-row justify-between">
-                        <p><span className="text-[var(--gris2)] opacity-60">{user || "Usuario desconocido"}</span></p>
-                        <p><span className="text-[var(--gris2)] opacity-60">{objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</span></p>
+                        <p><span className="text-[var(--gris2)]">{user || "Usuario desconocido"}</span></p>
+                        <p><span className="text-[var(--gris2)]">{objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</span></p>
                     </div>
                 </div>
 

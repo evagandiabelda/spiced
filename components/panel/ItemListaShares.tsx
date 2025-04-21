@@ -8,6 +8,7 @@ import Boton from "@/components/buttons/Boton";
 interface ItemProps {
     id: string;
     titulo: string;
+    texto: string;
     imagen: string;
     fecha: Date;
     slug: string;
@@ -20,9 +21,13 @@ interface ItemProps {
     onDelete: (id: string) => void;
 }
 
-const ItemListaShares = ({ id, titulo, imagen, fecha, slug, share_verificado, user, numDenuncias, onDelete }: ItemProps) => {
+const ItemListaShares = ({ id, titulo, texto, imagen, fecha, slug, share_verificado, user, numDenuncias, onDelete }: ItemProps) => {
 
     const objetoFecha = new Date(fecha);
+
+    const getExcerpt = (text: string, maxLength = 90) => {
+        return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+    };
 
     return (
         <li className="w-full flex flex-col gap-6 px-4 py-10 border-b border-b-[var(--gris2)] dark:border-b-[var(--negro)]">
@@ -58,32 +63,35 @@ const ItemListaShares = ({ id, titulo, imagen, fecha, slug, share_verificado, us
                         />
                     </div>
                     <div className="w-full flex flex-col gap-3">
-                        <p className="font-bold">{titulo}</p>
-                        {share_verificado &&
-                            <div className="w-full flex flex-row items-center gap-2">
+
+                        <div className="w-full flex flex-row items-center gap-2">
+                            <p className="font-bold">{titulo}</p>
+                            {share_verificado &&
                                 <Image
                                     src="/iconos/iconos-otros/icono-verificado-relleno.svg"
                                     alt="miniatura-share"
                                     width={14}
                                     height={14}
                                 />
-                                <p className="text-[0.8rem] texto-[var(--gris3)]">Share verificado</p>
-                            </div>
-                        }
+                            }
+                        </div>
+
+                        <p>{getExcerpt(texto)}</p>
+
                     </div>
                 </a>
             </div>
 
-            <div id="caja-denuncias" className="w-full flex mobile:flex-col laptop:flex-row laptop:justify-end laptop:items-center gap-4">
+            <div id="caja-denuncias" className="w-full flex mobile:flex-col laptop:flex-row laptop:justify-end laptop:items-center gap-2">
 
-                <div className="flex flex-row justify-end items-center gap-6 px-4">
+                <div className="flex flex-row justify-end items-center gap-4 px-4">
                     {numDenuncias > 0 ?
                         <p className="text-[0.8rem] font-bold text-white px-3 py-1 rounded-xl bg-[#D84C60]">{numDenuncias} denuncias</p>
                         :
                         <p className="text-[0.8rem] font-bold text-white px-3 py-1 rounded-xl bg-[var(--gris2)]">{numDenuncias} denuncias</p>
                     }
 
-                    <Boton texto="Eliminar" tamano="grande" jerarquia="secundario" onClick={() => onDelete(id)} />
+                    <Boton texto="Eliminar Share" tamano="pequeno" jerarquia="primario" onClick={() => onDelete(id)} />
                 </div>
 
             </div>

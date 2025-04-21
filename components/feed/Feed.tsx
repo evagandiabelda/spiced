@@ -28,6 +28,7 @@ export default function Feed() {
     // Obtener las categorías en la BD:
 
     const [categorias, setCategorias] = useState<Categoria[]>([]);
+    const [error, setError] = useState<string | null>(null);
 
     // Callback para manejar los Spices seleccionados en la nube de tags:
     // (necesitamos recoger los tags seleccionados dentro de "NubeTagsDinamica" para poder filtrar luego los Shares en "ListaFeed")
@@ -35,11 +36,21 @@ export default function Feed() {
 
     useEffect(() => {
         const fetchCategorias = async () => {
+            setError(null);
+
             try {
                 const res = await fetch('/api/categorias');
                 if (!res.ok) throw new Error('Error al obtener categorías.');
                 const data = await res.json();
-                setCategorias(data);
+
+                const categorias: Categoria[] = data.categorias;
+
+                if (categorias.length === 0) {
+                    setError("Todavía no has publicado ninguna categoría.");
+                    setCategorias([]);
+                } else {
+                    setCategorias(categorias);
+                }
             } catch (error) {
                 console.error('Error al cargar las categorías.', error);
             }

@@ -59,7 +59,7 @@ const ItemListaUsuario = ({ id, name, foto, usuario_verificado, fecha, numShares
                             }
                         </div>
                         <div className="w-full flex flex-row justify-between">
-                            <p><span className="text-[var(--gris2)] opacity-60">Registrado: {objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</span></p>
+                            <p><span className="text-[var(--gris3)]">Registrado: {objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</span></p>
                         </div>
                     </div>
 
