@@ -10,11 +10,21 @@ import Estadisticas from "@/components/cards/Estadisticas";
 import Boton from "@/components/buttons/Boton";
 import ListaSharesPublicados from "@/components/panel/ListaSharesPublicados";
 import Input from "@/components/inputs/Input";
+import { Insignia } from "@prisma/client";
 
 export default function Inicio() {
 
-    const { status } = useSession();
+    const { data: session } = useSession();
     const router = useRouter();
+
+    let iconoInsignia = "/iconos/iconos-otros/icono-insignia-mini-1.svg";
+
+    if (session?.user.insignia === Insignia.cacahuete_sabio) {
+        iconoInsignia = "/iconos/iconos-otros/icono-insignia-mini-2.svg";
+    }
+    if (session?.user.insignia === Insignia.cactus_legendario) {
+        iconoInsignia = "/iconos/iconos-otros/icono-insignia-mini-3.svg";
+    }
 
     useEffect(() => {
         if (status === "unauthenticated") {
@@ -39,7 +49,7 @@ export default function Inicio() {
                                 alt="notificaciones"
                             />
                             <Image
-                                src="/iconos/iconos-otros/icono-insignia-mini-1.svg"
+                                src={iconoInsignia}
                                 width={32}
                                 height={32}
                                 className="cursor-pointer hover:scale-110 transition ease dark:opacity-70 dark:hover:opacity-100"
