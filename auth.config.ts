@@ -58,6 +58,7 @@ export const authConfig: NextAuthOptions = {
         token.foto = user.foto;
         token.nombre_real = user.nombre_real;
         token.usuario_verificado = user.usuario_verificado;
+        token.insignia = user.insignia || null;
       }
 
       return token;
@@ -109,6 +110,7 @@ export const authConfig: NextAuthOptions = {
           nombre_real: user.nombre_real,
           usuario_verificado: user.usuario_verificado,
           userType: userType || null,
+          insignia: user.standard?.insignia || null,
         };
       }
     }),

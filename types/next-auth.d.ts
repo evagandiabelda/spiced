@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+import { Insignia } from "@prisma/client";
 
 declare module "next-auth" {
     interface Session {
@@ -10,7 +11,7 @@ declare module "next-auth" {
             nombre_real: string;
             usuario_verificado: boolean;
             userType: "admin" | "expert" | "standard" | null;
-            insignia?: string | null;
+            insignia?: Insignia | null;
         } & DefaultSession["user"];
     }
 
@@ -22,7 +23,7 @@ declare module "next-auth" {
         nombre_real: string;
         usuario_verificado: boolean;
         userType: "admin" | "expert" | "standard" | null;
-        insignia?: string | null;
+        insignia?: Insignia | null;
     }
 
     interface JWT {
@@ -32,6 +33,6 @@ declare module "next-auth" {
         nombre_real: string;
         usuario_verificado: boolean;
         userType: "admin" | "expert" | "standard" | null;
-        insignia?: string | null;
+        insignia?: Insignia | null;
     }
 }

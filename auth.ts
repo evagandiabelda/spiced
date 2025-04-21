@@ -4,6 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { z } from 'zod';
 import bcrypt from 'bcryptjs';
 import { PrismaClient } from '@prisma/client';
+import { Insignia } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -62,6 +63,7 @@ export const { auth, signIn, signOut } = NextAuth({
             nombre_real: user.nombre_real,
             usuario_verificado: user.usuario_verificado,
             userType: userType,
+            insignia: user.standard?.insignia || null,
           };
         }
 
@@ -79,6 +81,7 @@ export const { auth, signIn, signOut } = NextAuth({
         session.user.nombre_real = token.nombre_real as string;
         session.user.usuario_verificado = token.usuario_verificado as boolean;
         session.user.userType = token.userType as string;
+        session.user.insignia = token.insignia as Insignia | null;
       }
       return session;
     },
@@ -90,6 +93,7 @@ export const { auth, signIn, signOut } = NextAuth({
         token.nombre_real = user.nombre_real;
         token.usuario_verificado = user.usuario_verificado;
         token.userType = user.userType;
+        token.insignia = user.insignia || null;
       }
       if (trigger === "update") {
         token.id = user.id;
@@ -98,6 +102,7 @@ export const { auth, signIn, signOut } = NextAuth({
         token.nombre_real = user.nombre_real;
         token.usuario_verificado = user.usuario_verificado;
         token.userType = user.userType;
+        token.insignia = user.insignia || null;
       }
       return token;
     },
