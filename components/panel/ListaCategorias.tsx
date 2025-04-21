@@ -113,7 +113,7 @@ export default function ListaCategorias() {
     );
 
     return (
-        <div className="w-full flex flex-col gap-8 px-[30px] pt-[10px] pb-[24px] rounded-xl bg-white dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--borde-shares)]">
+        <div className="w-full flex flex-col gap-8 px-6 pt-[10px] pb-[24px] rounded-xl bg-white dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--gris4)]">
             {categorias.length === 0 ? (
                 <p>Todavía no hay categorías.</p>
             ) : (

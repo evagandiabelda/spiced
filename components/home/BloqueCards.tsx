@@ -13,7 +13,7 @@ export default function BloqueCards() {
                     width="40"
                     height="40"
                 />
-                <h1>¿Qué es Spiced?</h1>
+                <h1 className="dark:text-[var(--gris3)]">¿Qué es Spiced?</h1>
                 <p>Somos una comunidad creada por neurodivergentes y para neurodivergentes. Spiced es un espacio abierto y diverso donde compartir contenido y aprender, pero también un lugar donde divertirse y aceptar ese toque especial que nos hace tan únicos.</p>
             </div>
             <div className="w-full flex mobile:flex-col laptop:flex-row justify-stretch items-stretch gap-8">

@@ -136,9 +136,9 @@ export default function Feed() {
             </Suspense>
 
             {/* ACCIÓN CIERRE */}
-            <div className='flex flex-col gap-8 pt-16'>
-                <p>¡Esto es todo! ¿Te animas a publicar tu propio Share?</p>
-                {session?.user.userType !== "admin" &&
+            {session?.user.userType !== "admin" &&
+                <div className='flex flex-col gap-8 pt-16'>
+                    <p>¡Esto es todo! ¿Te animas a publicar tu propio Share?</p>
                     <div>
                         <Boton
                             texto="Nuevo Share"
@@ -147,8 +147,8 @@ export default function Feed() {
                             jerarquia='secundario'
                         />
                     </div>
-                }
-            </div>
+                </div>
+            }
 
         </div>
     );

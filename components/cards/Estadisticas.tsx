@@ -67,7 +67,7 @@ export default function Estadisticas() {
                                 width={28}
                                 height={28}
                                 alt="nuevo share"
-                                className="opacity-50"
+                                className="opacity-50 dark:invert"
                             />
                             <p className="font-bold">Nuevo share</p>
                         </div>

@@ -28,7 +28,7 @@ export default function Inicio() {
             {/* CABECERA: */}
             <div className="w-full flex flex-col gap-8">
                 <div className="w-full flex mobile:flex-col-reverse tablet:flex-row justify-between mobile:items-between tablet:items-center mobile:gap-12 tablet:gap-3">
-                    <h2>Tu espacio personal</h2>
+                    <h2 className="dark:text-[var(--gris3)]">Tu espacio personal</h2>
                     <div className="flex flex-row justify-end gap-6">
                         <div className="flex flex-row justify-end gap-4">
                             <Image
@@ -43,7 +43,7 @@ export default function Inicio() {
                     </div>
                 </div>
                 <div className="w-full flex flex-col gap-3">
-                    <p>Qué bien verte por aquí. ¿Cómo estás hoy? Desde aquí podrás gestionar tu cuenta, compartir cositas con la comunidad de Spice, consultar tus notificaciones y mucho más. ¡Adelante, explora!</p>
+                    <p className="dark:text-[var(--gris3)]">Qué bien verte por aquí. ¿Cómo estás hoy? Desde aquí podrás gestionar tu cuenta, compartir cositas con la comunidad de Spice, consultar tus notificaciones y mucho más. ¡Adelante, explora!</p>
                 </div>
             </div>
 

@@ -59,9 +59,9 @@ export default function RegisterForm({ usuario }: RegisterFormProps) {
 
     return (
         <form onSubmit={handleSubmit} className="w-full flex flex-col justify-center items-center gap-4 px-col1">
-            <h1>Regístrate en Spiced</h1>
+            <h1 className="dark:text-[var(--gris3)]">Regístrate en Spiced</h1>
 
-            <div className="w-full flex flex-col flex-1 align-center gap-16 pb-4 pt-8 max-w-[360px]">
+            <div className="w-full flex flex-col flex-1 align-center gap-12 pb-4 pt-8 max-w-[360px]">
 
                 {/* INPUTS */}
 
@@ -69,8 +69,8 @@ export default function RegisterForm({ usuario }: RegisterFormProps) {
 
                     {usuario === "standard" &&
                         <div>
-                            <p className="w-full text-[0.9rem] font-bold text-[var(--gris2)] text-center">¿Eres un profesional de la salud mental?</p>
-                            <p className="w-full text-center"><a href="/register-expert" className="underline text-[0.9rem] font-bold text-[var(--gris2)] text-center">Verifica tu cuenta gratis.</a></p>
+                            <p className="w-full text-[0.9rem] font-bold text-[var(--gris2)] dark:text-[var(--gris3)] text-center">¿Eres un profesional de la salud mental?</p>
+                            <p className="w-full text-center"><a href="/register-expert" className="underline text-[0.9rem] font-bold text-[var(--gris2)] dark:text-[var(--gris3)] dark:hover:text-[var(--gris2)] text-center">Verifica tu cuenta gratis.</a></p>
                         </div>
                     }
 
@@ -113,10 +113,8 @@ export default function RegisterForm({ usuario }: RegisterFormProps) {
 
                 {/* BOTONES */}
 
-                <div className="flex flex-row justify-end">
-                    <BotonSubmit
-                        texto="Regístrate"
-                    />
+                <div className="w-full flex flex-col items-center">
+                    <BotonSubmit texto="Regístrate" />
                 </div>
 
             </div>

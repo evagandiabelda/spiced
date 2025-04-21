@@ -178,7 +178,7 @@
   }
 
   .placeholder-dark::placeholder {
-    @apply text-[var(--gris2)] opacity-40;
+    @apply text-[var(--gris4)] opacity-40;
   }
 
   label {

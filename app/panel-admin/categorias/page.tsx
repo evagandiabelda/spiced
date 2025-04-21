@@ -54,7 +54,7 @@ export default function Categorias() {
             {/* CABECERA: */}
             <div className="w-full flex flex-col gap-8">
                 <div className="w-full flex mobile:flex-col-reverse tablet:flex-row justify-between mobile:items-between tablet:items-center mobile:gap-12 tablet:gap-3">
-                    <h2>Categorías</h2>
+                    <h2 className="dark:text-[var(--gris3)]">Categorías</h2>
                 </div>
             </div>
 

@@ -13,10 +13,10 @@ export default function TusShares() {
             {/* CABECERA: */}
             <div className="w-full flex flex-col gap-8 border-b border-b-1 border-b-[var(--gris3)] pb-16">
                 <div className="w-full flex mobile:flex-col-reverse tablet:flex-row justify-between mobile:items-between tablet:items-center mobile:gap-12 tablet:gap-3">
-                    <h2>Tus shares</h2>
+                    <h2 className="dark:text-[var(--gris3)]">Tus shares</h2>
                 </div>
                 <div className="w-full flex flex-col gap-3">
-                    <p>Aquí encontrarás todos los shares que has compartido. Desde aquí podrás consultarlos o eliminarlos.</p>
+                    <p className="dark:text-[var(--gris3)]">Aquí encontrarás todos los shares que has compartido. Desde aquí podrás consultarlos o eliminarlos.</p>
                 </div>
             </div>
 

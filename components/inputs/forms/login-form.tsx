@@ -52,9 +52,10 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit} className="w-full flex flex-col items-center gap-4 justify-center space-y-3">
-      <h1>Accede a tu cuenta</h1>
+      <h1 className="dark:text-[var(--gris3)]">Accede a tu cuenta</h1>
 
-      <div className="w-full flex flex-col flex-1 align-center gap-16 pb-4 pt-8 max-w-[360px]">
+      {/* INPUTS */}
+      <div className="w-full flex flex-col flex-1 align-center gap-12 pb-4 pt-8 max-w-[360px]">
 
         <div className="w-full">
 
@@ -72,8 +73,11 @@ export default function LoginForm() {
 
         </div>
 
-        <BotonLogin className="mt-4 w-full" type="submit">Log in</BotonLogin>
-        {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
+        {/* BOTONES */}
+        <div className="w-full flex flex-col items-center">
+          <BotonLogin className="mt-4 w-full" type="submit">Log in</BotonLogin>
+          {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
+        </div>
 
       </div>
     </form>

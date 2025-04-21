@@ -119,7 +119,7 @@ export default function ListaComentarios({ numItems }: ListaComentariosProps) {
     );
 
     return (
-        <div className="w-full flex flex-col gap-8 p-[10px] pb-[24px] rounded-xl bg-white dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--borde-comentarios)]">
+        <div className="w-full flex flex-col gap-8 px-4 pt-[10px] pb-[24px] rounded-xl bg-white dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--gris4)]">
             {comentarios.length === 0 ? (
                 <p>Todavía no hay shares por aquí...</p>
             ) : (

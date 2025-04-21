@@ -49,7 +49,7 @@ const ItemListaDenuncias = ({ motivo, fecha, share, comentario, user, onDeleteSh
     const objetoFecha = new Date(fecha);
 
     return (
-        <li className="w-full flex-1 flex flex-col mobile:items-start tablet:items-center gap-4 px-4 py-8 border-b border-b-1">
+        <li className="w-full flex-1 flex flex-col mobile:items-start tablet:items-center gap-4 px-4 py-8 border-b border-b-1 dark:border-[var(--gris4)]">
 
             <div id="caja-denuncia" className="w-full flex-1 flex flex-col justify-between gap-4">
 
@@ -59,7 +59,7 @@ const ItemListaDenuncias = ({ motivo, fecha, share, comentario, user, onDeleteSh
                         <div className="w-[2.5rem]">
                             <AvatarOtros autor={user} />
                         </div>
-                        <p className="font-bold text-[0.9rem]">{user.name}</p>
+                        <p className="font-bold text-[0.9rem] dark:text-[var(--gris3)]">{user.name}</p>
                         {user.usuario_verificado &&
                             <div className="w-[1.2rem] h-[1.2rem]">
                                 <Image
@@ -70,22 +70,23 @@ const ItemListaDenuncias = ({ motivo, fecha, share, comentario, user, onDeleteSh
                                 />
                             </div>
                         }
-                        <p className="text-[0.9rem]">denuncia:</p>
+                        <p className="text-[0.9rem] dark:text-[var(--gris3)]">denuncia:</p>
                     </div>
 
                     <div className="w-full flex flex-row justify-end text-end">
-                        <p><span className="text-[var(--gris2)]">{objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</span></p>
+                        <p><span className="text-[var(--gris2)] dark:text-[var(--gris3)]">{objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</span></p>
                     </div>
 
                 </div>
 
-                <div className="w-full flex flex-row items-center gap-3 px-4 py-3 rounded-xl bg-[var(--gris1)]">
+                <div className="w-full flex flex-row items-center gap-3 px-4 py-3 rounded-xl bg-[var(--gris1)] dark:bg-[var(--gris4)]">
                     <div className="w-[1.2rem] h-[1.2rem] pt-[0.1rem]">
                         <Image
                             src="/iconos/iconos-menu/icono-denuncias.svg"
                             alt="icono denuncia"
                             width={16}
                             height={16}
+                            className="dark:invert"
                         />
                     </div>
                     <p><span>"{motivo}"</span></p>
@@ -107,8 +108,8 @@ const ItemListaDenuncias = ({ motivo, fecha, share, comentario, user, onDeleteSh
                             />
                         </div>
                         <div className="w-full flex flex-col flex-1 gap-1">
-                            <p className="text-[0.9rem]">Share denunciado:</p>
-                            <h4>{share.titulo}</h4>
+                            <p className="text-[0.9rem] dark:text-[var(--gris3)]">Share denunciado:</p>
+                            <h4 className="dark:text-[var(--gris3)]">{share.titulo}</h4>
                         </div>
                     </div>
 
@@ -145,8 +146,8 @@ const ItemListaDenuncias = ({ motivo, fecha, share, comentario, user, onDeleteSh
                             />
                         </div>
                         <div className="w-full flex flex-col flex-1 gap-2">
-                            <p className="text-[0.9rem]">Comentario denunciado:</p>
-                            <p><span className="font-bold">"{comentario.texto}"</span></p>
+                            <p className="text-[0.9rem] dark:text-[var(--gris3)]">Comentario denunciado:</p>
+                            <p><span className="font-bold dark:text-[var(--gris3)]">"{comentario.texto}"</span></p>
                         </div>
                     </div>
 

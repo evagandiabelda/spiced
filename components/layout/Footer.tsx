@@ -19,19 +19,19 @@ const Footer = () => {
             <div className='flex-col m-0 px-col1 py-8 m-0 gap-2 bg-[--negro]'>
 
                 {/* Caja Superior: */}
-                <div className='flex justify-left h-[100px] px-4 py-8 border-b-[1px] border-b-[var(--brand2)]'>
+                <div className='flex justify-left h-[100px] px-4 py-8 border-b-[1px] border-b-[var(--brand2)] dark:border-b-[var(--gris4)]'>
                     <Logo modo='oscuro' />
                 </div>
 
                 {/* Caja Central: */}
-                <div className='flex mobile:flex-col laptop:flex-row justify-left px-4 py-10 gap-16 border-b-[1px] border-b-[var(--brand2)]'>
+                <div className='flex mobile:flex-col laptop:flex-row justify-left px-4 py-10 gap-16 border-b-[1px] border-b-[var(--brand2)] dark:border-b-[var(--gris4)]'>
                     <div id='caja-izq' className='mobile:hidden tablet:block flex flex-row justify-left mobile:w-full laptop:w-col6'>
                         <Menu tipo='footer' />
                     </div>
                     <div id='caja-izq' className='mobile:block tablet:hidden flex flex-row justify-left mobile:w-full laptop:w-col6'>
                         <Menu tipo='footer-desplegable' />
                     </div>
-                    <div id='caja-der' className='flex flex-col gap-9 mobile:w-full laptop:w-col4'>
+                    <div id='caja-der' className='flex flex-col gap-12 mobile:w-full laptop:w-col4'>
                         <div className='flex felx-row gap-4 items-end'>
                             <a href="https://www.instagram.com" className='hover:scale-110 transition ease'>
                                 <Image
@@ -39,6 +39,7 @@ const Footer = () => {
                                     width={24}
                                     height={24}
                                     alt="instagram"
+                                    className='dark:opacity-40'
                                 />
                             </a>
                             <a href="https://www.facebook.com" className='hover:scale-110 transition ease'>
@@ -47,6 +48,7 @@ const Footer = () => {
                                     width={24}
                                     height={24}
                                     alt="facebook"
+                                    className='dark:opacity-40'
                                 />
                             </a>
                             <a href="https://www.x.com" className='hover:scale-110 transition ease'>
@@ -55,6 +57,7 @@ const Footer = () => {
                                     width={24}
                                     height={24}
                                     alt="x"
+                                    className='dark:opacity-40'
                                 />
                             </a>
                             <a href="https://www.pinterest.com" className='hover:scale-110 transition ease'>
@@ -63,13 +66,14 @@ const Footer = () => {
                                     width={24}
                                     height={24}
                                     alt="pinterest"
+                                    className='dark:opacity-40'
                                 />
                             </a>
                         </div>
                         <div className='flex flex-col gap-6'>
                             <div className="flex flex-col gap-5">
-                                <h3 className='text-white'>Ayuda y prevención contra el suicidio</h3>
-                                <p className='text-[var(--brand2)]'>No dudes en utilizar nuestro chat en vivo 24/7 y gratuito, con profesionales voluntarios y totalmente anónimo.</p>
+                                <h3 className='text-white dark:text-[var(--gris3)]'>Ayuda y prevención contra el suicidio</h3>
+                                <p className='text-[var(--brand2)] dark:text-[var(--gris3)]'>No dudes en utilizar nuestro chat en vivo 24/7 y gratuito, con profesionales voluntarios y totalmente anónimo.</p>
                             </div>
                             <div>
                                 <Boton texto='Necesito ayuda' enlace='#' tamano='grande' jerarquia="primario" customColor='var(--brand1)' />
@@ -80,7 +84,7 @@ const Footer = () => {
 
                 {/* Caja Inferior: */}
                 <div className='flex justify-center px-4 py-8'>
-                    <p className='text-[0.8rem]'>ⓒ Spiced. Creado con ❤ por y para gente neurospicy.</p>
+                    <p className='text-[0.8rem] dark:text-[var(--gris3)]'>ⓒ Spiced. Creado con ❤ por y para gente neurospicy.</p>
                 </div>
 
             </div>

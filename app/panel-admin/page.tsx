@@ -35,7 +35,7 @@ export default function Inicio() {
             {/* CABECERA: */}
             <div className="w-full flex flex-col gap-8">
                 <div className="w-full flex mobile:flex-col-reverse tablet:flex-row justify-between mobile:items-between tablet:items-center mobile:gap-12 tablet:gap-3">
-                    <h2>Panel de Administrador</h2>
+                    <h2 className="dark:text-[var(--gris3)]">Panel de Administrador</h2>
                     <div className="flex flex-row justify-end items-center gap-4">
                         <ThemeToggle />
                         <Boton texto="Cerrar sesión" onClick={handleLogout} tamano="pequeno" jerarquia="secundario" />
@@ -51,7 +51,7 @@ export default function Inicio() {
                     {/* Card Últimas Denuncias: */}
                     <div className="w-full flex flex-col rounded-xl bg-[#D84C60] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-denuncias)] dark:border-2 dark:border-[var(--borde-denuncias)]">
                         <div className="w-full flex flex-row justify-between items-center px-2">
-                            <h3 className="text-white">Últimas denuncias</h3>
+                            <h3 className="text-white dark:text-[var(--gris2)]">Últimas denuncias</h3>
                             <Image
                                 src="/iconos/iconos-menu/icono-denuncias.svg"
                                 width={20}
@@ -68,7 +68,7 @@ export default function Inicio() {
                 {/* Card Últimos Usuarios: */}
                 <div className="w-full h-auto flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-shares)] dark:border-2 dark:border-[var(--borde-shares)]">
                     <div className="w-full flex flex-row justify-between items-center px-2">
-                        <h3>Últimos usuarios</h3>
+                        <h3 className="dark:text-[var(--gris2)]">Últimos usuarios</h3>
                         <Image
                             src="/iconos/iconos-menu/icono-usuarios.svg"
                             width={20}

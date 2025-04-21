@@ -23,7 +23,7 @@ export default function Verificaciones() {
             {/* CABECERA: */}
             <div className="w-full flex flex-col gap-8">
                 <div className="w-full flex mobile:flex-col-reverse tablet:flex-row justify-between mobile:items-between tablet:items-center mobile:gap-12 tablet:gap-3">
-                    <h2>Verificaciones</h2>
+                    <h2 className="dark:text-[var(--gris3)]">Verificaciones</h2>
                 </div>
             </div>
 

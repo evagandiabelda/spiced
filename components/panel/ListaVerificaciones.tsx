@@ -96,7 +96,7 @@ export default function ListaVerificaciones({ numItems }: ListaUsuariosProps) {
     );
 
     return (
-        <div className="w-full flex flex-col gap-8 p-[10px] pb-[24px] rounded-xl bg-white dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--borde-shares)]">
+        <div className="w-full flex flex-col gap-8 px-4 pt-[10px] pb-[24px] rounded-xl bg-white dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--gris4)]">
             {usuarios.length === 0 ? (
                 <div className="w-full text-center pt-4">
                     <p>No hay verificaciones pendientes.</p>

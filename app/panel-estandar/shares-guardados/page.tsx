@@ -12,10 +12,10 @@ export default function SharesGuardados() {
             {/* CABECERA: */}
             <div className="w-full flex flex-col gap-8 border-b border-b-1 border-b-[var(--gris3)] pb-16">
                 <div className="w-full flex mobile:flex-col-reverse tablet:flex-row justify-between mobile:items-between tablet:items-center mobile:gap-12 tablet:gap-3">
-                    <h2>Shares guardados</h2>
+                    <h2 className="dark:text-[var(--gris3)]">Shares guardados</h2>
                 </div>
                 <div className="w-full flex flex-col gap-3">
-                    <p>Esta es tu biblioteca de Shares de otros usuarios. En ella podrás volver a consultar la información que guardaste o borrarla de la lista si ya no la necesitas.</p>
+                    <p className="dark:text-[var(--gris3)]">Esta es tu biblioteca de Shares de otros usuarios. En ella podrás volver a consultar la información que guardaste o borrarla de la lista si ya no la necesitas.</p>
                 </div>
             </div>
 
