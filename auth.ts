@@ -61,6 +61,7 @@ export const { auth, signIn, signOut } = NextAuth({
             name: user.name,
             foto: user.foto,
             nombre_real: user.nombre_real,
+            descripcion_perfil: user.descripcion_perfil || null,
             usuario_verificado: user.usuario_verificado,
             userType: userType,
             insignia: user.standard?.insignia || null,
@@ -79,6 +80,7 @@ export const { auth, signIn, signOut } = NextAuth({
         session.user.name = token.name as string;
         session.user.foto = token.foto as string;
         session.user.nombre_real = token.nombre_real as string;
+        session.user.descripcion_perfil = token.descripcion_perfil as string | null;
         session.user.usuario_verificado = token.usuario_verificado as boolean;
         session.user.userType = token.userType as string;
         session.user.insignia = token.insignia as Insignia | null;
@@ -91,6 +93,7 @@ export const { auth, signIn, signOut } = NextAuth({
         token.name = user.name;
         token.foto = user.foto;
         token.nombre_real = user.nombre_real;
+        token.descripcion_perfil = user.descripcion_perfil || null;
         token.usuario_verificado = user.usuario_verificado;
         token.userType = user.userType;
         token.insignia = user.insignia || null;
@@ -100,6 +103,7 @@ export const { auth, signIn, signOut } = NextAuth({
         token.name = user.name;
         token.foto = user.foto;
         token.nombre_real = user.nombre_real;
+        token.descripcion_perfil = user.descripcion_perfil || null;
         token.usuario_verificado = user.usuario_verificado;
         token.userType = user.userType;
         token.insignia = user.insignia || null;

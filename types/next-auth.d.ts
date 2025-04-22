@@ -9,6 +9,7 @@ declare module "next-auth" {
             name: string;
             foto: string;
             nombre_real: string;
+            descripcion_perfil: string | null;
             usuario_verificado: boolean;
             userType: "admin" | "expert" | "standard" | null;
             insignia?: Insignia | null;
@@ -21,6 +22,7 @@ declare module "next-auth" {
         name: string;
         foto?: string;
         nombre_real: string;
+        descripcion_perfil: string | null;
         usuario_verificado: boolean;
         userType: "admin" | "expert" | "standard" | null;
         insignia?: Insignia | null;
@@ -31,6 +33,7 @@ declare module "next-auth" {
         name: string;
         foto: string;
         nombre_real: string;
+        descripcion_perfil: string | null;
         usuario_verificado: boolean;
         userType: "admin" | "expert" | "standard" | null;
         insignia?: Insignia | null;

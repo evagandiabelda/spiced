@@ -16,6 +16,7 @@ export const authConfig: NextAuthOptions = {
         session.user.name = token.name ?? "";
         session.user.foto = token.foto ?? "";
         session.user.nombre_real = token.nombre_real ?? "";
+        session.user.descripcion_perfil = token.descripcion_perfil ?? "";
         session.user.usuario_verificado = token.usuario_verificado ?? false;
         session.user.insignia = token.insignia ?? null;
         session.user.userType = token.userType ?? null;
@@ -46,6 +47,7 @@ export const authConfig: NextAuthOptions = {
         token.name = dbUser?.name ?? user.name ?? "";
         token.foto = dbUser?.foto ?? user.foto ?? "";
         token.nombre_real = dbUser?.nombre_real ?? user.nombre_real ?? "";
+        token.descripcion_perfil = dbUser?.descripcion_perfil ?? user.descripcion_perfil ?? "";
         token.usuario_verificado = dbUser?.usuario_verificado ?? user.usuario_verificado ?? false;
         token.insignia = dbUser?.standard?.insignia || null;
         token.userType = userType || null;
@@ -57,6 +59,7 @@ export const authConfig: NextAuthOptions = {
         token.name = user.name;
         token.foto = user.foto;
         token.nombre_real = user.nombre_real;
+        token.descripcion_perfil = user.descripcion_perfil || null;
         token.usuario_verificado = user.usuario_verificado;
         token.insignia = user.insignia || null;
       }
@@ -108,6 +111,7 @@ export const authConfig: NextAuthOptions = {
           name: user.name,
           foto: user.foto,
           nombre_real: user.nombre_real,
+          descripcion_perfil: user.descripcion_perfil || null,
           usuario_verificado: user.usuario_verificado,
           userType: userType || null,
           insignia: user.standard?.insignia || null,

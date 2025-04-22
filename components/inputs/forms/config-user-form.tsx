@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
+import { toast } from "react-hot-toast"
+import Modal from "@/components/layout/Modal";
 import Image from "next/image";
 import Input from "@/components/inputs/Input";
-import InputFile from "@/components/inputs/InputFile";
-import Toggle from "@/components/buttons/Toggle";
 import BotonSubmit from "@/components/buttons/BotonSubmit";
 import Boton from "@/components/buttons/Boton";
 
@@ -13,16 +13,14 @@ export default function ConfigUserForm() {
 
     const { data: session, update } = useSession();
 
-    const [successMessage, setSuccessMessage] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
+    const [showModal, setShowModal] = useState(false);
 
     const [formData, setFormData] = useState({
-        nombre_real: "",
+        nombre_real: session?.user.nombre_real || "",
         email: "",
         password: "",
         foto: session?.user.foto,
-        descripcion_perfil: "",
-        perfil_privado: false,
+        descripcion_perfil: session?.user.descripcion_perfil || "",
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -56,7 +54,9 @@ export default function ConfigUserForm() {
                 body: uploadData,
             });
 
-            if (!response.ok) throw new Error("Error subiendo la imagen");
+            if (!response.ok) throw new Error("Error al subir la imagen.");
+
+            toast.success("Has cambiado tu imagen de perfil.");
 
             const data = await response.json();
 
@@ -66,24 +66,20 @@ export default function ConfigUserForm() {
                 foto: data.url, // Guardamos la URL devuelta por el backend
             }));
         } catch (error) {
-            console.error("Error al subir la imagen:", error);
+            toast.error("Error al subir la imagen.");
         }
     };
 
-
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSuccessMessage("");
-        setErrorMessage("");
 
         try {
             if (!session?.user.name) {
-                setErrorMessage("Error: no se ha encontrado el usuario");
+                toast.error("Error: no se ha encontrado el usuario");
                 return;
             }
 
-            const response = await fetch(`/api/users`, {
+            const response = await fetch(`/api/users/me`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -94,11 +90,10 @@ export default function ConfigUserForm() {
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.error || "Error al actualizar el perfil");
+                throw new Error("Error al actualizar el perfil.");
             }
 
-            setSuccessMessage("Perfil actualizado correctamente");
-            setTimeout(() => setSuccessMessage(""), 5000);
+            toast.success("Perfil actualizado correctamente");
 
             await update({
                 nombre_real: formData.nombre_real,
@@ -107,23 +102,70 @@ export default function ConfigUserForm() {
 
             window.location.reload();
         } catch (error) {
-            setErrorMessage("Hubo un error al actualizar el perfil");
-            console.error("Error en la actualización:", error);
+            toast.error("Error al actualizar el perfil");
         }
     };
-
 
     const handleLogout = async () => {
         try {
             await signOut({ callbackUrl: "/" }); // Redirige a la página de inicio tras cerrar sesión
+            toast("Has cerrado sesión");
         } catch (error) {
-            console.error("Error al cerrar sesión:", error);
+            toast.error("Error al cerrar sesión.");
         }
     };
+
+    const handleDeleteAccount = async () => {
+        try {
+            const response = await fetch(`/api/users/me`, {
+                method: "DELETE",
+            });
+
+            if (!response.ok) {
+                throw new Error("Error al eliminar tu cuenta.");
+            }
+
+            await signOut({ callbackUrl: "/" }); // Redirige a la página de inicio tras eliminar la cuenta
+            toast.success("Has eliminado tu cuenta de Spiced permanentemente.");
+        } catch (error) {
+            toast.error("Error al eliminar tu cuenta.");
+        }
+    }
+
+
 
     return (
 
         <div className="w-full mx-auto flex flex-col">
+
+            {/* MODAL DE CONFIRMACIÓN DE ELIMINACIÓN DE CUENTA: */}
+
+            <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+                <div className="flex flex-col gap-4">
+                    <h4 className="text-lg font-semibold">¿Seguro que quieres eliminar tu cuenta?</h4>
+                    <p className="text-sm text-[var(--gris5)]">
+                        Esta acción es permanente y no se puede deshacer. Se eliminarán todos tus datos y no podrás recuperarlos.
+                    </p>
+
+                    <div className="flex justify-end gap-4 mt-6">
+                        <Boton
+                            texto="Cancelar"
+                            tamano="pequeno"
+                            jerarquia="secundario"
+                            onClick={() => setShowModal(false)}
+                        />
+                        <Boton
+                            texto="Sí, eliminar cuenta"
+                            tamano="pequeno"
+                            jerarquia="primario"
+                            onClick={() => {
+                                setShowModal(false);
+                                handleDeleteAccount();
+                            }}
+                        />
+                    </div>
+                </div>
+            </Modal>
 
             {/* SECCIÓN 'EDITA TU PERFIL' */}
 
@@ -131,12 +173,45 @@ export default function ConfigUserForm() {
 
                 <h3>Edita tu perfil</h3>
 
-                <div className="w-full mx-auto flex flex-row justify-between gap-8">
+                <form onSubmit={handleSubmit} className="w-full flex flex-row gap-8">
 
-                    <div className="w-col5 flex flex-col gap-8">
-                        <form onSubmit={handleSubmit} className="w-full mx-auto flex flex-col gap-6">
+                    {/* AVATAR: */}
+                    <div className="w-col1">
+
+                        <input
+                            type="file"
+                            id="foto"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={handleFileChange}
+                            required
+                        />
+
+                        <label htmlFor="foto" className='opacity-100 cursor-pointer'>
+                            <div className="p-1 rounded-full border-[3px] border-[var(--brand1)] hover:scale-[1.02] transition ease">
+                                <div className="rounded-full overflow-hidden">
+                                    <Image
+                                        src={formData.foto || session?.user.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
+                                        width={200}
+                                        height={200}
+                                        alt="avatar"
+                                    />
+                                </div>
+                            </div>
+                        </label>
+
+                    </div>
+
+                    {/* DATOS */}
+                    <div className="w-full flex flex-col flex-1 gap-8">
+                        <div className="w-full mx-auto flex flex-col gap-6">
+
+                            <div className="w-full flex flex-row gap-4 items-baseline">
+                                <p className="font-bold text-[1.1rem]">@{session?.user.name}</p>
+                                <p className="text-[0.8rem] text-[var(--gris2)] font-bold">(No puedes cambiar tu nombre de usuario)</p>
+                            </div>
+
                             <div className="w-full">
-                                <label className="block mb-2">Tu nombre</label>
                                 <Input
                                     tipo="text"
                                     id="nombre_real"
@@ -159,48 +234,13 @@ export default function ConfigUserForm() {
                                 />
                             </div>
 
-                            <div className="w-full">
-                                <label className="block mb-2">Foto de perfil (URL)</label>
-                                <InputFile
-                                    id="foto"
-                                    onChange={handleFileChange}
-                                    required={false}
-                                    accept="image/*"
-                                />
-                            </div>
-
                             <div className="w-full flex justify-end gap-4">
-                                {successMessage && (
-                                    <div className="p-2 text-green-700 border rounded">
-                                        {successMessage}
-                                    </div>
-                                )}
-
-                                {errorMessage && (
-                                    <div className="p-2 text-red-700 border rounded">
-                                        {errorMessage}
-                                    </div>
-                                )}
                                 <BotonSubmit texto="Guardar cambios" />
                             </div>
-                        </form>
-                    </div>
-
-                    <div className="flex flex-col items-center gap-6">
-                        <div className="w-30 h-30 p-1 rounded-full border-[3px] border-[var(--brand1)] overflow-hidden cursor-pointer hover:scale-105 transition ease">
-                            <div className="rounded-full overflow-hidden">
-                                <Image
-                                    src={formData.foto || session?.user.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
-                                    width={200}
-                                    height={200}
-                                    alt="avatar"
-                                />
-                            </div>
                         </div>
-                        <p className="text-black text-[1.3rem] opacity-50">@{session?.user.name}</p>
                     </div>
 
-                </div>
+                </form>
 
             </section>
 
@@ -210,11 +250,13 @@ export default function ConfigUserForm() {
 
                 <h3>Modifica tus datos de acceso</h3>
 
-                <div className="w-col3 flex flex-row">
+                <div className="w-full flex flex-row gap-8">
 
-                    <form onSubmit={handleSubmit} className="w-full mx-auto flex flex-col gap-6">
+                    <div className="w-col1"></div>
 
-                        <div className="w-col3">
+                    <form onSubmit={handleSubmit} className="w-full flex flex-col flex-1 gap-8">
+
+                        <div className="w-full">
                             <label className="block mb-2">Nuevo Email</label>
                             <Input
                                 tipo="email"
@@ -225,7 +267,7 @@ export default function ConfigUserForm() {
                             />
                         </div>
 
-                        <div className="w-col3">
+                        <div className="w-full">
                             <label className="block mb-2">Nueva Contraseña</label>
                             <Input
                                 tipo="password"
@@ -237,42 +279,9 @@ export default function ConfigUserForm() {
                         </div>
 
                         <div className="w-full flex justify-end gap-4">
-                            {successMessage && (
-                                <div className="p-2 text-green-700 border rounded">
-                                    {successMessage}
-                                </div>
-                            )}
-
-                            {errorMessage && (
-                                <div className="p-2 text-red-700 border rounded">
-                                    {errorMessage}
-                                </div>
-                            )}
                             <BotonSubmit texto="Guardar cambios" />
                         </div>
                     </form>
-
-                </div>
-
-            </section>
-
-            {/* SECCIÓN 'GESTIONA TU PRIVACIDAD' */}
-
-            <section className="w-full mx-auto flex flex-col border-b border-b-1 border-b-[var(--gris3)] py-16 px-col1 gap-12">
-
-                <h3>Gestiona tu privacidad</h3>
-
-                <div className="w-col6 flex flex-row justify-start gap-6">
-
-                    <div className="w-1/2 flex flex-row gap-4 items-center">
-                        <Toggle />
-                        <p>Ocultar mi insignia al resto de usuarios</p>
-                    </div>
-
-                    <div className="w-1/2 flex flex-row gap-4 items-center">
-                        <Toggle />
-                        <p>Ocultar mi perfil al resto de usuarios</p>
-                    </div>
 
                 </div>
 
@@ -285,8 +294,8 @@ export default function ConfigUserForm() {
                 <h3>Salir de Spiced</h3>
 
                 <div className="w-col6 flex flex-row justify-start gap-4">
-                    <Boton texto="Desconectarse" onClick={handleLogout} tamano="grande" jerarquia="primario" />
-                    <Boton texto="Eliminar tu cuenta de Spiced (esta acción es irreversible)" onClick={handleLogout} tamano="grande" jerarquia="secundario" />
+                    <Boton texto="Desconectarse" onClick={handleLogout} tamano="pequeno" jerarquia="primario" />
+                    <Boton texto="Eliminar tu cuenta de Spiced (esta acción es irreversible)" onClick={() => setShowModal(true)} tamano="pequeno" jerarquia="secundario" />
                 </div>
 
             </section>
