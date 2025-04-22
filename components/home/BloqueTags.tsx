@@ -1,6 +1,6 @@
 'use client';
 
-import NubeTags from "@/components/buttons/NubeTags";
+import NubeTagsDinamica from "../buttons/NubeTagsDinamica";
 
 export default function BloqueTags() {
     return (
@@ -10,7 +10,9 @@ export default function BloqueTags() {
                 <p>Descubre contenido basado en tu condición. Puedes seleccionar una o varias etiquetas para empezar a componer tu tablero de intereses.</p>
             </div>
             <div className="w-full">
-                <NubeTags />
+                <NubeTagsDinamica
+                    uso="register"
+                />
             </div>
         </div>
     );
