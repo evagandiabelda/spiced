@@ -40,7 +40,7 @@ const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
                     : "#";
 
     return createPortal( // Crea un 'body' paral·lel per a renderitzar el menú desplegable sobre el body principal.
-        <div className="fixed inset-0 bg-white dark:bg-[var(--gris5)] z-50 h-screen flex flex-col justify-between">
+        <div className="fixed inset-0 bg-white dark:bg-[var(--gris5)] z-50 h-dvh flex flex-col justify-between">
             <div>
                 <div className="px-[30px] py-[24px] border-y-2 border-[--gris1] dark:border-[--gris4] cursor-pointer">
                     <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
