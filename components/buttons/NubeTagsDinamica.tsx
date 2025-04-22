@@ -43,7 +43,7 @@ const NubeTagsDinamica = ({ uso, defaultActive = false, onSeleccionarTags, tagsS
         }
     }, [tagsSeleccionados]);
 
-    const estiloFeed = "flex mobile:flex-row tablet:flex-wrap scrollbar-hide gap-2 justify-center";
+    const estiloFeed = "flex mobile:flex-row tablet:flex-wrap overflow-hidden scrollbar-hide gap-2 justify-center";
     const estiloRegister = "flex flex-wrap gap-2 justify-center";
 
     return (
