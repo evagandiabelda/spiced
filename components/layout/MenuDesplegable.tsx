@@ -30,54 +30,25 @@ const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
 
     if (!isOpen) return null;
 
-    // Obtener el tipo de usuario (Standard, Expert o Admin):
-    useEffect(() => {
-        const fetchUserType = async () => {
-            if (!session?.user?.email) return;
-
-            try {
-                const res = await fetch("/api/auth/user-type", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ email: session.user.email }),
-                });
-
-                const data = await res.json();
-
-                if (data.tipo) {
-                    setUserType(data.tipo);
-                }
-            } catch (error) {
-                console.error("Error al obtener el tipo de usuario:", error);
-            }
-        };
-
-        fetchUserType();
-    }, [session?.user?.email]);
-
-    const avatarHref =
-        userType === "standard"
+    const href =
+        session?.user.userType === "standard"
             ? "/panel-estandar"
-            : userType === "expert"
+            : session?.user.userType === "expert"
                 ? "/panel-experto"
-                : userType === "admin"
+                : session?.user.userType === "admin"
                     ? "/panel-admin"
                     : "#";
 
     return createPortal( // Crea un 'body' paral·lel per a renderitzar el menú desplegable sobre el body principal.
-        <div className="fixed inset-0 bg-[--blanco] z-50 h-screen flex flex-col justify-between">
+        <div className="fixed inset-0 bg-white dark:bg-[var(--gris5)] z-50 h-screen flex flex-col justify-between">
             <div>
                 <div className="px-[30px] py-[24px] border-y-2 border-[--gris1] dark:border-[--gris4] cursor-pointer">
-                    <a href={avatarHref} id="enlace">
-                        <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
-                            <div className="w-12">
-                                <AvatarPropio />
-                            </div>
-                            <p className="font-bold mb-0">Espacio personal</p>
+                    <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">
+                        <div className="w-12">
+                            <AvatarPropio />
                         </div>
-                    </a>
+                        <a href={href}><p className="font-bold mb-0">Espacio personal</p></a>
+                    </div>
                     <div className="py-3">
                         <Search />
                     </div>

@@ -14,14 +14,13 @@ export default function ThemeToggle() {
         return (
             <>
                 {/* Grande: */}
-                <div onClick={toggleTheme} className='mobile:hidden laptop:block rounded-full h-auto px-[7px] pt-[4px] pb-[5px] bg-[var(--gris4)] sombra-interior-dark cursor-pointer'>
+                <div onClick={toggleTheme} className='mobile:hidden laptop:flex justify-center items-center rounded-full h-auto px-[7px] pt-[4px] pb-[5px] bg-[var(--gris4)] sombra-interior-dark cursor-pointer'>
                     <div id='opacidad' className='flex flex-row justify-between items-center pt-[2px] opacity-50 hover:opacity-100 transition ease duration-500'>
                         <Image
                             src="/iconos/iconos-otros/icono-dark.svg"
                             width={20}
                             height={20}
                             alt="activar modo oscuro"
-                            className='pl-[3px] pb-[1px]'
                         />
                         <div className='px-2'>
                             <p className='a-boton-pq text-white'>Modo Oscuro</p>
@@ -48,7 +47,7 @@ export default function ThemeToggle() {
         return (
             <>
                 {/* Grande: */}
-                <div onClick={toggleTheme} className='mobile:hidden laptop:block rounded-full h-auto px-[7px] pt-[4px] pb-[5px] bg-[var(--gris3)] sombra-interior-light dark:border-2 dark:border-[var(--gris3)] cursor-pointer'>
+                <div onClick={toggleTheme} className='mobile:hidden laptop:flex justify-center items-center rounded-full h-auto px-[7px] pt-[4px] pb-[5px] bg-[var(--gris3)] sombra-interior-light dark:border-2 dark:border-[var(--gris3)] cursor-pointer'>
                     <div id='opacidad' className='flex flex-row justify-between items-center pt-[2px] opacity-50 hover:opacity-100 transition ease duration-500'>
                         <div className='px-2'>
                             <p className='a-boton-pq text-[var(--gris5)] dark:text-[var(--gris1)]'>Modo Claro</p>
@@ -57,13 +56,13 @@ export default function ThemeToggle() {
                             src="/iconos/iconos-otros/icono-light.svg"
                             width={20}
                             height={20}
-                            className='dark:invert pr-[3px] pb-[1px]'
+                            className='dark:invert'
                             alt="activar modo claro"
                         />
                     </div>
                 </div>
                 {/* Pequeño: */}
-                <div onClick={toggleTheme} className='mobile:block laptop:hidden rounded-full h-auto px-[7px] pt-[2px] pb-[5px] bg-[var(--gris3)] sombra-interior-light dark:border-2 dark:border-[var(--gris3)] cursor-pointer'>
+                <div onClick={toggleTheme} className='mobile:flex justify-center items-center laptop:hidden rounded-full h-auto px-[7px] pt-[2px] pb-[5px] bg-[var(--gris3)] sombra-interior-light dark:border-2 dark:border-[var(--gris3)] cursor-pointer'>
                     <div id='opacidad' className='flex flex-row justify-between items-center pt-[2px] opacity-50 hover:opacity-100 transition ease duration-500'>
                         <div className='px-3'></div>
                         <Image

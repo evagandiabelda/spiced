@@ -144,16 +144,16 @@ const Menu = ({ tipo }: tipo) => {
     }
 
     if (tipo === "footer-desplegable") {
-        const className = "font-normal text-[var(--brand2)] dark:text-[var(--gris3)] hover:text-white dark:hover:text-[var(--gris2)]";
+        const className = "font-normal text-[var(--brand2)] dark:text-[var(--gris2)] hover:text-white transition ease";
 
         return (
             <div className="w-full flex flex-col gap-0 px-4 py-4 rounded-xl bg-[var(--gris4)]">
                 <Accordion type="single" collapsible>
 
-                    <AccordionItem value="item-1" className="px-4 rounded-[0.4rem] hover:bg-[var(--gris3)]">
-                        <AccordionTrigger className="pb-5 dark:text-[var(--gris3)]">Spices</AccordionTrigger>
+                    <AccordionItem value="item-1" className="px-4 rounded-[0.4rem] hover:bg-[var(--gris3)] transition ease">
+                        <AccordionTrigger className="pb-5 dark:text-[var(--gris2)] transition ease">Spices</AccordionTrigger>
                         <AccordionContent>
-                            <nav className="flex flex-col">
+                            <nav className="flex flex-col px-4 py-2">
                                 <a href="/explorar?spices=TEA" className={className}>TEA</a>
                                 <a href="/explorar?spices=TDAH" className={className}>TDAH</a>
                                 <a href="/explorar?spices=TOC" className={className}>TOC</a>
@@ -173,10 +173,10 @@ const Menu = ({ tipo }: tipo) => {
                         </AccordionContent>
                     </AccordionItem>
 
-                    <AccordionItem value="item-2" className="px-4 rounded-[0.4rem] hover:bg-[var(--gris3)]">
-                        <AccordionTrigger className="pb-5 dark:text-[var(--gris3)]">Categorías</AccordionTrigger>
+                    <AccordionItem value="item-2" className="px-4 rounded-[0.4rem] hover:bg-[var(--gris3)] transition ease">
+                        <AccordionTrigger className="pb-5 dark:text-[var(--gris2)] transition ease">Categorías</AccordionTrigger>
                         <AccordionContent>
-                            <nav className="flex flex-col">
+                            <nav className="flex flex-col px-4 py-2">
                                 <a href="/explorar?categoria=Arte" className={className}>Arte</a>
                                 <a href="/explorar?categoria=Bienestar" className={className}>Bienestar</a>
                                 <a href="/explorar?categoria=Cine" className={className}>Cine</a>
@@ -191,10 +191,10 @@ const Menu = ({ tipo }: tipo) => {
                         </AccordionContent>
                     </AccordionItem>
 
-                    <AccordionItem value="item-3" className="px-4 rounded-[0.4rem] hover:bg-[var(--gris3)]">
-                        <AccordionTrigger className="pb-5 dark:text-[var(--gris3)]">Tu espacio</AccordionTrigger>
+                    <AccordionItem value="item-3" className="px-4 rounded-[0.4rem] hover:bg-[var(--gris3)] transition ease">
+                        <AccordionTrigger className="pb-5 dark:text-[var(--gris2)] transition ease">Tu espacio</AccordionTrigger>
                         <AccordionContent>
-                            <nav className="flex flex-col">
+                            <nav className="flex flex-col px-4 py-2">
                                 <a href={session?.user.userType === "expert" ? "/panel-experto" : "/panel-estandar"} className={className}>Espacio personal</a>
                                 <a href={session?.user.userType === "expert" ? "/panel-experto/nuevo-share" : "/panel-estandar/nuevo-share"} className={className}>Compartir contenido</a>
                                 <a href={session?.user.userType === "expert" ? "/panel-experto/shares-guardados" : "/panel-estandar/shares-guardados"} className={className}>Contenido guardado</a>
