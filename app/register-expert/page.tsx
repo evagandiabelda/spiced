@@ -2,7 +2,7 @@ import RegisterForm from '@/components/inputs/forms/register-form';
 
 export default function RegisterPage() {
     return (
-        <div className="mx-auto h-full flex items-center justify-center w-full flex-col p-8">
+        <div className="w-full h-full flex flex-col justify-center items-center">
             <RegisterForm usuario='expert' />
         </div>
     );

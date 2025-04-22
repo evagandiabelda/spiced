@@ -15,7 +15,7 @@ export default function PanelEstandarLayout({
     return (
         <div className='w-full flex mobile:flex-col-reverse tablet:flex-row gap-0 mobile:justify-start tablet:justify-between align-start'>
             {/* CAJA PRINCIPAL: */}
-            <section className='flex flex-col w-full h-full p-[4rem] pb-[6rem] bg-[var(--gris1)] dark:bg-[var(--gris5)]'>
+            <section className='flex flex-col w-full h-full px-col1 pt-[4rem] pb-[6rem] bg-[var(--gris1)] dark:bg-[var(--gris5)]'>
                 {children}
             </section>
 

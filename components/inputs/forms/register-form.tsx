@@ -58,8 +58,8 @@ export default function RegisterForm({ usuario }: RegisterFormProps) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="w-full flex flex-col justify-center items-center gap-4 px-col1">
-            <h1 className="dark:text-[var(--gris3)]">Regístrate en Spiced</h1>
+        <form onSubmit={handleSubmit} className="w-full flex flex-col justify-center items-center gap-4">
+            <h1 className="text-center dark:text-[var(--gris3)]">Regístrate en Spiced</h1>
 
             <div className="w-full flex flex-col flex-1 align-center gap-12 pb-4 pt-8 max-w-[360px]">
 

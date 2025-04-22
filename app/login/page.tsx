@@ -19,7 +19,7 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="mx-auto h-full flex items-center justify-center w-full max-w-[600px] flex-col p-4">
+        <div className="w-full h-full flex flex-col justify-center items-center">
             <Suspense>
                 <LoginForm />
             </Suspense>
