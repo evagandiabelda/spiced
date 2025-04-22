@@ -7,9 +7,8 @@ import { useEffect } from "react";
 import Image from "next/image";
 import ThemeToggle from "@/components/buttons/ThemeToggle";
 import Estadisticas from "@/components/cards/Estadisticas";
-import Boton from "@/components/buttons/Boton";
+import CardDescripcion from "@/components/cards/CardDescripcion";
 import ListaSharesPublicados from "@/components/panel/ListaSharesPublicados";
-import Input from "@/components/inputs/Input";
 
 export default function Inicio() {
 
@@ -53,21 +52,7 @@ export default function Inicio() {
                     {/* Card Estadísticas: */}
                     <Estadisticas />
                     {/* Card Descripción: */}
-                    <div className="w-full flex flex-col justify-between gap-2 rounded-xl bg-[#ffb6c3] px-[36px] py-[40px] gap-[2.8rem] dark:bg-[var(--fondo-pinguinadas)] dark:border-2 dark:border-[var(--borde-pinguinadas)]">
-                        <h3>Tu descripción</h3>
-                        <p>Añade una descripción a tu perfil para que otros usuarios entiendan mejor tu perfil profesional.</p>
-                        <div className="rounded-[1rem] border border-2 dark:border-[var(--borde-pinguinadas)] overflow-hidden">
-                            <Input tipo="text" id="nombre_usuario" placeholder="Descríbete como tú quieras" required={true} />
-                        </div>
-                        <div className="w-full flex justify-end">
-                            <div className="dark:hidden">
-                                <Boton texto="Guardar" enlace="#" tamano="grande" jerarquia="primario" />
-                            </div>
-                            <div className="hidden dark:block">
-                                <Boton texto="Guardar" enlace="#" tamano="grande" jerarquia="primario" customColor="var(--fob)" />
-                            </div>
-                        </div>
-                    </div>
+                    <CardDescripcion />
                 </div>
                 {/* Card Últimos Shares Guardados: */}
                 <div className="w-full flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-shares)] dark:border-2 dark:border-[var(--borde-shares)]">
