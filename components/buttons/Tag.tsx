@@ -125,8 +125,8 @@ const Tag = ({ nombre, tamano, isActive = false, icon = false, mode = "static", 
                     }
                 }}
             >
-                <div className="flex flex-row justify-center gap-2">
-                    <p className="whitespace-nowrap">{texto}</p>
+                <div className="flex flex-row justify-center gap-2 whitespace-nowrap">
+                    {texto}
                     {icon && <Image src="/iconos/iconos-otros/icono-cruz.svg" alt="icono" width={10} height={10} />}
                 </div>
             </a>

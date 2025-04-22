@@ -127,17 +127,19 @@ export default function Feed() {
             {/* SHARES */}
 
             <Suspense fallback={<ListaSkeleton />}>
-                <ListaFeed
-                    filtroCategoria={filtroCategoria}
-                    filtroUsuarios={filtroUsuarios}
-                    filtroVerificados={filtroVerificados}
-                    filtroSpices={tagsSeleccionados}
-                />
+                <div className='w-full flex flex-col items-center mobile:px-col1'>
+                    <ListaFeed
+                        filtroCategoria={filtroCategoria}
+                        filtroUsuarios={filtroUsuarios}
+                        filtroVerificados={filtroVerificados}
+                        filtroSpices={tagsSeleccionados}
+                    />
+                </div>
             </Suspense>
 
             {/* ACCIÓN CIERRE */}
             {session?.user.userType !== "admin" &&
-                <div className='flex flex-col gap-8 pt-16'>
+                <div className='flex flex-col gap-8 mobile:px-col1 pt-16'>
                     <p>¡Esto es todo! ¿Te animas a publicar tu propio Share?</p>
                     <div>
                         <Boton
