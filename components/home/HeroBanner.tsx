@@ -2,7 +2,7 @@
 
 export default function HeroBanner() {
 
-    const className = `w-full flex mobile:flex-col tablet:flex-row mobile:bg-[url('/imgs/IMG-Banner-Inicio-Mobile-2.webp')] tablet:bg-[url('/imgs/IMG-Banner-Inicio-Desktop-2.webp')] bg-cover bg-top-right mobile:px-col1 laptop:px-col2 py-[100px]`;
+    const className = `w-full flex mobile:bg-[url('/imgs/IMG-Banner-Inicio-Mobile-2.webp')] tablet:bg-[url('/imgs/IMG-Banner-Inicio-Desktop-2.webp')] bg-cover bg-top mobile:px-col1 laptop:px-col2 py-[100px]`;
 
     return (
         <div className={className}>

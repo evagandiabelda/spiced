@@ -30,14 +30,17 @@ const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
 
     if (!isOpen) return null;
 
-    const href =
-        session?.user.userType === "standard"
-            ? "/panel-estandar"
-            : session?.user.userType === "expert"
-                ? "/panel-experto"
-                : session?.user.userType === "admin"
-                    ? "/panel-admin"
-                    : "#";
+    let href = "/login";
+
+    if (session?.user.userType === "standard") {
+        href = "/panel-estandar";
+    }
+    if (session?.user.userType === "expert") {
+        href = "/panel-experto";
+    }
+    if (session?.user.userType === "admin") {
+        href = "/panel-admin";
+    }
 
     return createPortal( // Crea un 'body' paral·lel per a renderitzar el menú desplegable sobre el body principal.
         <div className="fixed inset-0 bg-white dark:bg-[var(--gris5)] z-50 h-dvh flex flex-col justify-between">
