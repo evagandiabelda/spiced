@@ -43,6 +43,7 @@ export const authOptions: NextAuthOptions = {
                     email: user.email,
                     name: user.name,
                     nombre_real: user.nombre_real,
+                    descripcion_perfil: user.descripcion_perfil,
                     foto: user.foto,
                     usuario_verificado: user.usuario_verificado,
                     userType,
@@ -56,6 +57,7 @@ export const authOptions: NextAuthOptions = {
                 token.id = user.id;
                 token.name = user.name;
                 token.nombre_real = user.nombre_real;
+                token.descripcion_perfil = user.descripcion_perfil;
                 token.foto = user.foto;
                 token.usuario_verificado = user.usuario_verificado;
                 token.userType = user.userType;
@@ -64,6 +66,7 @@ export const authOptions: NextAuthOptions = {
                 token.id = user.id;
                 token.name = user.name;
                 token.nombre_real = user.nombre_real;
+                token.descripcion_perfil = user.descripcion_perfil;
                 token.foto = user.foto;
                 token.usuario_verificado = user.usuario_verificado;
                 token.userType = user.userType;
@@ -76,6 +79,7 @@ export const authOptions: NextAuthOptions = {
                 session.user.id = token.id as string;
                 session.user.name = token.name as string;
                 session.user.nombre_real = token.nombre_real as string;
+                session.user.descripcion_perfil = token.descripcion_perfil as string;
                 session.user.foto = token.foto as string;
                 session.user.usuario_verificado = token.usuario_verificado as boolean;
                 session.user.userType = token.userType as string;

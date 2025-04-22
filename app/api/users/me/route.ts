@@ -26,7 +26,11 @@ export async function GET() {
 
                 spices_seguidos: {
                     include: {
-                        spice: true,
+                        spice: {
+                            select: {
+                                nombre: true,
+                            }
+                        },
                     }
                 },
                 categorias_seguidas: {
@@ -64,7 +68,7 @@ export async function GET() {
             foto: user.foto,
             descripcion_perfil: user.descripcion_perfil,
             rol: rol,
-            spices_seguidos: user.spices_seguidos.map(spice => spice.spice),
+            spices_seguidos: user.spices_seguidos.map(spice => spice.spice.nombre),
             categorias_seguidas: user.categorias_seguidas.map(categoria => categoria.categoria),
             shares_publicados: user.shares_publicados,
             shares_guardados: user.shares_guardados,
@@ -83,7 +87,7 @@ export async function PATCH(req: Request) {
 
     const session = await getServerSession(authOptions);
 
-    if (!session || !session.user?.id) {
+    if (!session) {
         return NextResponse.json({ error: "Usuario no autorizado." }, { status: 401 });
     }
 
@@ -94,6 +98,35 @@ export async function PATCH(req: Request) {
         const updateData: Record<string, any> = Object.fromEntries(
             Object.entries(requestData).filter(([_, value]) => value !== undefined && value !== "")
         );
+
+        // Transformar los spices para adaptarlos a la relación:
+        if (Array.isArray(updateData.spices_seguidos)) {
+            const spiceNames: string[] = updateData.spices_seguidos;
+
+            const spices = await prisma.spice.findMany({
+                where: {
+                    nombre: { in: spiceNames },
+                },
+                select: { id: true },
+            });
+
+            // Primero eliminamos las relaciones anteriores del usuario
+            await prisma.usuarioSpice.deleteMany({
+                where: {
+                    user_id: session.user.id,
+                },
+            });
+
+            // Luego añadimos las nuevas relaciones
+            await prisma.usuarioSpice.createMany({
+                data: spices.map(spice => ({
+                    user_id: session.user.id,
+                    spice_id: spice.id,
+                })),
+            });
+
+            delete updateData.spices_seguidos; // Ya se ha gestionado aparte
+        }
 
         // Si el usuario está cambiando la contraseña, la encriptamos antes de guardar
         if (typeof updateData.password === "string") {

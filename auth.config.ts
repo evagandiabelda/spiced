@@ -10,7 +10,8 @@ export const authConfig: NextAuthOptions = {
   },
   callbacks: {
     async session({ session, token }) {
-      if (token) {
+      if (token && token.id) {
+        session.user = session.user || {};
         session.user.id = token.id as string;
         session.user.email = token.email ?? "";
         session.user.name = token.name ?? "";
@@ -25,7 +26,7 @@ export const authConfig: NextAuthOptions = {
     },
 
     async jwt({ token, user, trigger }) {
-      if (user) {
+      if (user && user.id) {
         const dbUser = await prisma.user.findUnique({
           where: { email: user.email! },
           include: {
@@ -35,22 +36,36 @@ export const authConfig: NextAuthOptions = {
           },
         });
 
-        let userType: "standard" | "expert" | "admin" | null = null;
+        if (dbUser) {
+          let userType: "standard" | "expert" | "admin" | null = null;
 
-        // Asignamos el tipo de usuario según la relación
-        if (dbUser?.admin) userType = "admin";
-        else if (dbUser?.expert) userType = "expert";
-        else if (dbUser?.standard) userType = "standard";
+          // Asignamos el tipo de usuario según la relación
+          if (dbUser?.admin) userType = "admin";
+          else if (dbUser?.expert) userType = "expert";
+          else if (dbUser?.standard) userType = "standard";
 
-        token.id = dbUser?.id ?? user.id;
-        token.email = dbUser?.email ?? user.email ?? "";
-        token.name = dbUser?.name ?? user.name ?? "";
-        token.foto = dbUser?.foto ?? user.foto ?? "";
-        token.nombre_real = dbUser?.nombre_real ?? user.nombre_real ?? "";
-        token.descripcion_perfil = dbUser?.descripcion_perfil ?? user.descripcion_perfil ?? "";
-        token.usuario_verificado = dbUser?.usuario_verificado ?? user.usuario_verificado ?? false;
-        token.insignia = dbUser?.standard?.insignia || null;
-        token.userType = userType || null;
+          token.id = dbUser?.id ?? user.id;
+          token.email = dbUser?.email ?? user.email ?? "";
+          token.name = dbUser?.name ?? user.name ?? "";
+          token.foto = dbUser?.foto ?? user.foto ?? "";
+          token.nombre_real = dbUser?.nombre_real ?? user.nombre_real ?? "";
+          token.descripcion_perfil = dbUser?.descripcion_perfil ?? user.descripcion_perfil ?? "";
+          token.usuario_verificado = dbUser?.usuario_verificado ?? user.usuario_verificado ?? false;
+          token.insignia = dbUser?.standard?.insignia || null;
+          token.userType = userType || null;
+        } else {
+          // Si no se encuentra el usuario en la base de datos, pasamos a las propiedades del usuario de `user`
+          token.id = user.id;
+          token.email = user.email ?? "";
+          token.name = user.name ?? "";
+          token.foto = user.foto ?? "";
+          token.nombre_real = user.nombre_real ?? "";
+          token.descripcion_perfil = user.descripcion_perfil ?? "";
+          token.usuario_verificado = user.usuario_verificado ?? false;
+          token.insignia = user.insignia || null;
+          token.userType = null;  // Si no se encuentra el usuario en la base de datos, asignamos `null` al tipo de usuario
+        }
+
       }
 
       if (trigger === "update") {

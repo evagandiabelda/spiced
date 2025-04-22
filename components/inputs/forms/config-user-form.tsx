@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { toast } from "react-hot-toast"
 import Modal from "@/components/layout/Modal";
@@ -8,12 +8,15 @@ import Image from "next/image";
 import Input from "@/components/inputs/Input";
 import BotonSubmit from "@/components/buttons/BotonSubmit";
 import Boton from "@/components/buttons/Boton";
+import Tag from "@/components/buttons/Tag";
 
 export default function ConfigUserForm() {
 
     const { data: session, update } = useSession();
 
     const [showModal, setShowModal] = useState(false);
+    const [listaSpices, setListaSpices] = useState([]);
+    const [showSpices, setShowSpices] = useState(false);
 
     const [formData, setFormData] = useState({
         nombre_real: session?.user.nombre_real || "",
@@ -21,7 +24,36 @@ export default function ConfigUserForm() {
         password: "",
         foto: session?.user.foto,
         descripcion_perfil: session?.user.descripcion_perfil || "",
+        spices_seguidos: [] as string[],
     });
+
+    useEffect(() => {
+        const fetchUsuario = async () => {
+
+            try {
+                const response = await fetch(`/api/users/me`);
+
+                if (!response.ok) {
+                    throw new Error("Error al recuperar los spices del usuario.");
+                }
+
+                const { spices_seguidos } = await response.json();
+
+                if (spices_seguidos === undefined || spices_seguidos === null) {
+                    throw new Error("La respuesta no contiene spices_seguidos.");
+                }
+
+                setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    spices_seguidos: spices_seguidos,  // Aquí directamente el array de nombres
+                }));
+            } catch (err) {
+                throw new Error("No se pudo cargar la información del usuario.");
+            }
+        };
+
+        fetchUsuario();
+    }, [session]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target;
@@ -68,6 +100,34 @@ export default function ConfigUserForm() {
         } catch (error) {
             toast.error("Error al subir la imagen.");
         }
+    };
+
+    const handleMostrarSpices = async () => {
+        try {
+            const response = await fetch(`/api/spices`);
+            if (!response.ok) throw new Error("Error al obtener el listado de spices.");
+
+            const spices = await response.json();
+            if (!spices) throw new Error("No se han encontrado spices.");
+
+            const nombresSpices = spices.map((spice: { nombre: string }) => spice.nombre);
+            setListaSpices(nombresSpices);
+            setShowSpices(true);
+        } catch (error) {
+            throw new Error("Error al obtener el listado de spices.");
+        }
+    }
+
+    const handleToggleSpice = (spice: string) => {
+        setFormData((prevFormData) => {
+            const yaExiste = prevFormData.spices_seguidos.includes(spice);
+            return {
+                ...prevFormData,
+                spices_seguidos: yaExiste
+                    ? prevFormData.spices_seguidos.filter((s) => s !== spice) // lo quitamos
+                    : [...prevFormData.spices_seguidos, spice], // lo añadimos
+            };
+        });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -184,7 +244,6 @@ export default function ConfigUserForm() {
                             accept="image/*"
                             className="hidden"
                             onChange={handleFileChange}
-                            required
                         />
 
                         <label htmlFor="foto" className='opacity-100 cursor-pointer'>
@@ -204,6 +263,7 @@ export default function ConfigUserForm() {
 
                     {/* DATOS */}
                     <div className="w-full flex flex-col flex-1 gap-8">
+
                         <div className="w-full mx-auto flex flex-col gap-6">
 
                             <div className="w-full flex flex-row gap-4 items-baseline">
@@ -234,10 +294,54 @@ export default function ConfigUserForm() {
                                 />
                             </div>
 
-                            <div className="w-full flex justify-end gap-4">
-                                <BotonSubmit texto="Guardar cambios" />
-                            </div>
                         </div>
+
+                        {/* SPICES */}
+
+                        <div className="w-full flex flex-col gap-6">
+                            <div className="w-full flex flex-wrap gap-2">
+                                {formData.spices_seguidos.map((spice: string, index: number) => (
+                                    <Tag
+                                        key={index}
+                                        nombre={spice}
+                                        tamano="pequeno"
+                                        isActive
+                                        icon
+                                        mode="toggle"
+                                        onClick={() => handleToggleSpice(spice)}
+                                    />
+                                ))}
+                            </div>
+
+                            {showSpices ?
+                                <p className="font-bold text-[0.9rem] text-[var(--gris2)]">Haz click en los Spices para añadirlos:</p>
+                                : <p onClick={handleMostrarSpices} className="font-bold text-[0.9rem] text-[var(--gris2)] underline cursor-pointer">
+                                    {session?.user.userType === "expert" ? "Editar tus Especialidades" : "Editar tus Spices"}
+                                </p>
+                            }
+
+                            <div className="w-full flex flex-wrap gap-2">
+                                {showSpices &&
+                                    listaSpices.map((spice, index) => (
+                                        <Tag
+                                            key={index}
+                                            nombre={spice}
+                                            tamano="pequeno"
+                                            isActive={formData.spices_seguidos.includes(spice)}
+                                            mode="toggle"
+                                            onClick={() => handleToggleSpice(spice)}
+                                        />
+                                    ))
+                                }
+                            </div>
+
+                        </div>
+
+                        {/* BOTÓN SUBMIT */}
+                        <div className="w-full flex justify-end gap-4">
+                            <BotonSubmit texto="Guardar cambios" />
+                        </div>
+
                     </div>
 
                 </form>
