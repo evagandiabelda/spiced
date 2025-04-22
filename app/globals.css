@@ -205,6 +205,10 @@ main {
 *::-webkit-scrollbar:horizontal {
   display: none; /* Oculta la barra de scroll horizontal en navegadores basados en WebKit */
 }
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
 
 * {
   scrollbar-width: none; /* Firefox: oculta la barra de scroll horizontal */

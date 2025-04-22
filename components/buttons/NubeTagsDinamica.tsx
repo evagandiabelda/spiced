@@ -43,8 +43,11 @@ const NubeTagsDinamica = ({ uso, defaultActive = false, onSeleccionarTags, tagsS
         }
     }, [tagsSeleccionados]);
 
+    const estiloFeed = "flex mobile:flex-row tablet:flex-wrap scrollbar-hide gap-2 justify-center";
+    const estiloRegister = "flex flex-wrap gap-2 justify-center";
+
     return (
-        <div className="flex gap-2 flex-wrap justify-center">
+        <div className={uso === "feed" ? estiloFeed : estiloRegister}>
             {listaTags.map((tag) => (
                 <Tag
                     key={tag}

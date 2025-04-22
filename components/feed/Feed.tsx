@@ -82,7 +82,7 @@ export default function Feed() {
             <div className='w-full flex flex-col items-center text-center gap-8 py-3'>
 
                 {/* DROPDOWNS */}
-                <div className='w-full flex flex-row items-center gap-4 mobile:px-col1 laptop:px-col2'>
+                <div className='w-full flex mobile:flex-col tablet:flex-row items-center gap-4 mobile:px-col1 laptop:px-col2'>
                     <Options
                         tipo='dropdown'
                         opciones={opcionesCategoria}
