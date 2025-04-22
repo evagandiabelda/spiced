@@ -150,8 +150,8 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
         <div className="w-full flex flex-col items-center gap-16 pb-[160px]">
 
             {/* CABECERA */}
-            <div className="w-full min-h-[500px] max-h-[600px] flex flex-row">
-                <div className="relative w-2/3">
+            <div className="w-full min-h-[500px] max-h-[600px] flex mobile:flex-col laptop:flex-row">
+                <div className="relative mobile:w-full laptop:w-2/3 mobile:h-[400px] laptop:h-full">
                     <Image
                         src={img_principal}
                         alt="miniatura"
@@ -160,7 +160,7 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                     />
                 </div>
 
-                <div className="w-full h-full flex flex-col justify-center gap-8 p-20 bg-black/5 dark:bg-white/5">
+                <div className="w-full h-full flex flex-col justify-center gap-8 mobile:p-col1 tablet:p-20 bg-black/5 dark:bg-white/5">
                     <div className="flex flex-row gap-4 items-center">
                         <Image
                             src="/iconos/iconos-genericos/icono-spiced.svg"
@@ -178,13 +178,13 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
             </div>
 
             {/* CONTENIDO */}
-            <div className="w-full flex flex-row gap-col1 px-col2">
+            <div className="w-full flex mobile:flex-col laptop:flex-row gap-col1 mobile:px-col1 laptop:px-col2">
 
                 {/* Sidebar */}
-                <div className="w-col3 flex flex-col gap-2">
+                <div className="mobile:w-full laptop:w-col3 flex flex-col gap-2">
 
                     <div className="w-full flex flex-col gap-8 border-b border-b-1 border-b-[var(--gris2)] px-2 pb-12">
-                        <div className="w-full flex flex-col gap-4">
+                        <div className="w-full flex mobile:flex-row laptop:flex-col mobile:items-center laptop:items-start gap-4">
                             <div className="max-w-[6rem] pl-2">
                                 <AvatarOtros autor={autor} />
                             </div>
@@ -221,9 +221,10 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                                         width={16}
                                         height={16}
                                     />
-                                </div>}
+                                </div>
+                            }
                             <div>
-                                <p className="font-bold text-[0.8rem] text-[var(--gris2)]">Publicado el:</p>
+                                <p className="mobile:hidden tablet:block font-bold text-[0.8rem] text-[var(--gris2)]">Publicado el:</p>
                                 <p className="font-bold text-[0.8rem] text-[var(--gris2)]">
                                     {fecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}
                                 </p>
@@ -236,7 +237,7 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                         </div>
                     </div>
 
-                    <div className="w-full flex flex-col gap-6 px-2 py-8">
+                    <div className="w-full flex flex-col gap-6 px-2 mobile:py-0 laptop:py-8">
                         {session && session?.user.userType !== "admin" &&
                             <a href="#" onClick={() => setMostrarDenuncia(true)} className="text-[0.8rem] font-bold underline text-[var(--gris2)] hover:text-[var(--gris4)] transition ease">Denunciar contenido inapropiado</a>
                         }
