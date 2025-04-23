@@ -127,7 +127,7 @@ export default function Feed() {
             {/* SHARES */}
 
             <Suspense fallback={<ListaSkeleton />}>
-                <div className='w-full flex flex-col items-center mobile:px-col1'>
+                <div className='w-full flex flex-col items-center mobile:px-col1 tablet:px-0'>
                     <ListaFeed
                         filtroCategoria={filtroCategoria}
                         filtroUsuarios={filtroUsuarios}

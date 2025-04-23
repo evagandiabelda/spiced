@@ -198,8 +198,10 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                                 />}
                             </div>
                         </div>
-                        {session && session?.user.userType !== "admin" &&
-                            <Boton
+                        {session
+                            && session?.user.userType !== "admin"
+                            && autor.id !== session?.user.id
+                            && <Boton
                                 texto={isFollowing ? "Dejar de seguir" : "Seguir contenido"}
                                 onClick={handleToggleFollow}
                                 tamano="pequeno"
@@ -238,16 +240,21 @@ export default function DetalleShare({ id, titulo, texto, img_principal, img_sec
                     </div>
 
                     <div className="w-full flex flex-col gap-6 px-2 mobile:py-0 laptop:py-8">
-                        {session && session?.user.userType !== "admin" &&
-                            <a href="#" onClick={() => setMostrarDenuncia(true)} className="text-[0.8rem] font-bold underline text-[var(--gris2)] hover:text-[var(--gris4)] transition ease">Denunciar contenido inapropiado</a>
+                        {session
+                            && session?.user.userType !== "admin"
+                            && autor.id !== session?.user.id
+                            && <a href="#" onClick={() => setMostrarDenuncia(true)} className="text-[0.8rem] font-bold underline text-[var(--gris2)] hover:text-[var(--gris4)] transition ease">Denunciar contenido inapropiado</a>
                         }
-                        {session && session?.user.userType !== "admin" && <Boton
-                            texto={guardado ? "Olvidar" : "Guardar"}
-                            onClick={handleToggleGuardado}
-                            tamano="pequeno"
-                            jerarquia={guardado ? "secundario" : "primario"}
-                            icon="/iconos/iconos-menu/icono-guardado.svg"
-                        />}
+                        {session
+                            && session?.user.userType !== "admin"
+                            && autor.id !== session?.user.id
+                            && <Boton
+                                texto={guardado ? "Olvidar" : "Guardar"}
+                                onClick={handleToggleGuardado}
+                                tamano="pequeno"
+                                jerarquia={guardado ? "secundario" : "primario"}
+                                icon="/iconos/iconos-menu/icono-guardado.svg"
+                            />}
                         {/* Si el usuario en sesión está verificado, si el autor del Share es Standard y si el Share todavía NO ha sido verificado: */}
                         {usuarioVerificado && autor.usuario_verificado === false && verificado === false && (
                             <Boton

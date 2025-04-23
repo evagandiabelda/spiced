@@ -263,10 +263,10 @@ select {
   -webkit-appearance: none; /* Compatibilidad con Safari */
   -moz-appearance: none; /* Compatibilidad con Firefox */
   position: relative;
-  font-size: 0.9rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: normal;
   color: var(--gris2);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.7rem;
   margin: 0;
   border: 2px solid var(--blanco);
   border-radius: 0.8rem;

@@ -117,6 +117,34 @@ export async function POST(req: Request) {
       shareVerificado = true;
     }
 
+    // Obtener los IDs de los Spices y Categorías:
+
+    const spicesIds = await prisma.spice.findMany({
+      where: {
+        nombre: { in: spices },
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    const categoriasIds = await prisma.categoria.findMany({
+      where: {
+        nombre: { in: categorias },
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    // Verificar que se hayan encontrado los Spices y Categorías:
+    if (spicesIds.length === 0) {
+      return NextResponse.json({ error: "No se encontraron los Spices." }, { status: 400 });
+    }
+    if (categoriasIds.length === 0) {
+      return NextResponse.json({ error: "No se encontraron las Categorías." }, { status: 400 });
+    }
+
     // Insertar el nuevo Share en la base de datos
     const nuevoShare = await prisma.share.create({
       data: {
@@ -125,11 +153,25 @@ export async function POST(req: Request) {
         img_principal: imgPrincipal,
         img_secundaria: imgSecundaria || null,
         share_verificado: shareVerificado,
-        spices: spices,
-        categorias: categorias,
         slug,
         autor_id: session.user.id, // Asignamos el Share al usuario autenticado
       },
+    });
+
+    // Generar las relaciones con Spices y Categorías:
+
+    await prisma.shareSpice.createMany({
+      data: spicesIds.map(({ id }) => ({
+        share_id: nuevoShare.id,
+        spice_id: id,
+      })),
+    });
+
+    await prisma.shareCategoria.createMany({
+      data: categoriasIds.map(({ id }) => ({
+        share_id: nuevoShare.id,
+        categoria_id: id,
+      })),
     });
 
     await comprobarInsignia(session?.user.id);

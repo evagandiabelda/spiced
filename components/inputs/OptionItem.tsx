@@ -15,7 +15,7 @@ const OptionItem = ({ tipo, id, texto, name, checked, onChange }: OptionItemProp
 
     if (tipo === "dropdown") {
         return (
-            <option id={id} value={id} className="select">
+            <option id={id} value={id}>
                 {texto}
             </option>
         );
