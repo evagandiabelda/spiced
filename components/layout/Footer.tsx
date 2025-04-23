@@ -8,6 +8,9 @@ import Boton from '@/components/buttons/Boton';
 
 const Footer = () => {
 
+    const divClassname = 'hover:scale-110 transition ease';
+    const iconClassname = 'dark:opacity-40 dark:hover:opacity-100 transition ease';
+
     return (
         <footer className="w-full -mt-4 -mb-5 flex flex-col gap-0 dark">
 
@@ -33,40 +36,40 @@ const Footer = () => {
                     </div>
                     <div id='caja-der' className='flex flex-col gap-12 mobile:w-full laptop:w-col4'>
                         <div className='flex felx-row gap-4 items-end'>
-                            <a href="https://www.instagram.com" className='hover:scale-110 transition ease'>
+                            <a href="https://www.instagram.com" className={divClassname}>
                                 <Image
                                     src="/iconos/iconos-redes-sociales/social-instagram.svg"
                                     width={24}
                                     height={24}
                                     alt="instagram"
-                                    className='dark:opacity-40'
+                                    className={iconClassname}
                                 />
                             </a>
-                            <a href="https://www.facebook.com" className='hover:scale-110 transition ease'>
+                            <a href="https://www.facebook.com" className={divClassname}>
                                 <Image
                                     src="/iconos/iconos-redes-sociales/social-facebook.svg"
                                     width={24}
                                     height={24}
                                     alt="facebook"
-                                    className='dark:opacity-40'
+                                    className={iconClassname}
                                 />
                             </a>
-                            <a href="https://www.x.com" className='hover:scale-110 transition ease'>
+                            <a href="https://www.x.com" className={divClassname}>
                                 <Image
                                     src="/iconos/iconos-redes-sociales/social-x.svg"
                                     width={24}
                                     height={24}
                                     alt="x"
-                                    className='dark:opacity-40'
+                                    className={iconClassname}
                                 />
                             </a>
-                            <a href="https://www.pinterest.com" className='hover:scale-110 transition ease'>
+                            <a href="https://www.pinterest.com" className={divClassname}>
                                 <Image
                                     src="/iconos/iconos-redes-sociales/social-pinterest.svg"
                                     width={24}
                                     height={24}
                                     alt="pinterest"
-                                    className='dark:opacity-40'
+                                    className={iconClassname}
                                 />
                             </a>
                         </div>

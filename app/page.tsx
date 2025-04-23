@@ -1,10 +1,16 @@
+
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import HeroBanner from "@/components/home/HeroBanner";
 import BloqueCards from "@/components/home/BloqueCards";
 import BloqueTags from "@/components/home/BloqueTags";
 import BannerExpertos from "@/components/home/BannerExpertos";
 import BloqueColabs from "@/components/home/BloqueColabs";
 
-export default function Inicio() {
+export default async function Inicio() {
+
+  const session = await getServerSession(authOptions);
+
   return (
     <div className="w-full flex flex-col items-center gap-[80px] pb-[120px] text-center mx-auto">
 
@@ -15,10 +21,10 @@ export default function Inicio() {
       <BloqueCards />
 
       {/* BLOQUE TAGS: */}
-      <BloqueTags />
+      {!session && <BloqueTags />}
 
       {/* BANNER EXPERTOS: */}
-      <BannerExpertos />
+      {!session && <BannerExpertos />}
 
       {/* BLOQUE COLABORADORES: */}
       <BloqueColabs />
