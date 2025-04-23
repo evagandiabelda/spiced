@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { RegistroProvider } from "@/context/RegistroContext";
 import RegistroSidebar from "@/components/layout/RegistroSidebar";
 
 export const metadata: Metadata = {
@@ -23,9 +22,7 @@ export default function PanelEstandarLayout({
 
             {/* CAJA PRINCIPAL: */}
             <section className='flex flex-col w-full h-full px-col1 pt-[4rem] pb-[6rem] bg-[var(--gris1)] dark:bg-[var(--gris5)]'>
-                <RegistroProvider>
-                    {children}
-                </RegistroProvider>
+                {children}
             </section>
         </div>
     );

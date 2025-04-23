@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from '@/context/ThemeContext';
 import { LanguageProvider } from "@/context/LanguageContext";
+import SessionWrapper from "@/components/SessionWrapper";
+import { RegistroProvider } from "@/context/RegistroContext";
 import { Toaster } from "react-hot-toast";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import SessionWrapper from "@/components/SessionWrapper";
 
 export const metadata: Metadata = {
   title: {
@@ -29,12 +30,14 @@ export default function RootLayout({
         <ThemeProvider>
           <LanguageProvider>
             <SessionWrapper>
-              <Header />
-              <main className="flex flex-grow">
-                {children}
-                <Toaster position="bottom-right" />
-              </main>
-              <Footer />
+              <RegistroProvider>
+                <Header />
+                <main className="flex flex-grow">
+                  {children}
+                  <Toaster position="bottom-right" />
+                </main>
+                <Footer />
+              </RegistroProvider>
             </SessionWrapper>
           </LanguageProvider>
         </ThemeProvider>
