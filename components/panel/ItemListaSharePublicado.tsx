@@ -8,14 +8,14 @@ import Boton from "@/components/buttons/Boton";
 interface ItemProps {
     id: string;
     imagen: string;
-    user?: string | null;
+    autor: string | null;
     titulo: string;
     fecha: Date;
     slug: string;
     onDelete: (id: string) => void;
 }
 
-const ItemListaSharePublicado = ({ id, imagen, user = "Usuario desconocido", titulo, fecha, slug, onDelete }: ItemProps) => {
+const ItemListaSharePublicado = ({ id, imagen, autor, titulo, fecha, slug, onDelete }: ItemProps) => {
 
     const router = useRouter();
     const objetoFecha = new Date(fecha);
@@ -30,7 +30,7 @@ const ItemListaSharePublicado = ({ id, imagen, user = "Usuario desconocido", tit
                         src={imagen}
                         alt="miniatura"
                         fill
-                        className="object-cover"
+                        className="object-cover rounded-xl"
                     />
                 </div>
 
@@ -39,7 +39,7 @@ const ItemListaSharePublicado = ({ id, imagen, user = "Usuario desconocido", tit
                         <p className="font-bold">{titulo}</p>
                     </div>
                     <div className="w-full mobile:hidden tablet:flex flex-row justify-between">
-                        <p><span className="text-[var(--gris2)]">{user || "Usuario desconocido"}</span></p>
+                        <p><span className="text-[var(--gris2)]">@{autor || ""}</span></p>
                         <p><span className="text-[var(--gris2)]">{objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</span></p>
                     </div>
                 </div>

@@ -1,5 +1,4 @@
 
-import Boton from '@/components/buttons/Boton';
 import Feed from '@/components/feed/Feed';
 
 export const metadata = {

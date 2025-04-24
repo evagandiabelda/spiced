@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
@@ -8,7 +8,13 @@ const prisma = new PrismaClient();
 /* OBTENER UN SHARE ESPECÍFICO */
 
 export async function GET(request: Request, { params }: { params: Promise<{ slug: string }> }) {
+
     try {
+
+        // Obtener los datos del usuario en sesión:
+        const session = await getServerSession(authOptions);
+        const userId = session?.user?.id;
+
         // Obtener el Slug desde la URL
         const { slug } = await params;
 
@@ -59,7 +65,27 @@ export async function GET(request: Request, { params }: { params: Promise<{ slug
             return NextResponse.json({ error: "Share no encontrado." }, { status: 404 });
         }
 
-        return NextResponse.json({ share }, { status: 200 });
+        // Comprobar si el usuario autenticado sigue al autor
+        const siguiendo = userId
+            ? !!(await prisma.seguimiento.findFirst({
+                where: {
+                    seguidor_id: userId,
+                    seguido_id: share.autor.id,
+                },
+            }))
+            : false;
+
+        // Comprobar si el usuario ha guardado el share
+        const guardado = userId
+            ? !!(await prisma.shareGuardado.findFirst({
+                where: {
+                    share_id: share.id,
+                    user_id: userId,
+                },
+            }))
+            : false;
+
+        return NextResponse.json({ share, siguiendo, guardado }, { status: 200 });
     } catch (error) {
         console.error("Error obteniendo el share.", error);
         return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });

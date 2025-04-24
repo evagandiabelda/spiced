@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
 import ListaSkeleton from "@/components/panel/ListaSkeleton";
 import ItemListaSharePublicado from "@/components/panel/ItemListaSharePublicado";
 
@@ -37,7 +38,6 @@ export default function ListaSharesPublicados() {
         const shares: Share[] = data.shares;
 
         if (shares.length === 0) {
-          setError("Todavía no has publicado ningún share.");
           setShares([]);
         } else {
           setShares(shares);
@@ -53,6 +53,9 @@ export default function ListaSharesPublicados() {
   }, [session?.user?.name]); // Se ejecuta solo cuando el usuario cambia
 
   const handleDelete = async (id: string) => {
+
+    toast.loading("Eliminando Share...");
+
     try {
       const res = await fetch(`/api/shares/${id}`, {
         method: "DELETE",
@@ -64,13 +67,17 @@ export default function ListaSharesPublicados() {
 
       // Actualizar el estado eliminando el share de la lista
       setShares((prevShares) => prevShares.filter((share) => share.id !== id));
+
+      toast.remove();
+      toast.success("Share eliminado.");
+
     } catch (error) {
-      console.error(error);
-      alert("Hubo un error al eliminar el share.");
+      toast.remove();
+      toast.error("Hubo un error al eliminar el share.");
     }
   };
 
-  if (!session?.user) return <p>Debes iniciar sesión para ver tus shares.</p>;
+  if (!session?.user) return;
   if (error) return <p>{error}</p>;
 
   if (loading) return (
@@ -84,7 +91,7 @@ export default function ListaSharesPublicados() {
   return (
     <div className="w-full flex flex-col gap-8 px-[30px] pt-[10px] pb-[24px] rounded-xl bg-white dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--borde-shares)]">
       {shares.length === 0 ? (
-        <p>Todavía no hay shares por aquí...</p>
+        <p className="text-sm text-[var(--gris3)] pt-4">Todavía no hay shares por aquí...</p>
       ) : (
         <ul>
           {shares.map((share) => (
@@ -92,7 +99,7 @@ export default function ListaSharesPublicados() {
               id={share.id}
               key={share.id}
               imagen={share.img_principal}
-              user={session.user!.name} // Aquí usamos "!" porque ya verificamos antes que está definido
+              autor={session.user!.name} // Aquí usamos "!" porque ya verificamos antes que está definido
               titulo={share.titulo}
               fecha={share.created_at as Date}
               slug={share.slug}

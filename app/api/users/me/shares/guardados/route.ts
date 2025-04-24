@@ -25,7 +25,16 @@ export async function GET(request: Request) {
             select: {
                 shares_guardados: {
                     include: {
-                        share: true,
+                        share: {
+                            include: {
+                                autor: {
+                                    select: {
+                                        id: true,
+                                        name: true,
+                                    }
+                                }
+                            }
+                        },
                     }
                 }
             }

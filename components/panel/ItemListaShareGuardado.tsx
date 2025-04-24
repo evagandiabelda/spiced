@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Boton from "@/components/buttons/Boton";
@@ -8,13 +7,14 @@ import Boton from "@/components/buttons/Boton";
 interface ItemProps {
     id: string;
     imagen: string;
-    user?: string | null;
+    autor: string | null;
     titulo: string;
     fecha: Date;
     slug: string;
+    onDelete: () => void;
 }
 
-const ItemListaShareGuardado = ({ id, imagen, user, titulo, fecha, slug }: ItemProps) => {
+const ItemListaShareGuardado = ({ id, imagen, autor, titulo, fecha, slug, onDelete }: ItemProps) => {
 
     const router = useRouter();
     const objetoFecha = new Date(fecha);
@@ -29,7 +29,7 @@ const ItemListaShareGuardado = ({ id, imagen, user, titulo, fecha, slug }: ItemP
                         src={imagen}
                         alt="miniatura"
                         fill
-                        className="object-cover"
+                        className="object-cover rounded-xl"
                     />
                 </div>
 
@@ -38,15 +38,16 @@ const ItemListaShareGuardado = ({ id, imagen, user, titulo, fecha, slug }: ItemP
                         <p className="font-bold">{titulo}</p>
                     </div>
                     <div className="w-full mobile:hidden tablet:flex flex-row justify-between">
-                        <p><span className="text-[var(--gris2)]">{user || "Usuario desconocido"}</span></p>
+                        <p><span className="text-[var(--gris2)]">@{autor || ""}</span></p>
                         <p><span className="text-[var(--gris2)]">{objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</span></p>
                     </div>
                 </div>
 
             </div>
 
-            <div id="caja-boton" className="mobile:hidden laptop:flex flex-row gap-4">
-                <Boton texto="Leer" enlace="#" tamano="pequeno" jerarquia="secundario" onClick={() => router.push(`/share/${slug}`)} />
+            <div id="caja-boton" className="mobile:hidden laptop:flex flex-row gap-3">
+                <Boton texto="Leer" tamano="pequeno" jerarquia="primario" onClick={() => router.push(`/share/${slug}`)} />
+                <Boton texto="Borrar de Guardados" tamano="pequeno" jerarquia="secundario" onClick={onDelete} />
             </div>
 
         </li>
