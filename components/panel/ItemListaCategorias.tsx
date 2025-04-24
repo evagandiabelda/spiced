@@ -11,7 +11,7 @@ interface ItemProps {
     onDelete: (id: string) => void;
 }
 
-const ItemListaCategorias = ({ id, nombre, onEdit, onDelete }: ItemProps) => {
+export default function ItemListaCategorias({ id, nombre, onEdit, onDelete }: ItemProps) {
 
     const [editando, setEditando] = useState(false);
     const [nuevoNombre, setNuevoNombre] = useState(nombre);
@@ -79,5 +79,3 @@ const ItemListaCategorias = ({ id, nombre, onEdit, onDelete }: ItemProps) => {
         </li>
     );
 };
-
-export default ItemListaCategorias;

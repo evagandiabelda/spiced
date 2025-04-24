@@ -13,7 +13,7 @@ interface BotonProps {
     deshabilitado?: boolean;
 }
 
-const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick, deshabilitado }: BotonProps) => {
+export default function Boton({ texto, enlace, tamano, jerarquia, icon, customColor, onClick, deshabilitado }: BotonProps) {
     let className = "inline-block gap-4 text-center font-semibold rounded-full border-2 hover:scale-[1.02] transition ease duration-300 cursor-pointer ";
     let style: React.CSSProperties = {};
     let iconClassName = ""
@@ -65,5 +65,3 @@ const Boton = ({ texto, enlace, tamano, jerarquia, icon, customColor, onClick, d
         </div>
     );
 };
-
-export default Boton;

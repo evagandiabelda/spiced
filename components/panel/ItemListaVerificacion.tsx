@@ -19,7 +19,7 @@ interface ItemProps {
     onVerificar: (id: string) => void;
 }
 
-const ItemListaVerificacion = ({ id, nombre_real, name, foto, created_at, num_colegiado, anyos_experiencia, lista_titulaciones, onVerificar }: ItemProps) => {
+export default function ItemListaVerificacion({ id, nombre_real, name, foto, created_at, num_colegiado, anyos_experiencia, lista_titulaciones, onVerificar }: ItemProps) {
 
     const router = useRouter();
     const objetoFecha = new Date(created_at);
@@ -100,5 +100,3 @@ const ItemListaVerificacion = ({ id, nombre_real, name, foto, created_at, num_co
         </li>
     );
 };
-
-export default ItemListaVerificacion;

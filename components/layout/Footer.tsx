@@ -6,7 +6,7 @@ import Logo from '@/components/icons/Logo';
 import Menu from '@/components/layout/Menu';
 import Boton from '@/components/buttons/Boton';
 
-const Footer = () => {
+export default function Footer() {
 
     const divClassname = 'hover:scale-110 transition ease';
     const iconClassname = 'dark:opacity-40 dark:hover:opacity-100 transition ease';
@@ -95,5 +95,3 @@ const Footer = () => {
         </footer>
     );
 };
-
-export default Footer;

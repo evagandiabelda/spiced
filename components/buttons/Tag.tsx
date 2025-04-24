@@ -11,7 +11,7 @@ interface TagProps {
     onClick?: (nombre: string) => void;
 }
 
-const Tag = ({ nombre, tamano, isActive = false, icon = false, mode = "static", onClick }: TagProps) => {
+export default function Tag({ nombre, tamano, isActive = false, icon = false, mode = "static", onClick }: TagProps) {
     let texto = "";
     let className = `inline-block gap-4 text-center font-semibold rounded-full dark:hover:text-[var(--gris5)] `;
     let backgroundColor = "bg-[#d2c9c9] dark:bg-[var(--gris4)] "; // Color por defecto inactivo.
@@ -133,5 +133,3 @@ const Tag = ({ nombre, tamano, isActive = false, icon = false, mode = "static", 
         </div>
     );
 };
-
-export default Tag;

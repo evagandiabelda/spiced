@@ -14,7 +14,7 @@ interface ItemProps {
     slug: string;
 }
 
-const ItemListaShareVerificado = ({ id, imagen, user = "Usuario desconocido", titulo, fecha, slug }: ItemProps) => {
+export default function ItemListaShareVerificado({ id, imagen, user = "Usuario desconocido", titulo, fecha, slug }: ItemProps) {
 
     const router = useRouter();
     const objetoFecha = new Date(fecha);
@@ -52,5 +52,3 @@ const ItemListaShareVerificado = ({ id, imagen, user = "Usuario desconocido", ti
         </li>
     );
 };
-
-export default ItemListaShareVerificado;

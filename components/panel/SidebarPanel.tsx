@@ -10,7 +10,7 @@ type SidebarPanelProps = {
     usuario: "estandar" | "experto" | "admin";
 };
 
-const SidebarPanel = ({ usuario }: SidebarPanelProps) => {
+export default function SidebarPanel({ usuario }: SidebarPanelProps) {
 
     const { data: session, status } = useSession();
     const router = useRouter();
@@ -67,5 +67,3 @@ const SidebarPanel = ({ usuario }: SidebarPanelProps) => {
     );
 
 };
-
-export default SidebarPanel;

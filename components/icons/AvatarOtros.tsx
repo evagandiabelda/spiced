@@ -12,7 +12,7 @@ type AvatarOtrosProps = {
     customBorder?: string;
 };
 
-const AvatarOtros = ({ autor, customBorder }: AvatarOtrosProps) => {
+export default function AvatarOtros({ autor, customBorder }: AvatarOtrosProps) {
 
     let href = `/perfil/${autor.name}`;
 
@@ -40,5 +40,3 @@ const AvatarOtros = ({ autor, customBorder }: AvatarOtrosProps) => {
         </div>
     );
 };
-
-export default AvatarOtros;

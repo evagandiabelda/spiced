@@ -8,7 +8,7 @@ import Search from '@/components/inputs/Search';
 import AvatarPropio from '@/components/icons/AvatarPropio';
 import MenuDesplegable from "@/components/layout/MenuDesplegable";
 
-const Header = () => {
+export default function Header() {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -49,5 +49,3 @@ const Header = () => {
         </header>
     );
 };
-
-export default Header;

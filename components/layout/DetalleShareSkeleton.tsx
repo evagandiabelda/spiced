@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-export function DetalleShareSkeleton() {
+export default function DetalleShareSkeleton() {
 
     return (
         <div className="w-full flex flex-col items-center gap-16 pb-[160px]">

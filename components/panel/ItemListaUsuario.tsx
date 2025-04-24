@@ -22,7 +22,7 @@ interface ItemProps {
     onDelete?: (name: string, id: string) => void;
 }
 
-const ItemListaUsuario = ({ id, name, foto, usuario_verificado, fecha, numShares, numComentarios, numSeguidores, numCategorias, numSpices, numDenunciasHechas, numDenunciasRecibidas, onDelete }: ItemProps) => {
+export default function ItemListaUsuario({ id, name, foto, usuario_verificado, fecha, numShares, numComentarios, numSeguidores, numCategorias, numSpices, numDenunciasHechas, numDenunciasRecibidas, onDelete }: ItemProps) {
 
     const router = useRouter();
     const objetoFecha = new Date(fecha);
@@ -88,5 +88,3 @@ const ItemListaUsuario = ({ id, name, foto, usuario_verificado, fecha, numShares
         </li>
     );
 };
-
-export default ItemListaUsuario;

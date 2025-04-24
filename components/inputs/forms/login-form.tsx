@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { BotonLogin } from "@/components/buttons/BotonLogin";
+import BotonLogin from "@/components/buttons/BotonLogin";
 import Input from "@/components/inputs/Input";
 
 export default function LoginForm() {

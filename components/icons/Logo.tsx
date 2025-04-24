@@ -5,7 +5,7 @@ type modo = {
     modo?: "claro" | "oscuro";
 };
 
-const Logo = ({ modo }: modo) => {
+export default function Logo({ modo }: modo) {
 
     /* COMPORTAMIENTO POR DEFECTO: */
 
@@ -54,5 +54,3 @@ const Logo = ({ modo }: modo) => {
     }
 
 };
-
-export default Logo;

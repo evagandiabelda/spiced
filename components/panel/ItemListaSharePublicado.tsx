@@ -15,7 +15,7 @@ interface ItemProps {
     onDelete: (id: string) => void;
 }
 
-const ItemListaSharePublicado = ({ id, imagen, autor, titulo, fecha, slug, onDelete }: ItemProps) => {
+export default function ItemListaSharePublicado({ id, imagen, autor, titulo, fecha, slug, onDelete }: ItemProps) {
 
     const router = useRouter();
     const objetoFecha = new Date(fecha);
@@ -54,5 +54,3 @@ const ItemListaSharePublicado = ({ id, imagen, autor, titulo, fecha, slug, onDel
         </li>
     );
 };
-
-export default ItemListaSharePublicado;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
@@ -11,10 +11,9 @@ type DesplegableProps = {
     onClose: () => void;
 };
 
-const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
+export default function Desplegable({ isOpen, onClose }: DesplegableProps) {
 
     const { data: session } = useSession();
-    const [userType, setUserType] = useState<string | null>(null);
 
     // Evitar scroll al obrir el menú:
     useEffect(() => {
@@ -76,5 +75,3 @@ const Desplegable = ({ isOpen, onClose }: DesplegableProps) => {
     );
 
 };
-
-export default Desplegable;

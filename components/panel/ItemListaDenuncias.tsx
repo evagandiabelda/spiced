@@ -43,7 +43,7 @@ interface ItemProps {
     onDeleteComentario?: (id: string) => void;
 }
 
-const ItemListaDenuncias = ({ motivo, fecha, share, comentario, user, onDeleteShare, onDeleteComentario }: ItemProps) => {
+export default function ItemListaDenuncias({ motivo, fecha, share, comentario, user, onDeleteShare, onDeleteComentario }: ItemProps) {
 
     const router = useRouter();
     const objetoFecha = new Date(fecha);
@@ -173,5 +173,3 @@ const ItemListaDenuncias = ({ motivo, fecha, share, comentario, user, onDeleteSh
         </li>
     );
 };
-
-export default ItemListaDenuncias;

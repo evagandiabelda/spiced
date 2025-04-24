@@ -1,4 +1,4 @@
-
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import HeroBanner from "@/components/home/HeroBanner";
@@ -6,6 +6,10 @@ import BloqueCards from "@/components/home/BloqueCards";
 import BloqueTags from "@/components/home/BloqueTags";
 import BannerExpertos from "@/components/home/BannerExpertos";
 import BloqueColabs from "@/components/home/BloqueColabs";
+
+export const metadata: Metadata = {
+  title: 'Inicio',
+};
 
 export default async function Inicio() {
 

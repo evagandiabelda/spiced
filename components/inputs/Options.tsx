@@ -15,7 +15,7 @@ type OptionsProps = {
     onChange?: (nuevoValor: string | string[]) => void;
 };
 
-const Options = ({ tipo, label, name, placeholder, required, multiple, opciones, valorSeleccionado, onChange }: OptionsProps) => {
+export default function Options({ tipo, label, name, placeholder, required, multiple, opciones, valorSeleccionado, onChange }: OptionsProps) {
     // Definir los estados al inicio del componente
     const [opcionSel, setOpcionSel] = useState<string | string[]>(multiple ? [] : ""); // Para el Dropdown
     const [seleccionados, setSeleccionados] = useState<string[]>([]); // Para el Checkbox
@@ -129,5 +129,3 @@ const Options = ({ tipo, label, name, placeholder, required, multiple, opciones,
 
     return null;
 };
-
-export default Options;

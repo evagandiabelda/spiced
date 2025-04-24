@@ -21,7 +21,7 @@ interface ItemProps {
     onDelete: (id: string) => void;
 }
 
-const ItemListaShares = ({ id, titulo, texto, imagen, fecha, slug, share_verificado, user, numDenuncias, onDelete }: ItemProps) => {
+export default function ItemListaShares({ id, titulo, texto, imagen, fecha, slug, share_verificado, user, numDenuncias, onDelete }: ItemProps) {
 
     const objetoFecha = new Date(fecha);
 
@@ -99,5 +99,3 @@ const ItemListaShares = ({ id, titulo, texto, imagen, fecha, slug, share_verific
         </li>
     );
 };
-
-export default ItemListaShares;

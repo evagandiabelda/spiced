@@ -1,7 +1,5 @@
 'use client';
 
-import { ChangeEvent } from "react";
-
 type InputFileProps = {
     id: string;
     placeholder?: string;
@@ -11,7 +9,7 @@ type InputFileProps = {
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const InputFile = ({ id, placeholder, value, required, onChange }: InputFileProps) => {
+export default function InputFile({ id, placeholder, value, required, onChange }: InputFileProps) {
 
     const inputClassName = "py-3 inline-block text-center text-[0.9rem] cursor-pointer text-[var(--gris5)] dark:text-[var(--gris2)]";
 
@@ -23,5 +21,3 @@ const InputFile = ({ id, placeholder, value, required, onChange }: InputFileProp
 
 
 };
-
-export default InputFile;

@@ -11,7 +11,7 @@ type OptionItemProps = {
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void; // Rebrà una funció amb l'acció a realitzar.
 }
 
-const OptionItem = ({ tipo, id, texto, name, checked, onChange }: OptionItemProps) => {
+export default function OptionItem({ tipo, id, texto, name, checked, onChange }: OptionItemProps) {
 
     if (tipo === "dropdown") {
         return (
@@ -61,5 +61,3 @@ const OptionItem = ({ tipo, id, texto, name, checked, onChange }: OptionItemProp
     return null; // Si no s'especifica un tipus vàlid, no renderitza res.
 
 };
-
-export default OptionItem;

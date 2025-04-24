@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { DetalleShareSkeleton } from "@/components/layout/DetalleShareSkeleton";
+import DetalleShareSkeleton from "@/components/layout/DetalleShareSkeleton";
 import Image from "next/image";
 import AvatarOtros from "@/components/icons/AvatarOtros";
 import Boton from "@/components/buttons/Boton";

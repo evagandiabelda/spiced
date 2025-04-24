@@ -15,7 +15,7 @@ type InputProps = {
     onChange?: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
-const Input = ({ tipo, icon, customIcon, id, placeholder, rows, value, required, onChange }: InputProps) => {
+export default function Input({ tipo, icon, customIcon, id, placeholder, rows, value, required, onChange }: InputProps) {
 
     const divClassName = "flex flex-row justify-between items-center gap-3 px-3 py-1 rounded-[12px] bg-white dark:bg-[var(--gris4)] cursor-text";
     const inputClassName = "flex-1 text-[1rem] !bg-transparent py-1 px-4 focus:outline-none active:outline-none cursor-text placeholder-light dark:placeholder-dark ";
@@ -170,5 +170,3 @@ const Input = ({ tipo, icon, customIcon, id, placeholder, rows, value, required,
 
 
 };
-
-export default Input;

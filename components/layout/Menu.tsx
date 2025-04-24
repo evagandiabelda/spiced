@@ -15,7 +15,7 @@ type tipo = {
     tipo: "header" | "header-desplegable" | "footer" | "footer-desplegable";
 };
 
-const Menu = ({ tipo }: tipo) => {
+export default function Menu({ tipo }: tipo) {
 
     const { data: session } = useSession();
 
@@ -218,5 +218,3 @@ const Menu = ({ tipo }: tipo) => {
 
     return null; // Por si no coincide con ninguno.
 };
-
-export default Menu;

@@ -3,7 +3,7 @@
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 
-const Search = () => {
+export default function Search() {
 
     const searchParams = useSearchParams();
     const pathname = usePathname();
@@ -41,5 +41,3 @@ const Search = () => {
         </div>
     );
 };
-
-export default Search;

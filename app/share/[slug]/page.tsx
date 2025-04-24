@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
 import DetalleShare from "@/components/layout/DetalleShare";
-import { DetalleShareSkeleton } from "@/components/layout/DetalleShareSkeleton";
+import DetalleShareSkeleton from "@/components/layout/DetalleShareSkeleton";
 
 export const metadata: Metadata = {
     title: 'Share',

@@ -11,7 +11,7 @@ interface NubeTagsDinamicaProps {
     tagsSeleccionados?: string[];
 }
 
-const NubeTagsDinamica = ({ uso, defaultActive = false, onSeleccionarTags, tagsSeleccionados }: NubeTagsDinamicaProps) => {
+export default function NubeTagsDinamica({ uso, defaultActive = false, onSeleccionarTags, tagsSeleccionados }: NubeTagsDinamicaProps) {
 
     const listaTags = ["TEA", "TDAH", "TOC", "TLP", "TAG", "TP", "TPA", "TB", "TEP", "TD", "TE", "TA", "ADI", "FOB", "OTR"];
 
@@ -61,5 +61,3 @@ const NubeTagsDinamica = ({ uso, defaultActive = false, onSeleccionarTags, tagsS
         </div>
     );
 };
-
-export default NubeTagsDinamica;

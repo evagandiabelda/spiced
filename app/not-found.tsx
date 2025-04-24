@@ -1,9 +1,14 @@
+import { Metadata } from "next";
 import Image from "next/image"
 import Boton from "@/components/buttons/Boton"
 
+export const metadata: Metadata = {
+    title: 'Error 404',
+};
+
 /* PÁGINA PARA EL ERROR '404 - NOT FOUND' */
 
-export default function NotFound() {
+export default async function NotFound() {
     return (
         <div className="w-full h-100 flex flex-col justify-center items-center text-center mx-auto px-col1 pt-12 pb-32 gap-8">
             <Image

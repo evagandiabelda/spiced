@@ -22,7 +22,7 @@ interface ItemProps {
     onDelete: (id: string) => void;
 }
 
-const ItemListaComentarios = ({ id, texto, fecha, user, share, numDenuncias, onDelete }: ItemProps) => {
+export default function ItemListaComentarios({ id, texto, fecha, user, share, numDenuncias, onDelete }: ItemProps) {
 
     const objetoFecha = new Date(fecha);
 
@@ -85,5 +85,3 @@ const ItemListaComentarios = ({ id, texto, fecha, user, share, numDenuncias, onD
         </li>
     );
 };
-
-export default ItemListaComentarios;

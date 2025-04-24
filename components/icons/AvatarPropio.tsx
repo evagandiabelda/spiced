@@ -9,7 +9,7 @@ type AvatarPropioProps = {
     foto?: string;
 };
 
-const AvatarPropio = ({ customBorder, foto }: AvatarPropioProps) => {
+export default function AvatarPropio({ customBorder, foto }: AvatarPropioProps) {
 
     const { data: session } = useSession();
     const userType = session?.user.userType;
@@ -56,5 +56,3 @@ const AvatarPropio = ({ customBorder, foto }: AvatarPropioProps) => {
         </div>
     );
 };
-
-export default AvatarPropio;

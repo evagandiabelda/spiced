@@ -8,7 +8,7 @@ interface BotonSubmitProps {
     icon?: string;
 }
 
-const BotonSubmit = ({ texto, disabled = false, icon }: BotonSubmitProps) => {
+export default function BotonSubmit({ texto, disabled = false, icon }: BotonSubmitProps) {
 
     return (
         <button
@@ -22,5 +22,3 @@ const BotonSubmit = ({ texto, disabled = false, icon }: BotonSubmitProps) => {
     );
 
 }
-
-export default BotonSubmit;

@@ -9,8 +9,7 @@ type ItemProps = {
     texto: string;
 }
 
-
-const ItemMenuSidebar = ({ enlace, icono, texto }: ItemProps) => {
+export default function ItemMenuSidebar({ enlace, icono, texto }: ItemProps) {
 
     // Per a determinar si l'enllaç està actiu:
     const pathname = usePathname();
@@ -31,5 +30,3 @@ const ItemMenuSidebar = ({ enlace, icono, texto }: ItemProps) => {
     );
 
 };
-
-export default ItemMenuSidebar;
