@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
 import ListaSkeleton from "@/components/panel/ListaSkeleton";
 import ItemListaDenuncias from "@/components/panel/ItemListaDenuncias";
 
@@ -160,9 +161,10 @@ export default function ListaDenuncias({ numItems }: ListaDenunciasProps) {
 
             setDenunciasShares((prevDenuncias) => prevDenuncias.filter((denuncia) => denuncia.id !== id));
 
+            toast.success("Share eliminado.");
+
         } catch (error) {
-            console.error(error);
-            alert("Hubo un error al eliminar el Share.");
+            toast.error("Hubo un error al eliminar el Share.");
         }
     };
 
@@ -189,9 +191,10 @@ export default function ListaDenuncias({ numItems }: ListaDenunciasProps) {
 
             setDenunciasComentarios((prevDenuncias) => prevDenuncias.filter((denuncia) => denuncia.id !== id));
 
+            toast.success("Comentario eliminado.");
+
         } catch (error) {
-            console.error(error);
-            alert("Hubo un error al eliminar el Share.");
+            toast.error("Hubo un error al eliminar el comentario.");
         }
     };
 

@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import ListaSkeleton from "@/components/panel/ListaSkeleton";
 import { UserData } from "@/types/user";
+import { toast } from "react-hot-toast";
+import ListaSkeleton from "@/components/panel/ListaSkeleton";
 import ItemListaUsuario from "@/components/panel/ItemListaUsuario";
 
 interface ListaUsuariosProps {
@@ -81,9 +82,11 @@ export default function ListaUsuarios({ numItems }: ListaUsuariosProps) {
 
             // Actualizar el estado eliminando el share de la lista
             setUsuarios((prevUsers) => prevUsers.filter((user) => user.id !== id));
+
+            toast.success("Usuario eliminado.");
+
         } catch (error) {
-            console.error(error);
-            alert("Hubo un error al eliminar el usuario.");
+            toast.error("Hubo un error al eliminar el usuario.");
         }
     };
 

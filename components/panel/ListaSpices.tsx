@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
 import ListaSkeleton from "@/components/panel/ListaSkeleton";
 import ItemListaSpices from "@/components/panel/ItemListaSpices";
 
@@ -73,9 +74,10 @@ export default function ListaSpices() {
                 )
             );
 
+            toast.success("Spice editado.");
+
         } catch (error) {
-            console.error(error);
-            alert("Hubo un error al editar el Spice.");
+            toast.error("Hubo un error al editar el Spice.");
         }
 
     };
@@ -96,9 +98,10 @@ export default function ListaSpices() {
 
             setSpices((prevSpices) => prevSpices.filter((spice) => spice.id !== id));
 
+            toast.success("Spice eliminado.");
+
         } catch (error) {
-            console.error(error);
-            alert("Hubo un error al eliminar el Spice.");
+            toast.error("Hubo un error al eliminar el Spice.");
         }
     };
 

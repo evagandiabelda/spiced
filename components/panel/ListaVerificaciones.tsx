@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
 import ListaSkeleton from "@/components/panel/ListaSkeleton";
 import ItemListaVerificacion from "@/components/panel/ItemListaVerificacion";
 
@@ -79,9 +80,11 @@ export default function ListaVerificaciones({ numItems }: ListaUsuariosProps) {
 
             // Actualizar el estado eliminando el usuario verificado de la lista de pendientes:
             setUsuarios((prevUsers) => prevUsers.filter((user) => user.id !== id));
+
+            toast.success("Usuario verificado.");
+
         } catch (error) {
-            console.error(error);
-            alert("Hubo un error al verificar el usuario.");
+            toast.error("Hubo un error al verificar el usuario.");
         }
     };
 

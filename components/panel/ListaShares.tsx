@@ -4,6 +4,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
 import ListaSkeleton from "@/components/panel/ListaSkeleton";
 import ItemListaShares from "@/components/panel/ItemListaShares";
 import Boton from "@/components/buttons/Boton";
@@ -101,9 +102,10 @@ export default function ListaShares({ numItems }: ListaSharesProps) {
 
             setShares((prevshares) => prevshares.filter((share) => share.slug !== slug));
 
+            toast.success("Share eliminado.");
+
         } catch (error) {
-            console.error(error);
-            alert("Hubo un error al eliminar el share.");
+            toast.error("Hubo un error al eliminar el share.");
         }
     };
 

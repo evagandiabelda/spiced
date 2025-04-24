@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from '@/context/ThemeContext';
 import { LanguageProvider } from "@/context/LanguageContext";
-import SessionWrapper from "@/components/SessionWrapper";
+import SessionContext from "@/context/SessionContext";
 import { RegistroProvider } from "@/context/RegistroContext";
 import { Toaster } from "react-hot-toast";
 import Header from "@/components/layout/Header";
@@ -29,7 +29,7 @@ export default function RootLayout({
 
         <ThemeProvider>
           <LanguageProvider>
-            <SessionWrapper>
+            <SessionContext>
               <RegistroProvider>
                 <Header />
                 <main className="flex flex-grow">
@@ -38,7 +38,7 @@ export default function RootLayout({
                 </main>
                 <Footer />
               </RegistroProvider>
-            </SessionWrapper>
+            </SessionContext>
           </LanguageProvider>
         </ThemeProvider>
 

@@ -54,8 +54,6 @@ export default function ListaSharesPublicados() {
 
   const handleDelete = async (id: string) => {
 
-    toast.loading("Eliminando Share...");
-
     try {
       const res = await fetch(`/api/shares/${id}`, {
         method: "DELETE",
@@ -68,11 +66,10 @@ export default function ListaSharesPublicados() {
       // Actualizar el estado eliminando el share de la lista
       setShares((prevShares) => prevShares.filter((share) => share.id !== id));
 
-      toast.remove();
+
       toast.success("Share eliminado.");
 
     } catch (error) {
-      toast.remove();
       toast.error("Hubo un error al eliminar el share.");
     }
   };

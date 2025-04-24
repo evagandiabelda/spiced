@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
 import ListaSkeleton from "@/components/panel/ListaSkeleton";
 import ItemListaCategorias from "@/components/panel/ItemListaCategorias";
 
@@ -73,9 +74,10 @@ export default function ListaCategorias() {
                 )
             );
 
+            toast.success("Categoría editada.")
+
         } catch (error) {
-            console.error(error);
-            alert("Hubo un error al editar la categoría.");
+            toast.error("Hubo un error al editar la categoría.");
         }
 
     };
@@ -96,9 +98,10 @@ export default function ListaCategorias() {
 
             setCategorias((prevCategorias) => prevCategorias.filter((categoria) => categoria.id !== id));
 
+            toast.success("Categoría eliminada.");
+
         } catch (error) {
-            console.error(error);
-            alert("Hubo un error al eliminar la categoría.");
+            toast.error("Hubo un error al eliminar la categoría.");
         }
     };
 

@@ -3,6 +3,7 @@
 import React from "react";
 import { useSession } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import Image from "next/image";
 import AvatarOtros from "@/components/icons/AvatarOtros";
@@ -60,6 +61,7 @@ interface DetalleShareProps {
 export default function DetalleShare({ slug }: DetalleShareProps) {
 
     const { data: session } = useSession();
+    const router = useRouter();
 
     const [share, setShare] = useState<Share>();
     const [isFollowing, setIsFollowing] = useState(false);
@@ -188,6 +190,7 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
 
             toast.success("Has verificado este Share.");
             setEstaVerificado(true);
+            router.refresh();
         } catch (error) {
             toast.error("Error al verificar el Share.");
         }
@@ -335,7 +338,7 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                                         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                                             <div className="flex flex-col gap-4">
                                                 <p className="text-sm">
-                                                    Al verificar este Share, confirmas que toda la información que contiene es <strong>cierta</strong> y <strong>contrastable</strong>. Esta acción no se puede deshacer.
+                                                    Al verificar este Share, confirmas que toda la información que contiene es <strong>cierta</strong> y <strong>contrastable</strong>. Esta acción no se puede deshacer, pero puede ser revisada por los administradores de Spiced.
                                                 </p>
                                                 <div className="flex justify-end gap-2 pt-4">
                                                     <Boton texto="Cancelar" jerarquia="secundario" tamano="pequeno" onClick={() => setIsModalOpen(false)} />

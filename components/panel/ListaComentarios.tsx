@@ -4,6 +4,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
 import ListaSkeleton from "@/components/panel/ListaSkeleton";
 import ItemListaComentarios from "./ItemListaComentarios";
 import Boton from "@/components/buttons/Boton";
@@ -102,9 +103,10 @@ export default function ListaComentarios({ numItems }: ListaComentariosProps) {
 
             setComentarios((prevComentarios) => prevComentarios.filter((comentario) => comentario.id !== id));
 
+            toast.success("Comentario eliminado.")
+
         } catch (error) {
-            console.error(error);
-            alert("Hubo un error al eliminar el comentario.");
+            toast.error("Hubo un error al eliminar el comentario.");
         }
     };
 

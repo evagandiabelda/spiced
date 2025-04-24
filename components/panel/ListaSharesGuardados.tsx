@@ -57,7 +57,6 @@ export default function ListaSharesGuardados() {
     }, [session?.user?.name]); // Se ejecuta solo cuando el usuario cambia
 
     const handleDesguardar = async (id: string) => {
-        toast.loading("Borrando...");
 
         try {
             const res = await fetch(`/api/users/me/shares/guardados`, {
@@ -73,11 +72,11 @@ export default function ListaSharesGuardados() {
                 throw new Error(data.error || 'Error al borrar el Share de la lista de Guardados.');
             }
 
-            toast.remove();
             setShares((prevShares) => prevShares.filter((share) => share.id !== id));
+
             toast.success("Share borrado de la lista de Guardados.");
+
         } catch (error: any) {
-            toast.remove();
             toast.error("Error al borrar el Share de la lista de Guardados.");
         }
     }

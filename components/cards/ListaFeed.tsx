@@ -9,6 +9,7 @@ import ShareSkeleton from "@/components/cards/ShareSkeleton";
 interface ShareData {
     id: string;
     img_principal: string;
+    share_verificado: boolean;
     categorias: {
         categoria: {
             id: string,
@@ -175,7 +176,7 @@ export default function ListaFeed({ filtroCategoria, filtroUsuarios, filtroVerif
                     <Share
                         key={share.id}
                         imagen={share.img_principal || "/imgs/IMG-Ejemplo-Miniatura.png"}
-                        verificado={share.autor?.usuario_verificado || false}
+                        verificado={share.share_verificado || false}
                         user={share.autor?.name || "anónimo"}
                         foto={share.autor?.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
                         categorias={share.categorias.map(c => c.categoria.nombre)}
