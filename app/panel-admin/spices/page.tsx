@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { toast } from "react-hot-toast";
 import Input from "@/components/inputs/Input";
 import Boton from "@/components/buttons/Boton";
 import ListaSpices from "@/components/panel/ListaSpices";
@@ -41,10 +42,10 @@ export default function Spices() {
             setNuevoNombre("");
             setEditando(false);
             setRefrescar((prev) => !prev); // Alterna para forzar el refresh
+            toast.success("Spice añadido.");
 
         } catch (error) {
-            console.error(error);
-            alert("Hubo un error al crear el Spice.");
+            toast.error("Error al crear el Spice.");
         }
     };
 

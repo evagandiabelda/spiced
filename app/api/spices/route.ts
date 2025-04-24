@@ -40,7 +40,7 @@ export async function GET() {
             }
         });
 
-        return NextResponse.json(spices, { status: 200 });
+        return NextResponse.json({ spices }, { status: 200 });
     } catch (error) {
         console.error("Error obteniendo los spices.", error);
         return NextResponse.json({ error: "Error interno del servidor." }, { status: 500 });

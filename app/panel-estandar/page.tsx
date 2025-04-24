@@ -14,8 +14,16 @@ import { Insignia } from "@prisma/client";
 
 export default function Inicio() {
 
-    const { data: session } = useSession();
+    const { status, data: session } = useSession();
     const router = useRouter();
+
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            router.push("/login"); // Redirigir si no está autenticado
+        }
+    }, [status, router]);
+
+    const perfilHref = `/perfil/${session?.user.name}`;
 
     let iconoInsignia = "/iconos/iconos-otros/icono-insignia-mini-1.svg";
 
@@ -40,13 +48,12 @@ export default function Inicio() {
                 <div className="w-full flex mobile:flex-col-reverse tablet:flex-row justify-between mobile:items-between tablet:items-center mobile:gap-12 tablet:gap-3">
                     <h2 className="dark:text-[var(--gris3)]">Tu espacio personal</h2>
                     <div className="flex flex-row justify-end gap-6">
-                        <div className="flex flex-row justify-end gap-4">
-                            <Image
-                                src="/iconos/iconos-menu/icono-notificaciones.svg"
-                                width={32}
-                                height={32}
-                                className="cursor-pointer hover:scale-110 transition ease dark:invert dark:opacity-70 dark:hover:opacity-100"
-                                alt="notificaciones"
+                        <div className="flex flex-row justify-end items-center gap-3">
+                            <Boton
+                                texto="Ver mi perfil"
+                                enlace={perfilHref}
+                                tamano="pequeno"
+                                jerarquia="secundario"
                             />
                             <Image
                                 src={iconoInsignia}

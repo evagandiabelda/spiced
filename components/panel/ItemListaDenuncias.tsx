@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Modal from "@/components/layout/Modal";
 import AvatarOtros from "@/components/icons/AvatarOtros";
 import Image from "next/image";
 import Boton from "@/components/buttons/Boton";
@@ -45,8 +46,9 @@ interface ItemProps {
 
 export default function ItemListaDenuncias({ motivo, fecha, share, comentario, user, onDeleteShare, onDeleteComentario }: ItemProps) {
 
-    const router = useRouter();
     const objetoFecha = new Date(fecha);
+    const [isModalShareOpen, setIsModalShareOpen] = useState(false);
+    const [isModalComentarioOpen, setIsModalComentarioOpen] = useState(false);
 
     return (
         <li className="w-full flex-1 flex flex-col mobile:items-start tablet:items-center gap-4 px-4 py-8 border-b border-b-1 dark:border-[var(--gris4)]">
@@ -124,9 +126,29 @@ export default function ItemListaDenuncias({ motivo, fecha, share, comentario, u
                             texto="Eliminar Share"
                             tamano="pequeno"
                             jerarquia="primario"
-                            onClick={() => onDeleteShare(share.id)}
+                            onClick={() => setIsModalShareOpen(true)}
                         />
                     </div>
+
+                    <Modal isOpen={isModalShareOpen} onClose={() => setIsModalShareOpen(false)}>
+                        <div className="flex flex-col gap-6">
+                            <div className="w-full flex flex-col items-center text-center gap-4">
+                                <Image
+                                    src="/iconos/iconos-genericos/icono-spiced.svg"
+                                    alt="miniatura"
+                                    width={15}
+                                    height={15}
+                                    className="object-cover"
+                                />
+                                <h3>Eliminar Share</h3>
+                            </div>
+                            <p className="text-sm text-center">¿Seguro que quieres eliminar este Share?</p>
+                            <div className="flex justify-center gap-2">
+                                <Boton texto="Cancelar" jerarquia="secundario" tamano="pequeno" onClick={() => setIsModalShareOpen(false)} />
+                                <Boton texto="Eliminar" jerarquia="primario" tamano="pequeno" onClick={() => onDeleteShare(share.id)} />
+                            </div>
+                        </div>
+                    </Modal>
 
                 </div>
 
@@ -162,9 +184,29 @@ export default function ItemListaDenuncias({ motivo, fecha, share, comentario, u
                             texto="Eliminar Comentario"
                             tamano="pequeno"
                             jerarquia="primario"
-                            onClick={() => onDeleteComentario(comentario.share.id)}
+                            onClick={() => setIsModalComentarioOpen(true)}
                         />
                     </div>
+
+                    <Modal isOpen={isModalComentarioOpen} onClose={() => setIsModalComentarioOpen(false)}>
+                        <div className="flex flex-col gap-6">
+                            <div className="w-full flex flex-col items-center text-center gap-4">
+                                <Image
+                                    src="/iconos/iconos-genericos/icono-spiced.svg"
+                                    alt="miniatura"
+                                    width={15}
+                                    height={15}
+                                    className="object-cover"
+                                />
+                                <h3>Eliminar Comentario</h3>
+                            </div>
+                            <p className="text-sm text-center">¿Seguro que quieres eliminar este comentario?</p>
+                            <div className="flex justify-center gap-2">
+                                <Boton texto="Cancelar" jerarquia="secundario" tamano="pequeno" onClick={() => setIsModalComentarioOpen(false)} />
+                                <Boton texto="Eliminar" jerarquia="primario" tamano="pequeno" onClick={() => onDeleteComentario(comentario.share.id)} />
+                            </div>
+                        </div>
+                    </Modal>
 
                 </div>
 

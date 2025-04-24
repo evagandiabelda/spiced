@@ -346,7 +346,17 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                                             deshabilitado={estaVerificado}
                                         />
                                         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                                            <div className="flex flex-col gap-4">
+                                            <div className="flex flex-col gap-6">
+                                                <div className="w-full flex flex-col items-center text-center gap-4">
+                                                    <Image
+                                                        src="/iconos/iconos-genericos/icono-spiced.svg"
+                                                        alt="miniatura"
+                                                        width={15}
+                                                        height={15}
+                                                        className="object-cover"
+                                                    />
+                                                    <h3>Verificar Share</h3>
+                                                </div>
                                                 <p className="text-sm">
                                                     Al verificar este Share, confirmas que toda la información que contiene es <strong>cierta</strong> y <strong>contrastable</strong>. Esta acción no se puede deshacer, pero puede ser revisada por los administradores de Spiced.
                                                 </p>

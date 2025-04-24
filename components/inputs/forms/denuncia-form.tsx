@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Input from "@/components/inputs/Input";
+import Image from "next/image";
 import Boton from "@/components/buttons/Boton";
 import BotonSubmit from "@/components/buttons/BotonSubmit";
 
@@ -56,7 +57,17 @@ export default function DenunciaForm({ slug, idComentario, onClose }: DenunciaFo
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-            <h3>Denunciar comentario</h3>
+            <div className="w-full flex flex-col items-center text-center gap-4">
+                <Image
+                    src="/iconos/iconos-genericos/icono-spiced.svg"
+                    alt="miniatura"
+                    width={15}
+                    height={15}
+                    className="object-cover"
+                />
+                <h3>Denunciar comentario</h3>
+            </div>
+
             <Input
                 tipo="textarea"
                 id="denuncia"

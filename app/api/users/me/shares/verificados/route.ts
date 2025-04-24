@@ -23,7 +23,15 @@ export async function GET(request: Request) {
                 id: session.user.id,
             },
             include: {
-                shares_verificados: true,
+                shares_verificados: {
+                    include: {
+                        autor: {
+                            select: {
+                                name: true,
+                            }
+                        }
+                    }
+                },
             }
         });
 

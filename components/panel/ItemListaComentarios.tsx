@@ -2,6 +2,8 @@
 
 /* SOLO PARA EL PANEL DE ADMIN */
 
+import { useState } from "react";
+import Modal from "@/components/layout/Modal";
 import Image from "next/image";
 import Boton from "@/components/buttons/Boton";
 
@@ -25,6 +27,7 @@ interface ItemProps {
 export default function ItemListaComentarios({ id, texto, fecha, user, share, numDenuncias, onDelete }: ItemProps) {
 
     const objetoFecha = new Date(fecha);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <li className="w-full flex flex-col gap-6 px-4 py-10 border-b border-b-[var(--gris2)] dark:border-[var(--gris4)]">
@@ -77,8 +80,28 @@ export default function ItemListaComentarios({ id, texto, fecha, user, share, nu
                         <p className="text-[0.8rem] font-bold text-white px-3 py-1 rounded-xl bg-[var(--gris2)] dark:bg-[var(--gris3)]">{numDenuncias} denuncias</p>
                     }
 
-                    <Boton texto="Eliminar" tamano="grande" jerarquia="secundario" onClick={() => onDelete(id)} />
+                    <Boton texto="Eliminar" tamano="grande" jerarquia="secundario" onClick={() => setIsModalOpen(true)} />
                 </div>
+
+                <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                    <div className="flex flex-col gap-6">
+                        <div className="w-full flex flex-col items-center text-center gap-4">
+                            <Image
+                                src="/iconos/iconos-genericos/icono-spiced.svg"
+                                alt="miniatura"
+                                width={15}
+                                height={15}
+                                className="object-cover"
+                            />
+                            <h3>Eliminar Comentario</h3>
+                        </div>
+                        <p className="text-sm text-center">¿Seguro que quieres eliminar este comentario?</p>
+                        <div className="flex justify-center gap-2">
+                            <Boton texto="Cancelar" jerarquia="secundario" tamano="pequeno" onClick={() => setIsModalOpen(false)} />
+                            <Boton texto="Eliminar" jerarquia="primario" tamano="pequeno" onClick={() => onDelete(id)} />
+                        </div>
+                    </div>
+                </Modal>
 
             </div>
 

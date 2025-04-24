@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 import Image from "next/image";
+import Boton from "@/components/buttons/Boton";
 import ThemeToggle from "@/components/buttons/ThemeToggle";
 import Estadisticas from "@/components/cards/Estadisticas";
 import CardDescripcion from "@/components/cards/CardDescripcion";
@@ -12,7 +13,7 @@ import ListaSharesPublicados from "@/components/panel/ListaSharesPublicados";
 
 export default function Inicio() {
 
-    const { status } = useSession();
+    const { status, data: session } = useSession();
     const router = useRouter();
 
     useEffect(() => {
@@ -21,6 +22,8 @@ export default function Inicio() {
         }
     }, [status, router]);
 
+    const perfilHref = `/perfil/${session?.user.name}`;
+
     return (
         <div className="w-full flex flex-col gap-12">
 
@@ -28,16 +31,13 @@ export default function Inicio() {
             <div className="w-full flex flex-col gap-8">
                 <div className="w-full flex mobile:flex-col-reverse tablet:flex-row justify-between mobile:items-between tablet:items-center mobile:gap-12 tablet:gap-3">
                     <h2 className="dark:text-[var(--gris3)]">Tu espacio personal</h2>
-                    <div className="flex flex-row justify-end gap-6">
-                        <div className="flex flex-row justify-end gap-4">
-                            <Image
-                                src="/iconos/iconos-menu/icono-notificaciones.svg"
-                                width={32}
-                                height={32}
-                                className="cursor-pointer hover:scale-110 transition ease dark:invert dark:opacity-70 dark:hover:opacity-100"
-                                alt="notificaciones"
-                            />
-                        </div>
+                    <div className="flex flex-row justify-end items-center gap-3">
+                        <Boton
+                            texto="Ver mi perfil"
+                            enlace={perfilHref}
+                            tamano="pequeno"
+                            jerarquia="secundario"
+                        />
                         <ThemeToggle />
                     </div>
                 </div>

@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Modal from "@/components/layout/Modal";
 import AvatarOtros from "@/components/icons/AvatarOtros";
 import Image from "next/image";
 import Boton from "@/components/buttons/Boton";
@@ -31,7 +33,8 @@ export default function ItemListaUsuario({ id, name, foto, usuario_verificado, f
         name: name,
         foto: foto,
         usuario_verificado: usuario_verificado,
-    }
+    };
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <li className="w-full flex flex-col gap-3 px-4 pt-4 pb-8 border-b border-b-1 border-[var(--gris1)] dark:border-[var(--gris4)]">
@@ -81,7 +84,27 @@ export default function ItemListaUsuario({ id, name, foto, usuario_verificado, f
 
             {onDelete &&
                 <div className="w-full flex justify-end items-center gap-4 px-4">
-                    <Boton texto="Eliminar usuario" enlace="#" tamano="pequeno" jerarquia="primario" onClick={() => onDelete(name, id)} />
+                    <Boton texto="Eliminar usuario" enlace="#" tamano="pequeno" jerarquia="primario" onClick={() => setIsModalOpen(true)} />
+
+                    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                        <div className="flex flex-col gap-6">
+                            <div className="w-full flex flex-col items-center text-center gap-4">
+                                <Image
+                                    src="/iconos/iconos-genericos/icono-spiced.svg"
+                                    alt="miniatura"
+                                    width={15}
+                                    height={15}
+                                    className="object-cover"
+                                />
+                                <h3>Eliminar Usuario</h3>
+                            </div>
+                            <p className="text-sm text-center">¿Seguro que quieres eliminar este usuario?</p>
+                            <div className="flex justify-center gap-2">
+                                <Boton texto="Cancelar" jerarquia="secundario" tamano="pequeno" onClick={() => setIsModalOpen(false)} />
+                                <Boton texto="Eliminar" jerarquia="primario" tamano="pequeno" onClick={() => onDelete(name, id)} />
+                            </div>
+                        </div>
+                    </Modal>
                 </div>
             }
 

@@ -107,7 +107,7 @@ export default function ConfigUserForm() {
             const response = await fetch(`/api/spices`);
             if (!response.ok) throw new Error("Error al obtener el listado de spices.");
 
-            const spices = await response.json();
+            const { spices } = await response.json();
             if (!spices) throw new Error("No se han encontrado spices.");
 
             const nombresSpices = spices.map((spice: { nombre: string }) => spice.nombre);

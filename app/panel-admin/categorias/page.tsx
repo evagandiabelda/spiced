@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { toast } from "react-hot-toast";
 import Input from "@/components/inputs/Input";
 import Boton from "@/components/buttons/Boton";
 import ListaCategorias from "@/components/panel/ListaCategorias";
@@ -41,10 +42,10 @@ export default function Categorias() {
             setNuevoNombre("");
             setEditando(false);
             setRefrescar((prev) => !prev); // Alterna para forzar el refresh
+            toast.success("Categoría añadida.");
 
         } catch (error) {
-            console.error(error);
-            alert("Hubo un error al crear la categoría.");
+            toast.error("Error al crear la categoría.");
         }
     };
 
