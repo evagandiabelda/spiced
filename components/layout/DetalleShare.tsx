@@ -3,6 +3,7 @@
 import React from "react";
 import { useSession } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
+import { toast } from "react-hot-toast";
 import Image from "next/image";
 import AvatarOtros from "@/components/icons/AvatarOtros";
 import Boton from "@/components/buttons/Boton";
@@ -11,7 +12,6 @@ import ComentarioForm from "@/components/inputs/forms/comentario-form";
 import Comentario from "@/components/cards/Comentario";
 import Modal from "@/components/layout/Modal";
 import DenunciaForm from "@/components/inputs/forms/denuncia-form";
-import { gu } from "date-fns/locale";
 
 interface Share {
     id: string;
@@ -122,7 +122,7 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
 
             setIsFollowing(!isFollowing); // Invertimos el estado
         } catch (error) {
-            console.error("Error al seguir/dejar de seguir al autor del Share.", error);
+            toast.error("Error al seguir/dejar de seguir al autor del Share.");
         }
     }
 
@@ -149,7 +149,7 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
 
             setShareGuardado(!shareGuardado)
         } catch (error: any) {
-            console.error("Error al guardar/olvidar el Share.", error);
+            toast.error("Error al guardar/olvidar el Share.");
         }
     }
 
@@ -186,9 +186,10 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                 throw new Error(data.error || "Error al verificar el Share.");
             }
 
+            toast.success("Has verificado este Share.");
             setEstaVerificado(true);
         } catch (error) {
-            console.error("Error al verificar el Share:", error);
+            toast.error("Error al verificar el Share.");
         }
     };
 

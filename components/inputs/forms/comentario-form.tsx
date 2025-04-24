@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 import Input from "@/components/inputs/Input";
 import BotonSubmit from "@/components/buttons/BotonSubmit";
 
@@ -16,8 +17,6 @@ export default function ComentarioForm({ slug, usernameRespondiendoA }: Comentar
 
     const [texto, setTexto] = useState('');
     const [cargando, setCargando] = useState(false);
-    const [error, setError] = useState('');
-    const [exito, setExito] = useState(false);
 
     // Añadir al textarea el nombre de usuario al que se está respondiendo:
     useEffect(() => {
@@ -29,8 +28,6 @@ export default function ComentarioForm({ slug, usernameRespondiendoA }: Comentar
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setCargando(true);
-        setError('');
-        setExito(false);
 
         try {
             const res = await fetch(`/api/shares/${slug}/comentarios`, {
@@ -42,18 +39,17 @@ export default function ComentarioForm({ slug, usernameRespondiendoA }: Comentar
             const data = await res.json();
 
             if (!res.ok) {
-                setError(data.error || 'Error al publicar el comentario.');
+                throw new Error(data.error || 'Error al publicar el comentario.');
             } else {
                 usernameRespondiendoA = null;
                 setTexto('');
-                setExito(true);
-                setTimeout(() => setExito(false), 3000);
+                setCargando(false);
+                toast.success("¡Comentario publicado!");
                 router.refresh();
             }
         } catch (err) {
-            setError('Error de conexión.');
-        } finally {
             setCargando(false);
+            toast.error('Error de conexión.');
         }
     };
 
@@ -73,8 +69,6 @@ export default function ComentarioForm({ slug, usernameRespondiendoA }: Comentar
             />
 
             <div className="flex justify-end gap-8 items-center">
-                {exito && <p className="text-sm text-green-600">¡Publicado!</p>}
-                {error && <p className="text-sm text-red-500">{error}</p>}
 
                 <BotonSubmit
                     texto={cargando ? 'Publicando...' : 'Publicar'}
