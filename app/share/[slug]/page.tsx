@@ -1,9 +1,7 @@
 import { Metadata } from "next";
-import { PrismaClient } from "@prisma/client";
 import { Suspense } from "react";
 import DetalleShare from "@/components/layout/DetalleShare";
-
-const prisma = new PrismaClient();
+import { DetalleShareSkeleton } from "@/components/layout/DetalleShareSkeleton";
 
 export const metadata: Metadata = {
     title: 'Share',
@@ -16,7 +14,7 @@ export default async function SharePage({
 }) {
 
     return (
-        <Suspense fallback="Cargando Share...">
+        <Suspense fallback={<DetalleShareSkeleton />}>
             <DetalleShare
                 slug={(await params).slug}
             />

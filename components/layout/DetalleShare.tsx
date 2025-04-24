@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import { DetalleShareSkeleton } from "@/components/layout/DetalleShareSkeleton";
 import Image from "next/image";
 import AvatarOtros from "@/components/icons/AvatarOtros";
 import Boton from "@/components/buttons/Boton";
@@ -63,6 +64,7 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
     const { data: session } = useSession();
     const router = useRouter();
 
+    const [loading, setLoading] = useState(false);
     const [share, setShare] = useState<Share>();
     const [isFollowing, setIsFollowing] = useState(false);
     const [shareGuardado, setShareGuardado] = useState(false);
@@ -73,6 +75,7 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
 
     useEffect(() => {
         const fetchShare = async () => {
+            setLoading(true);
 
             try {
                 const response = await fetch(`/api/shares/${slug}`);
@@ -91,8 +94,10 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                     setShare(share);
                     setIsFollowing(siguiendo);
                     setShareGuardado(guardado);
+                    setLoading(false);
                 }
             } catch (error) {
+                setLoading(false);
                 throw new Error("Error cargando el Share.");
             }
         };
@@ -206,6 +211,11 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
         comentarioFormRef.current?.scrollIntoView({ behavior: "smooth" });
     }
 
+    if (loading) {
+        return (
+            <DetalleShareSkeleton />
+        );
+    }
 
     return (
         <div className="w-full flex flex-col items-center gap-16 pb-[160px]">

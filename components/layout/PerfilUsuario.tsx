@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useSession } from "next-auth/react";
 import type { UserData } from '@/types/user';
+import { toast } from "react-hot-toast";
+import PerfilUsuarioSkeleton from '@/components/layout/PerfilUsuarioSkeleton';
 import ListaFeedUsuario from '@/components/cards/ListaFeedUsuario';
 import AvatarOtros from "@/components/icons/AvatarOtros";
 import Image from "next/image";
@@ -83,10 +85,15 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
 
             setSiguiendo(!siguiendo); // Cambiar estado del seguimiento
         } catch (error) {
-            console.error(error);
-            setError("No se pudo realizar la acción.");
+            toast.error("No se pudo realizar la acción.");
         }
     };
+
+    if (loading) {
+        return (
+            <PerfilUsuarioSkeleton />
+        );
+    }
 
     return (
         <div className="w-full flex flex-col items-center gap-12 px-col1 pt-[3rem] pb-32">
