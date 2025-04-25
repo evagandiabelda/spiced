@@ -3,12 +3,10 @@ import Image from "next/image";
 import DudasForm from "@/components/inputs/forms/dudas-form";
 
 export const metadata: Metadata = {
-    title: 'Preguntas Frecuentes',
+    title: 'Política de Privacidad',
 };
 
-export default async function PerfilPage() {
-
-    const triggerClassname = "pb-6 font-inter font-bold text-[var(--gris4)] px-6 rounded-xl bg-white dark:bg-[var(--gris4)] shadow-sm";
+export default async function PoliticaPrivacidad() {
 
     return (
         <div className="w-full flex flex-col items-center mobile:gap-12 tablet:gap-0 px-col1 pt-[3rem] pb-32">

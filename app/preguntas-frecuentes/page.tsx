@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: 'Preguntas Frecuentes',
 };
 
-export default async function PerfilPage() {
+export default async function PreguntasFrecuentes() {
 
     const triggerClassname = "pb-6 font-inter font-bold text-[var(--gris4)] px-6 rounded-xl bg-white dark:bg-[var(--gris4)] shadow-sm";
 
