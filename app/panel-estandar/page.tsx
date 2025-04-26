@@ -12,7 +12,7 @@ import ListaSharesPublicados from "@/components/panel/ListaSharesPublicados";
 import Input from "@/components/inputs/Input";
 import { Insignia } from "@prisma/client";
 
-export default function Inicio() {
+export default function PanelEstandar() {
 
     const { status, data: session } = useSession();
     const router = useRouter();
@@ -47,14 +47,8 @@ export default function Inicio() {
             <div className="w-full flex flex-col gap-8">
                 <div className="w-full flex mobile:flex-col-reverse tablet:flex-row justify-between mobile:items-between tablet:items-center mobile:gap-12 tablet:gap-3">
                     <h2 className="dark:text-[var(--gris3)]">Tu espacio personal</h2>
-                    <div className="flex flex-row justify-end gap-6">
-                        <div className="flex flex-row justify-end items-center gap-3">
-                            <Boton
-                                texto="Ver mi perfil"
-                                enlace={perfilHref}
-                                tamano="pequeno"
-                                jerarquia="secundario"
-                            />
+                    <div className="flex flex-row justify-end items-center gap-3">
+                        <a href="/panel-estandar/insignias">
                             <Image
                                 src={iconoInsignia}
                                 width={32}
@@ -62,7 +56,13 @@ export default function Inicio() {
                                 className="cursor-pointer hover:scale-110 transition ease dark:opacity-70 dark:hover:opacity-100"
                                 alt="insignia actual"
                             />
-                        </div>
+                        </a>
+                        <Boton
+                            texto="Ver mi perfil"
+                            enlace={perfilHref}
+                            tamano="pequeno"
+                            jerarquia="secundario"
+                        />
                         <ThemeToggle />
                     </div>
                 </div>

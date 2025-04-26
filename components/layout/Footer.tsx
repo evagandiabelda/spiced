@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import React from 'react';
 import Image from 'next/image';
 import Logo from '@/components/icons/Logo';
@@ -7,6 +8,8 @@ import Menu from '@/components/layout/Menu';
 import Boton from '@/components/buttons/Boton';
 
 export default function Footer() {
+
+    const { data: session } = useSession();
 
     const divClassname = 'hover:scale-110 transition ease';
     const iconClassname = 'dark:opacity-40 dark:hover:opacity-100 transition ease';
@@ -75,11 +78,13 @@ export default function Footer() {
                         </div>
                         <div className='flex flex-col gap-6'>
                             <div className="flex flex-col gap-5">
-                                <h3 className='text-white dark:text-[var(--gris3)]'>Ayuda y prevención contra el suicidio</h3>
-                                <p className='text-[var(--brand2)] dark:text-[var(--gris3)]'>No dudes en utilizar nuestro chat en vivo 24/7 y gratuito, con profesionales voluntarios y totalmente anónimo.</p>
+                                <h3 className='text-white dark:text-[var(--gris2)]'>Ayuda y prevención contra el suicidio</h3>
+                                <p className='text-[var(--brand2)] dark:text-[var(--gris3)]'>
+                                    {session?.user.userType === "expert" ? "Participa en el programa voluntario para atender a pacientes en riesgo." : "No dudes en utilizar nuestro sistema gratuito 24/7 con profesionales voluntarios."}
+                                </p>
                             </div>
                             <div>
-                                <Boton texto='Necesito ayuda' enlace='#' tamano='grande' jerarquia="primario" customColor='var(--brand1)' />
+                                <Boton texto={session?.user.userType === "expert" ? "Participar ahora" : "Necesito ayuda"} enlace={session?.user.userType === "expert" ? "/panel-experto/saps" : "/saps"} tamano='grande' jerarquia="primario" customColor='var(--brand1)' />
                             </div>
                         </div>
                     </div>

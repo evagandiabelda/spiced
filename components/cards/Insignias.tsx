@@ -9,7 +9,7 @@ export default function Insignias() {
     const { data: session } = useSession();
 
     const divClassname = "w-full flex flex-col gap-4 p-6 mobile:bg-white mobile:rounded-xl mobile:shadow-lg";
-    const divClassnameOpacity = divClassname + " opacity-50";
+    const divClassnameOpacity = divClassname + " opacity-50 grayscale";
 
     return (
         <div className="w-full flex mobile:flex-col tablet:flex-row tablet:justify-between gap-8">
@@ -60,7 +60,7 @@ export default function Insignias() {
 
             {/* INSIGNIA 2: */}
 
-            <div className={(session?.user.insignia.cacahuete_sabio || session?.user.insignia.cactus_legendario) ? divClassname : divClassnameOpacity}>
+            <div className={(session?.user.insignia === "cacahuete_sabio" || session?.user.insignia === "cactus_legendario") ? divClassname : divClassnameOpacity}>
                 <div className="w-full flex flex-col items-center text-center gap-4 border-b border-b-1 border-[var(--gris5)] pb-4">
                     <Image
                         src="/iconos/iconos-otros/icono-insignia-2.svg"
@@ -104,7 +104,7 @@ export default function Insignias() {
 
             {/* INSIGNIA 3: */}
 
-            <div className={session?.user.insignia.cactus_legendario ? divClassname : divClassnameOpacity}>
+            <div className={session?.user.insignia === "cactus_legendario" ? divClassname : divClassnameOpacity}>
                 <div className="w-full flex flex-col items-center text-center gap-4 border-b border-b-1 border-[var(--gris5)] pb-4">
                     <Image
                         src="/iconos/iconos-otros/icono-insignia-3.svg"

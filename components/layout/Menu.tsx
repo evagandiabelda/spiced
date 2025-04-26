@@ -10,12 +10,11 @@ import {
 } from "@/components/ui/accordion"
 
 
-type tipo = {
-    // Valores aceptados:
+interface MenuProps {
     tipo: "header" | "header-desplegable" | "footer" | "footer-desplegable";
 };
 
-export default function Menu({ tipo }: tipo) {
+export default function Menu({ tipo }: MenuProps) {
 
     const { data: session } = useSession();
 
@@ -84,7 +83,7 @@ export default function Menu({ tipo }: tipo) {
         return (
             <div className="w-full flex mobile:flex-col tablet:flex-row mobile:gap-6 tablet:gap-16">
                 <div className="flex flex-col gap-5">
-                    <h3 className='text-white dark:text-[var(--gris3)]'>Spices</h3>
+                    <h3 className='text-white dark:text-[var(--gris2)]'>Spices</h3>
                     <div className="flex flex-row gap-6">
                         <nav className="flex flex-col gap-3">
                             <a href="/explorar?spices=TEA" className={className}>TEA</a>
@@ -108,7 +107,7 @@ export default function Menu({ tipo }: tipo) {
                     </div>
                 </div>
                 <div className="flex flex-col gap-5">
-                    <h3 className='text-white dark:text-[var(--gris3)]'>Categorías</h3>
+                    <h3 className='text-white dark:text-[var(--gris2)]'>Categorías</h3>
                     <nav className="flex flex-col gap-3">
                         <a href="/explorar?categoria=Arte" className={className}>Arte</a>
                         <a href="/explorar?categoria=Bienestar" className={className}>Bienestar</a>
@@ -123,7 +122,7 @@ export default function Menu({ tipo }: tipo) {
                     </nav>
                 </div>
                 <div className="flex flex-col gap-5">
-                    <h3 className='text-white dark:text-[var(--gris3)]'>Tu espacio</h3>
+                    <h3 className='text-white dark:text-[var(--gris2)]'>Tu espacio</h3>
                     <nav className="flex flex-col gap-3">
                         <a href={session?.user.userType === "expert" ? "/panel-experto" : "/panel-estandar"} className={className}>Espacio personal</a>
                         <a href={session?.user.userType === "expert" ? "/panel-experto/nuevo-share" : "/panel-estandar/nuevo-share"} className={className}>Compartir contenido</a>
@@ -131,9 +130,10 @@ export default function Menu({ tipo }: tipo) {
                         {!session?.user &&
                             <a href="/register-expert" className={className}>Convertirse en experto</a>
                         }
-                        <a href="#" className={className}>Preguntas frecuentes</a>
-                        <a href="#" className={className}>Política de Privacidad</a>
-                        <a href="#" className={className}>Ayúdanos a mejorar</a>
+                        <a href="/preguntas-frecuentes" className={className}>Preguntas frecuentes</a>
+                        <a href="/normas-comunidad" className={className}>Normas de la Comunidad</a>
+                        <a href="politica-privacidad" className={className}>Política de Privacidad</a>
+                        <a href="/sugerencias" className={className}>Ayúdanos a mejorar</a>
                         {session?.user &&
                             <a href={session?.user.userType === "expert" ? "/panel-experto/configuracion" : "/panel-estandar/configuracion"} className={className}>Salir</a>
                         }
@@ -201,9 +201,10 @@ export default function Menu({ tipo }: tipo) {
                                 {!session?.user &&
                                     <a href="/register-expert" className={className}>Convertirse en experto</a>
                                 }
-                                <a href="#" className={className}>Preguntas frecuentes</a>
-                                <a href="#" className={className}>Política de Privacidad</a>
-                                <a href="#" className={className}>Ayúdanos a mejorar</a>
+                                <a href="/preguntas-frecuentes" className={className}>Preguntas frecuentes</a>
+                                <a href="/normas-comunidad" className={className}>Normas de la Comunidad</a>
+                                <a href="politica-privacidad" className={className}>Política de Privacidad</a>
+                                <a href="/sugerencias" className={className}>Ayúdanos a mejorar</a>
                                 {session?.user &&
                                     <a href={session?.user.userType === "expert" ? "/panel-experto/configuracion" : "/panel-estandar/configuracion"} className={className}>Salir</a>
                                 }

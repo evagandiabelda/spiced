@@ -31,8 +31,8 @@ export default function MenuSidebar({ usuario }: MenuSidebarProps) {
                 <ItemMenuSidebar enlace="/panel-experto/nuevo-share" icono="/iconos/iconos-menu/icono-nuevo.svg" texto="Nuevo Share" />
                 <ItemMenuSidebar enlace="/panel-experto/tus-shares" icono="/iconos/iconos-menu/icono-clip.svg" texto="Tus Shares" />
                 <ItemMenuSidebar enlace="/panel-experto/shares-guardados" icono="/iconos/iconos-menu/icono-guardado.svg" texto="Shares guardados" />
-                <ItemMenuSidebar enlace="/panel-experto/sesiones" icono="/iconos/iconos-otros/icono-euro.svg" texto="Sesiones" />
                 <ItemMenuSidebar enlace="/panel-experto/verificaciones" icono="/iconos/iconos-otros/icono-verificado-lineal.svg" texto="Verificaciones" />
+                <ItemMenuSidebar enlace="/panel-experto/saps" icono="/iconos/iconos-otros/icono-corazon.svg" texto="Prevención del suicidio" />
                 <ItemMenuSidebar enlace="/panel-experto/configuracion" icono="/iconos/iconos-menu/icono-configuracion.svg" texto="Configuración" />
             </nav>
         );

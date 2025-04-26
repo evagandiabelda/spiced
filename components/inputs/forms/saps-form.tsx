@@ -1,0 +1,148 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import ablyClient from "@/lib/ably";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Boton from "@/components/buttons/Boton";
+
+interface Message {
+    text: string;
+    sender: "yo" | "otro";
+}
+
+export default function SapsForm() {
+
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [input, setInput] = useState("");
+    const [channelId, setChannelId] = useState<string | null>(null);
+    const [isInPresence, setIsInPresence] = useState(false);
+
+    // Publicar la solicitud de chat para que la puedan ver los Experts:
+    useEffect(() => {
+        const setupChannel = async () => {
+            let storedChannelId = localStorage.getItem("chat-channel-id");
+
+            if (!storedChannelId) {
+                storedChannelId = crypto.randomUUID();
+                localStorage.setItem("chat-channel-id", storedChannelId);
+
+                const solicitudesChannel = ablyClient.channels.get("solicitudes-ayuda");
+
+                // NOS AÑADIMOS AL PRESENCE
+                await solicitudesChannel.presence.enter({
+                    channelId: storedChannelId,
+                    timestamp: new Date().toISOString(),
+                });
+
+                setIsInPresence(true);
+            }
+
+            setChannelId(storedChannelId);
+        };
+
+        setupChannel();
+
+        return () => {
+            const solicitudesChannel = ablyClient.channels.get("solicitudes-ayuda");
+            if (isInPresence) {
+                solicitudesChannel.presence.leave();
+            }
+        };
+    }, [isInPresence]);
+
+    // Iniciar el chat:
+    useEffect(() => {
+        if (!channelId) return;
+
+        const channel = ablyClient.channels.get(`chat-ayuda-${channelId}`);
+
+        // Mensaje de bienvenida automático
+        setMessages([
+            { sender: "otro", text: "Sabemos que estás pasando por un momento difícil, pero no estás sol@. Al llegar hasta aquí, has dado un paso valiente hacia tu bienestar.\n\nEstamos aquí para escucharte y ayudarte. No hay prisa, tómate el tiempo que necesites.\n\nSi te encuentras en una situación de emergencia, puedes utilizar directamente la línea telefónica de ayuda gratuita del Ministerio de Sanidad: 024." }
+        ]);
+
+        channel.subscribe((message) => {
+            setMessages((prev) => [...prev, message.data]);
+        });
+
+        // Cleanup cuando el componente se desmonta
+        return () => {
+            channel.unsubscribe();
+        };
+    }, [channelId]);
+
+    // Enviar un mensaje:
+    const sendMessage = () => {
+        if (!channelId) return;
+
+        const channel = ablyClient.channels.get(`chat-ayuda-${channelId}`);
+
+        if (input.trim() !== "") {
+            const messageToSend: Message = {
+                text: input.trim(),
+                sender: "yo", // Quien envía ahora mismo
+            };
+            channel.publish("message", messageToSend);
+            setInput("");
+        }
+    };
+
+    return (
+        <div className="w-full flex flex-col items-center gap-12 px-col1">
+
+            <h2>Chat anónimo 24/7</h2>
+
+            <div className="w-full flex flex-col items-center gap-8">
+
+                <div className="relative w-full h-[50vh] flex flex-col overflow-y-auto overflow-x-hidden px-6">
+                    <div className="flex flex-col justify-end gap-4 min-h-full">
+                        {messages.map((msg, index) => (
+                            <div key={index} className={`flex ${msg.sender === "yo" ? "justify-end" : "justify-start"}`}>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                    className={`px-6 py-4 rounded-[1.6rem] max-w-[70%] whitespace-pre-wrap ${msg.sender === "yo" ? "rounded-br-none bg-[#cfc8c4] dark:bg-[var(--gris4)]" : "rounded-bl-none text-white fondo-degradado2"}`}
+                                >
+                                    {msg.text}
+                                </motion.div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Fading superior */}
+                    <div className="pointer-events-none absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-[var(--background)] to-transparent z-10" />
+                </div>
+
+                <div className="w-full flex flex-row justify-between items-center gap-2 rounded-full p-2 bg-white dark:bg-[var(--gris4)] shadow-md">
+                    <div className="pl-6">
+                        <Image
+                            src="/iconos/iconos-otros/icono-editar.svg"
+                            alt="icono escribir"
+                            width={16}
+                            height={16}
+                            className="object-contain"
+                        />
+                    </div>
+                    <input
+                        type="text"
+                        id="message"
+                        placeholder="Empieza a escribir y un profesional estará contigo en breve..."
+                        className="flex-1 py-2 px-4 focus:outline-none placeholder-light dark:placeholder-dark"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                    />
+                    <Boton
+                        texto="Enviar"
+                        tamano="grande"
+                        jerarquia="primario"
+                        onClick={sendMessage}
+                    />
+                </div>
+
+            </div>
+
+        </div>
+    );
+}
