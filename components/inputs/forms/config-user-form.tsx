@@ -229,14 +229,14 @@ export default function ConfigUserForm() {
 
             {/* SECCIÓN 'EDITA TU PERFIL' */}
 
-            <section className="w-full mx-auto flex flex-col border-b border-b-1 border-b-[var(--gris3)] pb-16 px-col1 gap-12">
+            <section className="w-full mx-auto flex flex-col border-b border-b-1 border-b-[var(--gris3)] pb-16 tablet:px-col1 gap-12">
 
                 <h3>Edita tu perfil</h3>
 
-                <form onSubmit={handleSubmit} className="w-full flex flex-row gap-8">
+                <form onSubmit={handleSubmit} className="w-full flex mobile:flex-col tablet:flex-row mobile:items-center tablet:items-start mobile:gap-2 tablet:gap-8">
 
                     {/* AVATAR: */}
-                    <div className="w-col1">
+                    <div className="mobile:w-col3 tablet:w-col1">
 
                         <input
                             type="file"
@@ -262,11 +262,11 @@ export default function ConfigUserForm() {
                     </div>
 
                     {/* DATOS */}
-                    <div className="w-full flex flex-col flex-1 gap-8">
+                    <div className="w-full flex flex-col flex-1 gap-8 pt-4">
 
                         <div className="w-full mx-auto flex flex-col gap-6">
 
-                            <div className="w-full flex flex-row gap-4 items-baseline">
+                            <div className="w-full flex mobile:flex-col tablet:flex-row mobile:gap-2 tablet:gap-4 tablet:items-baseline mobile:text-center tablet:text-left">
                                 <p className="font-bold text-[1.1rem]">@{session?.user.name}</p>
                                 <p className="text-[0.8rem] text-[var(--gris2)] font-bold">(No puedes cambiar tu nombre de usuario)</p>
                             </div>
@@ -350,13 +350,13 @@ export default function ConfigUserForm() {
 
             {/* SECCIÓN 'MODIFICA TUS DATOS DE ACCESO' */}
 
-            <section className="w-full mx-auto flex flex-col border-b border-b-1 border-b-[var(--gris3)] py-16 px-col1 gap-12">
+            <section className="w-full mx-auto flex flex-col border-b border-b-1 border-b-[var(--gris3)] py-16 tablet:px-col1 gap-12">
 
                 <h3>Modifica tus datos de acceso</h3>
 
                 <div className="w-full flex flex-row gap-8">
 
-                    <div className="w-col1"></div>
+                    <div className="w-col1 mobile:hidden tablet:block"></div>
 
                     <form onSubmit={handleSubmit} className="w-full flex flex-col flex-1 gap-8">
 
@@ -393,13 +393,16 @@ export default function ConfigUserForm() {
 
             {/* SECCIÓN 'SALIR DE SPICED' */}
 
-            <section className="w-full mx-auto flex flex-col py-16 px-col1 gap-12">
+            <section className="w-full mx-auto flex flex-col py-16 tablet:px-col1 gap-12">
 
                 <h3>Salir de Spiced</h3>
 
-                <div className="w-col6 flex flex-row justify-start gap-4">
-                    <Boton texto="Desconectarse" onClick={handleLogout} tamano="pequeno" jerarquia="primario" />
-                    <Boton texto="Eliminar tu cuenta de Spiced (esta acción es irreversible)" onClick={() => setShowModal(true)} tamano="pequeno" jerarquia="secundario" />
+                <div className="w-col6 flex mobile:flex-col tablet:flex-row gap-6">
+                    <Boton texto="Desconectarse" onClick={handleLogout} tamano="grande" jerarquia="primario" />
+                    <div className="w-full flex mobile:flex-col laptop:flex-row laptop:items-center mobile:gap-3 laptop:gap-0">
+                        <Boton texto="Eliminar tu cuenta" onClick={() => setShowModal(true)} tamano="grande" jerarquia="secundario" />
+                        <p className="text-sm text-[var(--gris3)] pl-4">Esta acción es irreversible.</p>
+                    </div>
                 </div>
 
             </section>

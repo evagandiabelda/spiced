@@ -24,7 +24,7 @@ export default function ItemListaSharePublicado({ id, imagen, autor, titulo, fec
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <li className="w-full flex flex-row justify-between items-end gap-12 py-4 border-b border-b-[var(--gris2)] dark:border-b-[var(--negro)]">
+        <li className="w-full flex mobile:flex-col laptop:flex-row laptop:justify-between laptop:items-end mobile:gap-6 laptop:gap-12 py-4 border-b border-b-[var(--gris2)] dark:border-b-[var(--negro)]">
 
             <div className="flex-1 flex flex-row mobile:items-start tablet:items-center gap-4">
 
@@ -41,7 +41,7 @@ export default function ItemListaSharePublicado({ id, imagen, autor, titulo, fec
                     <div className="w-full flex flex-row">
                         <p className="font-bold">{titulo}</p>
                     </div>
-                    <div className="w-full mobile:hidden tablet:flex flex-row justify-between">
+                    <div className="w-full flex flex-row justify-between">
                         <p><span className="text-[var(--gris2)]">@{autor || ""}</span></p>
                         <p><span className="text-[var(--gris2)]">{objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</span></p>
                     </div>
@@ -49,7 +49,7 @@ export default function ItemListaSharePublicado({ id, imagen, autor, titulo, fec
 
             </div>
 
-            <div id="caja-boton" className="mobile:hidden laptop:flex flex-row gap-4">
+            <div id="caja-boton" className="flex flex-row justify-end gap-4">
                 <Boton texto="Leer" enlace="#" tamano="pequeno" jerarquia="secundario" onClick={() => router.push(`/share/${slug}`)} />
                 <Boton texto="Eliminar" enlace="#" tamano="pequeno" jerarquia="secundario" customColor="var(--brand1)" onClick={() => setIsModalOpen(true)} />
             </div>

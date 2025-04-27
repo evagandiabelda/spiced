@@ -10,7 +10,7 @@ export default function Chat() {
     const { id } = params as { id: string };
 
     return (
-        <div className="w-full flex flex-col items-center mobile:gap-12 tablet:gap-0 px-col1 pt-[3rem] pb-32">
+        <div className="w-full flex flex-col items-center pb-32">
 
             {/* 'Volver al listado de solicitudes de chat' */}
 

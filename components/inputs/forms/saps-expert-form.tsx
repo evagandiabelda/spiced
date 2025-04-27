@@ -74,11 +74,11 @@ export default function SapsExpertForm({ channelId }: SapsExpertFormProps) {
     };
 
     return (
-        <div className="w-full flex flex-col items-center gap-12 px-col1">
-            <h2>Chat de Ayuda - Expert</h2>
+        <div className="w-full flex flex-col items-center gap-12 tablet:px-col1">
+            <h2>Chat de Ayuda</h2>
 
             <div className="w-full flex flex-col items-center gap-8">
-                <div className="relative w-full h-[50vh] flex flex-col overflow-y-auto overflow-x-hidden px-6">
+                <div className="relative w-full h-[40vh] flex flex-col overflow-y-auto overflow-x-hidden px-6">
                     <div className="flex flex-col justify-end gap-4 min-h-full">
                         {messages.map((msg, index) => (
                             <div key={index} className={`flex ${msg.sender === "expert" ? "justify-end" : "justify-start"}`}>
@@ -99,7 +99,7 @@ export default function SapsExpertForm({ channelId }: SapsExpertFormProps) {
                 </div>
 
                 <div className="w-full flex flex-row justify-between items-center gap-2 rounded-full p-2 bg-white dark:bg-[var(--gris4)] shadow-md">
-                    <div className="pl-6">
+                    <div className="pl-6 mobile:hidden tablet:block">
                         <Image
                             src="/iconos/iconos-otros/icono-editar.svg"
                             alt="icono escribir"

@@ -40,7 +40,7 @@ export default async function PanelEstandarLayout({
                 </section>
 
                 {/* CAJA PRINCIPAL */}
-                <section className="flex flex-col w-full h-full p-[4rem] pb-[6rem] rounded-t-[28px] tablet:rounded-t-none tablet:rounded-tl-[28px] bg-[var(--gris1)]">
+                <section className="flex flex-col w-full h-full mobile:px-col1 tablet:px-[4rem] py-[4rem] pb-[6rem] rounded-t-[28px] tablet:rounded-t-none tablet:rounded-tl-[28px] bg-[var(--gris1)]">
                     {children}
                 </section>
             </div>
