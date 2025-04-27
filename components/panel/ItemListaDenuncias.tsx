@@ -55,7 +55,7 @@ export default function ItemListaDenuncias({ motivo, fecha, share, comentario, u
 
             <div id="caja-denuncia" className="w-full flex-1 flex flex-col justify-between gap-4">
 
-                <div className="w-full flex mobile:flex-col-reverse laptop:flex-row tablet:justify-between items-center mobile:gap-4 laptop:gap-12 px-4">
+                <div className="w-full flex mobile:flex-col-reverse laptop:flex-row tablet:justify-between items-center mobile:gap-4 laptop:gap-12 tablet:px-4">
 
                     <div className="w-full flex flex-row items-center gap-2">
                         <div className="w-[2.5rem]">

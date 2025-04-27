@@ -8,7 +8,7 @@ type MenuSidebarProps = {
 
 export default function MenuSidebar({ usuario }: MenuSidebarProps) {
 
-    const className = "w-full flex mobile:flex-row tablet:flex-col mobile:justify-between tablet:justify-start tablet:items-center laptop:items-start mobile:gap-0 tablet:gap-2";
+    const className = "w-full flex mobile:flex-row tablet:flex-col mobile:justify-between tablet:justify-start tablet:items-center laptop:items-start mobile:gap-0 tablet:gap-2 overflow-x-auto scrollbar-hide";
 
     if (usuario === "estandar") {
 

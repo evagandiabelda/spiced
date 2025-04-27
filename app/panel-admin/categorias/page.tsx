@@ -62,10 +62,10 @@ export default function Categorias() {
             {/* CONTENIDO: */}
             <div className="w-full flex flex-col gap-6">
 
-                <div className="w-full flex flex-row justify-end items-center gap-8 px-4">
+                <div className="w-full flex mobile:flex-col tablet:flex-row justify-end items-center mobile:gap-4 tablet:gap-8 px-4">
 
                     {editando && (
-                        <div className="w-full rounded-xl border border-2 border-[var(--gris2)]">
+                        <div className="w-full flex-1 rounded-xl border border-2 border-[var(--gris2)]">
                             <Input
                                 id="nueva"
                                 tipo="text"
@@ -77,7 +77,7 @@ export default function Categorias() {
                         </div>
                     )}
 
-                    <div className="w-ful flex flex-row justify-end items-center gap-4">
+                    <div className="w-full flex flex-row justify-end items-center gap-4">
                         {editando && (
                             <Boton
                                 texto="Cancelar"

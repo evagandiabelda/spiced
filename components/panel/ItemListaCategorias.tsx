@@ -27,7 +27,7 @@ export default function ItemListaCategorias({ id, nombre, onEdit, onDelete }: It
     };
 
     return (
-        <li className="w-full flex mobile:flex-col tablet:flex-row justify-between mobile:items-end tablet:items-center mobile:gap-2 tablet:gap-12 px-4 py-6 border-b border-b-[var(--gris2)] dark:border-[var(--gris4)]">
+        <li className="w-full flex mobile:flex-col tablet:flex-row justify-between mobile:items-end tablet:items-center mobile:gap-4 tablet:gap-12 px-4 py-6 border-b border-b-[var(--gris2)] dark:border-[var(--gris4)]">
 
             <div className="w-full flex-1 flex flex-row mobile:items-start tablet:items-center gap-4">
                 {editando ? (
@@ -45,7 +45,7 @@ export default function ItemListaCategorias({ id, nombre, onEdit, onDelete }: It
                 )}
             </div>
 
-            <div id="caja-botones" className="flex flex-row gap-4">
+            <div id="caja-botones" className="flex flex-row mobile:gap-3 tablet:gap-4">
 
                 {editando &&
 

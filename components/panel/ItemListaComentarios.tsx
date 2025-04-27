@@ -30,7 +30,7 @@ export default function ItemListaComentarios({ id, texto, fecha, user, share, nu
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <li className="w-full flex flex-col gap-6 px-4 py-10 border-b border-b-[var(--gris2)] dark:border-[var(--gris4)]">
+        <li className="w-full flex flex-col gap-6 px-4 mobile:py-6 tablet:py-10 border-b border-b-[var(--gris2)] dark:border-[var(--gris4)]">
 
             <div id="caja-autor-fecha" className="w-full flex mobile:flex-col-reverse tablet:flex-row tablet:justify-between tablet:items-center px-4 mobile:gap-4 tablet:gap-8">
                 <div className="flex flex-row gap-1">
@@ -57,7 +57,7 @@ export default function ItemListaComentarios({ id, texto, fecha, user, share, nu
                     href={`/share/${share.slug}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full flex flex-1 items-center gap-3 p-4 rounded-xl hover:bg-[var(--gris1)] dark:hover:bg-[var(--gris4)] cursor-pointer"
+                    className="w-full flex flex-1 gap-3 mobile:p-2 tablet:p-4 rounded-xl hover:bg-[var(--gris1)] dark:hover:bg-[var(--gris4)] cursor-pointer"
                 >
                     <div className="relative w-[3rem] h-[3rem]">
                         <Image
@@ -67,7 +67,7 @@ export default function ItemListaComentarios({ id, texto, fecha, user, share, nu
                             className="rounded-xl object-cover"
                         />
                     </div>
-                    <div className="w-full flex flex-col gap-2">
+                    <div className="w-full flex flex-col flex-1 gap-2">
                         <p className="text-[0.8rem] dark:text-[var(--gris3)]">En el Share:</p>
                         <p className="text-[0.8rem] font-bold dark:text-[var(--gris3)]">{share.titulo}</p>
                     </div>

@@ -33,9 +33,9 @@ export default function ItemListaShares({ id, titulo, texto, imagen, fecha, slug
     };
 
     return (
-        <li className="w-full flex flex-col gap-6 px-4 py-10 border-b border-b-[var(--gris2)] dark:border-[var(--gris4)]">
+        <li className="w-full flex flex-col gap-6 px-4 mobile:py-6 tablet:py-10 border-b border-b-[var(--gris2)] dark:border-[var(--gris4)]">
 
-            <div id="caja-autor-fecha" className="w-full flex mobile:flex-col-reverse tablet:flex-row tablet:justify-between tablet:items-center px-4 mobile:gap-4 tablet:gap-8">
+            <div id="caja-autor-fecha" className="w-full flex mobile:flex-col-reverse tablet:flex-row tablet:justify-between tablet:items-center px-4 mobile:gap-2 tablet:gap-8">
                 <div className="flex flex-row gap-1">
                     {user.usuario_verificado &&
                         <Image
@@ -50,22 +50,22 @@ export default function ItemListaShares({ id, titulo, texto, imagen, fecha, slug
                 <p className="text-[0.8rem] text-[var(--gris3)] text-right">{objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</p>
             </div>
 
-            <div id="caja-share" className="px-4 py-3 rounded-xl bg-[var(--gris1)] dark:bg-[var(--gris4)]">
+            <div id="caja-share" className="mobile:px-2 tablet:px-4 py-3 rounded-xl bg-[var(--gris1)] dark:bg-[var(--gris4)]">
                 <a
                     href={`/share/${slug}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full flex flex-1 items-center gap-4 p-4 rounded-xl hover:bg-[var(--gris1)] dark:hover:bg-[var(--gris4)] cursor-pointer"
+                    className="w-full flex flex-1 gap-4 p-4 rounded-xl hover:bg-[var(--gris1)] dark:hover:bg-[var(--gris4)] cursor-pointer"
                 >
                     <div className="relative w-[4rem] h-[4rem]">
                         <Image
                             src={imagen}
                             alt="miniatura-share"
                             fill
-                            className="rounded-xl object-cover"
+                            className="object-cover rounded-xl"
                         />
                     </div>
-                    <div className="w-full flex flex-col gap-3">
+                    <div className="w-full flex flex-col flex-1 gap-3">
 
                         <div className="w-full flex flex-row items-center gap-2">
                             <p className="font-bold">{titulo}</p>
