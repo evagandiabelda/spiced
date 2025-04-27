@@ -53,11 +53,7 @@ export default function SapsForm() {
         setupChannel();
 
         return () => {
-            const solicitudesChannel = ablyClient.channels.get("solicitudes-ayuda");
-            console.log("Solicitudes: ", solicitudesChannel)
-            if (isInPresence) {
-                solicitudesChannel.presence.leave();
-            }
+            // No hace nada para evitar que se elimine en el lado del Expert.
         };
     }, [isInPresence]);
 
@@ -93,14 +89,13 @@ export default function SapsForm() {
         });
 
         channel.presence.get((members) => {
-            console.log("Members in presence:", members); // SIGUE SALIENDO NULL...
+            console.log("Members in presence:", members);
         });
 
         // Cleanup cuando el componente se desmonta
         return () => {
             channel.unsubscribe("message");
             channel.presence.unsubscribe("enter");
-            channel.presence.leave();
         };
     }, [channelId]);
 
@@ -122,7 +117,7 @@ export default function SapsForm() {
             channel.publish("message", messageToSend);
 
             channel.presence.get((members) => {
-                console.log("Members in presence:", members);  // SIGUE SALIENDO NULL...
+                console.log("Members in presence:", members);
             });
 
             setInput("");
