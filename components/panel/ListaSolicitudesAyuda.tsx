@@ -37,10 +37,16 @@ export default function ListaSolicitudesAyuda() {
         fetchSolicitudes();
 
         const channel = ably.channels.get("solicitudes-ayuda");
-        channel.subscribe("nueva-solicitud", (message) => {
-            console.log(message)
+
+        const onNuevaSolicitud = (message: any) => {
             setSolicitudes((prev) => [...prev, message.data]);
-        });
+        };
+
+        channel.subscribe("nueva-solicitud", onNuevaSolicitud);
+
+        return () => {
+            channel.unsubscribe("nueva-solicitud", onNuevaSolicitud);
+        };
 
     }, []);
 
