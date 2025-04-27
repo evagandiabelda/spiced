@@ -19,7 +19,7 @@ export default function ListaSolicitudesAyuda() {
     useEffect(() => {
         const fetchSolicitudes = async () => {
             try {
-                const res = await fetch("/api/ably/chats");
+                const res = await fetch("/api/chats");
                 if (!res.ok) {
                     throw new Error("No se pudieron cargar las solicitudes.");
                 }
@@ -34,7 +34,15 @@ export default function ListaSolicitudesAyuda() {
         };
 
         fetchSolicitudes();
-        console.log(solicitudes);
+
+        const channel = ably.channels.get("solicitudes-ayuda");
+        channel.subscribe("nueva-solicitud", (message) => {
+            setSolicitudes((prev) => [...prev, message.data]);
+        });
+
+        return () => {
+            channel.unsubscribe("nueva-solicitud");
+        };
     }, []);
 
     const handleUnirseAlChat = async (solicitudId: string) => {

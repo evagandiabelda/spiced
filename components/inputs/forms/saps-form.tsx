@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import ablyClient from "@/lib/ably"
+import ablyClient, { clientId } from "@/lib/ably"
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Boton from "@/components/buttons/Boton";
@@ -9,6 +9,7 @@ import Boton from "@/components/buttons/Boton";
 interface Message {
     text: string;
     sender: "yo" | "otro" | "sistema";
+    clientId: string;
 }
 
 export default function SapsForm() {
@@ -29,7 +30,12 @@ export default function SapsForm() {
 
                 const solicitudesChannel = ablyClient.channels.get("solicitudes-ayuda");
 
-                console.log(solicitudesChannel)
+                // Enviar un mensaje al canal cuando un usuario se une
+                solicitudesChannel.publish("nueva-solicitud", {
+                    username: "usuario1", // Usar datos relevantes como el username
+                    timestamp: Date.now(),
+                    channelId: storedChannelId,
+                });
 
                 // NOS AÑADIMOS AL PRESENCE
                 await solicitudesChannel.presence.enter({
@@ -41,7 +47,6 @@ export default function SapsForm() {
             }
 
             setChannelId(storedChannelId);
-            console.log("StoredChanelId: ", storedChannelId)
         };
 
         setupChannel();
@@ -65,7 +70,8 @@ export default function SapsForm() {
         setMessages([
             {
                 sender: "sistema",
-                text: "Sabemos que estás pasando por un momento difícil, pero no estás sol@. Al llegar hasta aquí, has dado un paso valiente hacia tu bienestar.\n\nEstamos aquí para escucharte y ayudarte. No hay prisa, tómate el tiempo que necesites.\n\nSi te encuentras en una situación de emergencia, puedes utilizar directamente la línea telefónica de ayuda gratuita del Ministerio de Sanidad: 024."
+                text: "Sabemos que estás pasando por un momento difícil, pero no estás sol@. Al llegar hasta aquí, has dado un paso valiente hacia tu bienestar.\n\nEstamos aquí para escucharte y ayudarte. No hay prisa, tómate el tiempo que necesites.\n\nSi te encuentras en una situación de emergencia, puedes utilizar directamente la línea telefónica de ayuda gratuita del Ministerio de Sanidad: 024.",
+                clientId: clientId,
             }
         ]);
 
@@ -82,21 +88,11 @@ export default function SapsForm() {
 
         // Escuchamos si un Expert entra al canal
         channel.presence.subscribe("enter", (member) => {
-            const data = member.data as { role?: string };
-
-            if (data?.role === "expert") {
-                setMessages((prev) => [
-                    ...prev,
-                    {
-                        text: "Un profesional se ha unido al chat.",
-                        sender: "sistema",
-                    },
-                ]);
-            }
+            const data = member.data;
         });
 
         channel.presence.get((members) => {
-            console.log("Members in presence:", members);
+            console.log("Members in presence:", members); // SIGUE SALIENDO NULL...
         });
 
         // Cleanup cuando el componente se desmonta
@@ -113,12 +109,21 @@ export default function SapsForm() {
 
         const channel = ablyClient.channels.get(`chat-ayuda-${channelId}`);
 
+        if (!channel) console.log("no hay channel")
+
         if (input.trim() !== "") {
             const messageToSend: Message = {
                 text: input.trim(),
-                sender: "yo", // Quien envía ahora mismo
+                sender: "yo",
+                clientId: clientId,
             };
+
             channel.publish("message", messageToSend);
+
+            channel.presence.get((members) => {
+                console.log("Members in presence:", members);  // SIGUE SALIENDO NULL...
+            });
+
             setInput("");
         }
     };
