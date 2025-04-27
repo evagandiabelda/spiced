@@ -39,8 +39,9 @@ export default function SapsForm() {
 
                 // NOS AÑADIMOS AL PRESENCE
                 await solicitudesChannel.presence.enter({
-                    channelId: storedChannelId,
+                    username: "usuario1",
                     timestamp: new Date().toISOString(),
+                    channelId: storedChannelId,
                 });
 
                 setIsInPresence(true);

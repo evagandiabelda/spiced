@@ -6,11 +6,9 @@ import ably from "@/lib/ably";
 import Boton from "@/components/buttons/Boton";
 
 interface Solicitud {
-    clientId: string;
-    data: {
-        channelId: string;
-        timestamp: string;
-    }
+    username: string,
+    timestamp: Date,
+    channelId: string,
 }
 
 export default function ListaSolicitudesAyuda() {
@@ -29,6 +27,7 @@ export default function ListaSolicitudesAyuda() {
 
                 const data = await res.json();
                 setSolicitudes(data);  // Guardamos las solicitudes obtenidas
+                console.log(solicitudes);
             } catch (error: any) {
                 setError(error.message);  // En caso de error, lo mostramos
             } finally {
@@ -78,16 +77,16 @@ export default function ListaSolicitudesAyuda() {
                             className="w-full flex justify-between items-center px-8 py-6 bg-white rounded-xl"
                         >
                             <div>
-                                <p><strong>ID:</strong> {solicitud.data.channelId}</p>
+                                <p><strong>ID:</strong> {solicitud.username}</p>
                                 <p className="text-sm text-gray-500">
-                                    Recibido: {new Date(solicitud.data.timestamp).toLocaleTimeString()}
+                                    Recibido: {new Date(solicitud.timestamp).toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}
                                 </p>
                             </div>
                             <Boton
                                 texto="Unirse al Chat"
                                 tamano="grande"
                                 jerarquia="primario"
-                                onClick={() => handleUnirseAlChat(solicitud.data.channelId)}
+                                onClick={() => handleUnirseAlChat(solicitud.channelId)}
                             />
                         </li>
                     ))}
