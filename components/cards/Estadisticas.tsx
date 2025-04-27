@@ -59,7 +59,7 @@ export default function Estadisticas() {
     return (
         <div className="min-w-col3 flex flex-col justify-between rounded-xl p-[30px] bg-[var(--tdah)] dark:bg-[var(--fondo-estadisticas)] dark:border-2 dark:border-[var(--borde-estadisticas)]">
             <div id="caja-sup" className="w-full h-full flex flex-row pb-6 border-b border-[var(--negro)]">
-                <div className="w-full h-100">
+                <div className="w-full h-[120px]">
                     <a href="/panel-estandar/nuevo-share">
                         <div className="flex flex-row gap-2 items-center hover:scale-105 transition ease">
                             <Image
@@ -75,7 +75,7 @@ export default function Estadisticas() {
                 </div>
                 <div className="h-full flex flex-col justify-end">
                     <a href="/panel-estandar/tus-shares">
-                        <div className="w-full h-100 flex flex-col justify-end items-right gap-4">
+                        <div className="w-full flex flex-col justify-end items-right gap-4">
                             <p className="font-bold text-[4rem] text-right">
                                 {numShares !== null ? numShares : "..."}
                             </p>
@@ -84,7 +84,7 @@ export default function Estadisticas() {
                     </a>
                 </div>
             </div>
-            <div id="caja-inf" className="w-full h-[100px] flex flex-row justify-between pt-6">
+            <div id="caja-inf" className="w-full flex flex-row justify-between pt-6">
                 <div className="w-full h-100 flex flex-col justify-end">
                     <a href="/panel-estandar/shares-guardados">
                         <p className="text-[0.9rem] font-bold">{numGuardados !== null ? `${numGuardados} guardados` : "cargando..."}</p>

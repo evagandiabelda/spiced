@@ -15,6 +15,15 @@ export default function SidebarPanel({ usuario }: SidebarPanelProps) {
     const { data: session, status } = useSession();
     const router = useRouter();
 
+    let insignia = "Pequeño Saltamontes" // Insignia base por defecto.
+
+    if (session?.user.insignia === "cacahuete_sabio") {
+        insignia = "Cacahuete Sabio"
+    }
+    else if (session?.user.insignia === "cactus_legendario") {
+        insignia = "Cactus Legendario"
+    }
+
     useEffect(() => {
         if (status === "unauthenticated") {
             router.push("/login"); // Redirigir si no está autenticado
@@ -33,13 +42,13 @@ export default function SidebarPanel({ usuario }: SidebarPanelProps) {
                     <div className="mobile:w-12 laptop:w-16 hidden dark:block">
                         <AvatarPropio />
                     </div>
-                    <div className="mobile:flex tablet:hidden laptop:flex flex-col gap-3">
+                    <div className="mobile:flex tablet:hidden laptop:flex flex-col gap-2">
 
                         <h4 className="m-0 text-[var(--blanco)] dark:text-[var(--gris2)]">¡Hola, {session?.user.nombre_real}!</h4>
 
                         {/* Usuario Estándar (muestra insignia): */}
                         {usuario === "estandar" &&
-                            <p className="mobile:hidden laptop:block font-normal text-[0.7rem] opacity-60"><span className="text-[var(--blanco)] dark:text-[var(--gris2)]">{session?.user.insignia}</span></p>
+                            <p className="mobile:hidden laptop:block font-normal text-[0.7rem] opacity-60"><span className="text-[var(--blanco)] dark:text-[var(--gris2)]">{insignia}</span></p>
                         }
 
                         {/* Usuario Experto No-Verificado: */}

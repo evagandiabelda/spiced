@@ -5,7 +5,11 @@ import { toast } from "react-hot-toast";
 import Input from "@/components/inputs/Input";
 import Boton from "@/components/buttons/Boton";
 
-export default function CardDescripcion() {
+interface CardDescripcionProps {
+    usuario: "standard" | "expert";
+}
+
+export default function CardDescripcion({ usuario }: CardDescripcionProps) {
 
     const [descripcion, setDescripcion] = useState("");
 
@@ -38,9 +42,14 @@ export default function CardDescripcion() {
     };
 
     return (
-        <div className="w-full flex flex-col justify-between gap-2 rounded-xl bg-[#ffb6c3] px-[36px] py-[40px] gap-[2.8rem] dark:bg-[var(--fondo-pinguinadas)] dark:border-2 dark:border-[var(--borde-pinguinadas)]">
+        <div className="w-full flex flex-col justify-between gap-2 rounded-xl bg-[#ffb6c3] px-[36px] py-[40px] gap-[1.6rem] dark:bg-[var(--fondo-pinguinadas)] dark:border-2 dark:border-[var(--borde-pinguinadas)]">
             <h3>Tu descripción</h3>
-            <p>Añade una descripción a tu perfil para que otros usuarios entiendan mejor tu perfil profesional.</p>
+            {usuario === "standard" &&
+                <p>Añade una descripción a tu perfil para que otros usuarios te conozcan mejor.</p>
+            }
+            {usuario === "expert" &&
+                <p>Añade una descripción a tu perfil para que otros usuarios entiendan mejor tu perfil profesional.</p>
+            }
             <div className="rounded-[1rem] border border-2 dark:border-[var(--borde-pinguinadas)] overflow-hidden">
                 <Input
                     tipo="text"

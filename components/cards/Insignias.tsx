@@ -23,7 +23,7 @@ export default function Insignias() {
                         alt="Insignia 1"
                         width={100}
                         height={100}
-                        className="w-full h-auto px-12"
+                        className="w-full h-auto mobile:px-20 tablet:px-12"
                     />
                     <h3>Pequeño Saltamontes</h3>
                 </div>
@@ -67,7 +67,7 @@ export default function Insignias() {
                         alt="Insignia 1"
                         width={100}
                         height={100}
-                        className="w-full h-auto px-12"
+                        className="w-full h-auto mobile:px-20 tablet:px-12"
                     />
                     <h3>Cacahuete Sabio</h3>
                 </div>
@@ -111,7 +111,7 @@ export default function Insignias() {
                         alt="Insignia 1"
                         width={100}
                         height={100}
-                        className="w-full h-auto px-12"
+                        className="w-full h-auto mobile:px-20 tablet:px-12"
                     />
                     <h3>Cactus Legendario</h3>
                 </div>

@@ -41,8 +41,7 @@ export default function ItemListaSharePublicado({ id, imagen, autor, titulo, fec
                     <div className="w-full flex flex-row">
                         <p className="font-bold">{titulo}</p>
                     </div>
-                    <div className="w-full flex flex-row justify-between">
-                        <p><span className="text-[var(--gris2)]">@{autor || ""}</span></p>
+                    <div className="w-full flex mobile:flex-col tablet:flex-row tablet:justify-between">
                         <p><span className="text-[var(--gris2)]">{objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</span></p>
                     </div>
                 </div>

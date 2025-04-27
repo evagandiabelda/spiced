@@ -218,12 +218,12 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
     }
 
     return (
-        <div className="w-full flex flex-col items-center gap-16 pb-[160px]">
+        <div className="w-full flex flex-col items-center mobile:gap-8 tablet:gap-16 pb-[160px]">
 
             {/* CABECERA */}
             {share &&
-                <div className="w-full min-h-[500px] max-h-[600px] flex mobile:flex-col laptop:flex-row">
-                    <div className="relative mobile:w-full laptop:w-2/3 mobile:h-[400px] laptop:h-full">
+                <div className="w-full min-h-[500px] mobile:max-h-[800px] tablet:max-h-[600px] flex mobile:flex-col laptop:flex-row">
+                    <div className="relative mobile:w-full laptop:w-2/3 mobile:h-[800px] laptop:h-full">
                         <Image
                             src={share.img_principal}
                             alt="miniatura"
@@ -232,7 +232,7 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                         />
                     </div>
 
-                    <div className="w-full h-full flex flex-col justify-center gap-8 mobile:p-col1 tablet:p-20 bg-black/5 dark:bg-white/5">
+                    <div className="w-full mobile:h-auto tablet:h-full flex flex-col justify-center gap-8 mobile:p-col1 tablet:p-20 bg-black/5 dark:bg-white/5">
                         <div className="flex flex-row gap-4 items-center">
                             <Image
                                 src="/iconos/iconos-genericos/icono-spiced.svg"
@@ -258,7 +258,7 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                     {/* Sidebar */}
                     <div className="mobile:w-full laptop:w-col3 flex flex-col gap-2">
 
-                        <div className="w-full flex flex-col gap-8 border-b border-b-1 border-b-[var(--gris2)] px-2 pb-12">
+                        <div className="w-full flex flex-col mobile:gap-2 tablet:gap-8 border-b border-b-1 border-b-[var(--gris2)] px-2 mobile:pb-6 tablet:pb-12">
                             <div className="w-full flex mobile:flex-row laptop:flex-col mobile:items-center laptop:items-start gap-4">
                                 <div className="max-w-[6rem] pl-2">
                                     <AvatarOtros autor={share.autor} />
@@ -273,19 +273,21 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                                     />}
                                 </div>
                             </div>
-                            {session
-                                && session?.user.userType !== "admin"
-                                && share.autor.id !== session?.user.id
-                                && <Boton
-                                    texto={isFollowing ? "Dejar de seguir" : "Seguir contenido"}
-                                    onClick={handleToggleFollow}
-                                    tamano="pequeno"
-                                    jerarquia={isFollowing ? "secundario" : "primario"}
-                                />
-                            }
+                            <div className="w-full flex mobile:justify-end tablet:justify-start">
+                                {session
+                                    && session?.user.userType !== "admin"
+                                    && share.autor.id !== session?.user.id
+                                    && <Boton
+                                        texto={isFollowing ? "Dejar de seguir" : "Seguir contenido"}
+                                        onClick={handleToggleFollow}
+                                        tamano="pequeno"
+                                        jerarquia={isFollowing ? "secundario" : "primario"}
+                                    />
+                                }
+                            </div>
                         </div>
 
-                        <div className="w-full flex flex-col gap-8 border-b border-b-1 border-b-[var(--gris2)] px-2 pt-8 pb-12">
+                        <div className="w-full flex flex-col mobile:gap-6 tablet:gap-8 border-b border-b-1 border-b-[var(--gris2)] px-2 mobile:pt-4 tablet:pt-8 mobile:pb-6 tablet:pb-12">
                             <div className="w-full flex flex-col gap-3">
                                 <h4 className="pl-2">Sobre este share:</h4>
                             </div>
@@ -315,7 +317,7 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                             </div>
                         </div>
 
-                        <div className="w-full flex flex-col gap-6 px-2 mobile:py-0 laptop:py-8">
+                        <div className="w-full flex flex-col gap-6 px-2 mobile:py-6 tablet:py-8 border-b border-b-1 border-b-[var(--gris2)] tablet:border-none">
                             {session
                                 && session?.user.userType !== "admin"
                                 && share.autor.id !== session?.user.id

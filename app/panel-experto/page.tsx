@@ -52,7 +52,7 @@ export default function Inicio() {
                     {/* Card Estadísticas: */}
                     <Estadisticas />
                     {/* Card Descripción: */}
-                    <CardDescripcion />
+                    <CardDescripcion usuario="expert" />
                 </div>
                 {/* Card Últimos Shares Guardados: */}
                 <div className="w-full flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-shares)] dark:border-2 dark:border-[var(--borde-shares)]">

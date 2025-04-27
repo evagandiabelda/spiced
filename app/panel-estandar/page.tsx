@@ -7,9 +7,9 @@ import { useEffect } from "react";
 import Image from "next/image";
 import ThemeToggle from "@/components/buttons/ThemeToggle";
 import Estadisticas from "@/components/cards/Estadisticas";
+import CardDescripcion from "@/components/cards/CardDescripcion";
 import Boton from "@/components/buttons/Boton";
 import ListaSharesPublicados from "@/components/panel/ListaSharesPublicados";
-import Input from "@/components/inputs/Input";
 import { Insignia } from "@prisma/client";
 
 export default function PanelEstandar() {
@@ -76,29 +76,8 @@ export default function PanelEstandar() {
                 <div className="w-full flex mobile:flex-col laptop:flex-row justify-between gap-4">
                     {/* Card Estadísticas: */}
                     <Estadisticas />
-                    {/* Card Pingüinadas: */}
-                    <div className="w-full flex mobile:flex-col-reverse tablet:flex-row gap-2 rounded-xl bg-[var(--fob)] px-[36px] py-[40px] gap-[2.8rem] dark:bg-[var(--fondo-pinguinadas)] dark:border-2 dark:border-[var(--borde-pinguinadas)]">
-                        <div id="caja-izq" className="w-full h-100 flex flex-col justify-center gap-8">
-                            <p>Los pingüinos suelen regalarse piedrecitas unos a otros en señal de afecto. Envía una pingüinada a alguien que te importe.</p>
-                            <div className="rounded-[1rem] border border-2 dark:border-[var(--borde-pinguinadas)] overflow-hidden">
-                                <Input tipo="text" id="nombre_usuario" placeholder="Su nombre de usuario" required={true} />
-                            </div>
-                            <div className="dark:hidden">
-                                <Boton texto="Enviar una pingüinada" enlace="#" tamano="pequeno" jerarquia="primario" />
-                            </div>
-                            <div className="hidden dark:block">
-                                <Boton texto="Enviar una pingüinada" enlace="#" tamano="pequeno" jerarquia="primario" customColor="var(--fob)" />
-                            </div>
-                        </div>
-                        <div id="caja-der" className="min-w-col1 h-100 flex flex-col justify-center items-center">
-                            <Image
-                                src="/imgs/IMG-Pinguino.svg"
-                                width={300}
-                                height={300}
-                                alt="imagen de un pingüino"
-                            />
-                        </div>
-                    </div>
+                    {/* Card Descripción: */}
+                    <CardDescripcion usuario="standard" />
                 </div>
                 {/* Card Últimos Shares Guardados: */}
                 <div className="w-full flex flex-col rounded-xl bg-[var(--tpa)] p-[30px] pt-[24px] gap-5 dark:bg-[var(--fondo-shares)] dark:border-2 dark:border-[var(--borde-shares)]">
