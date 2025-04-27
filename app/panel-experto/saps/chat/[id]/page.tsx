@@ -3,10 +3,10 @@ import Image from "next/image";
 import SapsForm from "@/components/inputs/forms/saps-form";
 
 export const metadata: Metadata = {
-    title: 'SAPS',
+    title: 'Chat',
 };
 
-export default async function Saps() {
+export default async function Chat() {
 
     return (
         <div className="w-full flex flex-col items-center mobile:gap-12 tablet:gap-0 px-col1 pt-[3rem] pb-32">
@@ -26,7 +26,7 @@ export default async function Saps() {
 
             {/* CONTENIDO */}
 
-            <div className='w-full flex flex-col items-center gap-12 mobile:px-col1 tablet:px-col1 py-16 border-b border-b-1 border-b-[#b0aaaa]'>
+            <div className='w-full flex flex-col items-center gap-12 py-16 border-b border-b-1 border-b-[#b0aaaa]'>
                 <SapsForm />
             </div>
 

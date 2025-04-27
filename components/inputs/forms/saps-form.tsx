@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import ablyClient from "@/lib/ably";
+import ablyClient from "@/lib/ably"
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Boton from "@/components/buttons/Boton";
@@ -29,6 +29,8 @@ export default function SapsForm() {
 
                 const solicitudesChannel = ablyClient.channels.get("solicitudes-ayuda");
 
+                console.log(solicitudesChannel)
+
                 // NOS AÑADIMOS AL PRESENCE
                 await solicitudesChannel.presence.enter({
                     channelId: storedChannelId,
@@ -39,12 +41,14 @@ export default function SapsForm() {
             }
 
             setChannelId(storedChannelId);
+            console.log("StoredChanelId: ", storedChannelId)
         };
 
         setupChannel();
 
         return () => {
             const solicitudesChannel = ablyClient.channels.get("solicitudes-ayuda");
+            console.log("Solicitudes: ", solicitudesChannel)
             if (isInPresence) {
                 solicitudesChannel.presence.leave();
             }
@@ -64,6 +68,12 @@ export default function SapsForm() {
                 text: "Sabemos que estás pasando por un momento difícil, pero no estás sol@. Al llegar hasta aquí, has dado un paso valiente hacia tu bienestar.\n\nEstamos aquí para escucharte y ayudarte. No hay prisa, tómate el tiempo que necesites.\n\nSi te encuentras en una situación de emergencia, puedes utilizar directamente la línea telefónica de ayuda gratuita del Ministerio de Sanidad: 024."
             }
         ]);
+
+        // Agregar al usuario actual a la presencia cuando se inicia el chat
+        channel.presence.enter({
+            channelId,
+            timestamp: new Date().toISOString(),
+        });
 
         // Suscribimos a mensajes normales:
         channel.subscribe("message", (message) => {
@@ -85,10 +95,15 @@ export default function SapsForm() {
             }
         });
 
+        channel.presence.get((members) => {
+            console.log("Members in presence:", members);
+        });
+
         // Cleanup cuando el componente se desmonta
         return () => {
             channel.unsubscribe("message");
             channel.presence.unsubscribe("enter");
+            channel.presence.leave();
         };
     }, [channelId]);
 

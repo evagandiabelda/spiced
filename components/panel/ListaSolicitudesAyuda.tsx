@@ -46,7 +46,7 @@ export default function ListaSolicitudesAyuda() {
             await chatChannel.presence.enter({ role: "expert" });
 
             // Redirigir al chat
-            router.push(`/dashboard/expert/chat/${solicitudId}`);
+            router.push(`/panel-experto/saps/chat/${solicitudId}`);
         } catch (error) {
             console.error("Error al unirse al canal de chat:", error);
         }
