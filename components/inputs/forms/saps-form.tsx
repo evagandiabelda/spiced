@@ -32,14 +32,14 @@ export default function SapsForm() {
 
                 // Enviar un mensaje al canal cuando un usuario se une
                 solicitudesChannel.publish("nueva-solicitud", {
-                    username: "usuario1", // Usar datos relevantes como el username
+                    username: clientId, // Usar datos relevantes como el username
                     timestamp: Date.now(),
                     channelId: storedChannelId,
                 });
 
                 // NOS AÑADIMOS AL PRESENCE
                 await solicitudesChannel.presence.enter({
-                    username: "usuario1",
+                    username: clientId,
                     timestamp: new Date().toISOString(),
                     channelId: storedChannelId,
                 });
