@@ -8,7 +8,7 @@ import Boton from "@/components/buttons/Boton";
 
 interface Message {
     text: string;
-    sender: "yo" | "otro";
+    sender: "yo" | "otro" | "sistema";
 }
 
 export default function SapsForm() {
@@ -57,18 +57,38 @@ export default function SapsForm() {
 
         const channel = ablyClient.channels.get(`chat-ayuda-${channelId}`);
 
-        // Mensaje de bienvenida automático
+        // Mensaje de bienvenida automático:
         setMessages([
-            { sender: "otro", text: "Sabemos que estás pasando por un momento difícil, pero no estás sol@. Al llegar hasta aquí, has dado un paso valiente hacia tu bienestar.\n\nEstamos aquí para escucharte y ayudarte. No hay prisa, tómate el tiempo que necesites.\n\nSi te encuentras en una situación de emergencia, puedes utilizar directamente la línea telefónica de ayuda gratuita del Ministerio de Sanidad: 024." }
+            {
+                sender: "sistema",
+                text: "Sabemos que estás pasando por un momento difícil, pero no estás sol@. Al llegar hasta aquí, has dado un paso valiente hacia tu bienestar.\n\nEstamos aquí para escucharte y ayudarte. No hay prisa, tómate el tiempo que necesites.\n\nSi te encuentras en una situación de emergencia, puedes utilizar directamente la línea telefónica de ayuda gratuita del Ministerio de Sanidad: 024."
+            }
         ]);
 
-        channel.subscribe((message) => {
+        // Suscribimos a mensajes normales:
+        channel.subscribe("message", (message) => {
             setMessages((prev) => [...prev, message.data]);
+        });
+
+        // Escuchamos si un Expert entra al canal
+        channel.presence.subscribe("enter", (member) => {
+            const data = member.data as { role?: string };
+
+            if (data?.role === "expert") {
+                setMessages((prev) => [
+                    ...prev,
+                    {
+                        text: "Un profesional se ha unido al chat.",
+                        sender: "sistema",
+                    },
+                ]);
+            }
         });
 
         // Cleanup cuando el componente se desmonta
         return () => {
-            channel.unsubscribe();
+            channel.unsubscribe("message");
+            channel.presence.unsubscribe("enter");
         };
     }, [channelId]);
 

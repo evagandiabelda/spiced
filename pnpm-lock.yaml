@@ -22,10 +22,10 @@ importers:
         version: 1.2.3(@types/react-dom@19.0.3(@types/react@19.0.8))(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@vercel/postgres':
         specifier: ^0.10.0
-        version: 0.10.0
+        version: 0.10.0(utf-8-validate@5.0.2)
       ably:
-        specifier: ^2.7.0
-        version: 2.7.0(bufferutil@4.0.9)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 1.2.18-beta.0
+        version: 1.2.18-beta.0(bufferutil@4.0.9)(utf-8-validate@5.0.2)
       bcryptjs:
         specifier: ^2.4.3
         version: 2.4.3
@@ -80,6 +80,9 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.17(ts-node@10.9.2(@types/node@20.17.17)(typescript@5.7.3)))
+      utf-8-validate:
+        specifier: ^5.0.2
+        version: 5.0.2
       uuid:
         specifier: ^11.0.5
         version: 11.0.5
@@ -132,8 +135,8 @@ importers:
 
 packages:
 
-  '@ably/msgpack-js@0.4.0':
-    resolution: {integrity: sha512-IPt/BoiQwCWubqoNik1aw/6M/DleMdrxJOUpSja6xmMRbT2p1TA8oqKWgfZabqzrq8emRNeSl/+4XABPNnW5pQ==}
+  '@ably/msgpack-js@0.3.4':
+    resolution: {integrity: sha512-gmnsxxcN/8WfoxZxQQF9LvM3ZUbuVH0LCS6oX7EJS+VfkXWBFIgDV+h7a0sntwKSvAEg4uJzNDje7kpH8/LJ3Q==}
 
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
@@ -846,17 +849,9 @@ packages:
     resolution: {integrity: sha512-+/kfrslGQ7TNV2ecmQwMJj/B65g5KVq1/L3SGVZ3tCYGqlzFuFCGBZJtMP99wH3NpEUyAjn0zPdPUg0D+DwrOA==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
-  ably@2.7.0:
-    resolution: {integrity: sha512-R3PexoyoFoYlxdxCw9DhywBTCr683CS2c4fOognqcH0DUuIyNNIUv8TSFOh9pZn9H8e/R+8i7U6g0U35jlanUA==}
-    engines: {node: '>=16'}
-    peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-    peerDependenciesMeta:
-      react:
-        optional: true
-      react-dom:
-        optional: true
+  ably@1.2.18-beta.0:
+    resolution: {integrity: sha512-i5fmsnA++6iyW9j9qtJWCfAAxoxMLHObz73Y8uLih9fxdS3nZY5dzrxMbIPSHrbt63b72nso42cN+n286YeOVQ==}
+    engines: {node: '>=5.10.x'}
 
   acorn-import-attributes@1.9.5:
     resolution: {integrity: sha512-n02Vykv5uA3eHGM/Z2dQrcD56kL8TyDb2p1+0P83PClMnC/nc+anbQRhIOWnSq4Ke/KvDPrY3C9hDtC/A3eHnQ==}
@@ -964,6 +959,9 @@ packages:
   async-function@1.0.0:
     resolution: {integrity: sha512-hsU18Ae8CDTR6Kgu9DYf0EbCr/a5iGL0rytQDobUcdpYOKokk8LEjVphnXkDkgpi0wYVsqrXuP0bZxJaTqdgoA==}
     engines: {node: '>= 0.4'}
+
+  async-limiter@1.0.1:
+    resolution: {integrity: sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==}
 
   async-listen@1.2.0:
     resolution: {integrity: sha512-CcEtRh/oc9Jc4uWeUwdpG/+Mb2YUHKmdaTf0gUr7Wa+bfp4xx70HOb3RuSTJMvqKNB1TkdTfjLdrcz2X4rkkZA==}
@@ -1578,9 +1576,6 @@ packages:
   fast-levenshtein@2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
 
-  fastestsmallesttextencoderdecoder@1.0.22:
-    resolution: {integrity: sha512-Pb8d48e+oIuY4MaM64Cd7OW1gt4nxCHs7/ddPPZ/Ic3sg8yVGM7O9wDvZ7us6ScaUupzM+pfBolwtYhN1IxBIw==}
-
   fastq@1.19.0:
     resolution: {integrity: sha512-7SFSRCNjBQIZH/xZR3iy5iQYR8aGBE0h3VG6/cwlbrpdciNYBMotQav8c1XI3HjHH+NikUpP53nPdlZSdWmFzA==}
 
@@ -2184,6 +2179,10 @@ packages:
     peerDependenciesMeta:
       encoding:
         optional: true
+
+  node-gyp-build@3.7.0:
+    resolution: {integrity: sha512-L/Eg02Epx6Si2NXmedx+Okg+4UHqmaf3TNcxd50SF9NQGcJaON3AtU++kax69XV7YWz4tUspqZSAsVofhFKG2w==}
+    hasBin: true
 
   node-gyp-build@4.8.4:
     resolution: {integrity: sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==}
@@ -2916,10 +2915,6 @@ packages:
   uid-promise@1.0.0:
     resolution: {integrity: sha512-R8375j0qwXyIu/7R0tjdF06/sElHqbmdmWC9M2qQHpEVbvE4I5+38KJI7LUUmQMp7NVq4tKHiBMkT0NFM453Ig==}
 
-  ulid@2.4.0:
-    resolution: {integrity: sha512-fIRiVTJNcSRmXKPZtGzFQv9WRrZ3M9eoptl/teFJvjOzmpU+/K/JH6HZ8deBfb5vMEpicJcLn7JmvdknlMq7Zg==}
-    hasBin: true
-
   unbox-primitive@1.1.0:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
     engines: {node: '>= 0.4'}
@@ -2941,6 +2936,9 @@ packages:
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
+
+  utf-8-validate@5.0.2:
+    resolution: {integrity: sha512-SwV++i2gTD5qh2XqaPzBnNX88N6HdyhQrNNRykvcS0QKvItV9u3vPEJr+X5Hhfb1JC0r0e1alL0iB09rY8+nmw==}
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
@@ -3011,6 +3009,17 @@ packages:
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
 
+  ws@5.2.4:
+    resolution: {integrity: sha512-fFCejsuC8f9kOSu9FYaOw8CdO68O3h5v0lg4p74o8JqWpwTf9tniOD+nOB78aWoVSS6WptVUmDrp/KPsMVBWFQ==}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+
   ws@8.18.0:
     resolution: {integrity: sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==}
     engines: {node: '>=10.0.0'}
@@ -3067,7 +3076,7 @@ packages:
 
 snapshots:
 
-  '@ably/msgpack-js@0.4.0':
+  '@ably/msgpack-js@0.3.4':
     dependencies:
       bops: 1.0.1
 
@@ -3778,11 +3787,11 @@ snapshots:
       - rollup
       - supports-color
 
-  '@vercel/postgres@0.10.0':
+  '@vercel/postgres@0.10.0(utf-8-validate@5.0.2)':
     dependencies:
       '@neondatabase/serverless': 0.9.5
       bufferutil: 4.0.9
-      ws: 8.18.0(bufferutil@4.0.9)
+      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.2)
     transitivePeerDependencies:
       - utf-8-validate
 
@@ -3829,16 +3838,11 @@ snapshots:
 
   abbrev@3.0.0: {}
 
-  ably@2.7.0(bufferutil@4.0.9)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  ably@1.2.18-beta.0(bufferutil@4.0.9)(utf-8-validate@5.0.2):
     dependencies:
-      '@ably/msgpack-js': 0.4.0
-      fastestsmallesttextencoderdecoder: 1.0.22
+      '@ably/msgpack-js': 0.3.4
       got: 11.8.6
-      ulid: 2.4.0
-      ws: 8.18.0(bufferutil@4.0.9)
-    optionalDependencies:
-      react: 19.0.0
-      react-dom: 19.0.0(react@19.0.0)
+      ws: 5.2.4(bufferutil@4.0.9)(utf-8-validate@5.0.2)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -3967,6 +3971,8 @@ snapshots:
   ast-types-flow@0.0.8: {}
 
   async-function@1.0.0: {}
+
+  async-limiter@1.0.1: {}
 
   async-listen@1.2.0: {}
 
@@ -4660,8 +4666,6 @@ snapshots:
 
   fast-levenshtein@2.0.6: {}
 
-  fastestsmallesttextencoderdecoder@1.0.22: {}
-
   fastq@1.19.0:
     dependencies:
       reusify: 1.0.4
@@ -5268,6 +5272,8 @@ snapshots:
   node-fetch@2.7.0:
     dependencies:
       whatwg-url: 5.0.0
+
+  node-gyp-build@3.7.0: {}
 
   node-gyp-build@4.8.4: {}
 
@@ -6058,8 +6064,6 @@ snapshots:
 
   uid-promise@1.0.0: {}
 
-  ulid@2.4.0: {}
-
   unbox-primitive@1.1.0:
     dependencies:
       call-bound: 1.0.3
@@ -6080,6 +6084,10 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
+
+  utf-8-validate@5.0.2:
+    dependencies:
+      node-gyp-build: 3.7.0
 
   util-deprecate@1.0.2: {}
 
@@ -6182,9 +6190,17 @@ snapshots:
 
   wrappy@1.0.2: {}
 
-  ws@8.18.0(bufferutil@4.0.9):
+  ws@5.2.4(bufferutil@4.0.9)(utf-8-validate@5.0.2):
+    dependencies:
+      async-limiter: 1.0.1
     optionalDependencies:
       bufferutil: 4.0.9
+      utf-8-validate: 5.0.2
+
+  ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.2):
+    optionalDependencies:
+      bufferutil: 4.0.9
+      utf-8-validate: 5.0.2
 
   xdg-app-paths@5.1.0:
     dependencies:

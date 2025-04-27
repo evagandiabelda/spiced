@@ -1,68 +1,55 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import ablyClient from "@/lib/ably";
 import { useRouter } from "next/navigation";
+import ably from "@/lib/ably";
 
-// Definimos un tipo adecuado para la solicitud
 interface Solicitud {
-    channelId: string;
-    timestamp: string;
-}
-
-// Definimos el tipo para el miembro en presence (en este caso, el Standard)
-interface PresenceMember {
-    data: {
-        channelId: string;
-    };
+    id: string;
+    username: string;
+    timestamp: number;
 }
 
 export default function ListaSolicitudesAyuda() {
     const [solicitudes, setSolicitudes] = useState<Solicitud[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null); // Para manejar errores
     const router = useRouter();
 
     useEffect(() => {
-        const solicitudesChannel = ablyClient.channels.get("solicitudes-ayuda");
-
-        // Al recibir una nueva solicitud
-        const handlePresenceEnter = (member: PresenceMember) => {
-            if (member?.data?.channelId) {
-                const nuevaSolicitud: Solicitud = {
-                    channelId: member.data.channelId,
-                    timestamp: new Date().toISOString(), // Usamos la fecha actual
-                };
-                setSolicitudes((prev) => [...prev, nuevaSolicitud]);
-            }
-        };
-
-        // Primero suscribimos a nuevos "enter"
-        solicitudesChannel.presence.subscribe("enter", handlePresenceEnter);
-
-        // Obtener las solicitudes presentes cuando el componente se monta
-        const fetchPresentMembers = async () => {
+        const fetchSolicitudes = async () => {
             try {
-                const members = await solicitudesChannel.presence.get();
-                const solicitudesIniciales = members.map((member: PresenceMember) => ({
-                    channelId: member.data.channelId,
-                    timestamp: new Date().toISOString(), // Usamos la fecha actual
-                }));
+                const res = await fetch("/api/ably/chats");
+                if (!res.ok) {
+                    throw new Error("No se pudieron cargar las solicitudes.");
+                }
 
-                setSolicitudes(solicitudesIniciales);
-            } catch (error) {
-                console.error("Error al obtener miembros presentes:", error);
+                const data = await res.json();
+                setSolicitudes(data);  // Guardamos las solicitudes obtenidas
+            } catch (error: any) {
+                setError(error.message);  // En caso de error, lo mostramos
+            } finally {
+                setIsLoading(false);  // Terminamos la carga
             }
         };
 
-        fetchPresentMembers();
-
-        // Cleanup al desmontar el componente
-        return () => {
-            solicitudesChannel.presence.unsubscribe("enter", handlePresenceEnter);
-        };
+        fetchSolicitudes();
+        console.log(solicitudes);
     }, []);
 
-    const handleUnirseChat = (channelId: string) => {
-        router.push(`/dashboard/expert/chat/${channelId}`);
+    const handleUnirseAlChat = async (solicitudId: string) => {
+        const chatChannelName = `chat-ayuda-${solicitudId}`;
+        const chatChannel = ably.channels.get(chatChannelName);
+
+        try {
+            // Entrar como Expert al canal de chat
+            await chatChannel.presence.enter({ role: "expert" });
+
+            // Redirigir al chat
+            router.push(`/dashboard/expert/chat/${solicitudId}`);
+        } catch (error) {
+            console.error("Error al unirse al canal de chat:", error);
+        }
     };
 
     return (
@@ -75,18 +62,18 @@ export default function ListaSolicitudesAyuda() {
                 <ul className="flex flex-col gap-2">
                     {solicitudes.map((solicitud) => (
                         <li
-                            key={solicitud.channelId}
+                            key={solicitud.id}
                             className="flex justify-between items-center p-4 border rounded-md"
                         >
                             <div>
-                                <p><strong>ID:</strong> {solicitud.channelId}</p>
+                                <p><strong>ID:</strong> {solicitud.id}</p>
                                 <p className="text-sm text-gray-500">
                                     Recibido: {new Date(solicitud.timestamp).toLocaleTimeString()}
                                 </p>
                             </div>
                             <button
                                 className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                                onClick={() => handleUnirseChat(solicitud.channelId)}
+                                onClick={() => handleUnirseAlChat(solicitud.id)}
                             >
                                 Unirse al Chat
                             </button>
