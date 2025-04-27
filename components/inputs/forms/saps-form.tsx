@@ -8,7 +8,7 @@ import Boton from "@/components/buttons/Boton";
 
 interface Message {
     text: string;
-    sender: "yo" | "otro" | "sistema";
+    sender: "standard" | "expert" | "sistema";
     clientId: string;
 }
 
@@ -115,7 +115,7 @@ export default function SapsForm() {
         if (input.trim() !== "") {
             const messageToSend: Message = {
                 text: input.trim(),
-                sender: "yo",
+                sender: "standard",
                 clientId: clientId,
             };
 
@@ -139,12 +139,12 @@ export default function SapsForm() {
                 <div className="relative w-full h-[50vh] flex flex-col overflow-y-auto overflow-x-hidden px-6">
                     <div className="flex flex-col justify-end gap-4 min-h-full">
                         {messages.map((msg, index) => (
-                            <div key={index} className={`flex ${msg.sender === "yo" ? "justify-end" : "justify-start"}`}>
+                            <div key={index} className={`flex ${msg.sender === "standard" ? "justify-end" : "justify-start"}`}>
                                 <motion.div
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.3 }}
-                                    className={`px-6 py-4 rounded-[1.6rem] max-w-[70%] whitespace-pre-wrap ${msg.sender === "yo" ? "rounded-br-none bg-[#cfc8c4] dark:bg-[var(--gris4)]" : "rounded-bl-none text-white fondo-degradado2"}`}
+                                    className={`px-6 py-4 rounded-[1.6rem] max-w-[70%] whitespace-pre-wrap ${msg.sender === "standard" ? "rounded-br-none bg-[#cfc8c4] dark:bg-[var(--gris4)]" : "rounded-bl-none text-white fondo-degradado2"}`}
                                 >
                                     {msg.text}
                                 </motion.div>
