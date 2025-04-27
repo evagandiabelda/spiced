@@ -1,12 +1,13 @@
-import { Metadata } from "next";
+"use client";
+
+import { useParams } from "next/navigation";
 import Image from "next/image";
-import SapsForm from "@/components/inputs/forms/saps-form";
+import SapsExpertForm from "@/components/inputs/forms/saps-expert-form";
 
-export const metadata: Metadata = {
-    title: 'Chat',
-};
+export default function Chat() {
 
-export default async function Chat() {
+    const params = useParams();
+    const { id } = params as { id: string };
 
     return (
         <div className="w-full flex flex-col items-center mobile:gap-12 tablet:gap-0 px-col1 pt-[3rem] pb-32">
@@ -27,7 +28,7 @@ export default async function Chat() {
             {/* CONTENIDO */}
 
             <div className='w-full flex flex-col items-center gap-12 py-16 border-b border-b-1 border-b-[#b0aaaa]'>
-                <SapsForm />
+                <SapsExpertForm channelId={id} />
             </div>
 
         </div>

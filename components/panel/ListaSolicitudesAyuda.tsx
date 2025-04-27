@@ -3,11 +3,14 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import ably from "@/lib/ably";
+import Boton from "@/components/buttons/Boton";
 
 interface Solicitud {
-    id: string;
-    username: string;
-    timestamp: number;
+    clientId: string;
+    data: {
+        channelId: string;
+        timestamp: string;
+    }
 }
 
 export default function ListaSolicitudesAyuda() {
@@ -37,6 +40,7 @@ export default function ListaSolicitudesAyuda() {
 
         const channel = ably.channels.get("solicitudes-ayuda");
         channel.subscribe("nueva-solicitud", (message) => {
+            console.log(message)
             setSolicitudes((prev) => [...prev, message.data]);
         });
 
@@ -68,23 +72,23 @@ export default function ListaSolicitudesAyuda() {
                 <p>No hay solicitudes activas ahora mismo.</p>
             ) : (
                 <ul className="flex flex-col gap-2">
-                    {solicitudes.map((solicitud) => (
+                    {solicitudes.map((solicitud, index) => (
                         <li
-                            key={solicitud.id}
-                            className="flex justify-between items-center p-4 border rounded-md"
+                            key={index}
+                            className="w-full flex justify-between items-center px-8 py-6 bg-white rounded-xl"
                         >
                             <div>
-                                <p><strong>ID:</strong> {solicitud.id}</p>
+                                <p><strong>ID:</strong> {solicitud.data.channelId}</p>
                                 <p className="text-sm text-gray-500">
-                                    Recibido: {new Date(solicitud.timestamp).toLocaleTimeString()}
+                                    Recibido: {new Date(solicitud.data.timestamp).toLocaleTimeString()}
                                 </p>
                             </div>
-                            <button
-                                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-                                onClick={() => handleUnirseAlChat(solicitud.id)}
-                            >
-                                Unirse al Chat
-                            </button>
+                            <Boton
+                                texto="Unirse al Chat"
+                                tamano="grande"
+                                jerarquia="primario"
+                                onClick={() => handleUnirseAlChat(solicitud.data.channelId)}
+                            />
                         </li>
                     ))}
                 </ul>
