@@ -5,7 +5,7 @@ import Ably from "ably/promises";
 export async function GET() {
     try {
         // Crear una instancia del cliente de Ably usando la API KEY secreta
-        const client = new Ably.Rest(process.env.NEXT_PUBLIC_ABLY_API_KEY!); // Guardada también en Vercel.
+        const client = new Ably.Rest(process.env.NEXT_PUBLIC_ABLY_API_KEY!);
         if (!client) throw new Error("No hay client.");
 
         // Canal de solicitudes de ayuda
