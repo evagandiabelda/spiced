@@ -27,7 +27,6 @@ export default function ListaSolicitudesAyuda() {
 
                 const data = await res.json();
                 setSolicitudes(data);  // Guardamos las solicitudes obtenidas
-                console.log(solicitudes);
             } catch (error: any) {
                 setError(error.message);  // En caso de error, lo mostramos
             } finally {
@@ -43,9 +42,6 @@ export default function ListaSolicitudesAyuda() {
             setSolicitudes((prev) => [...prev, message.data]);
         });
 
-        return () => {
-            channel.unsubscribe("nueva-solicitud");
-        };
     }, []);
 
     const handleUnirseAlChat = async (solicitudId: string) => {
@@ -72,6 +68,7 @@ export default function ListaSolicitudesAyuda() {
             ) : (
                 <ul className="flex flex-col gap-2">
                     {solicitudes.map((solicitud, index) => (
+                        solicitud.username &&
                         <li
                             key={index}
                             className="w-full flex justify-between items-center px-8 py-6 bg-white rounded-xl"
