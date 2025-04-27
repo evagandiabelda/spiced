@@ -50,7 +50,7 @@ export default async function NormasComunidad() {
 
             {/* CONTENIDO */}
 
-            <div className='w-full flex flex-col items-center gap-12 mobile:px-col1 tablet:px-col1 py-16 border-b border-b-1 border-b-[#b0aaaa]'>
+            <div className='w-full flex flex-col items-center gap-12 mobile:px-col1 tablet:px-col1 laptop:py-16 border-b border-b-1 border-b-[#b0aaaa]'>
 
                 <p>¡Bienvenido a Spiced! Nos encanta que formes parte de esta comunidad dedicada a la salud mental y el apoyo mutuo. Para asegurar que todos los miembros tengan una experiencia positiva y segura, te pedimos que sigas estas normas básicas:</p>
 
@@ -131,7 +131,7 @@ export default async function NormasComunidad() {
 
             {/* CIERRE */}
 
-            <div className='w-full flex flex-col items-center gap-12 mobile:px-col1 tablet:px-col1 pt-20'>
+            <div className='w-full flex flex-col items-center gap-12 tablet:px-col1 mobile:pt-10 laptop:pt-20'>
 
                 <div className="w-full flex flex-col text-center gap-8 px-col1">
                     <h2>¿Sigues teniendo dudas?</h2>

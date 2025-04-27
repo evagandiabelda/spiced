@@ -50,7 +50,7 @@ export default async function PoliticaPrivacidad() {
 
             {/* CONTENIDO */}
 
-            <div className='w-full flex flex-col items-center gap-12 mobile:px-col1 tablet:px-col1 py-16 border-b border-b-1 border-b-[#b0aaaa]'>
+            <div className='w-full flex flex-col items-center gap-12 mobile:px-col1 tablet:px-col1 mobile:pb-16 laptop:py-16 border-b border-b-1 border-b-[#b0aaaa]'>
 
                 <p>En Spiced, nos tomamos muy en serio la privacidad de nuestros usuarios. Esta Política de Privacidad describe cómo recopilamos, usamos, protegemos y compartimos tus datos personales al utilizar nuestra plataforma.</p>
 
@@ -128,7 +128,7 @@ export default async function PoliticaPrivacidad() {
 
             {/* CIERRE */}
 
-            <div className='w-full flex flex-col items-center gap-12 mobile:px-col1 tablet:px-col1 pt-20'>
+            <div className='w-full flex flex-col items-center gap-12 tablet:px-col1 mobile:pt-10 laptop:pt-20'>
 
                 <div className="w-full flex flex-col text-center gap-8 px-col1">
                     <h2>¿Sigues teniendo dudas?</h2>

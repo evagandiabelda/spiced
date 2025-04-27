@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default async function PreguntasFrecuentes() {
 
-    const triggerClassname = "pb-6 font-inter font-bold text-[var(--gris4)] px-6 rounded-xl bg-white dark:bg-[var(--gris4)] shadow-sm";
+    const triggerClassname = "pb-6 font-inter font-bold text-[var(--gris4)] px-6 mobile:py-10 laptop:py-6 rounded-xl bg-white dark:bg-[var(--gris4)] shadow-sm";
 
     return (
         <div className="w-full flex flex-col items-center mobile:gap-12 tablet:gap-0 px-col1 pt-[3rem] pb-32">
@@ -65,7 +65,7 @@ export default async function PreguntasFrecuentes() {
 
             {/* CONTENIDO */}
 
-            <div className='w-full flex flex-col items-center gap-10 mobile:px-col1 tablet:px-col1 py-16 border-b border-b-1 border-b-[#b0aaaa]'>
+            <div className='w-full flex flex-col items-center gap-10 tablet:px-col1 tablet:py-16 border-b border-b-1 border-b-[#b0aaaa]'>
                 <Accordion type="single" collapsible className="w-full">
 
                     <AccordionItem value="item-1" className="mb-4">
@@ -129,7 +129,7 @@ export default async function PreguntasFrecuentes() {
 
             {/* CIERRE */}
 
-            <div className='w-full flex flex-col items-center gap-12 mobile:px-col1 tablet:px-col1 pt-20'>
+            <div className='w-full flex flex-col items-center gap-12 tablet:px-col1 mobile:pt-10 laptop:pt-20'>
 
                 <div className="w-full flex flex-col text-center gap-8 px-col1">
                     <h2>¿Sigues teniendo dudas?</h2>

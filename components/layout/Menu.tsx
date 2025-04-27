@@ -144,16 +144,16 @@ export default function Menu({ tipo }: MenuProps) {
     }
 
     if (tipo === "footer-desplegable") {
-        const className = "font-normal text-[var(--brand2)] dark:text-[var(--gris2)] hover:text-white transition ease";
+        const className = "font-normal text-[var(--brand2)] dark:text-[var(--gris2)] px-3 hover:text-[var(--gris1)] dark:hover:text-[var(--gris1)] transition ease";
 
         return (
-            <div className="w-full flex flex-col gap-0 px-4 py-4 rounded-xl bg-[var(--gris4)]">
+            <div className="w-full flex flex-col gap-0 px-0 py-4 rounded-xl bg-[var(--gris4)]">
                 <Accordion type="single" collapsible>
 
-                    <AccordionItem value="item-1" className="px-4 rounded-[0.4rem] hover:bg-[var(--gris3)] transition ease">
-                        <AccordionTrigger className="pb-5 dark:text-[var(--gris2)] transition ease">Spices</AccordionTrigger>
+                    <AccordionItem value="item-1" className="px-4 rounded-[0.4rem]">
+                        <AccordionTrigger className="pb-5 dark:text-[var(--gris2)] rounded-xl px-4 py-6 hover:bg-[var(--gris3)] transition ease transition ease">Spices</AccordionTrigger>
                         <AccordionContent>
-                            <nav className="flex flex-col px-4 py-2">
+                            <nav className="flex flex-col gap-2 px-2 py-2">
                                 <a href="/explorar?spices=TEA" className={className}>TEA</a>
                                 <a href="/explorar?spices=TDAH" className={className}>TDAH</a>
                                 <a href="/explorar?spices=TOC" className={className}>TOC</a>
@@ -173,10 +173,10 @@ export default function Menu({ tipo }: MenuProps) {
                         </AccordionContent>
                     </AccordionItem>
 
-                    <AccordionItem value="item-2" className="px-4 rounded-[0.4rem] hover:bg-[var(--gris3)] transition ease">
-                        <AccordionTrigger className="pb-5 dark:text-[var(--gris2)] transition ease">Categorías</AccordionTrigger>
+                    <AccordionItem value="item-2" className="px-4 rounded-[0.4rem]">
+                        <AccordionTrigger className="pb-5 dark:text-[var(--gris2)] rounded-xl px-4 py-6 hover:bg-[var(--gris3)] transition ease transition ease">Categorías</AccordionTrigger>
                         <AccordionContent>
-                            <nav className="flex flex-col px-4 py-2">
+                            <nav className="flex flex-col gap-2 px-2 py-2">
                                 <a href="/explorar?categoria=Arte" className={className}>Arte</a>
                                 <a href="/explorar?categoria=Bienestar" className={className}>Bienestar</a>
                                 <a href="/explorar?categoria=Cine" className={className}>Cine</a>
@@ -191,10 +191,10 @@ export default function Menu({ tipo }: MenuProps) {
                         </AccordionContent>
                     </AccordionItem>
 
-                    <AccordionItem value="item-3" className="px-4 rounded-[0.4rem] hover:bg-[var(--gris3)] transition ease">
-                        <AccordionTrigger className="pb-5 dark:text-[var(--gris2)] transition ease">Tu espacio</AccordionTrigger>
+                    <AccordionItem value="item-3" className="px-4 rounded-[0.4rem]">
+                        <AccordionTrigger className="pb-5 dark:text-[var(--gris2)] rounded-xl px-4 py-6 hover:bg-[var(--gris3)] transition ease transition ease">Tu espacio</AccordionTrigger>
                         <AccordionContent>
-                            <nav className="flex flex-col px-4 py-2">
+                            <nav className="flex flex-col gap-2 px-2 py-2">
                                 <a href={session?.user.userType === "expert" ? "/panel-experto" : "/panel-estandar"} className={className}>Espacio personal</a>
                                 <a href={session?.user.userType === "expert" ? "/panel-experto/nuevo-share" : "/panel-estandar/nuevo-share"} className={className}>Compartir contenido</a>
                                 <a href={session?.user.userType === "expert" ? "/panel-experto/shares-guardados" : "/panel-estandar/shares-guardados"} className={className}>Contenido guardado</a>

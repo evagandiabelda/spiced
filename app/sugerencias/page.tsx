@@ -50,7 +50,7 @@ export default async function Sugerencias() {
 
             {/* CONTENIDO */}
 
-            <div className='w-full flex flex-col items-center gap-12 mobile:px-col1 tablet:px-col1 pt-20'>
+            <div className='w-full flex flex-col items-center gap-12 tablet:px-col1 laptop:pt-20'>
 
                 <p>Este es tu espacio para compartir ideas, sugerencias y propuestas que nos ayuden a hacer de Spiced un lugar aún mejor para toda su comunidad. ¡Queremos escuchar tus recomendaciones!</p>
 
