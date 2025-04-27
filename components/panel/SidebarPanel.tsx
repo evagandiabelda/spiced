@@ -35,11 +35,11 @@ export default function SidebarPanel({ usuario }: SidebarPanelProps) {
             <div>
                 <div className="w-full flex flex-row items-center gap-4 pb-7 border-b border-b-[var(--gris2)] dark:border-b-[var(--gris3)]">
                     {/* Avatar Modo Claro */}
-                    <div className="mobile:w-12 laptop:w-16 dark:hidden">
+                    <div className="mobile:w-12 mobile:h-12 laptop:w-16 laptop:h-16 dark:hidden">
                         <AvatarPropio customBorder="#fff" />
                     </div>
                     {/* Avatar Modo Oscuro */}
-                    <div className="mobile:w-12 laptop:w-16 hidden dark:block">
+                    <div className="mobile:w-12 mobile:h-12 laptop:w-16 laptop:h-16 hidden dark:block">
                         <AvatarPropio />
                     </div>
                     <div className="mobile:flex tablet:hidden laptop:flex flex-col gap-2">

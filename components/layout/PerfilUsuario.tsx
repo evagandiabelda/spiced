@@ -168,7 +168,7 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
                     <div className='mobile:w-full laptop:w-1/2'>
                         <p className='text-[0.9rem]'>{usuario.descripcion_perfil}</p>
                     </div>
-                    <div className='w-full flex mobile:flex-col laptop:flex-row justify-between items-end gap-8'>
+                    <div className='w-full flex mobile:flex-col laptop:flex-row laptop:justify-between laptop:items-end gap-8'>
                         <div className='w-1/2 flex flex-wrap gap-2'>
                             {usuario.spices_seguidos?.map(({ spice }) => (
                                 spice ? (
@@ -188,11 +188,6 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
                         }
                         {usuario.id !== session?.user.id &&
                             <div className='w-full flex flex-wrap justify-end items-center gap-4'>
-                                <Boton
-                                    texto='Enviar una pingüinada'
-                                    tamano='pequeno'
-                                    jerarquia='secundario'
-                                />
                                 <Boton
                                     texto={siguiendo ? 'Dejar de seguir' : 'Seguir su contenido'}
                                     tamano='pequeno'

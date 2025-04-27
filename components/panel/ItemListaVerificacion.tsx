@@ -32,12 +32,14 @@ export default function ItemListaVerificacion({ id, nombre_real, name, foto, cre
         usuario_verificado: false, // Aquí ya sabemos que todavía no está verificado.
     }
 
+    const perfilHref = `/perfil/${name}`;
+
     return (
-        <li className="w-full flex flex-col gap-8 px-4 pt-4 pb-8 border-b border-b-1 border-[var(--gris1)]">
+        <li className="w-full flex flex-col gap-8 border-b border-b-1 border-[var(--gris1)]">
 
-            <div className="w-full flex-col mobile:gap-8 laptop:gap-16 p-4">
+            <div className="w-full flex flex-col gap-6 p-4">
 
-                <div className="w-full flex flex-row gap-4">
+                <a href={perfilHref} className="w-full flex flex-row gap-4 p-4 rounded-xl hover:bg-[var(--gris1)]">
 
                     <div id="caja-avatar" className="relative w-[4rem] h-[4rem]">
                         <AvatarOtros
@@ -47,12 +49,12 @@ export default function ItemListaVerificacion({ id, nombre_real, name, foto, cre
 
                     <div id="caja-textos" className="w-full flex-1 flex flex-col gap-8 py-2">
 
-                        <div className="w-full flex flex-row justify-between gap-12">
+                        <div className="w-full flex mobile:flex-col laptop:flex-row justify-between mobile:gap-4 laptop:gap-12">
                             <div className="w-full flex flex-col gap-2">
                                 <p className="font-bold">{nombre_real}</p>
                                 <p className="font-bold text-[var(--gris2)]">@{name}</p>
                             </div>
-                            <div className="w-full flex flex-row justify-end px-4">
+                            <div className="w-full flex flex-row laptop:justify-end laptop:px-4">
                                 <p><span className="text-[var(--gris3)]">Registrado: {objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</span></p>
                             </div>
                         </div>
@@ -64,7 +66,7 @@ export default function ItemListaVerificacion({ id, nombre_real, name, foto, cre
 
                     </div>
 
-                </div>
+                </a>
 
                 <div id="caja-botones" className="w-full flex flex-row justify-end gap-4">
                     <Boton texto={mostrarTitulaciones ? "Ocultar titulaciones" : "Ver titulaciones"} tamano="pequeno" jerarquia="secundario" onClick={() => mostrarTitulaciones ? setMostrarTitulaciones(false) : setMostrarTitulaciones(true)} />
