@@ -25,18 +25,36 @@ export default function SapsExpertForm({ channelId }: SapsExpertFormProps) {
 
         const channel = ablyClient.channels.get(`chat-ayuda-${channelId}`);
 
-        // Subscribirse a mensajes entrantes
-        channel.subscribe("message", (message) => {
-            setMessages((prev) => [...prev, message.data]);
-        });
+        const fetchHistory = () => {
 
-        // Entrar en presencia para que conste que un Expert está en el chat
-        channel.presence.enter({
-            expertJoinedAt: new Date().toISOString(),
-        });
+            channel.history({ limit: 50 }, (err, resultPage) => {
+                if (err) {
+                    console.error("Error al recuperar historial:", err);
+                    return;
+                }
+                if (!resultPage) return;
 
-        // Opcional: podrías hacer un .history() para recuperar mensajes anteriores si quieres
-        // (solo si quieres cargar historial más adelante)
+                const oldMessages = resultPage.items
+                    .map((msg) => msg.data as Message)
+                    .reverse();
+
+                setMessages(oldMessages);
+                console.log("Old messages: ", oldMessages)
+
+                // Subscribirse a nuevos mensajes
+                channel.subscribe("message", (message) => {
+                    setMessages((prev) => [...prev, message.data]);
+                });
+
+                // Entrar en presencia
+                channel.presence.enter({
+                    expertJoinedAt: new Date().toISOString(),
+                });
+            });
+
+        };
+
+        fetchHistory();
 
         // Cleanup al desmontar el componente
         return () => {
