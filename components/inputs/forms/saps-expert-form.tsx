@@ -55,12 +55,6 @@ export default function SapsExpertForm({ channelId }: SapsExpertFormProps) {
         };
 
         fetchHistory();
-
-        // Cleanup al desmontar el componente
-        return () => {
-            channel.unsubscribe("message");
-            channel.presence.leave();
-        };
     }, [channelId]);
 
     const sendMessage = () => {
@@ -92,7 +86,7 @@ export default function SapsExpertForm({ channelId }: SapsExpertFormProps) {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.3 }}
-                                    className={`px-6 py-4 rounded-[1.6rem] max-w-[70%] whitespace-pre-wrap ${msg.sender === "expert" ? "rounded-br-none bg-[#cfc8c4] dark:bg-[var(--gris4)]" : "rounded-bl-none text-white fondo-degradado2"}`}
+                                    className={`px-6 py-4 rounded-[1.6rem] max-w-[70%] whitespace-pre-wrap ${msg.sender === "expert" ? "rounded-br-none bg-[#cfc8c4] dark:bg-[var(--gris4)]" : "rounded-bl-none text-white fondo-degradado1"}`}
                                 >
                                     {msg.text}
                                 </motion.div>
