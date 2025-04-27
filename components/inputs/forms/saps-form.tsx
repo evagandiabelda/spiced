@@ -152,7 +152,7 @@ export default function SapsForm() {
                 </div>
 
                 <div className="w-full flex flex-row justify-between items-center gap-2 rounded-full p-2 bg-white dark:bg-[var(--gris4)] shadow-md">
-                    <div className="pl-6">
+                    <div className="pl-6 mobile:hidden tablet:block">
                         <Image
                             src="/iconos/iconos-otros/icono-editar.svg"
                             alt="icono escribir"
@@ -164,7 +164,7 @@ export default function SapsForm() {
                     <input
                         type="text"
                         id="message"
-                        placeholder="Empieza a escribir y un profesional estará contigo en breve..."
+                        placeholder="Empieza a escribir..."
                         className="flex-1 py-2 px-4 focus:outline-none placeholder-light dark:placeholder-dark"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}

@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 export default async function Saps() {
 
     return (
-        <div className="w-full flex flex-col items-center mobile:gap-12 tablet:gap-0 px-col1 pt-[3rem] pb-32">
+        <div className="w-full flex flex-col items-center mobile:gap-12 tablet:gap-0 tablet:px-col1 pt-[3rem] pb-32">
 
             {/* 'Volver' */}
 
-            <div className="w-full flex flex-row items-center gap-4">
+            <div className="w-full flex flex-row items-center gap-4 px-col1">
                 <Image
                     src="/iconos/iconos-otros/icono-flecha-desplegar.svg"
                     alt="Volver al Feed"
@@ -50,17 +50,17 @@ export default async function Saps() {
 
             {/* CONTENIDO */}
 
-            <div className='w-full flex flex-col items-center gap-12 mobile:px-col1 tablet:px-col1 py-16 border-b border-b-1 border-b-[#b0aaaa]'>
+            <div className='w-full flex flex-col items-center gap-12 tablet:px-col1 py-16 border-b border-b-1 border-b-[#b0aaaa]'>
                 <SapsForm />
             </div>
 
             {/* CIERRE */}
 
-            <div className='w-full flex flex-col items-center gap-16 mobile:px-col1 tablet:px-col1 pt-20'>
+            <div className='w-full flex flex-col items-center gap-16 mobile:px-col1 tablet:px-col1 mobile:pt-4 tablet:pt-20'>
 
-                <h2>¿En qué consiste este servicio de ayuda?</h2>
+                <h2 className="text-center">¿En qué consiste este servicio de ayuda?</h2>
 
-                <ol className="list-decimal flex flex-col gap-12">
+                <ol className="list-decimal flex flex-col gap-12 mobile:px-8 tablet:px-0">
                     <div className="w-full flex flex-col gap-6">
                         <h3><li>Disponibilidad 24/7</li></h3>
                         <p>Este servicio está disponible las 24 horas del día, los 7 días de la semana. No importa cuándo necesites ayuda, siempre habrá alguien aquí para escucharte.</p>
