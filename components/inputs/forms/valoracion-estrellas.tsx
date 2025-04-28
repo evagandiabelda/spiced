@@ -29,7 +29,7 @@ export default function ValoracionEstrellas({ onChange }: { onChange: (valor: nu
                         alt="icono estrella"
                         width={40}
                         height={40}
-                        className={`transition-colors ${(hovered || rating) >= estrella ? "" : "grayscale"}`}
+                        className={`transition-colors ${(hovered || rating) >= estrella ? "" : "grayscale dark:opacity-20"}`}
                     />
                 </button>
             ))}

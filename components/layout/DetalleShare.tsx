@@ -241,7 +241,7 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                                 height={15}
                                 className="object-cover"
                             />
-                            <h4>{share.categorias.map(({ categoria }) => (
+                            <h4 className="dark:text-[var(--gris3)]">{share.categorias.map(({ categoria }) => (
                                 categoria.nombre
                             )).join(", ")}</h4>
                         </div>
@@ -258,13 +258,13 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                     {/* Sidebar */}
                     <div className="mobile:w-full laptop:w-col3 flex flex-col gap-2">
 
-                        <div className="w-full flex flex-col mobile:gap-2 tablet:gap-8 border-b border-b-1 border-b-[var(--gris2)] px-2 mobile:pb-6 tablet:pb-12">
+                        <div className="w-full flex flex-col mobile:gap-2 tablet:gap-8 border-b border-b-1 border-b-[var(--gris2)] dark:border-b-[var(--gris4)] px-2 mobile:pb-6 tablet:pb-12">
                             <div className="w-full flex mobile:flex-row laptop:flex-col mobile:items-center laptop:items-start gap-4">
                                 <div className="max-w-[6rem] pl-2">
                                     <AvatarOtros autor={share.autor} />
                                 </div>
                                 <div className="flex flex-row gap-2 pl-2">
-                                    <a href="#"><h4>@{share.autor.name}</h4></a>
+                                    <a href="#"><h4 className="dark:text-[var(--gris2)]">@{share.autor.name}</h4></a>
                                     {share.autor.usuario_verificado && <Image
                                         src="/iconos/iconos-otros/icono-verificado-relleno2.svg"
                                         alt="Verificado"
@@ -273,23 +273,23 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                                     />}
                                 </div>
                             </div>
-                            <div className="w-full flex mobile:justify-end tablet:justify-start">
-                                {session
-                                    && session?.user.userType !== "admin"
-                                    && share.autor.id !== session?.user.id
-                                    && <Boton
+                            {session
+                                && session?.user.userType !== "admin"
+                                && share.autor.id !== session?.user.id
+                                && <div className="w-full flex mobile:justify-end tablet:justify-start">
+                                    <Boton
                                         texto={isFollowing ? "Dejar de seguir" : "Seguir contenido"}
                                         onClick={handleToggleFollow}
                                         tamano="pequeno"
                                         jerarquia={isFollowing ? "secundario" : "primario"}
                                     />
-                                }
-                            </div>
+                                </div>
+                            }
                         </div>
 
-                        <div className="w-full flex flex-col mobile:gap-6 tablet:gap-8 border-b border-b-1 border-b-[var(--gris2)] px-2 mobile:pt-4 tablet:pt-8 mobile:pb-6 tablet:pb-12">
+                        <div className="w-full flex flex-col mobile:gap-6 tablet:gap-8 border-b border-b-1 border-b-[var(--gris2)] dark:border-b-[var(--gris4)] px-2 mobile:pt-4 tablet:pt-8 mobile:pb-6 tablet:pb-12">
                             <div className="w-full flex flex-col gap-3">
-                                <h4 className="pl-2">Sobre este share:</h4>
+                                <h4 className="pl-2 dark:text-[var(--gris3)]">Sobre este share:</h4>
                             </div>
                             <div className="w-full flex flex-col gap-6 px-2">
                                 {estaVerificado &&

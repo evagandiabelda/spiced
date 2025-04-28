@@ -30,7 +30,7 @@ export default async function Saps() {
 
                 <div className="w-full flex flex-col mobile:items-center tablet:items-start mobile:text-center tablet:text-left tablet:flex-1 gap-6">
                     <div className="flex flex-row gap-4 items-center">
-                        <h4>Sistema de Ayuda y Prevención del Suicidio</h4>
+                        <h4 className="dark:text-[var(--gris3)]">Sistema de Ayuda y Prevención del Suicidio</h4>
                     </div>
                     <h1>Vamos a ayudarte</h1>
                 </div>

@@ -158,16 +158,21 @@ export default function SapsForm() {
                             alt="icono escribir"
                             width={16}
                             height={16}
-                            className="object-contain"
+                            className="object-contain dark:invert"
                         />
                     </div>
-                    <input
-                        type="text"
+                    <textarea
                         id="message"
                         placeholder="Empieza a escribir..."
-                        className="flex-1 py-2 px-4 focus:outline-none placeholder-light dark:placeholder-dark"
+                        className="flex-1 py-2 px-4 focus:outline-none placeholder-light dark:placeholder-dark dark:bg-[var(--gris4)] resize-none h-10"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                e.preventDefault(); // Previene que haga saltos de línea (por si acaso)
+                                sendMessage();
+                            }
+                        }}
                     />
                     <Boton
                         texto="Enviar"

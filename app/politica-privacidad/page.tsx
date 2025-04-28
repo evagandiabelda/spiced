@@ -30,7 +30,7 @@ export default async function PoliticaPrivacidad() {
 
                 <div className="w-full flex flex-col mobile:items-center tablet:items-start mobile:text-center tablet:text-left tablet:flex-1 gap-6">
                     <div className="flex flex-row gap-4 items-center">
-                        <h4>Última actualización: 25 abril 2025</h4>
+                        <h4 className="dark:text-[var(--gris3)]">Última actualización: 25 abril 2025</h4>
                     </div>
                     <h1>Política de Privacidad</h1>
                 </div>
@@ -54,7 +54,7 @@ export default async function PoliticaPrivacidad() {
 
                 <p>En Spiced, nos tomamos muy en serio la privacidad de nuestros usuarios. Esta Política de Privacidad describe cómo recopilamos, usamos, protegemos y compartimos tus datos personales al utilizar nuestra plataforma.</p>
 
-                <ol className="list-decimal flex flex-col gap-12">
+                <ol className="list-decimal flex flex-col gap-12 dark:text-[var(--gris2)]">
                     <div className="w-full flex flex-col gap-6">
                         <h2><li>Datos Personales Recogidos</li></h2>
                         <div className="w-full flex flex-col gap-2">

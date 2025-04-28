@@ -30,7 +30,7 @@ export default async function Sugerencias() {
 
                 <div className="w-full flex flex-col mobile:items-center tablet:items-start mobile:text-center tablet:text-left tablet:flex-1 gap-6">
                     <div className="flex flex-row gap-4 items-center">
-                        <h4>Escuchamos tus sugerencias</h4>
+                        <h4 className="dark:text-[var(--gris3)]">Escuchamos tus sugerencias</h4>
                     </div>
                     <h1>Ayúdanos a mejorar</h1>
                 </div>

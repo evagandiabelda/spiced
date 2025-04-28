@@ -178,11 +178,11 @@
   }
 
   .placeholder-dark::placeholder {
-    @apply text-[var(--gris4)] opacity-40;
+    @apply text-[var(--gris2)] opacity-40;
   }
 
   label {
-    @apply font-bold text-[var(--gris3)] opacity-60;
+    @apply font-bold text-[var(--gris2)] opacity-60;
   }
 
   /* Transiciones globales */

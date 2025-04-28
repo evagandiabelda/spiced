@@ -30,7 +30,7 @@ export default async function NormasComunidad() {
 
                 <div className="w-full flex flex-col mobile:items-center tablet:items-start mobile:text-center tablet:text-left tablet:flex-1 gap-6">
                     <div className="flex flex-row gap-4 items-center">
-                        <h4>Última actualización: 25 abril 2025</h4>
+                        <h4 className="dark:text-[var(--gris3)]">Última actualización: 25 abril 2025</h4>
                     </div>
                     <h1>Normas de la Comunidad</h1>
                 </div>
@@ -54,7 +54,7 @@ export default async function NormasComunidad() {
 
                 <p>¡Bienvenido a Spiced! Nos encanta que formes parte de esta comunidad dedicada a la salud mental y el apoyo mutuo. Para asegurar que todos los miembros tengan una experiencia positiva y segura, te pedimos que sigas estas normas básicas:</p>
 
-                <ol className="list-decimal flex flex-col gap-12">
+                <ol className="list-decimal flex flex-col gap-12 dark:text-[var(--gris2)]">
                     <div className="w-full flex flex-col gap-6">
                         <h2><li>Respeto y empatía</li></h2>
                         <ul className="list-disc flex flex-col gap-2 px-8 py-2">

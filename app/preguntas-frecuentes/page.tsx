@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default async function PreguntasFrecuentes() {
 
-    const triggerClassname = "pb-6 font-inter font-bold text-[var(--gris4)] px-6 mobile:py-10 laptop:py-6 rounded-xl bg-white dark:bg-[var(--gris4)] shadow-sm";
+    const triggerClassname = "pb-6 font-inter font-bold text-[var(--gris4)] dark:text-[var(--gris2)] px-6 mobile:py-10 laptop:py-6 rounded-xl bg-white dark:bg-[var(--gris4)] shadow-sm";
 
     return (
         <div className="w-full flex flex-col items-center mobile:gap-12 tablet:gap-0 px-col1 pt-[3rem] pb-32">
@@ -45,7 +45,7 @@ export default async function PreguntasFrecuentes() {
                             height={15}
                             className="object-cover"
                         />
-                        <h4>Resolvemos tus dudas</h4>
+                        <h4 className="dark:text-[var(--gris3)]">Resolvemos tus dudas</h4>
                     </div>
                     <h1>Preguntas y Respuestas Frecuentes</h1>
                 </div>
