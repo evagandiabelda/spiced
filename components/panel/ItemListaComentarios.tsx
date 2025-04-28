@@ -77,7 +77,7 @@ export default function ItemListaComentarios({ id, texto, fecha, user, share, nu
                     {numDenuncias > 0 ?
                         <p className="text-[0.8rem] font-bold text-white px-3 py-1 rounded-xl bg-[#D84C60]">{numDenuncias} denuncias</p>
                         :
-                        <p className="text-[0.8rem] font-bold text-white px-3 py-1 rounded-xl bg-[var(--gris2)] dark:bg-[var(--gris3)]">{numDenuncias} denuncias</p>
+                        <p className="text-[0.8rem] font-bold text-[var(--gris1)] px-3 py-1 rounded-xl bg-[var(--gris2)] dark:bg-[var(--gris4)]">{numDenuncias} denuncias</p>
                     }
 
                     <Boton texto="Eliminar" tamano="grande" jerarquia="secundario" onClick={() => setIsModalOpen(true)} />

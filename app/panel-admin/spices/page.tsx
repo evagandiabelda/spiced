@@ -77,7 +77,7 @@ export default function Spices() {
                         </div>
                     )}
 
-                    <div className="w-full flex flex-row justify-end items-center gap-4">
+                    <div className="flex flex-row justify-end items-center gap-4">
                         {editando && (
                             <Boton
                                 texto="Cancelar"

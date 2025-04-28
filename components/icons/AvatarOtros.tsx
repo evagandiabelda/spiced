@@ -26,17 +26,17 @@ export default function AvatarOtros({ autor, customBorder }: AvatarOtrosProps) {
     }
 
     return (
-        <div className={`p-1 rounded-full border-[3px] ${colorBorde} overflow-hidden cursor-pointer hover:scale-105 transition ease`}>
-            <div className="rounded-full overflow-hidden">
-                <a href={href}>
+        <div className={`w-full p-1 rounded-full border-[3px] ${colorBorde} overflow-hidden cursor-pointer hover:scale-105 transition ease`}>
+            <a href={href} className="block w-full h-full">
+                <div className="relative w-full aspect-square rounded-full overflow-hidden">
                     <Image
                         src={autor.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
-                        width={200}
-                        height={200}
-                        alt="avatar"
+                        alt="Avatar"
+                        fill
+                        className="avatar object-cover"
                     />
-                </a>
-            </div>
+                </div>
+            </a>
         </div>
     );
 };

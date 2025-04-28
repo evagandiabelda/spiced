@@ -35,11 +35,11 @@ export default function ItemListaVerificacion({ id, nombre_real, name, foto, cre
     const perfilHref = `/perfil/${name}`;
 
     return (
-        <li className="w-full flex flex-col gap-8 border-b border-b-1 border-[var(--gris1)]">
+        <li className="w-full flex flex-col gap-8 border-b border-b-1 border-[var(--gris1)] dark:border-[var(--gris4)]">
 
             <div className="w-full flex flex-col gap-6 p-4">
 
-                <a href={perfilHref} className="w-full flex flex-row gap-4 p-4 rounded-xl hover:bg-[var(--gris1)]">
+                <a href={perfilHref} className="w-full flex flex-row gap-4 p-4 rounded-xl hover:bg-[var(--gris1)] dark:hover:bg-[var(--gris4)]">
 
                     <div id="caja-avatar" className="relative w-[4rem] h-[4rem]">
                         <AvatarOtros
@@ -76,22 +76,24 @@ export default function ItemListaVerificacion({ id, nombre_real, name, foto, cre
             </div>
 
             {mostrarTitulaciones &&
-                <div className="w-full flex flex-col gap-2 px-12">
+                <div className="w-full flex flex-col gap-2 px-12 pb-4">
                     {lista_titulaciones.map((titulacion, index) => (
-                        <div key={index} className='w-full flex flex-row justify-between items-center gap-2 p-4 border-b border-b-1 border-[var(--gris1)]'>
-                            <div className='w-[3rem] flex flex-row items-center gap-4'>
-                                <Image
-                                    src="/iconos/iconos-otros/icono-archivo-otros.svg"
-                                    alt='icono archivo subido'
-                                    width={34}
-                                    height={34}
-                                    className='object-contain'
-                                />
+                        <div key={index} className='w-full flex mobile:flex-col laptop:flex-row laptop:justify-between laptop:items-center gap-4 p-4 border-t border-t-1 border-[var(--gris1)] dark:border-[var(--gris4)]'>
+                            <div className="w-full flex flex-row gap-2 items-center">
+                                <div className='w-[3rem] flex flex-row items-center gap-4'>
+                                    <Image
+                                        src="/iconos/iconos-otros/icono-archivo-otros.svg"
+                                        alt='icono archivo subido'
+                                        width={34}
+                                        height={34}
+                                        className='object-contain'
+                                    />
+                                </div>
+                                <div className='flex flex-1 pb-2'>
+                                    <p>Titulación aportada #{index + 1}</p>
+                                </div>
                             </div>
-                            <div className='flex flex-1 pb-2'>
-                                <p>Titulación aportada #{index + 1}</p>
-                            </div>
-                            <div>
+                            <div className="w-full flex flex-row justify-end">
                                 <Boton texto="Ver archivo" enlace={titulacion} tamano="pequeno" jerarquia="secundario" />
                             </div>
                         </div>
