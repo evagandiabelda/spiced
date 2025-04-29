@@ -14,7 +14,7 @@ interface BotonProps {
 }
 
 export default function Boton({ texto, enlace, tamano, jerarquia, icon, customColor, onClick, deshabilitado }: BotonProps) {
-    let className = "inline-block gap-4 text-center font-semibold rounded-full border-2 hover:scale-[1.02] transition ease duration-300 cursor-pointer ";
+    let className = "inline-block gap-4 text-center font-semibold rounded-full border-2 hover:scale-[1.01] transition ease duration-300 cursor-pointer ";
     let style: React.CSSProperties = {};
     let iconClassName = ""
 
@@ -26,24 +26,24 @@ export default function Boton({ texto, enlace, tamano, jerarquia, icon, customCo
 
     if (jerarquia === "primario") {
 
-        className += "text-[var(--blanco)] dark:text-[var(--gris5)] ";
+        className += "text-[var(--blanco)] dark:text-[var(--negro)] ";
         iconClassName += "invert dark:filter-none ";
 
         if (customColor) {
             style = { backgroundColor: customColor, borderColor: customColor };
         } else {
-            className += "border-[var(--gris5)] dark:border-[var(--gris2)] bg-[var(--gris5)] dark:bg-[var(--gris2)] ";
+            className += "border-[var(--gris5)] dark:border-[var(--gris3)] dark:hover:border-[var(--gris2)] bg-[var(--gris5)] dark:bg-[var(--gris3)] dark:hover:bg-[var(--gris2)] ";
         }
 
     } else if (jerarquia === "secundario") {
 
-        className += "hover:bg-black/10 dark:hover:bg-white/10 ";
+        className += "hover:bg-black/10 dark:hover:bg-white/10 dark:hover:text-[var(--gris2)] dark:hover:border-[var(--gris2)] ";
         iconClassName += "dark:invert ";
 
         if (customColor) {
             style = { color: customColor, borderColor: customColor };
         } else {
-            className += "text-[var(--gris5)] dark:text-[var(--gris2)] border-[var(--gris5)] dark:border-[var(--gris2)] ";
+            className += "text-[var(--gris5)] dark:text-[var(--gris3)] border-[var(--gris5)] dark:border-[var(--gris3)] ";
         }
 
     }

@@ -8,8 +8,8 @@ export default function Insignias() {
 
     const { data: session } = useSession();
 
-    const divClassname = "w-full flex flex-col gap-4 p-6 mobile:bg-white mobile:rounded-xl mobile:shadow-lg";
-    const divClassnameOpacity = divClassname + " opacity-50 grayscale";
+    const divClassname = "w-full flex flex-col gap-4 p-6 bg-white dark:bg-[var(--gris4)] rounded-xl shadow-lg";
+    const divClassnameOpacity = divClassname + " opacity-40 grayscale";
 
     return (
         <div className="w-full flex mobile:flex-col tablet:flex-row tablet:justify-between gap-8">
@@ -25,7 +25,7 @@ export default function Insignias() {
                         height={100}
                         className="w-full h-auto mobile:px-20 tablet:px-12"
                     />
-                    <h3>Pequeño Saltamontes</h3>
+                    <h3 className="dark:text-[var(--gris1)]">Pequeño Saltamontes</h3>
                 </div>
                 <div className="w-full flex flex-col items-center gap-4 p-3">
                     <div className="w-full flex flex-row item-center gap-3">
@@ -34,6 +34,7 @@ export default function Insignias() {
                             alt="Insignia 1"
                             width={14}
                             height={14}
+                            className="dark:invert dark:opacity-60"
                         />
                         <p>Has creado una cuenta</p>
                     </div>
@@ -43,6 +44,7 @@ export default function Insignias() {
                             alt="Insignia 1"
                             width={14}
                             height={14}
+                            className="dark:invert dark:opacity-60"
                         />
                         <p>Has definido tus Spices</p>
                     </div>
@@ -52,6 +54,7 @@ export default function Insignias() {
                             alt="Insignia 1"
                             width={14}
                             height={14}
+                            className="dark:invert dark:opacity-60"
                         />
                         <p>Has personalizado tu Feed</p>
                     </div>
@@ -69,7 +72,7 @@ export default function Insignias() {
                         height={100}
                         className="w-full h-auto mobile:px-20 tablet:px-12"
                     />
-                    <h3>Cacahuete Sabio</h3>
+                    <h3 className="dark:text-[var(--gris1)]">Cacahuete Sabio</h3>
                 </div>
                 <div className="w-full flex flex-col items-center gap-4 p-3">
                     <div className="w-full flex flex-row item-center gap-3">
@@ -78,6 +81,7 @@ export default function Insignias() {
                             alt="Insignia 1"
                             width={14}
                             height={14}
+                            className="dark:invert dark:opacity-60"
                         />
                         <p>Has publicado 5 Shares</p>
                     </div>
@@ -87,6 +91,7 @@ export default function Insignias() {
                             alt="Insignia 1"
                             width={14}
                             height={14}
+                            className="dark:invert dark:opacity-60"
                         />
                         <p>Has conseguido 10 comentarios en tus Shares</p>
                     </div>
@@ -96,6 +101,7 @@ export default function Insignias() {
                             alt="Insignia 1"
                             width={14}
                             height={14}
+                            className="dark:invert dark:opacity-60"
                         />
                         <p>Tus Shares se han guardado 3 veces</p>
                     </div>
@@ -113,7 +119,7 @@ export default function Insignias() {
                         height={100}
                         className="w-full h-auto mobile:px-20 tablet:px-12"
                     />
-                    <h3>Cactus Legendario</h3>
+                    <h3 className="dark:text-[var(--gris1)]">Cactus Legendario</h3>
                 </div>
                 <div className="w-full flex flex-col items-center gap-4 p-3">
                     <div className="w-full flex flex-row item-center gap-3">
@@ -122,6 +128,7 @@ export default function Insignias() {
                             alt="Insignia 1"
                             width={14}
                             height={14}
+                            className="dark:invert dark:opacity-60"
                         />
                         <p>Tienes 10 Shares verificados</p>
                     </div>
@@ -131,6 +138,7 @@ export default function Insignias() {
                             alt="Insignia 1"
                             width={14}
                             height={14}
+                            className="dark:invert dark:opacity-60"
                         />
                         <p>Has conseguido 50 comentarios en tus Shares</p>
                     </div>
@@ -140,6 +148,7 @@ export default function Insignias() {
                             alt="Insignia 1"
                             width={14}
                             height={14}
+                            className="dark:invert dark:opacity-60"
                         />
                         <p>Tus Shares se han guardado 20 veces</p>
                     </div>

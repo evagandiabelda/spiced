@@ -124,7 +124,7 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
                         <div className='flex flex-col flex-1 gap-4'>
                             <h3>{usuario.nombre_real}</h3>
                             <div className='w-full flex flex-row justify-start items-center gap-2'>
-                                <p className='text-[var(--gris2)] font-bold'>@{usuario.name}</p>
+                                <p className='text-[var(--gris2)] dark:text-[var(--gris3)] font-bold'>@{usuario.name}</p>
                             </div>
                         </div>
                         {usuario.usuario_verificado &&
@@ -135,6 +135,7 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
                                     alt='usuario verificado'
                                     width={16}
                                     height={16}
+                                    className='dark:invert'
                                 />
                             </div>
                         }
@@ -166,7 +167,7 @@ export default function PerfilUsuario({ name }: PerfilUsuarioProps) {
 
                     </div>
                     <div className='mobile:w-full laptop:w-1/2'>
-                        <p className='text-[0.9rem]'>{usuario.descripcion_perfil}</p>
+                        <p className='text-[0.9rem] dark:text-[var(--gris3)]'>{usuario.descripcion_perfil}</p>
                     </div>
                     <div className='w-full flex mobile:flex-col laptop:flex-row laptop:justify-between laptop:items-end gap-8'>
                         <div className='w-1/2 flex flex-wrap gap-2'>

@@ -18,7 +18,7 @@ interface ShareProps {
 export default function Share({ imagen, verificado, user, foto, categorias, spices, titulo, extracto, onClick }: ShareProps) {
 
     return (
-        <div onClick={onClick} className="w-full flex flex-col rounded-[1.8rem] p-[10px] bg-white dark:bg-[var(--gris4)] hover:drop-shadow-xl transition ease cursor-pointer">
+        <div onClick={onClick} className="w-full flex flex-col rounded-[1.8rem] p-[10px] bg-white dark:bg-[var(--gris4)] hover:drop-shadow-xl hover:scale-[1.01] transition ease cursor-pointer">
 
             <div id="caja-imagen" className="relative w-full min-h-[200px] rounded-tl-[1.2rem] rounded-tr-[1.2rem] rounded-bl-[1.2rem] overflow-hidden">
 
