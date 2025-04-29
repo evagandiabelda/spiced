@@ -10,9 +10,10 @@ type AvatarOtrosProps = {
         usuario_verificado: boolean;
     };
     customBorder?: string;
+    disableOnClick?: boolean;
 };
 
-export default function AvatarOtros({ autor, customBorder }: AvatarOtrosProps) {
+export default function AvatarOtros({ autor, customBorder, disableOnClick }: AvatarOtrosProps) {
 
     let href = `/perfil/${autor.name}`;
 
@@ -27,16 +28,28 @@ export default function AvatarOtros({ autor, customBorder }: AvatarOtrosProps) {
 
     return (
         <div className={`w-full p-1 rounded-full border-[3px] ${colorBorde} overflow-hidden cursor-pointer hover:scale-105 transition ease`}>
-            <a href={href} className="block w-full h-full">
-                <div className="relative w-full aspect-square rounded-full overflow-hidden">
-                    <Image
-                        src={autor.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
-                        alt="Avatar"
-                        fill
-                        className="avatar object-cover"
-                    />
+            {disableOnClick
+                ? <div className="block w-full h-full">
+                    <div className="relative w-full aspect-square rounded-full overflow-hidden">
+                        <Image
+                            src={autor.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
+                            alt="Avatar"
+                            fill
+                            className="avatar object-cover"
+                        />
+                    </div>
                 </div>
-            </a>
+                : <a href={href} className="block w-full h-full">
+                    <div className="relative w-full aspect-square rounded-full overflow-hidden">
+                        <Image
+                            src={autor.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
+                            alt="Avatar"
+                            fill
+                            className="avatar object-cover"
+                        />
+                    </div>
+                </a>
+            }
         </div>
     );
 };

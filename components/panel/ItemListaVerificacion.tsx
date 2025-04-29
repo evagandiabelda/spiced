@@ -44,6 +44,7 @@ export default function ItemListaVerificacion({ id, nombre_real, name, foto, cre
                     <div id="caja-avatar" className="relative w-[4rem] h-[4rem]">
                         <AvatarOtros
                             autor={autor}
+                            disableOnClick
                         />
                     </div>
 

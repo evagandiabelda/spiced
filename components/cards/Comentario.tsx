@@ -65,7 +65,7 @@ export default function Comentario({ id, texto, fecha, user, sessionUserId, slug
             {/* Caja Superior: */}
             <div className="w-full flex flex-row justify-between items-center gap-4">
                 <div className="flex flex-row items-center gap-2">
-                    <div className="max-w-[40px]">
+                    <div className="w-[40px]">
                         <AvatarOtros autor={user} />
                     </div>
                     <p className="font-bold text-[0.9rem] text-[var(--gris4)] dark:text-[var(--gris3)]">@{user.name}</p>
