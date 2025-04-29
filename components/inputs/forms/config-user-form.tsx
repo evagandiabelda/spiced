@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { toast } from "react-hot-toast"
 import Modal from "@/components/layout/Modal";
+import AvatarPropio from "@/components/icons/AvatarPropio";
 import Image from "next/image";
 import Input from "@/components/inputs/Input";
 import BotonSubmit from "@/components/buttons/BotonSubmit";
@@ -247,15 +248,11 @@ export default function ConfigUserForm() {
                         />
 
                         <label htmlFor="foto" className='opacity-100 cursor-pointer'>
-                            <div className="p-1 rounded-full border-[3px] border-[var(--brand1)] hover:scale-[1.02] transition ease">
-                                <div className="rounded-full overflow-hidden">
-                                    <Image
-                                        src={formData.foto || session?.user.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
-                                        width={200}
-                                        height={200}
-                                        alt="avatar"
-                                    />
-                                </div>
+                            <div className="w-[130px] p-1 rounded-full hover:scale-[1.02] transition ease">
+                                <AvatarPropio
+                                    foto={formData.foto || session?.user.foto || "/iconos/iconos-genericos/icono-usuario-anonimo-header.svg"}
+                                    disableOnClick
+                                />
                             </div>
                         </label>
 
@@ -268,7 +265,7 @@ export default function ConfigUserForm() {
 
                             <div className="w-full flex mobile:flex-col tablet:flex-row mobile:gap-2 tablet:gap-4 tablet:items-baseline mobile:text-center tablet:text-left">
                                 <p className="font-bold text-[1.1rem]">@{session?.user.name}</p>
-                                <p className="text-[0.8rem] text-[var(--gris2)] font-bold">(No puedes cambiar tu nombre de usuario)</p>
+                                <p className="text-[0.8rem] text-[var(--gris2)] dark:text-[var(--gris3)] font-bold">(No puedes cambiar tu nombre de usuario)</p>
                             </div>
 
                             <div className="w-full">

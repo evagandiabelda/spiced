@@ -20,7 +20,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
             onClick={onClose}
         >
             <div
-                className="bg-[var(--gris1)] p-8 rounded-xl p-6 shadow-xl max-w-lg w-full"
+                className="bg-[var(--gris1)] dark:bg-[var(--gris4)] p-8 rounded-xl p-6 shadow-xl max-w-lg w-full"
                 onClick={(e) => e.stopPropagation()} // para que no se cierre al hacer click dentro
             >
                 {children}

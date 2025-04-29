@@ -7,9 +7,10 @@ import Image from "next/image";
 type AvatarPropioProps = {
     customBorder?: string;
     foto?: string;
+    disableOnClick?: boolean;
 };
 
-export default function AvatarPropio({ customBorder, foto }: AvatarPropioProps) {
+export default function AvatarPropio({ customBorder, foto, disableOnClick }: AvatarPropioProps) {
 
     const { data: session } = useSession();
     const userType = session?.user.userType;
@@ -43,16 +44,29 @@ export default function AvatarPropio({ customBorder, foto }: AvatarPropioProps) 
 
     return (
         <div className={`w-full p-1 rounded-full border-[3px] ${colorBorde} overflow-hidden cursor-pointer hover:scale-105 transition ease`}>
-            <a href={href} className="block w-full h-full">
-                <div className="relative w-full aspect-square rounded-full overflow-hidden">
-                    <Image
-                        src={src}
-                        alt="Avatar"
-                        fill
-                        className="avatar object-cover"
-                    />
+            {disableOnClick
+                ? <div className="block w-full h-full">
+                    <div className="relative w-full aspect-square rounded-full overflow-hidden">
+                        <Image
+                            src={src}
+                            alt="Avatar"
+                            fill
+                            className="avatar object-cover"
+                        />
+                    </div>
                 </div>
-            </a>
+                : <a href={href} className="block w-full h-full">
+                    <div className="relative w-full aspect-square rounded-full overflow-hidden">
+                        <Image
+                            src={src}
+                            alt="Avatar"
+                            fill
+                            className="avatar object-cover"
+                        />
+                    </div>
+                </a>
+            }
+
         </div>
     );
 };

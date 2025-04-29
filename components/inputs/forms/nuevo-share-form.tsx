@@ -156,7 +156,7 @@ export default function nuevoShareForm() {
 
                     <h3 className="w-full px-2 pb-4 text-[var(--gris2)] border-b border-b-1 border-b-[var(--gris2)]">Vista previa</h3>
 
-                    <div className="w-full flex flex-col gap-4 rounded-xl bg-white/40 dark:bg-[var(--gris4)] p-6">
+                    <div className="w-full flex flex-col gap-4 rounded-xl bg-white/40 dark:bg-white/5 p-6">
 
                         {/* CARGA DE IMAGEN PRINCIPAL */}
                         <div className="rounded-[0.4rem] overflow-hidden">
@@ -193,6 +193,7 @@ export default function nuevoShareForm() {
                                         nombre={spice}
                                         tamano="pequeno"
                                         mode="static"
+                                        isActive
                                     />
                                 ))}
                             </div>

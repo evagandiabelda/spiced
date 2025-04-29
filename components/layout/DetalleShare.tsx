@@ -260,17 +260,19 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
 
                         <div className="w-full flex flex-col mobile:gap-2 tablet:gap-8 border-b border-b-1 border-b-[var(--gris2)] dark:border-b-[var(--gris4)] px-2 mobile:pb-6 tablet:pb-12">
                             <div className="w-full flex mobile:flex-row laptop:flex-col mobile:items-center laptop:items-start gap-4">
-                                <div className="max-w-[6rem] pl-2">
+                                <div className="w-[6rem] pl-2">
                                     <AvatarOtros autor={share.autor} />
                                 </div>
                                 <div className="flex flex-row gap-2 pl-2">
                                     <a href="#"><h4 className="dark:text-[var(--gris2)]">@{share.autor.name}</h4></a>
-                                    {share.autor.usuario_verificado && <Image
-                                        src="/iconos/iconos-otros/icono-verificado-relleno2.svg"
-                                        alt="Verificado"
-                                        width={16}
-                                        height={16}
-                                    />}
+                                    {share.autor.usuario_verificado &&
+                                        <Image
+                                            src="/iconos/iconos-otros/icono-verificado-relleno2.svg"
+                                            alt="Verificado"
+                                            width={16}
+                                            height={16}
+                                            className="dark:invert"
+                                        />}
                                 </div>
                             </div>
                             {session
@@ -416,18 +418,21 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                             }
 
                             <div className="w-full flex flex-col items-start gap-8">
-                                {share.comentarios.map((comentario, index) => (
-                                    <Comentario
-                                        key={index}
-                                        id={comentario.id}
-                                        texto={comentario.texto}
-                                        fecha={comentario.created_at}
-                                        user={comentario.user}
-                                        sessionUserId={session?.user.id}
-                                        slug={slug}
-                                        onResponderClick={handleResponderClick}
-                                    />
-                                ))}
+                                {share.comentarios.length === 0
+                                    ? <p className="text-[var(--gris3)]">Todavía no hay comentarios.</p>
+                                    : share.comentarios.map((comentario, index) => (
+                                        <Comentario
+                                            key={index}
+                                            id={comentario.id}
+                                            texto={comentario.texto}
+                                            fecha={comentario.created_at}
+                                            user={comentario.user}
+                                            sessionUserId={session?.user.id}
+                                            slug={slug}
+                                            onResponderClick={handleResponderClick}
+                                        />
+                                    ))
+                                }
                             </div>
 
                         </div>

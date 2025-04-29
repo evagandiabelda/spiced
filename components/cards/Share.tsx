@@ -43,11 +43,11 @@ export default function Share({ imagen, verificado, user, foto, categorias, spic
 
             </div>
 
-            <div id="caja-contenido" className="w-full flex flex-col py-4 gap-3">
+            <div id="caja-contenido" className="w-full flex flex-col pt-2 pb-4 gap-4">
 
-                <div id="caja-usuario" className="w-full flex flex-row justify-end items-center gap-2 py-1 px-2">
-                    <span className="text-right text-[0.9rem] opacity-50">@{user}</span>
-                    <div id="caja-imagen" className="relative w-8 h-8 rounded-full overflow-hidden">
+                <div id="caja-usuario" className="w-max flex flex-row self-end items-center gap-2 p-2 rounded-tl-full rounded-bl-full rounded-br-full bg-[var(--gris1)] dark:bg-[var(--gris3)]">
+                    <p className="text-right font-bold text-[0.8rem] pl-2">@{user}</p>
+                    <div id="caja-imagen" className="relative w-6 h-6 rounded-full overflow-hidden border border-2 border-white dark:border-[var(--gris2)]">
                         <Image
                             src={foto}
                             alt="miniatura"
@@ -73,7 +73,7 @@ export default function Share({ imagen, verificado, user, foto, categorias, spic
 
                 <div id="caja-textos" className="w-full flex flex-col items-start gap-4 pt-4 pb-3 px-2 border-t border-t-1 border-t-[var(--gris2)] dark:border-t-[var(--gris5)]">
                     <h4 className="text-left dark:text-[var(--foreground)]">{titulo}</h4>
-                    <p className="text-left text-[var(--gris3)] dark:text-[var(--gris2)] text-[0.9rem] opacity-80 dark:opacity-50">{extracto}</p>
+                    <p className="text-left text-[var(--gris3)] dark:text-[var(--gris2)] text-[0.9rem] leading-[1.2rem] opacity-80 dark:opacity-50">{extracto}</p>
                 </div>
 
                 {spices.length > 0 && (
