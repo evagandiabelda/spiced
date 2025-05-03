@@ -1,5 +1,5 @@
 
-/* Script para crear slugs para cada Share, en base al título */
+/* Script para crear un slug para cada Share, a partir de su título */
 
 export function generateSlug(title: string): string {
     return title

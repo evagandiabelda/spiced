@@ -132,7 +132,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ sl
         // Actualizar el Share
         const updatedShare = await prisma.share.update({
             where: { slug },
-            data: { titulo, texto, img_principal, img_secundaria, spices, categorias }, // 🔴 No tengo claro si el array de 'spices' y 'categorías' llegará aquí con el formato adecuado.
+            data: { titulo, texto, img_principal, img_secundaria, spices, categorias },
         });
 
         return NextResponse.json({ message: "Share actualizado correctamente.", share: updatedShare }, { status: 200 });
