@@ -87,7 +87,7 @@ export default function Paso1() {
                         alt='Icono cámara de fotos'
                         width={fotoURL ? 120 : 80}
                         height={fotoURL ? 120 : 80}
-                        className={fotoURL && "w-[300px] h-[300px] object-cover rounded-full"}
+                        className={fotoURL && "object-cover rounded-full"}
                     />
                     <div className='flex flex-col gap-4'>
                         <h2>Elige tu foto de perfil</h2>

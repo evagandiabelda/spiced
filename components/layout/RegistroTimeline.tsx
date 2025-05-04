@@ -12,7 +12,7 @@ export default function RegistroTimeline({ usuario, pasoActual }: RegistroTimeli
     const srcPasoActivo = "/iconos/iconos-registro/icono-paso-activo-neg.svg";
     const srcPasoHecho = "/iconos/iconos-registro/icono-paso-hecho-neg.svg";
 
-    const estiloTexto = "text-white opacity-60 text-[1rem]";
+    const estiloTexto = "text-white opacity-60 text-[1rem] hover:scale-[1.01] transition ease";
     const estiloTextoActivo = "text-white font-bold opacity-100 text-[1.2rem]";
 
     /* ------------- SIDEBAR PARA REGISTRO DE USUARIO ESTÁNDAR: ------------- */
@@ -88,10 +88,10 @@ export default function RegistroTimeline({ usuario, pasoActual }: RegistroTimeli
                         />
                     </div>
                     <div className="w-full flex flex-col justify-between">
-                        <p className={pasoActual === 1 ? estiloTextoActivo : estiloTexto}>Información básica</p>
-                        <p className={pasoActual === 2 ? estiloTextoActivo : estiloTexto}>Tu perfil</p>
-                        <p className={pasoActual === 3 ? estiloTextoActivo : estiloTexto}>Define tus Spices</p>
-                        <p className={pasoActual === 4 ? estiloTextoActivo : estiloTexto}>Construye tu feed</p>
+                        <a href="/register/paso-1" className={pasoActual === 1 ? estiloTextoActivo : estiloTexto}>Información básica</a>
+                        <a href="/register/paso-2" className={pasoActual === 2 ? estiloTextoActivo : estiloTexto}>Tu perfil</a>
+                        <a href="/register/paso-3" className={pasoActual === 3 ? estiloTextoActivo : estiloTexto}>Define tus Spices</a>
+                        <a href="/register/paso-4" className={pasoActual === 4 ? estiloTextoActivo : estiloTexto}>Construye tu feed</a>
                     </div>
                 </div>
 

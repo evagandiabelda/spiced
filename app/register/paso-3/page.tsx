@@ -14,6 +14,7 @@ export default function Paso3() {
 
     // Datos que se piden en este paso:
     const [spices, setSpices] = useState<string[]>([]);
+    const [errorSpices, setErrorSpices] = useState('');
 
     // Gestión de selección de Spices:
     const manejarSeleccionDeTags = (tags: string[]) => {
@@ -21,9 +22,17 @@ export default function Paso3() {
     };
 
     // Guardado de datos en contexto y Redirección:
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setErrorSpices('');
 
+        // Comprobar que se ha seleccionado al menos un Spice:
+        if (spices.length === 0) {
+            setErrorSpices('Debes seleccionar al menos un Spice.');
+            return;
+        }
+
+        // Si todo está bien, guardar en contexto y continuar:
         setRegistroData({
             spices,
         });
@@ -32,7 +41,7 @@ export default function Paso3() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="w-full h-full flex flex-col items-center gap-4">
+        <form onSubmit={handleSubmit} className="w-full h-full flex flex-col justify-center items-center gap-4">
             <div className='w-full text-center flex flex-col gap-6 px-col1'>
                 <h2 className='w-full'>¿Cuál es tu Spice?</h2>
                 <p>¡Aquí no juzgamos a nadie! No importa si tienes un diagnóstico clínico o simplemente tienes tus sospechas.<br /> En cualquier caso, adelante. Puedes elegir más de una condición.</p>

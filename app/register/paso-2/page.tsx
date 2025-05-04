@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useRegistro } from "@/context/RegistroContext";
-import InputFile from '@/components/inputs/InputFile';
 import Image from 'next/image';
 import Boton from '@/components/buttons/Boton';
 import BotonSubmit from "@/components/buttons/BotonSubmit";
@@ -63,13 +62,13 @@ export default function Paso2() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="w-full h-full flex flex-col items-center gap-8">
+        <form onSubmit={handleSubmit} className="w-full h-full flex flex-col justify-between items-center gap-8">
             <div className='w-full text-center flex flex-col gap-6 px-col1'>
                 <h2 className='w-full'>Elige tu foto de perfil</h2>
                 <p>Haz click en el gatito para cargar tu foto.<br /> Si no quieres mostrar tu cara, se te asignará un gatito de oficio.</p>
             </div>
 
-            <div className="w-full flex flex-col justify-start items-center gap-8 pt-4">
+            <div className="w-full h-full flex flex-col justify-center items-center gap-8 pt-4">
 
                 <label
                     htmlFor="foto"
@@ -82,9 +81,9 @@ export default function Paso2() {
                                 : "/iconos/iconos-registro/gatitos/icono-gato-00.svg"
                         }
                         alt="foto de perfil"
-                        width={300}
-                        height={300}
-                        className="w-[300px] h-[300px] object-cover rounded-full"
+                        width={260}
+                        height={260}
+                        className="object-cover rounded-full"
                     />
                 </label>
 

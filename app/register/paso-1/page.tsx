@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRegistro } from "@/context/RegistroContext";
 import Input from "@/components/inputs/Input";
 import Image from 'next/image';
@@ -23,13 +23,32 @@ export default function Paso1() {
     // Datos que se piden en este paso:
     const [nombreReal, setnombreReal] = useState('');
     const [name, setName] = useState('');
+    const [errorName, setErrorName] = useState('');
     const [fechaNacimiento, setFechaNacimiento] = useState('');
     const [genero, setGenero] = useState('');
 
     // Guardado de datos en contexto y Redirección:
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setErrorName('');
 
+        // Comprobar si el email ya existe:
+        const res = await fetch('/api/auth/register/check-name', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name }),
+        });
+
+        const data = await res.json();
+
+        if (data.exists) {
+            setErrorName('Ya existe una cuenta registrada con este nombre de usuario.');
+            return;
+        }
+
+        // Si todo está bien, guardar en contexto y continuar:
         setRegistroData({
             nombreReal,
             name,
@@ -41,13 +60,13 @@ export default function Paso1() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="w-full flex flex-col items-center gap-4">
+        <form onSubmit={handleSubmit} className="w-full flex flex-col justify-between items-center gap-4">
             <div className='w-full text-center flex flex-col gap-6 px-col1'>
                 <h2 className='w-full'>Información básica</h2>
                 <p>Estos datos nos ayudarán a ofrecerte contenido más personalizado.<br /> Prometemos no usarlos para nada más.</p>
             </div>
 
-            <div className="w-full flex flex-col flex-1 align-center gap-8 pb-4 pt-8">
+            <div className="w-full flex flex-col flex-1 items-center gap-8 pb-4 pt-8">
 
                 <div className='w-full flex mobile:flex-col laptop:flex-row gap-10'>
 
@@ -74,11 +93,14 @@ export default function Paso1() {
                                 tipo="text"
                                 icon={true}
                                 id="name"
-                                placeholder="@usuario_ejemplo"
+                                placeholder="usuario_ejemplo"
                                 required={true}
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
+                            {errorName && (
+                                <p className="text-sm text-red-500 mt-2">{errorName}</p>
+                            )}
                         </div>
 
                     </div>
@@ -120,8 +142,8 @@ export default function Paso1() {
                                 <Image
                                     src={opcion.icono}
                                     alt="miniatura"
-                                    width={120}
-                                    height={120}
+                                    width={100}
+                                    height={100}
                                     className="object-cover"
                                 />
                                 <h3 className='text-[1.2rem] text-[var(--gris4)]'>{opcion.texto}</h3>

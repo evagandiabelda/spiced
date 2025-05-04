@@ -32,7 +32,7 @@ export default function Paso3() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="w-full h-full flex flex-col items-center gap-4">
+        <form onSubmit={handleSubmit} className="w-full h-full flex flex-col justify-center items-center gap-4">
             <div className='w-full text-center flex flex-col gap-6 px-col1'>
                 <h2 className='w-full'>Elige tus especialidades</h2>
                 <p>Tu perfil aparecerá recomendado principalmente a los usuarios que se identifiquen con tus especialidades.</p>
