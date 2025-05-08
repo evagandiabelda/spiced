@@ -75,9 +75,6 @@ export async function GET(request: Request) {
           },
         },
         denuncias: true,
-      },
-      orderBy: {
-        created_at: "desc",
       }
     });
 
