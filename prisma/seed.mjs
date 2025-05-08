@@ -1,8 +1,14 @@
 import { PrismaClient } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import bcrypt from 'bcryptjs';
+import fs from 'fs/promises';
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 const prisma = new PrismaClient();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function main() {
     console.log('Borrando datos existentes...');
@@ -20,6 +26,7 @@ async function main() {
     await prisma.admin.deleteMany();
     await prisma.expert.deleteMany();
     await prisma.standard.deleteMany();
+    await prisma.seguimiento.deleteMany();
     await prisma.user.deleteMany();
 
     /* --------- 🌱 CREACIÓN DE LISTA DE SPICES Y CATEGORÍAS: --------- */
@@ -57,9 +64,19 @@ async function main() {
 
     /* --------- 🟣 CREACIÓN DE 3 USUARIOS EXPERT: --------- */
 
+    // Se recupera el archivo JSON que contiene los datos para cada Usuario:
+    const usersFilePath = path.join(__dirname, '..', 'lib', 'users.json');
+    const usersData = JSON.parse(await fs.readFile(usersFilePath, 'utf-8'));
+    let expertIndex = 0; // Para acceder a cada Usuario Experto.
+    let standardIndex = 0; // Para acceder a cada Usuario Standard.
+
     console.log('Creando usuarios Expert...');
     const expertUsers = [];
+
     for (let i = 0; i < 3; i++) {
+        // Se accede a la posición de un Usuario Experto en el JSON.
+        const userData = usersData.usuarios_expertos[expertIndex];
+        if (!userData) break;
         // Primero se crea una contraseña hasheada:
         const hashedPassword = await bcrypt.hash('password123', 10);
         // Luego obtenemos la lista de spices y categorías creadas:
@@ -70,11 +87,11 @@ async function main() {
         // Luego se definen los datos básicos de un usuario genérico:
         const user = await prisma.user.create({
             data: {
-                nombre_real: faker.person.fullName(),
-                name: faker.internet.username(),
+                nombre_real: userData.nombre_real,
+                name: userData.name,
                 email: faker.internet.email(),
                 password: hashedPassword,
-                foto: faker.image.avatar(),
+                foto: userData.foto,
                 descripcion_perfil: faker.lorem.sentences(2),
                 usuario_verificado: true,
             },
@@ -108,6 +125,8 @@ async function main() {
         }
         // Finalmente se añade a un array para su posterior uso:
         expertUsers.push(expert);
+
+        expertIndex++; // Se incrementa el valor para acceder al siguiente usuario en la siguiente iteración.
     }
 
     /* --------- 🟠 CREACIÓN DE 6 USUARIOS STANDARD: --------- */
@@ -115,6 +134,9 @@ async function main() {
     console.log('Creando usuarios Standard...');
     const standardUsers = [];
     for (let i = 0; i < 6; i++) {
+        // Se accede a la posición de un Usuario Estándar en el JSON.
+        const userData = usersData.usuarios_estandar[standardIndex];
+        if (!userData) break;
         // Primero se crea una contraseña hasheada:
         const hashedPassword = await bcrypt.hash('password123', 10);
         // Luego obtenemos la lista de spices y categorías creadas:
@@ -125,11 +147,11 @@ async function main() {
         // Luego se definen los datos básicos de un usuario genérico:
         const user = await prisma.user.create({
             data: {
-                nombre_real: faker.person.fullName(),
-                name: faker.internet.username(),
+                nombre_real: userData.nombre_real,
+                name: userData.name,
                 email: faker.internet.email(),
                 password: hashedPassword,
-                foto: faker.image.avatar(),
+                foto: userData.foto,
                 descripcion_perfil: faker.lorem.sentences(2),
             },
         });
@@ -162,6 +184,8 @@ async function main() {
         }
         // Finalmente se añade a un array para su posterior uso:
         standardUsers.push(standard);
+
+        standardIndex++; // Se incrementa el valor para acceder al siguiente usuario en la siguiente iteración. 
     }
 
     /* --------- SEGUIMIENTO ENTRE USUARIOS: --------- */
@@ -192,14 +216,24 @@ async function main() {
 
     console.log('Creando Shares...');
 
-    // Luego se obtienen todos los spices y categorías creados:
+    // Se recupera el archivo JSON que contiene el título y el texto para cada Share:
+    const sharesFilePath = path.join(__dirname, '..', 'lib', 'shares.json');
+    const sharesData = JSON.parse(await fs.readFile(sharesFilePath, 'utf-8'));
+    let shareExpertIndex = 0; // Para acceder a cada Share de usuarios Expertos.
+    let shareStandardIndex = 0; // Para acceder a cada Share de usuarios Estándar.
+
+    // Se obtienen todos los spices y categorías creados:
     const allSpices = await prisma.spice.findMany();
     const allCategories = await prisma.categoria.findMany();
-    // Luego se crean 3 shares por cada usuario:
-    for (const user of allUsers) {
+
+    // Se crean 3 shares por cada usuario Experto:
+    for (const user of expertUsers) {
         for (let j = 0; j < 3; j++) {
-            // Se construye el slug a partir del título:
-            const titulo = faker.lorem.sentence();
+            // Se accede a la posición de un Share en el JSON.
+            const shareData = sharesData.shares_expertos[shareExpertIndex];
+            if (!shareData) break;
+            // Se asigna el valor de 'titulo' a partir del JSON y se construye el slug a partir del título:
+            const titulo = shareData.titulo;
             const slug = generateSlug(titulo);
             // Se seleccionan aleatoriamente 3 spices y 1 categoría:
             const randomSpices = faker.helpers.arrayElements(allSpices, { min: 1, max: 3 });
@@ -209,18 +243,20 @@ async function main() {
                 where: { id: user.id },
                 select: { usuario_verificado: true },
             });
+
             // Se crea el share:
             let share = await prisma.share.create({
                 data: {
                     titulo,
                     slug,
-                    texto: faker.lorem.paragraphs(3),
-                    img_principal: faker.image.urlPicsumPhotos(),
-                    img_secundaria: faker.image.urlPicsumPhotos(),
+                    texto: shareData.texto,
+                    img_principal: shareData.img_principal,
+                    img_secundaria: shareData.img_secundaria,
                     autor_id: user.id,
                     share_verificado: autor?.usuario_verificado ?? false,
                 },
             });
+
             // Se asocian los spices al share:
             for (const spice of randomSpices) {
                 await prisma.shareSpice.create({
@@ -230,6 +266,7 @@ async function main() {
                     }
                 });
             }
+
             // Se asocia las categorías al share:
             for (const category of randomCategories) {
                 await prisma.shareCategoria.create({
@@ -240,27 +277,92 @@ async function main() {
                 });
             }
 
+            /* --------- 📣 CREACIÓN DE COMENTARIOS: --------- */
+
+            if (shareData.comentarios) {
+                for (const comentario of shareData.comentarios) {
+                    const randomUser = faker.helpers.arrayElement(allUsers);
+                    await prisma.comentario.create({
+                        data: {
+                            texto: comentario.texto,
+                            user_id: randomUser.id,
+                            share_id: share.id,
+                        },
+                    });
+                }
+            }
+
+            shareExpertIndex++; // Se incrementa para pasar al siguiente Share en el JSON.
         }
     }
 
-    /* --------- 📣 CREACIÓN DE COMENTARIOS: --------- */
+    // Se crean 3 shares por cada usuario Estándar:
+    for (const user of standardUsers) {
+        for (let j = 0; j < 3; j++) {
+            // Se accede a la posición de un Share en el JSON.
+            const shareData = sharesData.shares_estandar[shareStandardIndex];
+            if (!shareData) break;
+            // Se asigna el valor de 'titulo' y 'texto' a partir del JSON y se construye el slug a partir del título:
+            const titulo = shareData.titulo;
+            const slug = generateSlug(titulo);
+            // Se seleccionan aleatoriamente 3 spices y 1 categoría:
+            const randomSpices = faker.helpers.arrayElements(allSpices, { min: 1, max: 3 });
+            const randomCategories = faker.helpers.arrayElements(allCategories, { min: 1, max: 3 });
+            // Se obtiene el estado de verificación del autor:
+            const autor = await prisma.user.findUnique({
+                where: { id: user.id },
+                select: { usuario_verificado: true },
+            });
 
-    console.log('Creando Comentarios aleatorios...');
-    // Primero se obtienen todos los shares creados:
-    const allShares = await prisma.share.findMany();
-    // Luego se crean 3 comentarios por cada share:
-    for (const share of allShares) {
-        for (let k = 0; k < 3; k++) {
-            // Se elige un usuario aleatorio de la lista de usuarios:
-            const randomUser = faker.helpers.arrayElement(allUsers);
-            // Se crea el comentario:
-            await prisma.comentario.create({
+            // Se crea el share:
+            let share = await prisma.share.create({
                 data: {
-                    texto: faker.lorem.sentence(),
-                    user_id: randomUser.id,
-                    share_id: share.id,
+                    titulo,
+                    slug,
+                    texto: shareData.texto,
+                    img_principal: shareData.img_principal,
+                    img_secundaria: shareData.img_secundaria,
+                    autor_id: user.id,
+                    share_verificado: autor?.usuario_verificado ?? false,
                 },
             });
+
+            // Se asocian los spices al share:
+            for (const spice of randomSpices) {
+                await prisma.shareSpice.create({
+                    data: {
+                        share_id: share.id,
+                        spice_id: spice.id
+                    }
+                });
+            }
+
+            // Se asocia las categorías al share:
+            for (const category of randomCategories) {
+                await prisma.shareCategoria.create({
+                    data: {
+                        share_id: share.id,
+                        categoria_id: category.id
+                    }
+                });
+            }
+
+            /* --------- 📣 CREACIÓN DE COMENTARIOS: --------- */
+
+            if (shareData.comentarios) {
+                for (const comentario of shareData.comentarios) {
+                    const randomUser = faker.helpers.arrayElement(allUsers);
+                    await prisma.comentario.create({
+                        data: {
+                            texto: comentario.texto,
+                            user_id: randomUser.id,
+                            share_id: share.id,
+                        },
+                    });
+                }
+            }
+
+            shareStandardIndex++; // Se incrementa para pasar al siguiente Share en el JSON.
         }
     }
 

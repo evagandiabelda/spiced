@@ -1,0 +1,465 @@
+{
+  "shares_expertos": [
+    {
+      "titulo": "No eres raro: solo tienes una forma distinta de sentir el mundo",
+      "texto": "Es posible que durante mucho tiempo te hayas sentido fuera de lugar, como si tuvieras que actuar para encajar. Pero debes saber que tu sensibilidad no es un defecto, es una forma diferente de vivir la vida.\n\nSientes las emociones muy intensamente, y eso a veces te agota. Pero también te hace conectar más con otras personas, ser empático, notar detalles que otros pasan por alto.\n\nAceptar esto te dará más tranquilidad. No se trata de encajar a toda costa, sino de encontrar espacios donde ser uno mismo no sea un problema. Y esos espacios existen, aunque a veces cueste encontrarlos.",
+      "comentarios": [
+        {
+          "texto": "Me ha hecho reflexionar, gracias por ponerlo en palabras."
+        },
+        {
+          "texto": "Gracias por compartir esto, me siento muy identificada."
+        },
+        {
+          "texto": "Me pasa lo mismo. ¡Pensaba que era el único!"
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746727875/hiki-app-4DaoOT33dHc-unsplash_unwjkg.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746727875/cris-trung-3wK7RLRAAkA-unsplash_la4htj.jpg"
+    },
+    {
+      "titulo": "Autocuidado cuando estás en modo 'cero energía'",
+      "texto": "Quizás sientes que hay días en los que no puedes hacer absolutamente nada. Te levantas y sientes que el cuerpo pesa el triple, y la cabeza está como en niebla. Seguramente te estés machacando mucho por eso.\n\nTe propongo algo: intenta aplicar el autocuidado mínimo viable: beber agua, comer algo sencillo, lavarte la cara. Si consigues eso, ya es un logro. Y si no, también intenta no culparte.\n\nTener una lista de 'cosas pequeñas que ayudan' te será muy útil. Pueden ser vídeos relajantes, una manta con peso, o simplemente tumbarte sin hacer nada. Porque descansar también es productivo cuando lo necesitas.",
+      "comentarios": [
+        {
+          "texto": "Gracias por visibilizarlo, a veces una se siente sola con estas cosas."
+        },
+        {
+          "texto": "Justo ayer hablaba de esto con una amiga."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728052/toa-heftiba-ru3IoH9SRfc-unsplash_fbzhhv.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728052/yerlin-matu-GtwiBmtJvaU-unsplash_wktk6g.jpg"
+    },
+    {
+      "titulo": "Truco para no olvidar las cosas: convertirlas en rituales",
+      "texto": "Uno de los mayores retos en personas con TDAH es acordarse de cosas simples: tomar la medicación, cerrar la puerta, coger las llaves... El TDAH no perdona.\n\nUn truco que funciona en muchas personas es convertir esas acciones en rituales. Por ejemplo, cuando tomas la medicación, lo haces con la misma taza y pones siempre la misma canción. Eso refuerza el hábito.\n\nTambién puedes usar ayudas visuales, como notas adhesivas en sitios estratégicos, o apps con recordatorios. No se trata de tener mejor memoria, sino de encontrar estrategias que funcionen para ti.",
+      "comentarios": [
+        {
+          "texto": "Qué bien explicado, ojalá más gente lo entendiera así."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        },
+        {
+          "texto": "Totalmente cierto, es algo que no se habla lo suficiente."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728107/towfiqu-barbhuiya-jOeh3Lv88xA-unsplash_igbuzv.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728106/kelly-sikkema-mZ5D2T5rVG4-unsplash_iyrm8v.jpg"
+    },
+    {
+      "titulo": "Cómo gestionar el rechazo cuando tengo un mal día",
+      "texto": "A veces, cuando tienes un mal día, todo se te hace cuesta arriba. Lo peor no es solo sentirse mal, sino cómo te afecta cuando alguien te rechaza o te responde mal. ¿Te suena? Es como si todo se amplificara y te costara el triple recuperarte.\n\nUna cosa que puede ayudarte mucho es tener frases preparadas para repetirte, como \"no es personal\" o \"hoy estoy más sensible, y está bien\". No es que lo cure todo, pero te dará algo a lo que agarrarte en el momento.\n\nTambién debes aprender a retirarte a tiempo. Si notas que algo te está afectando más de la cuenta, intenta parar y tomarte un respiro. Puede que no siempre lo consigas, pero cada pequeño paso cuenta.",
+      "comentarios": [
+        {
+          "texto": "Me ha hecho reflexionar, gracias por ponerlo en palabras."
+        },
+        {
+          "texto": "Gracias por compartir esto, me siento muy identificada."
+        },
+        {
+          "texto": "Me pasa lo mismo. ¡Pensaba que era el único!"
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728187/zhivko-minkov-tHs82PkN5rg-unsplash_dlxtjv.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728186/jen-theodore-7Zyl18GzDPQ-unsplash_ysjv4h.jpg"
+    },
+    {
+      "titulo": "Ruido visual: el enemigo silencioso en el día a día",
+      "texto": "A muchas personas les cuesta entender por qué les agota tanto ir al supermercado o estar en ciertos espacios con mucha decoración. Si a ti también te pasa, es probable que tengas sensibilidad al 'ruido visual', algo muy habitual sobre todo en personas neurodivergentes.\n\nLos colores chillones, los carteles, los productos mal ordenados... todo eso te sobreestimula y te agota a nivel mental. ¿Pensabas que solo te pasaba a ti? La realidad es que esto es bastante común en personas con autismo o TDAH.\n\nTe doy algunos trucos para llevarlo mejor: hacer compras en horas de poca afluencia, llevar gafas de sol (sí, dentro del súper), o incluso hacer lista para ir lo más directo posible. Pequeños trucos que marcan una gran diferencia.",
+      "comentarios": [
+        {
+          "texto": "Gracias por visibilizarlo, a veces una se siente sola con estas cosas."
+        },
+        {
+          "texto": "Justo ayer hablaba de esto con una amiga."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728256/nathalia-rosa-P1SdQAhcJz8-unsplash_scxnyr.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728250/vladislav-bychkov-BDLj1qD3Fuc-unsplash_ptvqhf.jpg"
+    },
+    {
+      "titulo": "¿Crees que tienes 'parálisis por análisis'?",
+      "texto": "¿Te ocurre que te bloqueas muy a menudo solo de pensar en todas las opciones posibles para una decisión sencilla? Uno de mis pacientes me contaba el otro día que tardó más de media hora en elegir qué camiseta ponerse.\n\nEsto se llama 'parálisis por análisis' y es algo que sufren muchas personas con TDAH. La mente se satura porque quiere encontrar la opción perfecta, y al final no haces nada.\n\nPuede que te ayude limitarte a pocas opciones, o dejar las decisiones simples ya tomadas de antemano. Por ejemplo, tener un par de 'uniformes' o rutinas que te eviten ese bloqueo. A veces lo más simple es lo que más nos salva.",
+      "comentarios": [
+        {
+          "texto": "Qué bien explicado, ojalá más gente lo entendiera así."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        },
+        {
+          "texto": "Totalmente cierto, es algo que no se habla lo suficiente."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728292/raquel-martinez-SQM0sS0htzw-unsplash_hmafnj.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728288/christopher-lemercier-12yvdCiLaVE-unsplash_qudoyn.jpg"
+    },
+    {
+      "titulo": "Consejos para sobrevivir a un evento social con ansiedad",
+      "texto": "Uno de mis pacientes me contó en una ocasión que tenía que ir a un cumpleaños donde solo conocía a una persona, y la ansiedad social le tuvo temblando desde la mañana. Lo consiguió, pero no fue fácil.\n\nUna cosa que le habría ayudado sería tener un plan de escape. Saber que si se agobiaba, podía salir a dar una vuelta o decir que tenía que irse pronto. Si a ti también te pasa, puedes proponerte hablar solo con una persona nueva, no más.\n\nNo tiene que ser perfecto, pero te sentirás orgulloso de haber ido. Y lo mejor: no te forzarás a quedarte más tiempo del que podías. Aprender a respetar tus propios límites es clave.",
+      "comentarios": [
+        {
+          "texto": "Me ha hecho reflexionar, gracias por ponerlo en palabras."
+        },
+        {
+          "texto": "Gracias por compartir esto, me siento muy identificada."
+        },
+        {
+          "texto": "Me pasa lo mismo. ¡Pensaba que era el único!"
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728340/pedro-ribeiro-7tOIhINX4Jo-unsplash_ebfk8x.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728339/kevin-curtis-QlnUpMED6Qs-unsplash_pjdlmx.jpg"
+    },
+    {
+      "titulo": "Pequeños trucos que te ayudarán con el TDAH en el trabajo",
+      "texto": "Trabajas en una oficina y muchas veces te cuesta mantener la concentración. Entre notificaciones, ruidos y distracciones, a veces te sientes saturada. ¿Es tu caso? Te dejo algunos trucos que funcionan en muchos de mis pacientes, por si te sirven también.\n\nUno: usar auriculares con ruido blanco. Te ayudará un montón a bloquear el sonido del ambiente. Dos: dividir tus tareas en partes muy pequeñas y premiarte con pausas cada vez que termines una. Y tres: usar una app tipo Pomodoro para tener tiempos concretos de foco.\n\nAunque no todo funciona igual para todo el mundo, estos tres pasos puede que te den algo de estructura. Me encantaría leer vuestros trucos para no perderos en el caos.",
+      "comentarios": [
+        {
+          "texto": "Qué bien explicado, ojalá más gente lo entendiera así."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        },
+        {
+          "texto": "Totalmente cierto, es algo que no se habla lo suficiente."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728377/mimi-thian-slWBjTGhREQ-unsplash_yvjegk.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728376/tim-gouw-1K9T5YiZ2WU-unsplash_vzr4fu.jpg"
+    },
+    {
+      "titulo": "Dudas comunes cuando empiezas terapia (y por qué no rendirte)",
+      "texto": "Empezar terapia puede ser incómodo. No sabes por dónde empezar, te sientes expuesto y no sabes si estás 'haciéndolo bien'.\n\n Pues bien, debes saber que no hay una forma correcta. Solo hay que estar dispuesto a explorar, a veces con miedo, a veces con dudas. Y está bien no saber exactamente qué decir en cada sesión.\n\nHabrá sesiones en las que solo llorarás, otras en las que te irás con más preguntas que respuestas. Pero poco a poco, irás encontrando claridad. No te rindas en la primera curva, porque a veces lo mejor llega después de aguantar un poco más.",
+      "comentarios": [
+        {
+          "texto": "Me ha hecho reflexionar, gracias por ponerlo en palabras."
+        },
+        {
+          "texto": "Gracias por compartir esto, me siento muy identificada."
+        },
+        {
+          "texto": "Me pasa lo mismo. ¡Pensaba que era el único!"
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728434/linkedin-sales-solutions-W3Jl3jREpDY-unsplash_zn20tv.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728434/matthew-ball-rYteFvqUGVw-unsplash_gq7bnd.jpg"
+    }
+  ],
+  "shares_estandar": [
+    {
+      "titulo": "Mi rutina de desconexión cuando todo se vuelve abrumador",
+      "texto": "Cuando siento que mi cerebro va a mil por hora, tengo una pequeña rutina que me ayuda a 'aterrizar'. No siempre funciona igual, pero es como un salvavidas.\n\nEmpiezo por apagar notificaciones y poner el móvil en modo avión. Después me preparo una infusión (manzanilla o algo suave) y bajo la luz. Me pongo una playlist sin letra, solo música suave o binaural.\n\nA veces escribo en un cuaderno lo que siento, sin filtro, solo para sacarlo. Otras veces simplemente me tumbo con una manta. No es magia, pero me recuerda que tengo herramientas y eso ya me da paz.",
+      "comentarios": [
+        {
+          "texto": "Gracias por visibilizarlo, a veces una se siente sola con estas cosas."
+        },
+        {
+          "texto": "Justo ayer hablaba de esto con una amiga."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728468/madison-lavern-4gcqRf3-f2I-unsplash_t25jgv.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728467/thought-catalog-nbkd_9UpSb0-unsplash_xpqmxp.jpg"
+    },
+    {
+      "titulo": "¿Cómo explicarle a mi familia que soy autista sin que me miren raro?",
+      "texto": "Últimamente he estado dándole muchas vueltas a cómo contarle a mi familia que tengo un diagnóstico de autismo. No es algo que quiera ocultar, pero me da miedo que lo malinterpreten o que empiecen a tratarme diferente. ¿A alguien más le ha pasado?\n\nHe pensado en empezar por contarles cómo me siento en situaciones sociales, o cómo me afecta el ruido o los cambios de rutina. Tal vez si lo explico desde lo que ellos ya han visto en mí, puedan entenderlo mejor.\n\nSi alguien tiene experiencia con esto, agradecería muchísimo cualquier consejo. A veces siento que tengo que justificar cada parte de mi forma de ser y ya cansa. Solo quiero poder hablar de ello sin sentirme rara.",
+      "comentarios": [
+        {
+          "texto": "Gracias por visibilizarlo, a veces una se siente sola con estas cosas."
+        },
+        {
+          "texto": "Justo ayer hablaba de esto con una amiga."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728523/hiki-app-aM-BRQtrng8-unsplash_ej5nqw.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728522/alexander-grey-Rn9HYremvBI-unsplash_e4elwq.jpg"
+    },
+    {
+      "titulo": "La ansiedad nocturna no me deja dormir. ¿Os pasa también?",
+      "texto": "Durante el día estoy más o menos bien, pero en cuanto me meto en la cama, mi mente empieza a dar vueltas a todo. Cosas que no hice, errores del pasado, miedo al futuro... todo junto. Me cuesta horrores dormir.\n\nHe probado meditación guiada, infusiones, apagar el móvil una hora antes… A veces algo funciona, otras no. Es muy frustrante porque al día siguiente estoy agotada y con más ansiedad aún.\n\n¿Alguno ha encontrado algo que le funcione de verdad? Me sentiría menos sola sabiendo que no soy la única a la que le pasa esto.",
+      "comentarios": [
+        {
+          "texto": "Me ha hecho reflexionar, gracias por ponerlo en palabras."
+        },
+        {
+          "texto": "Gracias por compartir esto, me siento muy identificada."
+        },
+        {
+          "texto": "Me pasa lo mismo. ¡Pensaba que era el único!"
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728560/anthony-tran-i-ePv9Dxg7U-unsplash_kchlvp.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728559/toa-heftiba-B5Thyv8d3mo-unsplash_j0rapm.jpg"
+    },
+    {
+      "titulo": "Soy disléxica y esto es lo que me hubiera gustado saber en el cole",
+      "texto": "Cuando era pequeña pensaba que era tonta. Me costaba leer, confundía letras y me sentía súper frustrada. No fue hasta los 16 que me diagnosticaron dislexia. Ahí entendí que no era cuestión de inteligencia, sino de cómo proceso la información.\n\nOjalá en el cole me hubieran dado herramientas o al menos comprensión. Recuerdo a profes diciéndome que era vaga, cuando en realidad lo intentaba el doble.\n\nAhora que soy adulta, quiero compartir esto con quien lo necesite: no estás sola, y no estás roto/a. Solo tienes una forma distinta de aprender. Y eso también vale.",
+      "comentarios": [
+        {
+          "texto": "Gracias por visibilizarlo, a veces una se siente sola con estas cosas."
+        },
+        {
+          "texto": "Justo ayer hablaba de esto con una amiga."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728595/luke-jones-J5-IF5JjiM8-unsplash_iimmnn.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728596/vanessa-bucceri-gDiRwIYAMA8-unsplash_oe9j3g.jpg"
+    },
+    {
+      "titulo": "Me da miedo pedir adaptaciones en clase por ser neurodivergente",
+      "texto": "Estoy estudiando un ciclo y me cuesta mucho concentrarme durante los exámenes. He leído que tengo derecho a pedir adaptaciones, pero me da miedo que me tomen por exagerada o que el profesorado no lo entienda.\n\nNo quiero parecer débil o como que busco ventajas. Solo quiero poder rendir en igualdad de condiciones. Pero me da apuro hablarlo con coordinación. ¿Alguien ha pasado por esto?\n\nMe vendría bien saber cómo lo habéis enfocado, si os han puesto pegas o si ha sido más fácil de lo que pensabais. A veces siento que todo esto es una batalla constante y me agota un poco.",
+      "comentarios": [
+        {
+          "texto": "Qué bien explicado, ojalá más gente lo entendiera así."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        },
+        {
+          "texto": "Totalmente cierto, es algo que no se habla lo suficiente."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728640/timur-shakerzianov-RHqKnRACsqs-unsplash_ldmwow.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728642/brad-neathery-XrSzacdYbtQ-unsplash_a1aczd.jpg"
+    },
+    {
+      "titulo": "Lo que me hubiese gustado saber antes de mi diagnóstico de TDAH",
+      "texto": "Me diagnosticaron con TDAH a los 28, y de repente todo tuvo sentido. Pero también sentí rabia por haber vivido tantos años sin entenderme.\n\nUna de las cosas que más me dolió fue pensar que era perezoso o desorganizado, cuando en realidad estaba luchando contra algo que no sabía que existía. Las etiquetas que me puse (y que otros me pusieron) fueron muy injustas.\n\nSi estás en proceso de diagnóstico, o te lo acaban de dar, respira. No tienes que solucionarlo todo ya. Pero al menos ahora sabes por dónde empezar. Y eso, en sí mismo, ya es un gran paso.",
+      "comentarios": [
+        {
+          "texto": "Qué bien explicado, ojalá más gente lo entendiera así."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        },
+        {
+          "texto": "Totalmente cierto, es algo que no se habla lo suficiente."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728692/christina-victoria-craft-ZHys6xN7sUE-unsplash_dfhal0.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728691/adrian-swancar-imAfCYq7KH0-unsplash_lcxgas.jpg"
+    },
+    {
+      "titulo": "Así evito entrar en bucle cuando cometo un error",
+      "texto": "Antes, cuando cometía un error en el trabajo o en lo personal, me quedaba atrapado dándole vueltas durante días. Como si ese fallo definiera todo lo que soy.\n\nCon el tiempo he aprendido a observar esos pensamientos como si fueran nubes: vienen, los veo, pero no me aferro a ellos. No siempre funciona, pero al menos me ayuda a no identificarme con el fallo.\n\nTambién me ayuda escribir lo que pasó desde fuera, como si le estuviera contando a otra persona. Casi siempre descubro que no es tan grave como me parecía en mi cabeza.",
+      "comentarios": [
+        {
+          "texto": "Gracias por visibilizarlo, a veces una se siente sola con estas cosas."
+        },
+        {
+          "texto": "Justo ayer hablaba de esto con una amiga."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728725/wassim-chouak-cxz5PZv3WC8-unsplash_a94vfo.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728724/joice-kelly-rXrMy7mXUEs-unsplash_dpkhsr.jpg"
+    },
+    {
+      "titulo": "Lo que aprendí sobre el 'masking' y cómo me afecta",
+      "texto": "Durante años me esforzaba por parecer 'normal'. Copiaba expresiones, imitaba comportamientos sociales, me reía cuando tocaba, aunque no entendiera el chiste. Estaba agotado y no sabía por qué.\n\nLuego descubrí el concepto de 'masking'. Es cuando, por ser neurodivergente, te esfuerzas en ocultar cómo eres realmente para encajar. Es como llevar un disfraz diario, y eso pasa factura.\n\nDesde que soy más consciente, he empezado a soltar un poco ese disfraz. No siempre puedo, pero en entornos seguros me permito ser más yo. Y eso es liberador, aunque al principio dé miedo.",
+      "comentarios": [
+        {
+          "texto": "Qué bien explicado, ojalá más gente lo entendiera así."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        },
+        {
+          "texto": "Totalmente cierto, es algo que no se habla lo suficiente."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728771/dev-asangbam-z5u3go6GIJ8-unsplash_ljqwwi.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728769/kevin-laminto-LL1vA5sUs6g-unsplash_ouw6id.jpg"
+    },
+    {
+      "titulo": "¿Y si dejar de compararte fuera el verdadero objetivo?",
+      "texto": "Me paso la vida comparándome. Que si otros son más productivos, que si gestionan mejor sus emociones, que si no se olvidan de cosas simples. Y eso solo me hace sentir peor.\n\nUn día, mi terapeuta me dijo: 'Compárate contigo mismo, no con los demás'. Desde entonces intento fijarme en mi propio avance. No importa si otros hacen más, lo que importa es si yo estoy mejor que antes.\n\nAl final, cada uno tiene su ritmo. Y más cuando tienes un cerebro que funciona distinto. Lo importante no es ir rápido, sino ir a tu manera y sin perderte por el camino.",
+      "comentarios": [
+        {
+          "texto": "Me ha hecho reflexionar, gracias por ponerlo en palabras."
+        },
+        {
+          "texto": "Gracias por compartir esto, me siento muy identificada."
+        },
+        {
+          "texto": "Me pasa lo mismo. ¡Pensaba que era el único!"
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728816/jonathan-mabey-thVnHFmr9eI-unsplash_bcm9tm.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728815/helena-lopes-PGnqT0rXWLs-unsplash_uhetqo.jpg"
+    },
+    {
+      "titulo": "Mi experiencia con la hiperempatía: una bendición y una carga",
+      "texto": "Desde siempre me ha afectado mucho lo que les pasa a los demás. Si alguien está triste, lo siento como si me pasara a mí. A veces me cuesta saber dónde acabo yo y empiezan los otros.\n\nEsto me hizo pensar que era 'demasiado sensible', pero luego descubrí que muchas personas neurodivergentes viven lo mismo. Se llama hiperempatía, y no es una debilidad.\n\nEstoy aprendiendo a poner límites emocionales. Ayudar no significa absorber el dolor de los demás. Ahora sé que puedo acompañar sin hundirme con la otra persona. Pero es un proceso que sigo trabajando.",
+      "comentarios": [
+        {
+          "texto": "Gracias por visibilizarlo, a veces una se siente sola con estas cosas."
+        },
+        {
+          "texto": "Justo ayer hablaba de esto con una amiga."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728854/taylor-smith-XB_yndXE4ks-unsplash_x250l7.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728852/anthony-tran-3B6RfJQKBEM-unsplash_f6tltu.jpg"
+    },
+    {
+      "titulo": "Cómo uso la escritura como herramienta de autorregulación",
+      "texto": "Siempre me ha costado poner en palabras lo que siento cuando estoy saturado. Me bloqueo o exploto. Pero descubrí que escribir, aunque sea sin sentido, me ayuda a ordenar el caos interno.\n\nNo se trata de escribir bonito, ni de hacer un diario perfecto. A veces solo pongo frases sueltas, garabatos o listas de lo que me molesta. Pero el simple acto de escribirlo me da perspectiva.\n\nIncluso he hecho una carpeta con entradas tituladas 'cuando me siento así'. Me sirve para entender mis patrones, y me recuerda que ya he salido de esos estados antes. Es mi forma de hablar conmigo mismo.",
+      "comentarios": [
+        {
+          "texto": "Qué bien explicado, ojalá más gente lo entendiera así."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        },
+        {
+          "texto": "Totalmente cierto, es algo que no se habla lo suficiente."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728905/hans-isaacson-Mqx2-kbCVE8-unsplash_na7vde.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728903/priscilla-du-preez-VzqEavUGnss-unsplash_njzezo.jpg"
+    },
+    {
+      "titulo": "Sobrevivir al 'crash' después de una jornada intensa",
+      "texto": "Hay días que parecen normales, pero después de aguantar conversaciones, ruidos, decisiones y estímulos… llego a casa y me hundo. Literal. No puedo ni moverme. Solo quiero silencio absoluto.\n\nEso es un 'crash' o colapso. Le pasa a mucha gente neurodivergente cuando el esfuerzo por funcionar socialmente sobrepasa los límites. Antes me enfadaba conmigo por estar así, pero ahora lo veo como una señal.\n\nIntento anticiparme. Si sé que tengo una jornada exigente, planifico tiempo para recuperarme después. No siempre puedo evitar el crash, pero al menos no me siento culpable por necesitar parar.",
+      "comentarios": [
+        {
+          "texto": "Me ha hecho reflexionar, gracias por ponerlo en palabras."
+        },
+        {
+          "texto": "Gracias por compartir esto, me siento muy identificada."
+        },
+        {
+          "texto": "Me pasa lo mismo. ¡Pensaba que era el único!"
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728944/max-van-den-oetelaar-buymYm3RQ3U-unsplash_ucqlj8.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728942/andrew-neel-A9Msi-vUNKg-unsplash_drrlj7.jpg"
+    },
+    {
+      "titulo": "Mi técnica de los 5 minutos para empezar tareas difíciles",
+      "texto": "Una de las cosas que más me cuesta es empezar. Saber que tengo que hacer algo, pero sentir una barrera invisible que me impide comenzar, aunque sea sencillo.\n\nDescubrí la 'técnica de los 5 minutos': me digo que solo voy a hacer la tarea durante 5 minutos. Sin presión. Solo empezar. Curiosamente, muchas veces, una vez que empiezo, sigo adelante.\n\nNo siempre funciona, y a veces solo hago esos 5 minutos, pero al menos ya no me quedo bloqueado durante horas. Es como engañar un poco al cerebro para que se active sin asustarse.",
+      "comentarios": [
+        {
+          "texto": "Gracias por visibilizarlo, a veces una se siente sola con estas cosas."
+        },
+        {
+          "texto": "Justo ayer hablaba de esto con una amiga."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728976/malvestida-FfbVFLAVscw-unsplash_ivredn.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746728979/alyson-mcphee-yWG-ndhxvqY-unsplash_wc2fhe.jpg"
+    },
+    {
+      "titulo": "¿Tienes sensibilidad auditiva? Esto me ayuda a mí",
+      "texto": "El ruido me afecta muchísimo. No hablo solo de ruidos fuertes, también los constantes: un reloj que hace tic-tac, un grifo que gotea, gente hablando de fondo. Me desconcentran y me agotan.\n\nDescubrí que esto tiene nombre: sensibilidad auditiva, y muchas personas autistas o con TDAH la tienen. Lo bueno es que hay formas de manejarlo.\n\nUso cascos con cancelación de ruido o auriculares con música blanca. También aviso en casa o en el trabajo cuando necesito más silencio. No es ser delicado, es cuidar mi sistema nervioso.",
+      "comentarios": [
+        {
+          "texto": "Qué bien explicado, ojalá más gente lo entendiera así."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        },
+        {
+          "texto": "Totalmente cierto, es algo que no se habla lo suficiente."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746729032/elyas-pasban-uAm_c9heHxo-unsplash_zbc6ww.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746729034/jonathan-borba-YlSr0UEm9pA-unsplash_q5bjky.jpg"
+    },
+    {
+      "titulo": "No tener energía social también es válido",
+      "texto": "A veces me invitan a planes que parecen divertidos, pero no tengo energía social. No es que no quiera, es que simplemente no puedo. Y eso me hacía sentir culpable o antisocial.\n\nCon el tiempo he aprendido a decir que no, sin dar demasiadas explicaciones. Algo como 'Hoy no tengo energía, pero gracias por pensar en mí'. Parece simple, pero me ha costado mucho llegar ahí.\n\nLa energía social no es infinita, y en personas neurodivergentes suele agotarse más rápido. Aprender a escucharme y no forzarme ha sido clave para cuidar mi salud mental.",
+      "comentarios": [
+        {
+          "texto": "Me ha hecho reflexionar, gracias por ponerlo en palabras."
+        },
+        {
+          "texto": "Gracias por compartir esto, me siento muy identificada."
+        },
+        {
+          "texto": "Me pasa lo mismo. ¡Pensaba que era el único!"
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746729069/haley-phelps-S-llxYh3GzI-unsplash_zngmpt.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746729066/plann-8IhVh0xU2Hc-unsplash_kudccs.jpg"
+    },
+    {
+      "titulo": "Cuando la rutina se convierte en un salvavidas",
+      "texto": "Mucha gente piensa que tener una rutina es aburrido, pero para mí es lo que me da estabilidad. Saber lo que viene después reduce mi ansiedad y me permite funcionar mejor.\n\nNo necesito una rutina rígida, pero sí ciertos anclajes: desayunar siempre a la misma hora, hacer pausas programadas, tener un ritual para cerrar el día. Eso me ayuda a no sentirme tan perdido.\n\nCuando me salto la rutina por muchos días seguidos, lo noto enseguida. Me desoriento, me cuesta concentrarme y todo se vuelve más difícil. Así que he aprendido a cuidar mis rutinas como parte de mi autocuidado.",
+      "comentarios": [
+        {
+          "texto": "Gracias por visibilizarlo, a veces una se siente sola con estas cosas."
+        },
+        {
+          "texto": "Justo ayer hablaba de esto con una amiga."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746729115/antonino-visalli-RNiBLy7aHck-unsplash_n6wdnr.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746729117/priscilla-du-preez-8bdrGAh3L5Q-unsplash_guwniu.jpg"
+    },
+    {
+      "titulo": "¿Es normal llorar sin saber por qué?",
+      "texto": "Sí. A mí me pasa mucho. De repente empiezo a llorar y no sé exactamente cuál es la razón. Solo siento un peso en el pecho, un nudo en la garganta. Y ya está.\n\nAntes me asustaba. Ahora lo veo como una forma que tiene mi cuerpo de liberar tensión acumulada. A veces no tengo palabras para lo que siento, pero mi cuerpo sí lo expresa.\n\nIntento no frenarlo. Me dejo llorar, me abrazo (literal o mentalmente) y luego, si puedo, escribo o hablo con alguien de confianza. No hay que entenderlo todo para que sea válido. Llorar también es una forma de procesar.",
+      "comentarios": [
+        {
+          "texto": "Qué bien explicado, ojalá más gente lo entendiera así."
+        },
+        {
+          "texto": "Me ha ayudado mucho leer esto, justo estoy pasando por algo similar."
+        },
+        {
+          "texto": "Totalmente cierto, es algo que no se habla lo suficiente."
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746729159/joshua-rawson-harris-YNaSz-E7Qss-unsplash_n3nat8.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746729157/anthony-delanoix-hzgs56Ze49s-unsplash_pr9lrr.jpg"
+    },
+    {
+      "titulo": "Agradecer mis pequeños logros me cambió la perspectiva",
+      "texto": "Vivimos en una sociedad que solo celebra los grandes logros: terminar una carrera, conseguir un ascenso, tener pareja. Pero yo he aprendido a celebrar cosas como levantarme, ducharme, o salir a comprar pan.\n\nPorque cuando tienes ansiedad, depresión o TDAH, esas cosas pequeñas a veces requieren un esfuerzo enorme. Y si no las valoro, siento que no avanzo nunca.\n\nDesde que empecé a decir 'bien hecho' incluso en los días más difíciles, mi autoestima ha cambiado. No necesito hacer grandes cosas para valer. Ya estoy haciendo mucho solo por seguir adelante cada día.",
+      "comentarios": [
+        {
+          "texto": "Me ha hecho reflexionar, gracias por ponerlo en palabras."
+        },
+        {
+          "texto": "Gracias por compartir esto, me siento muy identificada."
+        },
+        {
+          "texto": "Me pasa lo mismo. ¡Pensaba que era el único!"
+        }
+      ],
+      "img_principal": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746729188/dmitry-shamis-uaufwPBhbio-unsplash_czazzo.jpg",
+      "img_secundaria": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746729186/brooke-lark-nBtmglfY0HU-unsplash_te7key.jpg"
+    }
+  ]
+}

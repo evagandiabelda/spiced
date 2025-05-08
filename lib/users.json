@@ -1,0 +1,51 @@
+{
+    "usuarios_expertos": [
+        {
+            "nombre_real": "Clara",
+            "name": "clara_psico",
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721460/shares/tz7u74bwwg5x1vz8lfow.jpg"
+        },
+        {
+            "nombre_real": "Jordi",
+            "name": "jordi_terapeuta",
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721460/shares/glj3wvjscbtbaoeeqnbh.jpg"
+        },
+        {
+            "nombre_real": "Nuria",
+            "name": "nuria_neuro",
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/ev7dmwyakthbwehwq39k.jpg"
+        }
+    ],
+    "usuarios_estandar": [
+        {
+            "nombre_real": "Marta",
+            "name": "marta_tdah",
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/gldjgfgzsikod1ed7tag.jpg"
+        },
+        {
+            "nombre_real": "Iván",
+            "name": "ivan_neurodiverso",
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/c3zptfqvrzy2gcnfieba.jpg"
+        },
+        {
+            "nombre_real": "Sergio",
+            "name": "sergio_90",
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721460/shares/s6j7joetx3ttze4ddiy6.jpg"
+        },
+        {
+            "nombre_real": "Sofía",
+            "name": "sofi.masking",
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/enwmqwpj55qopxhe4osb.jpg"
+        },
+        {
+            "nombre_real": "Álex",
+            "name": "alex_hpi",
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721461/shares/zi8ubmniin8purlhg0to.jpg"
+        },
+        {
+            "nombre_real": "Lucía",
+            "name": "lucia_en_bucle",
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/niirifyectcrjrbxwpwf.jpg"
+        }
+    ]
+}

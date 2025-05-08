@@ -92,6 +92,7 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                     throw new Error("No se ha encontrado el Share.");
                 } else {
                     setShare(share);
+                    setEstaVerificado(share.share_verificado);
                     setIsFollowing(siguiendo);
                     setShareGuardado(guardado);
                     setLoading(false);
@@ -264,7 +265,7 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                                     <AvatarOtros autor={share.autor} />
                                 </div>
                                 <div className="flex flex-row gap-2 pl-2">
-                                    <a href="#"><h4 className="dark:text-[var(--gris2)]">@{share.autor.name}</h4></a>
+                                    <p className="dark:text-[var(--gris2)]">@{share.autor.name}</p>
                                     {share.autor.usuario_verificado &&
                                         <Image
                                             src="/iconos/iconos-otros/icono-verificado-relleno2.svg"

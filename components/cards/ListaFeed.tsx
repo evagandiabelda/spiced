@@ -113,7 +113,11 @@ export default function ListaFeed({ filtroCategoria, filtroUsuarios, filtroVerif
                 if (!res.ok) throw new Error("Error al obtener los shares");
 
                 const data = await res.json();
-                setShares(data.shares);
+
+                /* Función para reordenar los Shares en orden Aleatorio: */
+                const shuffledShares = data.shares.sort(() => Math.random() - 0.5);
+
+                setShares(shuffledShares);
             } catch (err) {
                 setError("No se pudieron cargar los shares.");
             } finally {
