@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { hash } from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 import { obtenerAvatarAleatorio } from "@/lib/avatars";
 import { Genero } from "@prisma/client";
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
         }
 
         // Hashear la contraseña
-        const hashedPassword = await hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         // Crear el usuario en la base de datos
         const newUser = await prisma.user.create({

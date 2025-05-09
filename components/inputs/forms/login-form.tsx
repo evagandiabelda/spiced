@@ -24,6 +24,8 @@ export default function LoginForm() {
 
     if (result?.error) {
       setErrorMessage(result.error);
+      console.log(result.error);
+      return;
     }
 
     // Si el login es exitoso, consulta el tipo de usuario:
