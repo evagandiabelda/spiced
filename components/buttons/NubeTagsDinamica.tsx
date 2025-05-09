@@ -43,7 +43,7 @@ export default function NubeTagsDinamica({ uso, defaultActive = false, onSelecci
         }
     }, [tagsSeleccionados]);
 
-    const estiloFeed = "w-full flex mobile:flex-row tablet:flex-wrap overflow-x-auto scrollbar-hide gap-2 tablet:justify-center mobile:pl-col1 tablet:pl-0";
+    const estiloFeed = "w-full flex flex-wrap gap-2 justify-center mobile:px-6 tablet:px-0";
     const estiloRegister = "w-full flex flex-wrap gap-2 justify-center";
 
     return (

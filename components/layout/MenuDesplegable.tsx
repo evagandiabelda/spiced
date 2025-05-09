@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
@@ -15,34 +15,37 @@ export default function Desplegable({ isOpen, onClose }: DesplegableProps) {
 
     const { data: session } = useSession();
 
+    // Animación Abrir/Cerrar Menú:
+    const [shouldRender, setShouldRender] = useState(isOpen);
+    const [animateOut, setAnimateOut] = useState(false);
+
     // Evitar scroll al obrir el menú:
     useEffect(() => {
         if (isOpen) {
+            setShouldRender(true);
+            setAnimateOut(false);
             document.body.style.overflow = "hidden";
         } else {
+            setAnimateOut(true);
             document.body.style.overflow = "";
+            const timeout = setTimeout(() => {
+                setShouldRender(false);
+            }, 300); // duración igual que la animación
+            return () => clearTimeout(timeout);
         }
-        return () => {
-            document.body.style.overflow = "";
-        };
     }, [isOpen]);
 
-    if (!isOpen) return null;
+    if (!shouldRender) return null;
 
     let href = "/login";
-
-    if (session?.user.userType === "standard") {
-        href = "/panel-estandar";
-    }
-    if (session?.user.userType === "expert") {
-        href = "/panel-experto";
-    }
-    if (session?.user.userType === "admin") {
-        href = "/panel-admin";
-    }
+    if (session?.user.userType === "standard") href = "/panel-estandar";
+    if (session?.user.userType === "expert") href = "/panel-experto";
+    if (session?.user.userType === "admin") href = "/panel-admin";
 
     return createPortal( // Crea un 'body' paral·lel per a renderitzar el menú desplegable sobre el body principal.
-        <div className="fixed inset-0 bg-white dark:bg-[var(--gris5)] z-50 h-dvh flex flex-col justify-between">
+        <div className={`fixed inset-0 z-50 h-dvh flex flex-col justify-between bg-white dark:bg-[var(--gris5)]
+        ${animateOut ? "animate-slide-up" : "animate-slide-down"}`}>
+
             <div>
                 <div className="px-[30px] py-[24px] border-y-2 border-[--gris1] dark:border-[--gris4] cursor-pointer">
                     <div className="flex flex-row items-center w-full gap-5 p-4 rounded-xl hover:bg-[--gris1] dark:hover:bg-[--gris4]">

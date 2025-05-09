@@ -3,49 +3,58 @@
         {
             "nombre_real": "Clara",
             "name": "clara_psico",
-            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721460/shares/tz7u74bwwg5x1vz8lfow.jpg"
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721460/shares/tz7u74bwwg5x1vz8lfow.jpg",
+            "descripcion_perfil": "Psicóloga especializada en neurodivergencia y ansiedad. Acompaño procesos de diagnóstico y adaptación con un enfoque humano."
         },
         {
             "nombre_real": "Jordi",
             "name": "jordi_terapeuta",
-            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721460/shares/glj3wvjscbtbaoeeqnbh.jpg"
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721460/shares/glj3wvjscbtbaoeeqnbh.jpg",
+            "descripcion_perfil": "Terapeuta ocupacional con experiencia en TDAH, autismo y regulación sensorial. Trabajo desde la práctica basada en la evidencia."
         },
         {
             "nombre_real": "Nuria",
             "name": "nuria_neuro",
-            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/ev7dmwyakthbwehwq39k.jpg"
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/ev7dmwyakthbwehwq39k.jpg",
+            "descripcion_perfil": "Psiquiatra infanto-juvenil. Mi enfoque se centra en la comprensión integral de las neurodivergencias y el acompañamiento respetuoso."
         }
     ],
     "usuarios_estandar": [
         {
             "nombre_real": "Marta",
             "name": "marta_tdah",
-            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/gldjgfgzsikod1ed7tag.jpg"
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/gldjgfgzsikod1ed7tag.jpg",
+            "descripcion_perfil": "Tengo TDAH y estoy aprendiendo a organizarme sin perder la cabeza. Aquí comparto lo que me funciona (y lo que no)."
         },
         {
             "nombre_real": "Iván",
             "name": "ivan_neurodiverso",
-            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/c3zptfqvrzy2gcnfieba.jpg"
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/c3zptfqvrzy2gcnfieba.jpg",
+            "descripcion_perfil": "Autista adulto diagnosticado hace poco. Uso esta app para conectar, aprender y sentirme menos solo."
         },
         {
             "nombre_real": "Sergio",
             "name": "sergio_90",
-            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721460/shares/s6j7joetx3ttze4ddiy6.jpg"
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721460/shares/s6j7joetx3ttze4ddiy6.jpg",
+            "descripcion_perfil": "Altamente sensible y con ansiedad social. Escribo sobre mis días buenos y los no tan buenos. Sin filtros."
         },
         {
             "nombre_real": "Sofía",
             "name": "sofi.masking",
-            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/enwmqwpj55qopxhe4osb.jpg"
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/enwmqwpj55qopxhe4osb.jpg",
+            "descripcion_perfil": "Autista camuflada desde siempre. Estoy en proceso de dejar de fingir y empezar a ser yo misma. Aquí me siento libre."
         },
         {
             "nombre_real": "Álex",
             "name": "alex_hpi",
-            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721461/shares/zi8ubmniin8purlhg0to.jpg"
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721461/shares/zi8ubmniin8purlhg0to.jpg",
+            "descripcion_perfil": "Sufro de problemas con la alimentación y TDAH. Mil ideas por segundo y dificultad para parar. Busco herramientas para sobrevivir al caos mental."
         },
         {
             "nombre_real": "Lucía",
             "name": "lucia_en_bucle",
-            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/niirifyectcrjrbxwpwf.jpg"
+            "foto": "https://res.cloudinary.com/dwlevz67r/image/upload/v1746721459/shares/niirifyectcrjrbxwpwf.jpg",
+            "descripcion_perfil": "Ansiedad, rumiación, insomnio y mucha autoexigencia. Si te suena, ya somos dos. Aquí me desahogo un poco."
         }
     ]
 }

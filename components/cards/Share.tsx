@@ -43,7 +43,7 @@ export default function Share({ imagen, verificado, user, foto, categorias, spic
 
             </div>
 
-            <div id="caja-contenido" className="w-full flex flex-col pt-2 pb-4 gap-4">
+            <div id="caja-contenido" className="w-full flex flex-col pt-2 pb-4 gap-2">
 
                 <div id="caja-usuario" className="w-max flex flex-row self-end items-center gap-2 p-2 rounded-tl-full rounded-bl-full rounded-br-full bg-[var(--gris1)] dark:bg-[var(--gris3)]">
                     <p className="text-right font-bold text-[0.8rem] pl-2">@{user}</p>
@@ -60,20 +60,20 @@ export default function Share({ imagen, verificado, user, foto, categorias, spic
 
                 {categorias.length > 0 && (
                     <div id="caja-categorias" className="w-full flex flex-row justify-start items-center gap-1 px-2">
-                        <span className="text-[0.9rem] font-bold opacity-30">
+                        <span className="text-[0.8rem] font-bold opacity-40">
                             {categorias[0]}
                         </span>
                         {categorias.length > 1 && (
-                            <span className="text-[0.9rem] font-bold opacity-30">
+                            <span className="text-[0.8rem] font-bold opacity-40">
                                 ({categorias.length - 1} más)
                             </span>
                         )}
                     </div>
                 )}
 
-                <div id="caja-textos" className="w-full flex flex-col items-start gap-4 pt-4 pb-3 px-2 border-t border-t-1 border-t-[var(--gris2)] dark:border-t-[var(--gris5)]">
-                    <h4 className="text-left dark:text-[var(--foreground)]">{titulo}</h4>
-                    <p className="text-left text-[var(--gris3)] dark:text-[var(--gris2)] text-[0.9rem] leading-[1.2rem] opacity-80 dark:opacity-50">{extracto}</p>
+                <div id="caja-textos" className="w-full flex flex-col items-start gap-3 pt-4 pb-3 px-2 border-t border-t-1 border-t-[var(--gris2)] dark:border-t-[var(--gris5)]">
+                    <p className="text-left font-bold dark:text-[var(--foreground)]">{titulo}</p>
+                    <p className="text-left text-[var(--gris3)] dark:text-[var(--gris2)] text-[0.8rem] leading-[1.2rem] opacity-80 dark:opacity-50">{extracto}</p>
                 </div>
 
                 {spices.length > 0 && (

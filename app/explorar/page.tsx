@@ -8,7 +8,7 @@ export const metadata = {
 export default async function Explorar() {
 
     return (
-        <div className="w-full h-100 flex flex-col items-center text-center mx-auto tablet:px-col1 pt-12 pb-32 gap-8">
+        <div className="w-full h-100 flex flex-col items-center text-center mx-auto tablet:px-12 pt-12 pb-32 gap-8">
 
             {/* CABECERA */}
             <div className="w-full flex flex-col items-center gap-4 mobile:px-col1">

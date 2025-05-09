@@ -92,7 +92,7 @@ async function main() {
                 email: faker.internet.email(),
                 password: hashedPassword,
                 foto: userData.foto,
-                descripcion_perfil: faker.lorem.sentences(2),
+                descripcion_perfil: userData.descripcion_perfil,
                 usuario_verificado: true,
             },
         });
@@ -152,7 +152,7 @@ async function main() {
                 email: faker.internet.email(),
                 password: hashedPassword,
                 foto: userData.foto,
-                descripcion_perfil: faker.lorem.sentences(2),
+                descripcion_perfil: userData.descripcion_perfil,
             },
         });
         // Luego se crea un usuario 'standard' a partir del usuario genérico:
