@@ -11,9 +11,10 @@ interface BotonProps {
     customColor?: string; /* Color personalizado */
     onClick?: () => void;
     deshabilitado?: boolean;
+    nuevaPestana?: boolean;
 }
 
-export default function Boton({ texto, enlace, tamano, jerarquia, icon, customColor, onClick, deshabilitado }: BotonProps) {
+export default function Boton({ texto, enlace, tamano, jerarquia, icon, customColor, onClick, deshabilitado, nuevaPestana }: BotonProps) {
     let className = "inline-block gap-4 text-center font-semibold rounded-full border-2 hover:scale-[1.01] transition ease duration-300 cursor-pointer ";
     let style: React.CSSProperties = {};
     let iconClassName = ""
@@ -56,7 +57,13 @@ export default function Boton({ texto, enlace, tamano, jerarquia, icon, customCo
 
     return (
         <div className="inline-block">
-            <a href={enlace} className={className} style={style} onClick={onClick}>
+            <a
+                href={enlace}
+                target={nuevaPestana ? "_blank" : "_self"}
+                rel={nuevaPestana ? "noopener noreferrer" : undefined}
+                className={className}
+                style={style}
+                onClick={onClick}>
                 <div className="flex flex-row justify-center gap-4">
                     {icon && <Image src={icon} alt="icono" width={15} height={15} className={iconClassName} />}
                     {texto}

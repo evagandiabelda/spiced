@@ -95,7 +95,7 @@ export default function ItemListaVerificacion({ id, nombre_real, name, foto, cre
                                 </div>
                             </div>
                             <div className="w-full flex flex-row justify-end">
-                                <Boton texto="Ver archivo" enlace={titulacion} tamano="pequeno" jerarquia="secundario" />
+                                <Boton texto="Ver archivo" enlace={titulacion} tamano="pequeno" jerarquia="secundario" nuevaPestana />
                             </div>
                         </div>
                     ))}

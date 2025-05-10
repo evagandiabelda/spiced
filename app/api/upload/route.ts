@@ -25,9 +25,7 @@ export async function POST(req: Request) {
         const base64String = `data:${file.type};base64,${buffer.toString("base64")}`;
 
         // Subir a Cloudinary
-        const uploadResponse = await cloudinary.v2.uploader.upload(base64String, {
-            folder: "shares",
-        });
+        const uploadResponse = await cloudinary.v2.uploader.upload(base64String);
 
         const secureUrl = uploadResponse.secure_url;
         console.log(secureUrl);
