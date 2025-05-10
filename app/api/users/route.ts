@@ -40,7 +40,8 @@ export async function GET() {
         categorias_seguidas: true,
         denuncias_shares: true,
         denuncias_comentarios: true,
-      }
+      },
+      orderBy: { created_at: "desc" }
     });
 
     // Obtenemos el número de denuncias recibidas en cada Share de cada usuario:

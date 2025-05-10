@@ -35,11 +35,11 @@ export default function ItemListaVerificacion({ id, nombre_real, name, foto, cre
     const perfilHref = `/perfil/${name}`;
 
     return (
-        <li className="w-full flex flex-col gap-8 border-b border-b-1 border-[var(--gris1)] dark:border-[var(--gris4)]">
+        <li className="w-full flex flex-col gap-4 border-b border-b-1 border-[var(--gris1)] dark:border-[var(--gris4)]">
 
-            <div className="w-full flex flex-col gap-6 p-4">
+            <div className="w-full flex flex-col gap-4 p-4">
 
-                <a href={perfilHref} className="w-full flex flex-row gap-4 p-4 rounded-xl hover:bg-[var(--gris1)] dark:hover:bg-[var(--gris4)]">
+                <a href={perfilHref} className="w-full flex flex-row gap-4 p-4 rounded-xl hover:bg-neutral-100 dark:hover:bg-[var(--gris4)]">
 
                     <div id="caja-avatar" className="relative w-[4rem] h-[4rem]">
                         <AvatarOtros
@@ -48,21 +48,21 @@ export default function ItemListaVerificacion({ id, nombre_real, name, foto, cre
                         />
                     </div>
 
-                    <div id="caja-textos" className="w-full flex-1 flex flex-col gap-8 py-2">
+                    <div id="caja-textos" className="w-full flex-1 flex flex-col gap-4 py-2">
 
                         <div className="w-full flex mobile:flex-col laptop:flex-row justify-between mobile:gap-4 laptop:gap-12">
-                            <div className="w-full flex flex-col gap-2">
+                            <div className="w-full flex flex-col">
                                 <p className="font-bold">{nombre_real}</p>
-                                <p className="font-bold text-[var(--gris2)]">@{name}</p>
+                                <p className="text-[0.9rem] font-bold text-[var(--gris2)]">@{name}</p>
                             </div>
                             <div className="w-full flex flex-row laptop:justify-end laptop:px-4">
                                 <p><span className="text-[var(--gris3)]">Registrado: {objetoFecha.toLocaleDateString("es-ES", { day: "2-digit", month: "long", year: "numeric" })}</span></p>
                             </div>
                         </div>
 
-                        <div className="w-full flex flex-col gap-2">
-                            <p className="text-[0.9rem]">Nº de Colegiado: {num_colegiado}</p>
-                            <p className="text-[0.9rem]">{anyos_experiencia} años de experiencia.</p>
+                        <div className="w-full flex flex-wrap gap-2">
+                            <p className="text-[0.8rem] font-bold dark:text-[var(--gris5)] px-3 py-1 rounded-xl bg-[var(--brand2)] dark:opacity-60">Nº de Colegiado: {num_colegiado}</p>
+                            <p className="text-[0.8rem] font-bold dark:text-[var(--gris5)] px-3 py-1 rounded-xl bg-[var(--brand2)] dark:opacity-60">{anyos_experiencia} años de experiencia.</p>
                         </div>
 
                     </div>
@@ -77,7 +77,7 @@ export default function ItemListaVerificacion({ id, nombre_real, name, foto, cre
             </div>
 
             {mostrarTitulaciones &&
-                <div className="w-full flex flex-col gap-2 px-12 pb-4">
+                <div className="w-full flex flex-col gap-2 px-12">
                     {lista_titulaciones.map((titulacion, index) => (
                         <div key={index} className='w-full flex mobile:flex-col laptop:flex-row laptop:justify-between laptop:items-center gap-4 p-4 border-t border-t-1 border-[var(--gris1)] dark:border-[var(--gris4)]'>
                             <div className="w-full flex flex-row gap-2 items-center">
