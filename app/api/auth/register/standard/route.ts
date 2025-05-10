@@ -33,8 +33,15 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Este email ya está registrado." }, { status: 400 });
         }
 
+        // Verificar la contraseña:
+        if (password.length < 6 || !/[a-zA-Z]/.test(password) || !/[0-9]/.test(password)) {
+            return NextResponse.json({
+                error: "La contraseña debe tener al menos 6 caracteres e incluir letras y números."
+            }, { status: 400 });
+        }
+
         // Hashear la contraseña
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password.toString(), 10);
 
         // Crear el usuario en la base de datos
         const newUser = await prisma.user.create({

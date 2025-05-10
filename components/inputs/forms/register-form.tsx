@@ -20,6 +20,21 @@ export default function RegisterForm({ usuario }: RegisterFormProps) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorEmail, setErrorEmail] = useState('');
+    const [errorPassword, setErrorPassword] = useState('');
+
+    // Validación de contraseña:
+    const validarPassword = (value: string) => {
+        if (value.length < 6) {
+            return "Debe tener al menos 6 caracteres.";
+        }
+        if (!/[a-zA-Z]/.test(value)) {
+            return "Debe incluir al menos una letra.";
+        }
+        if (!/[0-9]/.test(value)) {
+            return "Debe incluir al menos un número.";
+        }
+        return '';
+    };
 
     // Guardado de datos en contexto y Redirección:
     const handleSubmit = async (e: React.FormEvent) => {
@@ -39,6 +54,12 @@ export default function RegisterForm({ usuario }: RegisterFormProps) {
 
         if (data.exists) {
             setErrorEmail('Ya existe una cuenta registrada con este correo.');
+            return;
+        }
+
+        // Comprobar que la contraseña cumpla los requisitos:
+        if (validarPassword(password)) {
+            setErrorPassword(validarPassword(password));
             return;
         }
 
@@ -104,8 +125,18 @@ export default function RegisterForm({ usuario }: RegisterFormProps) {
                                 placeholder="Contraseña"
                                 required={true}
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => {
+                                    const val = e.target.value;
+                                    setPassword(val);
+                                    setErrorPassword(validarPassword(val)); // validación en tiempo real
+                                }}
                             />
+                            <p className="text-sm text-[var(--gris2)] dark:text-[var(--gris3)]">
+                                La contraseña debe tener al menos 6 caracteres, e incluir letras y números.
+                            </p>
+                            {errorPassword && (
+                                <p className="text-sm text-red-500 mt-2">{errorPassword}</p>
+                            )}
                         </div>
                     </div>
 
