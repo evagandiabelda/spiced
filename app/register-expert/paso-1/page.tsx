@@ -24,22 +24,25 @@ export default function Paso1() {
     // URL definitiva de Cloudinary:
     const [fotoURL, setFotoURL] = useState("");
 
+    const [isUploading, setIsUploading] = useState(false);
+
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
 
         const file = event.target.files?.[0];
 
-        if (file) {
-            setFoto(file);
-        } else {
-            return;
-        }
+        if (!file) return;
+
+        setFoto(file);
+        setIsUploading(true);
 
         try {
             // Se gestiona la subida de la imagen a Cloudinary:
-            const { url, public_id } = await uploadCloudinary(file);
+            const { url } = await uploadCloudinary(file);
             setFotoURL(url);
         } catch (error) {
             console.error("Error al subir la imagen:", error);
+        } finally {
+            setIsUploading(false);
         }
     };
 
@@ -166,8 +169,9 @@ export default function Paso1() {
                     jerarquia='secundario'
                 />
                 <BotonSubmit
-                    texto="Siguiente"
+                    texto={isUploading ? "Subiendo imagen..." : "Siguiente"}
                     icon="/iconos/iconos-otros/icono-arrow-right.svg"
+                    disabled={isUploading}
                 />
             </div>
 

@@ -22,6 +22,8 @@ export default function Paso2() {
     // Datos que se piden en este paso:
     const [titulaciones, setTitulaciones] = useState<ArchivoSubido[]>([]);
 
+    const [isUploading, setIsUploading] = useState(false);
+
     // Formateo para mostrar el tamaño del archivo subido:
     const formatBytes = (bytes: number) => {
         const kb = bytes / 1024;
@@ -56,10 +58,10 @@ export default function Paso2() {
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
 
         const files = event.target.files;
-
         if (!files) return;
 
         const nuevosArchivos = Array.from(files);
+        setIsUploading(true);
 
         for (const file of nuevosArchivos) {
             const uploadData = new FormData();
@@ -79,6 +81,8 @@ export default function Paso2() {
                 ]);
             } catch (error) {
                 console.error("Error al subir el archivo:", error);
+            } finally {
+                setIsUploading(false);
             }
         }
 
@@ -172,8 +176,13 @@ export default function Paso2() {
                 {/* GRUPO SUBIDOS */}
 
                 <div className='mobile:w-full laptop:w-2/3 h-full flex flex-col gap-8'>
+
                     <h3>Archivos subidos</h3>
-                    {titulaciones.length === 0 && <p className='text-sm text-[var(--gris3)]'>Es necesario cargar al menos un archivo.</p>}
+
+                    {titulaciones.length === 0 && !isUploading && <p className='text-sm text-[var(--gris3)]'>Es necesario cargar al menos un archivo.</p>}
+
+                    {isUploading && <p className="text-sm text-[var(--gris3)]">Subiendo archivo...</p>}
+
                     <div className='w-full flex flex-col gap-6'>
                         {titulaciones.map((titulacion, index) => (
                             <div key={index} className='w-full flex flex-row justify-between items-center gap-8'>
