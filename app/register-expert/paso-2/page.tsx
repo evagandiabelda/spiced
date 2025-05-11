@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState, useRef } from 'react'
 import { useRegistro } from "@/context/RegistroContext";
+import { uploadCloudinary } from '@/lib/uploadCloudinary';
 import Image from 'next/image';
 import Boton from '@/components/buttons/Boton';
 import BotonSubmit from "@/components/buttons/BotonSubmit";
@@ -65,21 +66,15 @@ export default function Paso2() {
             uploadData.append("file", file);
 
             try {
-                const response = await fetch("/api/upload", {
-                    method: "POST",
-                    body: uploadData,
-                });
-
-                if (!response.ok) throw new Error("Error subiendo el archivo");
-
-                const data = await response.json(); // { url, public_id }
+                // Se gestiona la subida de la imagen a Cloudinary:
+                const { url, public_id } = await uploadCloudinary(file);
 
                 setTitulaciones(prev => [
                     ...prev,
                     {
                         file,
-                        url: data.url,
-                        public_id: data.public_id,
+                        url: url,
+                        public_id: public_id,
                     }
                 ]);
             } catch (error) {

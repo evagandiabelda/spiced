@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useRegistro } from "@/context/RegistroContext";
+import { uploadCloudinary } from '@/lib/uploadCloudinary';
 import Image from 'next/image';
 import Boton from '@/components/buttons/Boton';
 import BotonSubmit from "@/components/buttons/BotonSubmit";
@@ -28,25 +29,10 @@ export default function Paso2() {
             return;
         }
 
-        const uploadData = new FormData();
-        uploadData.append("file", file);
-
         try {
-
-            // En la petición '/api/upload' se gestiona la subida de la imagen a Cloudinary:
-            const response = await fetch("/api/upload", {
-                method: "POST",
-                body: uploadData,
-            });
-
-            if (!response.ok) throw new Error("Error subiendo la imagen");
-
-            const data = await response.json();
-
-            if (!data.url) throw new Error("Error al obtener la URL");
-
-            setFotoURL(data.url);
-
+            // Se gestiona la subida de la imagen a Cloudinary:
+            const { url, public_id } = await uploadCloudinary(file);
+            setFotoURL(url);
         } catch (error) {
             console.error("Error al subir la imagen:", error);
         }
