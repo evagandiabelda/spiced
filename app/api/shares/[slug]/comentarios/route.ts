@@ -28,7 +28,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
         // Obtener todos los comentarios asociados a este Share
         const comentarios = await prisma.comentario.findMany({
-            where: { id: share.id },
+            where: { share_id: share.id },
             include: {
                 user: {
                     select: {

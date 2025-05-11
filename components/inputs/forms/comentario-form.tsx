@@ -9,9 +9,10 @@ import BotonSubmit from "@/components/buttons/BotonSubmit";
 interface ComentarioFormProps {
     slug: string | null;
     usernameRespondiendoA?: string | null;
+    onSubmit?: () => void;
 }
 
-export default function ComentarioForm({ slug, usernameRespondiendoA }: ComentarioFormProps) {
+export default function ComentarioForm({ slug, usernameRespondiendoA, onSubmit }: ComentarioFormProps) {
 
     const router = useRouter();
 
@@ -45,7 +46,7 @@ export default function ComentarioForm({ slug, usernameRespondiendoA }: Comentar
                 setTexto('');
                 setCargando(false);
                 toast.success("¡Comentario publicado!");
-                router.refresh();
+                onSubmit?.();
             }
         } catch (err) {
             setCargando(false);

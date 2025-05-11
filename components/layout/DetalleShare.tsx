@@ -64,12 +64,13 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
     const { data: session } = useSession();
     const router = useRouter();
 
-    const [loading, setLoading] = useState(false);
     const [share, setShare] = useState<Share>();
+    const [comentarios, setComentarios] = useState<Share["comentarios"]>([]);
+
+    const [loading, setLoading] = useState(false);
     const [isFollowing, setIsFollowing] = useState(false);
     const [shareGuardado, setShareGuardado] = useState(false);
     const [estaVerificado, setEstaVerificado] = useState(false);
-
     const [mostrarDenuncia, setMostrarDenuncia] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -92,6 +93,7 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                     throw new Error("No se ha encontrado el Share.");
                 } else {
                     setShare(share);
+                    setComentarios(share.comentarios);
                     setEstaVerificado(share.share_verificado);
                     setIsFollowing(siguiendo);
                     setShareGuardado(guardado);
@@ -217,6 +219,19 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
             <DetalleShareSkeleton />
         );
     }
+
+    // Gestionar la acción tras publicar/eliminar un comentario propio:
+
+    const actualizarComentarios = async () => {
+        try {
+            const res = await fetch(`/api/shares/${slug}/comentarios`);
+            if (!res.ok) throw new Error("Error al cargar comentarios.");
+            const data = await res.json();
+            setComentarios(data.comentarios);
+        } catch (error) {
+            console.error("Error al actualizar comentarios:", error);
+        }
+    };
 
     return (
         <div className="w-full flex flex-col items-center mobile:gap-8 tablet:gap-16 pb-[160px]">
@@ -414,14 +429,15 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                                     <ComentarioForm
                                         slug={slug}
                                         usernameRespondiendoA={respondiendoA}
+                                        onSubmit={actualizarComentarios}
                                     />
                                 </div>
                             }
 
                             <div className="w-full flex flex-col items-start gap-8">
-                                {share.comentarios.length === 0
+                                {comentarios.length === 0
                                     ? <p className="text-[var(--gris3)]">Todavía no hay comentarios.</p>
-                                    : share.comentarios.map((comentario, index) => (
+                                    : comentarios.map((comentario, index) => (
                                         <Comentario
                                             key={index}
                                             id={comentario.id}
@@ -431,6 +447,7 @@ export default function DetalleShare({ slug }: DetalleShareProps) {
                                             sessionUserId={session?.user.id}
                                             slug={slug}
                                             onResponderClick={handleResponderClick}
+                                            onComentarioEliminado={actualizarComentarios}
                                         />
                                     ))
                                 }

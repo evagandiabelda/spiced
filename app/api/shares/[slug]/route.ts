@@ -56,7 +56,8 @@ export async function GET(request: Request, { params }: { params: Promise<{ slug
                                 usuario_verificado: true,
                             }
                         }
-                    }
+                    },
+                    orderBy: { created_at: "desc" }
                 }
             }
         });

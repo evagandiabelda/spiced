@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import AvatarOtros from "@/components/icons/AvatarOtros";
 import Boton from "@/components/buttons/Boton";
 import Image from "next/image";
+import { toast } from "react-hot-toast";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import Modal from "@/components/layout/Modal";
@@ -23,9 +24,10 @@ interface ComentarioProps {
     sessionUserId: string | null;
     slug: string | null;
     onResponderClick?: (username: string) => void;
+    onComentarioEliminado?: () => void;
 }
 
-export default function Comentario({ id, texto, fecha, user, sessionUserId, slug, onResponderClick }: ComentarioProps) {
+export default function Comentario({ id, texto, fecha, user, sessionUserId, slug, onResponderClick, onComentarioEliminado }: ComentarioProps) {
 
     const router = useRouter();
 
@@ -34,24 +36,27 @@ export default function Comentario({ id, texto, fecha, user, sessionUserId, slug
     // Acciones sobre comentarios propios (del usuario en sesión):
 
     const comentarioPropio = sessionUserId === user.id;
+    const [mostrarEliminar, setMostrarEliminar] = useState(false);
 
     const handleEliminarComentario = async (slug: string | null, id: string) => {
-        const confirmado = window.confirm("¿Estás seguro de que quieres eliminar este comentario?");
-        if (!confirmado) return;
 
         try {
             const res = await fetch(`/api/shares/${slug}/comentarios/${id}`, {
                 method: "DELETE",
             });
 
-            if (res.ok) {
-                router.refresh();
-            } else {
+            if (!res.ok) {
                 alert("No se pudo eliminar el comentario.");
             }
+
+            setMostrarEliminar(false);
+            toast.success("Comentario eliminado.");
+            onComentarioEliminado?.();
         } catch (err) {
             console.error(err);
-            alert("Ha ocurrido un error al eliminar el comentario.");
+            toast.error("Ha ocurrido un error al eliminar el comentario.");
+        } finally {
+            router.push(window.location.href);
         }
     };
 
@@ -98,7 +103,7 @@ export default function Comentario({ id, texto, fecha, user, sessionUserId, slug
                 <div className="w-full flex flex-row justify-end items-center gap-2">
                     <a href="#" onClick={(e) => {
                         e.preventDefault(); // Evita que el enlace recargue o navegue
-                        handleEliminarComentario(slug, id);
+                        setMostrarEliminar(true);
                     }} className="text-end text-[0.9rem] font-bold underline text-[var(--brand1)]">Eliminar tu comentario</a>
                     <Image
                         src="/iconos/iconos-otros/icono-papelera.svg"
@@ -108,6 +113,26 @@ export default function Comentario({ id, texto, fecha, user, sessionUserId, slug
                     />
                 </div>
             }
+
+            <Modal isOpen={mostrarEliminar} onClose={() => setMostrarEliminar(false)}>
+                <div className="flex flex-col gap-6">
+                    <div className="w-full flex flex-col items-center text-center gap-4">
+                        <Image
+                            src="/iconos/iconos-genericos/icono-spiced.svg"
+                            alt="miniatura"
+                            width={15}
+                            height={15}
+                            className="object-cover"
+                        />
+                        <h3>Eliminar tu comentario</h3>
+                    </div>
+                    <p className="text-sm">¿Estás seguro de que quieres eliminar este comentario?</p>
+                    <div className="flex justify-end gap-2 pt-4">
+                        <Boton texto="Cancelar" jerarquia="secundario" tamano="pequeno" onClick={() => setMostrarEliminar(false)} />
+                        <Boton texto="Eliminar mi comentario" jerarquia="primario" tamano="pequeno" onClick={() => handleEliminarComentario(slug, id)} />
+                    </div>
+                </div>
+            </Modal>
 
             <Modal isOpen={mostrarDenuncia} onClose={() => setMostrarDenuncia(false)}>
                 <DenunciaForm
