@@ -48,6 +48,8 @@ export default function Paso1() {
 
             const data = await response.json();
 
+            if (!data.url) throw new Error("Error al obtener la URL");
+
             setFotoURL(data.url);
 
         } catch (error) {

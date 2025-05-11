@@ -28,10 +28,13 @@ export async function POST(req: Request) {
         const uploadResponse = await cloudinary.v2.uploader.upload(base64String);
 
         const secureUrl = uploadResponse.secure_url;
-        console.log(secureUrl);
+
+        if (!secureUrl) {
+            return NextResponse.json({ error: "No se ha podido generar la URL." }, { status: 400 });
+        }
 
         return NextResponse.json({
-            url: uploadResponse.secure_url,
+            url: secureUrl,
             public_id: uploadResponse.public_id
         });
     } catch (error) {
