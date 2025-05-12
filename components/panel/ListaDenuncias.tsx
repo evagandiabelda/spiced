@@ -69,7 +69,6 @@ export default function ListaDenuncias({ numItems }: ListaDenunciasProps) {
                 const denuncias: DenunciaData[] = data.denuncias;
 
                 if (denuncias.length === 0) {
-                    setError("Todavía no se ha registrado ninguna denuncia a un Share.");
                     setDenunciasShares([]);
                 } else {
 
@@ -108,7 +107,6 @@ export default function ListaDenuncias({ numItems }: ListaDenunciasProps) {
                 const denuncias: DenunciaData[] = data.denuncias;
 
                 if (denuncias.length === 0) {
-                    setError("Todavía no se ha registrado ninguna denuncia a un Comentario.");
                     setDenunciasComentarios([]);
                 } else {
 
@@ -211,7 +209,7 @@ export default function ListaDenuncias({ numItems }: ListaDenunciasProps) {
     return (
         <div className="w-full flex flex-col gap-8 px-4 pb-[24px] rounded-xl bg-white dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--borde-denuncias)]">
             {allDenuncias.length === 0 ? (
-                <p>Todavía no hay denuncias.</p>
+                <p className="pt-6 px-4">Todavía no hay denuncias.</p>
             ) : (
                 <ul>
                     {allDenuncias.slice(0, numItems).map((denuncia) => (

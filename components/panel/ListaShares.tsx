@@ -122,7 +122,7 @@ export default function ListaShares({ numItems }: ListaSharesProps) {
     return (
         <div className="w-full flex flex-col gap-8 px-4 pt-[10px] pb-[24px] rounded-xl bg-white dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--gris4)]">
             {shares.length === 0 ? (
-                <p>Todavía no hay shares por aquí...</p>
+                <p className="pt-6 px-4">Todavía no se ha publicado ningún Share.</p>
             ) : (
                 <ul>
                     {shares.slice(0, visibleCount).map((share) => (
@@ -144,12 +144,14 @@ export default function ListaShares({ numItems }: ListaSharesProps) {
             )}
 
             <div className="w-full flex justify-center items-center gap-4 p-8">
-                <Boton
-                    texto="Ver más shares"
-                    tamano="grande"
-                    jerarquia="primario"
-                    onClick={() => setVisibleCount((prev) => prev + 10)}
-                />
+                {visibleCount <= shares.length &&
+                    <Boton
+                        texto="Ver más shares"
+                        tamano="grande"
+                        jerarquia="primario"
+                        onClick={() => setVisibleCount((prev) => prev + 10)}
+                    />
+                }
             </div>
         </div>
     );

@@ -103,7 +103,7 @@ export default function ListaUsuarios({ numItems }: ListaUsuariosProps) {
     return (
         <div className="w-full flex flex-col gap-8 tablet:px-4 tablet:pt-[10px] pb-[24px] rounded-xl bg-white dark:bg-[var(--gris5)] dark:border-2 dark:border-[var(--borde-shares)]">
             {usuarios.length === 0 ? (
-                <p>Todavía no hay shares por aquí...</p>
+                <p className="pt-6 px-4">Todavía no hay usuarios.</p>
             ) : (
                 <ul>
                     {usuarios.slice(0, numItems).map((usuario) => (
